@@ -7,7 +7,7 @@ include_once($folder . "cabecerahtml.php");
 ?>
 <script language="javascript" type="text/javascript" src="../../js/configuracion/general.js"></script>
 <?php include_once($folder . "cabecera.php"); ?>
-<?php if ($_GET['m'] == 1) { ?>
+<?php if (isset($_GET['m']) && $_GET['m'] == 1) { ?>
     <div class="span12">
         <div class="alert alert-success">
             <?php echo $idioma['DatosGuardadosCorrectamente'] ?><a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -32,8 +32,8 @@ include_once($folder . "cabecerahtml.php");
                     </td>
                     <td><select class="span6" name="PeriodoActual">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
-                                ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActual") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                        } ?>
+                            ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActual") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
+                                                                                                                                                                    } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -41,8 +41,8 @@ include_once($folder . "cabecerahtml.php");
                     </td>
                     <td><select class="span6" name="PeriodoActualBimestre">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
-                                ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActualBimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                                } ?>
+                            ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActualBimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
+                                                                                                                                                                            } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -50,8 +50,8 @@ include_once($folder . "cabecerahtml.php");
                     </td>
                     <td><select class="span6" name="PeriodoActualTrimestre">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
-                                ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActualTrimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                                } ?>
+                            ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActualTrimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
+                                                                                                                                                                            } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -342,8 +342,8 @@ include_once($folder . "cabecerahtml.php");
                     </td>
                     <td><select class="span12" name="PeriodoNotaHabilitado">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
-                                ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoNotaHabilitado") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                                } ?>
+                            ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoNotaHabilitado") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
+                                                                                                                                                                            } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -351,8 +351,8 @@ include_once($folder . "cabecerahtml.php");
                     </td>
                     <td><select class="span12" name="PeriodoNotaHabilitadoBimestre">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
-                                ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoNotaHabilitadoBimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                                        } ?>
+                            ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoNotaHabilitadoBimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
+                                                                                                                                                                                    } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -567,7 +567,8 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
                 <tr class="success resaltar">
                     <td colspan="2">
-                        <hr class="separador"><br><?php echo $idioma['NuevoSistemaFacturacion'] ?></td>
+                        <hr class="separador"><br><?php echo $idioma['NuevoSistemaFacturacion'] ?>
+                    </td>
                 </tr>
                 <tr>
                     <td width="50%"><?php echo $idioma['NitEmisor'] ?>
