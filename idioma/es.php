@@ -1383,6 +1383,7 @@ $idioma['SeguroCambiarEstado'] = "¿Estas seguro de cambiar Estado de esta Factu
 $idioma['Totales'] = "Totales";
 $idioma['Facturacion'] = "Facturación";
 $idioma['LlaveDosificacion'] = "Llave de Dosificación";
+$idioma['NumeroAutorizacionT'] = "";
 $idioma['LlaveDosificacionT'] = "Llave Dosificación, otorgado por el Servicio de Impuestos Nacionales";
 $idioma['NumeroAutorizacion'] = "Número de Autorización";
 $idioma['FechaLimiteEmisionVencida'] = "La Fecha Límite de Emisión de Factura se encuentra Vencida";
