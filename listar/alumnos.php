@@ -1,14 +1,19 @@
 <?php
 include_once("../login/check.php");
-if(!empty($_POST) && isset($_POST)){
-	$CodCurso=$_POST['CodCurso'];
-	if(isset($_POST['CodAlumno'])){
-		$CodAlumno=$_POST['CodAlumno'];
+if (!empty($_POST) && isset($_POST)) {
+	$CodCurso = $_POST['CodCurso'];
+	$CodAlumno = '';
+	if (isset($_POST['CodAlumno'])) {
+		$CodAlumno = $_POST['CodAlumno'];
 	}
 	include_once("../class/alumno.php");
-	$alumno=new alumno;
-	foreach($alumno->mostrarDatosAlumnos($CodCurso,0) as $al){
-		?><option value="<?php echo $al['CodAlumno']?>" <?php echo $al['CodAlumno']==$CodAlumno?'selected="selected"':'';?> ><?php echo ucwords(eliminarEspaciosDobles($al['Paterno']));?> <?php echo ucwords(eliminarEspaciosDobles($al['Materno']));?> <?php echo ucwords(eliminarEspaciosDobles($al['Nombres']));?></option> <?php
+	$alumno = new alumno;
+	foreach ($alumno->mostrarDatosAlumnos($CodCurso, 0) as $al) {
+?>
+		<option value="<?php echo $al['CodAlumno'] ?>" <?php echo $al['CodAlumno'] == $CodAlumno ? 'selected="selected"' : ''; ?>>
+			<?php echo ucwords(eliminarEspaciosDobles($al['Paterno'])); ?> <?php echo ucwords(eliminarEspaciosDobles($al['Materno'])); ?> <?php echo ucwords(eliminarEspaciosDobles($al['Nombres'])); ?>
+		</option>
+<?php
 	}
 }
 ?>
