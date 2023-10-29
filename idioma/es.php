@@ -1125,6 +1125,12 @@ $idioma['NotaModificarCurso'] = "Nota: Es un Riesgo Modificar un curso, por que 
 $idioma['NotaEliminarCurso'] = "Nota: Es Muy Riesgoso eliminar un curso cuando se comenzo la Gestión Educativa, se Recomienda realizarlo antes del inicio de la Gestión, antes de comenzar las Inscripciones";
 $idioma['MensajeEliminar'] = "¿Seguro que desea ELIMINAR este MENSAJE?";
 $idioma['MensajeModificar'] = "¿Seguro que desea Modificar este MENSAJE?";
+$idioma['NotaEliminar'] = "";
+$idioma['NotaModificar'] = "";
+$idioma['MensajeModificarObservacionFrecuente'] = "¿Seguro que desea Modificar esta Observación Frecuente?";
+$idioma['MensajeEliminarObservacionFrecuente'] = "¿Seguro que desea ELIMINAR esta Observación Frecuente?";
+$idioma['NotaEliminarObservacionFrecuente'] = "Nota: Es Muy Riesgoso eliminar una Observación Frecuente cuando se comenzo la Gestión Educativa, se Recomienda realizarlo antes del inicio de la Gestión, antes de comenzar las Inscripciones";
+$idioma['NotaModificarObservacionFrecuente'] = "Nota: Es un Riesgo Modificar una Observación Frecuente, por que afectaria al correcto funcionamiento del Sistema con los datos registrado anteriormente, se Recomienda realizarlo antes del inicio de La Gestión, antes de las Inscripciones";
 
 $idioma['MensajeEliminarCursoArea'] = "¿Seguro que desea ELIMINAR esta Área de Curso?, Tenga Encuenta que esto deberia realizarlo al inicio de la Gestión Educativa";
 $idioma['MensajeModificarCursoArea'] = "¿Seguro que desea Modificar esta Área de Curso?, Tenga Encuenta que esto deberia realizarlo al inicio de la Gestión Educativa?";
