@@ -11,7 +11,8 @@ if(isset($_GET)){
 	$alumno=new alumno;
 	$observaciones=new observaciones;
 	$agenda=new agenda;
-	$cur=array_shift($curso->mostrarCurso($CodCurso));
+	$cur = $curso->mostrarCurso($CodCurso);
+	$cur=array_shift($cur);
 	$titulo=$idioma["AgendaReporteGeneral"];
 	class PDF extends PPDF{
 		function Cabecera(){
@@ -25,8 +26,8 @@ if(isset($_GET)){
 			$this->Ln();
 			$this->CuadroCabecera(35,"",50,"");
 			$this->CuadroCabecera(10,sacarIniciales($idioma['NotificacionPadres'])."=",40,$idioma['NotificacionPadres']);
-			
-			
+
+
 			$this->CuadroCabecera(10,sacarIniciales($idioma['NoRespondeTelf'])."=",40,$idioma['NoRespondeTelf']);
 			$this->CuadroCabecera(10,sacarIniciales($idioma['Felicitaciones'])."=",40,$idioma['Felicitaciones']);
 			$this->Ln();
@@ -42,14 +43,14 @@ if(isset($_GET)){
 			$this->TituloCabecera(15,sacarIniciales($idioma['NoRespondeTelf']));
 			$this->TituloCabecera(15,sacarIniciales($idioma['Felicitaciones']));
 			$this->TituloCabecera(15,$idioma['Total']);
-		}	
+		}
 	}
-	
+
 	$pdf=new PDF("L","mm","letter");
 	$pdf->AddPage();
 	$i=0;
 	$tObservaciones=0;$tfaltas=0;$tAtrasos=0;$tLicencias=0;$tNotificacionPadres=0;$tNoRespondeTelf=0;$tFelicitaciones=0;$tTotal=0;
-	
+
 	foreach($alumno->mostrarAlumnosCurso($CodCurso) as $al){$i++;
 		/*Inicio Agenda*/
 		$CodAl=$al['CodAlumno'];
@@ -95,7 +96,7 @@ if(isset($_GET)){
 		$CodigosObservaciones=implode(",",$Obser);
 		$CantNoContestan=$agenda->CantidadObservaciones($CodAl,$CodigosObservaciones);
 		$CantNoContestan=array_shift($CantNoContestan);
-		
+
 		//Cantidad de Felicitaciones
 		$Obser=array();
 		$CodObser=$observaciones->CodObservaciones(7);
@@ -103,7 +104,7 @@ if(isset($_GET)){
 		$CodigosObservaciones=implode(",",$Obser);
 		$CantFelicitacion=$agenda->CantidadObservaciones($CodAl,$CodigosObservaciones);
 		$CantFelicitacion=array_shift($CantFelicitacion);
-		
+
 		$Total=$CantObser['Cantidad']+$CantFaltas['Cantidad']+$CantAtrasos['Cantidad']+$CantLicencias['Cantidad']+$CantNotificacion['Cantidad']+$CantNoContestan['Cantidad']+$CantFelicitacion['Cantidad'];
 		/*Fin Agenda*/
 		$tObservaciones+=$CantObser['Cantidad'];
@@ -114,8 +115,8 @@ if(isset($_GET)){
 		$tNoRespondeTelf+=$CantNoContestan['Cantidad'];
 		$tFelicitaciones+=$CantFelicitacion['Cantidad'];
 		$tTotal+=$Total;
-		
-		
+
+
 		if($i%2==0){$relleno=1;}else{$relleno=0;}
 		$pdf->CuadroCuerpo(10,$i,$relleno,"R");
 		$pdf->CuadroNombreSeparado(30,$al['Paterno'],30,$al['Materno'],45,$al['Nombres'],1,$relleno);
@@ -141,4 +142,3 @@ if(isset($_GET)){
 	$pdf->CuadroCuerpoResaltar(15,$tTotal,1,"R",1,1);
 	$pdf->Output($titulo." ".$cur['Nombre'].".pdf","I");
 }
-?>
