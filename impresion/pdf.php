@@ -18,13 +18,15 @@ include_once("../../funciones/usuarios.php");
 $Nivel = $_SESSION['Nivel'];
 $CodigoUsuario = $_SESSION['CodUsuarioLog'];
 $DatosGenerador = DatosUsuario($Nivel, $CodigoUsuario);
+// $tam = isset($tam) ? $tam : '';
 class PPDF extends FPDF_Protection
 {
 	var $ancho = 176;
 	var $altocelda = 5;
+	var $OrientacionObligada  = "";
 	function Header()
 	{
-		global $idioma, $FechaReporte;
+		global $idioma, $FechaReporte, $tam;
 		$this->SetTitle(("Sistema Académico y Administrativo para Colegios"), true);
 		$this->SetAuthor(("Sistema Académico y Administrativo para Colegios Desarrollado por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"), true);
 		$this->SetSubject(("Sistema Académico y Administrativo para Colegios Desarrollado por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"), true);
