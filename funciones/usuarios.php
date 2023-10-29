@@ -10,6 +10,7 @@ function DatosUsuario($Nivel,$CodUsuario){
 	$usuario=new usuario;
 	$docente=new docente;
 	$alumno=new alumno;
+	$folder = '';
 	switch($Nivel){
 		case "1":{$Usuario=$idioma["Administrador"];
 					$ul=$usuario->mostrarDatos($CodUsuario);
@@ -80,8 +81,7 @@ function DatosUsuario($Nivel,$CodUsuario){
 		"Paterno"=>$Paterno,
 		"Materno"=>$Materno,
 		"Nombres"=>$Nombres,
-		
+
 	);
 	return $retorno;
 }
-?>
