@@ -139,6 +139,11 @@ class bd
 		return mysqli_query($this->l, "DELETE FROM {$this->tabla} $where");
 		//return $this->validateOperation ();
 	}
+
+	public function showError()
+	{
+		return mysqli_error($this->l);
+	}
 	public function updateRecord($where_str, $data)
 	{
 		$where = $where_str ? "WHERE $where_str" : "";
@@ -266,7 +271,8 @@ class bd
 				$condicion = " Activo=1";
 			} else {
 				$condicion = " and Activo=1";
-			} elseif ($activo == 0) :
+			}
+		elseif ($activo == 0) :
 			if ($where == "") {
 				$condicion = " Activo=0";
 			} else {
