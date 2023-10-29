@@ -8,6 +8,7 @@ include_once("../../class/config.php");
 include_once("../../class/observaciones.php");
 if (isset($_POST)) {
 	$CodAl = $_SESSION['CodAl'];
+	$CodMateria = isset($_POST['CodMateria']) ? $_POST['CodMateria'] : '';
 	$alumno = new alumno;
 	$curso = new curso;
 	$agenda = new agenda;
@@ -25,7 +26,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantObser = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantObser = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantObser = array_shift($CantObser);
 	//Cantidad de Faltas
 	$Obser = array();
@@ -34,7 +35,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantFaltas = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantFaltas = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantFaltas = array_shift($CantFaltas);
 	//Cantidad de Atrasos
 	$Obser = array();
@@ -43,7 +44,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantAtrasos = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantAtrasos = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantAtrasos = array_shift($CantAtrasos);
 	//Cantidad de Licencias
 	$Obser = array();
@@ -52,7 +53,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantLicencias = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantLicencias = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantLicencias = array_shift($CantLicencias);
 	//Cantidad de Felicitaciones
 	$Obser = array();
@@ -61,7 +62,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantNotificacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantNotificacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantNotificacion = array_shift($CantNotificacion);
 	//Cantidad de No contestan
 	$Obser = array();
@@ -70,7 +71,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantNoContestan = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantNoContestan = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantNoContestan = array_shift($CantNoContestan);
 	//Cantidad de Felicitaciones
 	$Obser = array();
@@ -79,7 +80,7 @@ if (isset($_POST)) {
 		$Obser[] = $CodO['CodObservacion'];
 	}
 	$CodigosObservaciones = implode(",", $Obser);
-	$CantFelicitacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $_POST['CodMateria']);
+	$CantFelicitacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
 	$CantFelicitacion = array_shift($CantFelicitacion);
 	$Total = $CantObser['Cantidad'] + $CantFaltas['Cantidad'] + $CantAtrasos['Cantidad'] + $CantLicencias['Cantidad'] + $CantNotificacion['Cantidad'] + $CantNoContestan['Cantidad'] + $CantFelicitacion['Cantidad'];
 
@@ -122,7 +123,7 @@ if (isset($_POST)) {
 	} else {
 		$ag = $agenda->mostrarRegistros($CodAl);
 	}
-	?>
+?>
 	<a href="#" id="exportarexcel" class="btn btn-success btn-mini"><?php echo $idioma['ExportarExcel'] ?></a>
 	<table class="table table-condensed table-bordered">
 		<thead>
@@ -158,7 +159,7 @@ if (isset($_POST)) {
 		</tr>
 	</table>
 	<?php
-		?>
+	?>
 	<div class="responsive-table">
 		<a href="#" id="exportarexcel" class="btn btn-success btn-mini"><?php echo $idioma['ExportarExcel'] ?></a>
 		<table class="table table-hover table-bordered table-striped table-condensed">
@@ -175,59 +176,59 @@ if (isset($_POST)) {
 			<?php
 
 
-				foreach ($ag as $a) {
-					$tipo = 0;
-					$mensaje = "";
-					$m = $materia->mostrarMateria($a['CodMateria']);
-					$m = array_shift($m);
-					$o = $observaciones->mostrarObser($a['CodObservacion']);
-					$o = array_shift($o);
-					if ($cur['Bimestre']) {
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre1)) {
-							$tipo = 1;
-						}
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre2) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre2)) {
-							$tipo = 2;
-						}
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre3) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre3)) {
-							$tipo = 3;
-						}
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre4) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre4)) {
-							$tipo = 4;
-						}
-						$mensaje = $tipo . " " . $idioma['Bimestre'];
-					} else {
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioTrimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinTrimestre1)) {
-							$tipo = 1;
-						}
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioTrimestre2) and strtotime($a['Fecha']) <= strtotime($fechaFinTrimestre2)) {
-							$tipo = 2;
-						}
-						if (strtotime($a['Fecha']) >= strtotime($fechaInicioTrimestre3) and strtotime($a['Fecha']) <= strtotime($fechaFinTrimestre3)) {
-							$tipo = 3;
-						}
-						$mensaje = $tipo . " " . $idioma['Trimestre'];
+			foreach ($ag as $a) {
+				$tipo = 0;
+				$mensaje = "";
+				$m = $materia->mostrarMateria($a['CodMateria']);
+				$m = array_shift($m);
+				$o = $observaciones->mostrarObser($a['CodObservacion']);
+				$o = array_shift($o);
+				if ($cur['Bimestre']) {
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre1)) {
+						$tipo = 1;
 					}
-					if ($a['Resaltar']) {
-						$resaltar = "resaltar";
-					} else {
-						$resaltar = "";
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre2) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre2)) {
+						$tipo = 2;
 					}
-					?>
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre3) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre3)) {
+						$tipo = 3;
+					}
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre4) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre4)) {
+						$tipo = 4;
+					}
+					$mensaje = $tipo . " " . $idioma['Bimestre'];
+				} else {
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioTrimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinTrimestre1)) {
+						$tipo = 1;
+					}
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioTrimestre2) and strtotime($a['Fecha']) <= strtotime($fechaFinTrimestre2)) {
+						$tipo = 2;
+					}
+					if (strtotime($a['Fecha']) >= strtotime($fechaInicioTrimestre3) and strtotime($a['Fecha']) <= strtotime($fechaFinTrimestre3)) {
+						$tipo = 3;
+					}
+					$mensaje = $tipo . " " . $idioma['Trimestre'];
+				}
+				if ($a['Resaltar']) {
+					$resaltar = "resaltar";
+				} else {
+					$resaltar = "";
+				}
+			?>
 				<tr class=" <?php if ($a['Resaltar2']) echo "warning"; ?>">
 					<td>
 						<?php
-								switch ($tipo) {
-									case 1: { ?><div class="cverde" title="<?php echo $mensaje ?>"></div><?php }
-																													break;
-																												case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>"></div><?php }
-																																																break;
-																																															case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>"></div><?php }
-																																																																	break;
-																																																																case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>"></div><?php }
-																																																																		break;
-																																																																}
-																																																																?><?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>"></div><?php } ?></td>
+						switch ($tipo) {
+							case 1: { ?><div class="cverde" title="<?php echo $mensaje ?>"></div><?php }
+																										break;
+																									case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>"></div><?php }
+																																												break;
+																																											case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>"></div><?php }
+																																																																break;
+																																																															case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>"></div><?php }
+																																																																																	break;
+																																																																															}
+																																																																																		?><?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>"></div><?php } ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $m['Nombre'] ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $o['Nombre'] ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $a['Detalle']; ?></td>
@@ -242,8 +243,8 @@ if (isset($_POST)) {
 					</td>
 				</tr>
 			<?php
-				}
-				?>
+			}
+			?>
 		</table>
 	</div>
 <?php
