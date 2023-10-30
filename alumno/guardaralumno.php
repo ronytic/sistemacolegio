@@ -52,13 +52,13 @@ if (!empty($_POST)) {
 	$ApellidosPadre = $_POST['ApellidosPadre'];
 	$NombrePadre = $_POST['NombrePadre'];
 	$CiPadre = $_POST['CiPadre'];
-	$CiExtP = $_POST['CiExtP'];
+	$CiExtP = isset($_POST['CiExtP']) ? $_POST['CiExtP'] : '';
 	$OcupPadre = $_POST['OcupPadre'];
 	$CelularP = $_POST['CelularP'];
 	$ApellidosMadre = $_POST['ApellidosMadre'];
 	$NombreMadre = $_POST['NombreMadre'];
 	$CiMadre = $_POST['CiMadre'];
-	$CiExtM = $_POST['CiExtM'];
+	$CiExtM = isset($_POST['CiExtM']) ? $_POST['CiExtM'] : '';
 	$OcupMadre = $_POST['OcupMadre'];
 	$CelularM = $_POST['CelularM'];
 	$Email = $_POST['Email'];
@@ -66,12 +66,12 @@ if (!empty($_POST)) {
 	$Nit = $_POST['Nit'];
 	$FacturaA = $_POST['FacturaA'];
 	//
-	$CertificadoNac = $_POST['CertificadoNac'] != "" ? $_POST['CertificadoNac'] : "0";
-	$LibretaEsc = $_POST['LibretaEsc'] != "" ? $_POST['LibretaEsc'] : "0";
-	$LibretaVac = $_POST['LibretaVac'] != "" ? $_POST['LibretaVac'] : "0";
-	$CedulaId = $_POST['CedulaId'] != "" ? $_POST['CedulaId'] : "0";
-	$CedulaIdP = $_POST['CedulaIdP'] != "" ? $_POST['CedulaIdP'] : "0";
-	$CedulaIdM = $_POST['CedulaIdM'] != "" ? $_POST['CedulaIdM'] : "0";
+	$CertificadoNac = (isset($_POST['CertificadoNac']) && $_POST['CertificadoNac'] != "") ? $_POST['CertificadoNac'] : "0";
+	$LibretaEsc = (isset($_POST['LibretaEsc']) && $_POST['LibretaEsc'] != "") ? $_POST['LibretaEsc'] : "0";
+	$LibretaVac = (isset($_POST['LibretaVac']) && $_POST['LibretaVac']) != "" ? $_POST['LibretaVac'] : "0";
+	$CedulaId = (isset($_POST['CedulaId']) && $_POST['CedulaId'] != "") ? $_POST['CedulaId'] : "0";
+	$CedulaIdP = (isset($_POST['CedulaIdP']) && $_POST['CedulaIdP'] != "") ? $_POST['CedulaIdP'] : "0";
+	$CedulaIdM = (isset($_POST['CedulaIdM']) && $_POST['CedulaIdM'] != "") ? $_POST['CedulaIdM'] : "0";
 	$ObservacionesDoc = $_POST['ObservacionesDoc'];
 	$autoIncrement = $al->estadoTabla();
 	$CodAlumno = $autoIncrement['Auto_increment'];
