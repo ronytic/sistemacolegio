@@ -5,7 +5,8 @@ include_once(RAIZ . "class/alumno.php");
 if (isset($_GET['CodAlumno'])) {
     $CodAlumno = $_GET['CodAlumno'];
     $alumno = new alumno;
-    $al = array_shift($alumno->mostrarTodoDatos($CodAlumno));
+    $al = $alumno->mostrarTodoDatos($CodAlumno);
+    $al = array_shift($al);
 }
 if (isset($_GET['CodCurso'])) {
     $CodCurso = $_GET['CodCurso'];
@@ -59,7 +60,7 @@ include_once($folder . "cabecerahtml.php"); ?>
 <div class="span8">
     <div class="box">
         <div class="box-header">
-            <h2><?php if ($icono != "") { ?><i class="<?php echo $icono; ?>"></i><span class="break"></span><?php } ?> <?php echo $idioma[$subtitulo1]; ?></h2>
+            <h2><?php if (isset($icono) && $icono != "") { ?><i class="<?php echo $icono; ?>"></i><span class="break"></span><?php } ?> <?php echo $idioma[$subtitulo1]; ?></h2>
         </div>
         <div class="box-content" id="respuesta"></div>
     </div>
