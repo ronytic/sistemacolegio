@@ -1,17 +1,17 @@
-<?php  
+<?php
 include_once '../../login/check.php';
-if(isset($_POST)):
+if (isset($_POST)) :
 ?>
 
-	<input type="button" value="<?php echo $idioma['VerDatosDocente']?>" class="btn btn-success span12" id="verdatos">
+    <input type="button" value="<?php echo $idioma['VerDatosDocente'] ?>" class="btn btn-success span12" id="verdatos">
     <br /><br />
-    <input type="button" value="<?php echo $idioma['ModificarDatosDocente']?>" class="btn btn-info span12" id="modificardatos">
+    <input type="button" value="<?php echo $idioma['ModificarDatosDocente'] ?>" class="btn btn-info span12" id="modificardatos">
     <br /><br />
-    <input type="button" value="<?php echo $idioma['RegistroNuevoDocente']?>" class="btn  span12 btn-inverse" id="nuevodocente">
+    <input type="button" value="<?php echo $idioma['RegistroNuevoDocente'] ?>" class="btn  span12 btn-inverse" id="nuevodocente">
     <br /><br />
-    <input type="button" value="<?php echo $idioma['ReporteDatosDocente']?>" class="btn  span12" id="reportedatos">
+    <input type="button" value="<?php echo $idioma['ReporteDatosDocente'] ?>" class="btn  span12" id="reportedatos">
     <br /><br />
-    <input type="button" value="<?php echo $idioma['ReporteDatosDocenteEntregar']?>" class="btn  span12 " id="accesosistema">
-<?php 
+    <input type="button" value="<?php echo $idioma['ReporteDatosDocenteEntregar'] ?>" class="btn  span12 " id="accesosistema">
+<?php
 endif
 ?>

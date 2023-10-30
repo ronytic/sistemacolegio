@@ -15,7 +15,7 @@ if (isset($_POST)) {
 	// echo "</pre>";
 	$doc = $docente->mostrarDocente($CodDocente);
 	$doc = array_shift($doc);
-	?>
+?>
 	<table class="table table-bordered table-striped table-hover table-condensed">
 		<thead>
 			<tr>
@@ -29,12 +29,13 @@ if (isset($_POST)) {
 			</tr>
 		</thead>
 		<?php
-			foreach ($asesores as $asesor) {
-				$i++;
-				$cur = $curso->mostrarCurso($asesor['CodCurso']);
-				$cur = array_shift($cur);
+		$i = 0;
+		foreach ($asesores as $asesor) {
+			$i++;
+			$cur = $curso->mostrarCurso($asesor['CodCurso']);
+			$cur = array_shift($cur);
 
-				?>
+		?>
 			<tr>
 				<td><?php echo $i ?></td>
 
@@ -45,8 +46,8 @@ if (isset($_POST)) {
 				</td>
 			</tr>
 		<?php
-			}
-			?>
+		}
+		?>
 	</table>
 <?php
 }
