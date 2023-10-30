@@ -283,6 +283,7 @@ $idioma['Seccion'] = "Sección";
 $idioma['SeIdentifica'] = "Se Identifica como";
 $idioma['LenguaMaterna'] = "¿Cuál es la Lengua Materna?";
 $idioma['LenguasEstudiante'] = "Lenguas que habla frecuentemente el Estudiante";
+$idioma['Salud'] = "Salud";
 $idioma['CentroSaludAlrededor'] = "¿Tiene un Centro de Salud a su Alrededor?";
 $idioma['CuantasVecesAcudio'] = "¿Cuantas veces acudió el año pasado?";
 $idioma['DiscapacidadDeficienciaMental'] = "Discapacidad o Deficiencia Mental";
