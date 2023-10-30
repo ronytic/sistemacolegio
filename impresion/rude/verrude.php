@@ -337,19 +337,19 @@ escribe(171, 284.5, $al['IdiomaM'], 10);
 escribe(171, 289, $a['OcupMadre'], 10);
 escribe(171, 293.5, $al['InstruccionM'], 10);
 
-escribe(27, 301.5, $Localidad[0], 10);
-escribe(32, 301.5, $Localidad[1], 10);
-escribe(36.5, 301.5, $Localidad[2], 10);
-escribe(41, 301.5, $Localidad[3], 10);
-escribe(45, 301.5, $Localidad[4], 10);
-escribe(50, 301.5, $Localidad[5], 10);
-escribe(54, 301.5, $Localidad[6], 10);
-escribe(59, 301.5, $Localidad[7], 10);
-escribe(63, 301.5, $Localidad[8], 10);
-escribe(68, 301.5, $Localidad[9], 10);
-escribe(72, 301.5, $Localidad[10], 10);
-escribe(76, 301.5, $Localidad[11], 10);
-escribe(81, 301.5, $Localidad[12], 10);
+escribe(27, 301.5, isset($Localidad[0]) ? $Localidad[0] : '', 10);
+escribe(32, 301.5, isset($Localidad[1]) ? $Localidad[1] : '', 10);
+escribe(36.5, 301.5, isset($Localidad[2]) ? $Localidad[2] : '', 10);
+escribe(41, 301.5, isset($Localidad[3]) ? $Localidad[3] : '', 10);
+escribe(45, 301.5, isset($Localidad[4]) ? $Localidad[4] : '', 10);
+escribe(50, 301.5, isset($Localidad[5]) ? $Localidad[5] : '', 10);
+escribe(54, 301.5, isset($Localidad[6]) ? $Localidad[6] : '', 10);
+escribe(59, 301.5, isset($Localidad[7]) ? $Localidad[7] : '', 10);
+escribe(63, 301.5, isset($Localidad[8]) ? $Localidad[8] : '', 10);
+escribe(68, 301.5, isset($Localidad[9]) ? $Localidad[9] : '', 10);
+escribe(72, 301.5, isset($Localidad[10]) ? $Localidad[10] : '', 10);
+escribe(76, 301.5, isset($Localidad[11]) ? $Localidad[11] : '', 10);
+escribe(81, 301.5, isset($Localidad[12]) ? $Localidad[12] : '', 10);
 
 
 $dia = date("d", strtotime($a['FechaIns']));
