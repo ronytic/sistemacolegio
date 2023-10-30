@@ -369,20 +369,20 @@ function promedio($NotaTotal, $Cantidad, $Cifras = 0)
 function usuarioPadre($cipadre, $cimadre)
 {
    if ($cipadre != "" && !preg_match('/-*/', $cipadre)) {
-      $usuarioP = $cipadre;
-      $usuarioP = trim($usuarioP);
+      $usuario = $cipadre;
    } else {
-      $usuarioP = $cimadre;
-      $usuarioP = trim($usuarioP);
+      $usuario = $cimadre;
    }
-   $usuario = mb_strtolower($usuarioP, "UTF-8");
+   $usuario = trim($usuario);
+   $usuario = mb_strtolower($usuario, "UTF-8");
+
    $dato = '';
    for ($j = 0; $j < strlen($usuario); $j++) {
       if (preg_match("/[0-9]/", $usuario[$j]))
          $dato .= $usuario[$j];
    }
-   if (strlen($dato) == 0) {
-      $dato = usuarioPadre($dato, $cimadre);
+   if (strlen($dato) == 0 && $cimadre != '') {
+      $dato = usuarioPadre($cimadre, '');
    }
    return $dato;
 }
