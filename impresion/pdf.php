@@ -131,7 +131,8 @@ class PPDF extends FPDF_Protection
 		if ($Full) {
 			$this->CuadroCuerpo($txtAncho, ucwords($Paterno . " " . $Materno . " " . $Nombres), $relleno);
 		} else {
-			$Nombre = array_shift(explode(" ", $Nombres));
+			$Nombre = explode(" ", $Nombres);
+			$Nombre = array_shift($Nombre);
 			$this->CuadroCuerpo($txtAncho, ucwords($Paterno . " " . $Materno . " " . $Nombre), $relleno);
 		}
 	}
