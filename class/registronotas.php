@@ -2,7 +2,7 @@
 include_once("bd.php");
 class registronotas extends bd{
 	var $tabla="registronotas";
-	function insertarRegistro($Values){
+	function insertarRegistro($Values, $Todo = 1){
 		return $this->insertRow($Values,1);
 	}
 	function mostrarRegistroNotas($CodCasilleros,$CodAlumno,$Trimestre){
@@ -19,12 +19,12 @@ class registronotas extends bd{
 	}
 	function mostrarPromedioCurso($CodCasilleros,$orden="DESC",$cantidad=false){
 		/*if($orden!="DESC"){
-			$orden="ASC";	
+			$orden="ASC";
 		}*/
 		//if($cantidad)
 		$this->tabla="registronotas rn,alumno a";
 		$this->campos=array("AVG(rn.NotaFinal) as Promedio, rn.CodAlumno");
-		return $this->getRecords("rn.CodCasilleros IN (".$CodCasilleros.") and a.Retirado=0 and a.codAlumno=rn.CodAlumno GROUP BY rn.CodAlumno ORDER BY AVG(rn.NotaFinal) ".$orden,0,0,$cantidad,0);	
+		return $this->getRecords("rn.CodCasilleros IN (".$CodCasilleros.") and a.Retirado=0 and a.codAlumno=rn.CodAlumno GROUP BY rn.CodAlumno ORDER BY AVG(rn.NotaFinal) ".$orden,0,0,$cantidad,0);
 	}
 	function MostrarTodo($Where){
 		$this->campos=array("*");
@@ -41,7 +41,6 @@ class registronotas extends bd{
 		return round(($n1+$n2+$n3+$n4)/4,0);
 	}
 	function actualizarNota($values,$where){
-		$this->updateRow($values,$where);		
+		$this->updateRow($values,$where);
 	}
 }
-?>
