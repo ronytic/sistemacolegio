@@ -4,7 +4,7 @@ include_once("../../class/curso.php");
 $curso = new curso;
 $cur = $curso->mostrar();
 if (count($cur)) {
-    ?><a href="#" class="btn btn-mini btn-success" id="exportarexcel"><?php echo $idioma['ExportarExcel'] ?></a>
+?><a href="#" class="btn btn-mini btn-success" id="exportarexcel"><?php echo $idioma['ExportarExcel'] ?></a>
     <table class="table table-bordered table-striped table-hover table-condensed">
         <thead>
             <tr>
@@ -21,9 +21,10 @@ if (count($cur)) {
             </tr>
         </thead>
         <?php
-            foreach ($cur as $c) {
-                $i++;
-                ?>
+        $i = 0;
+        foreach ($cur as $c) {
+            $i++;
+        ?>
             <tr>
                 <td class="der"><?php echo $i ?></td>
                 <td><?php echo $c['Nombre'] ?></td>
@@ -37,10 +38,10 @@ if (count($cur)) {
                 <td><a href="#" class="btn btn-mini modificar" title="<?php echo $idioma['Modificar'] ?>" rel="<?php echo $c['CodCurso'] ?>"><i class="icon-pencil"></i></a><a href="#" class="btn btn-mini eliminar" title="<?php echo $idioma['Eliminar'] ?>" rel="<?php echo $c['CodCurso'] ?>"><i class="icon-remove"></i></a></td>
             </tr>
         <?php
-            }
-            ?>
+        }
+        ?>
     </table><?php
-            } else {
-                ?><div class="alert alert-error"><?php echo $idioma['NoExisteCursosRegistrados'] ?></div><?php
-                                                                                                            }
-                                                                                                            ?>
+        } else {
+            ?><div class="alert alert-error"><?php echo $idioma['NoExisteCursosRegistrados'] ?></div><?php
+                                                                                                    }
+                                                                                                        ?>
