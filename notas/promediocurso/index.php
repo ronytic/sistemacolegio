@@ -11,4 +11,3 @@ $horizontal=2;
 $archivoInicial="formulario.php";
 $jsFile="notas/promediocurso.js";
 include_once("../../listar/curso.php");
-?>

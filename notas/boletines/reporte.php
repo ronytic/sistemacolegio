@@ -7,7 +7,8 @@ if (isset($_POST)) {
     $curso = new curso;
     include_once("../../class/config.php");
     $config = new config;
-    $cur = array_shift($curso->mostrarCurso($CodCurso));
+    $cur = $curso->mostrarCurso($CodCurso);
+    $cur = array_shift($cur);
     $boletinmediacarta = $config->mostrarConfig("BoletinMediaCarta", 1);
     if ($boletinmediacarta) {
         $ar = "mediacarta";
@@ -20,7 +21,7 @@ if (isset($_POST)) {
         $nombrearchivo = "boletintrimestre$ar.php";
     }
     $url = "../../impresion/notas/$nombrearchivo?CodAlumno=$CodAlumno&CodCurso=$CodCurso&mf=" . md5("lock");
-    ?>
+?>
     <a href="<?php echo $url; ?>" class="btn btn-danger" target="_blank"><?php echo $idioma['AbrirOtraVentana'] ?></a>
     <a href="#" class="btn btn-success" id="registrarimpresion" data-archivo="Boletin" data-alumno="<?php echo $CodAlumno; ?>"><?php echo $idioma['RegistrarImpresion'] ?></a>
     <hr />

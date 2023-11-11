@@ -109,9 +109,9 @@ class PPDF extends FPDF_Protection
 		$this->Fuente($tipo, $tam);
 		$this->Cell($txtAncho, 5, utf8_decode($txt), $borde, 0, $align, $relleno);
 	}
-	function CuadroCuerpoResaltar($txtAncho, $txt, $relleno = 0, $align = "L", $borde = 0, $resaltar = 2)
+	function CuadroCuerpoResaltar($txtAncho, $txt, $relleno = 0, $align = "L", $borde = 0, $resaltar = 2, $tipo = "", $tam = 10)
 	{
-		$this->Fuente("");
+		$this->Fuente($tipo, $tam);
 		switch ($resaltar) {
 				//case 1:{$this->SetFillColor(179,179,179);}break;
 				//case 2:{$this->SetFillColor(135,135,135);}break;

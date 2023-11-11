@@ -48,7 +48,7 @@ include_once($folder . "cabecerahtml.php"); ?>
 	<div class="span9">
 		<div class="box">
 			<div class="box-header">
-				<h2><i class="icon-cog"></i><span class="break"></span><?php echo $idioma[$subtitulo1]; ?></h2>
+				<h2><i class="icon-cog"></i><span class="break"></span><?php echo isset($idioma[$subtitulo1]) ? $idioma[$subtitulo1] : ''; ?></h2>
 			</div>
 			<div class="box-content" id="contenido1">
 			</div>
@@ -60,14 +60,14 @@ include_once($folder . "cabecerahtml.php"); ?>
 		<div class="span9">
 			<div class="box">
 				<div class="box-header">
-					<h2><i class="icon-cog"></i><span class="break"></span><?php echo $idioma[$subtitulo1]; ?></h2>
+					<h2><i class="icon-cog"></i><span class="break"></span><?php echo isset($idioma[$subtitulo1]) ? $idioma[$subtitulo1] : ''; ?></h2>
 				</div>
 				<div class="box-content" id="contenido1">
 				</div>
 			</div>
 			<div class="box">
 				<div class="box-header">
-					<h2><i class="icon-cog"></i><span class="break"></span><?php echo $idioma[$subtitulo2]; ?></h2>
+					<h2><i class="icon-cog"></i><span class="break"></span><?php echo isset($idioma[$subtitulo2]) ? $idioma[$subtitulo2] : ''; ?></h2>
 				</div>
 				<div class="box-content" id="contenido2">
 				</div>
@@ -76,14 +76,14 @@ include_once($folder . "cabecerahtml.php"); ?>
 	<?php else : ?>
 		<div class="span<?php echo isset($tamano1) ? $tamano1 : '3' ?> box">
 			<div class="box-header">
-				<h2><i class="icon-cog"></i><span class="break"></span><?php echo $idioma[$subtitulo1]; ?></h2>
+				<h2><i class="icon-cog"></i><span class="break"></span><?php echo isset($idioma[$subtitulo1]) ? $idioma[$subtitulo1] : ''; ?></h2>
 			</div>
 			<div class="box-content" id="contenido1">
 			</div>
 		</div>
 		<div class="span<?php echo isset($tamano1) ? (9 - $tamano1) : '6' ?> box">
 			<div class="box-header">
-				<h2><i class="icon-cog"></i><span class="break"></span><?php echo $idioma[$subtitulo2]; ?></h2>
+				<h2><i class="icon-cog"></i><span class="break"></span><?php echo isset($idioma[$subtitulo2]) ? $idioma[$subtitulo2] : ''; ?></h2>
 			</div>
 			<div class="box-content" id="contenido2">
 			</div>

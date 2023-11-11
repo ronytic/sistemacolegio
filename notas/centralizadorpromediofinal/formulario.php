@@ -1,14 +1,13 @@
 <?php
 include_once("../../login/check.php");
 include_once("../../class/config.php");
-if(!empty($_POST))
-{
+if (!empty($_POST)) {
 	/// esto hay que cambiar con la tabla de configuracion
-	$config=new config;
-	$TotalPeriodo=($config->mostrarConfig("TotalPeriodo",1));
+	$config = new config;
+	$TotalPeriodo = ($config->mostrarConfig("TotalPeriodo", 1));
 
-	$PeriodoActual=($config->mostrarConfig("PeriodoActual",1));
-	?>
+	$PeriodoActual = ($config->mostrarConfig("PeriodoActual", 1));
+?>
 	<?php /* echo $idioma['Periodo']?>:
 	<select name="Periodo">
 	<?php
@@ -19,8 +18,8 @@ if(!empty($_POST))
 		}
 	?>
     </select>
-	
-	
+
+
 	<?php *//*
 		for($i=1;$i<=$totalPeriodoAdicional;$i++){
 			?>
@@ -28,7 +27,7 @@ if(!empty($_POST))
 			<?php
 		}*/
 	?>
-	<input type="submit" id="generar" value="<?php echo $idioma['Generar']?>" class="btn btn-success"/>
-<?php	
+	<input type="submit" id="generar" value="<?php echo $idioma['Generar'] ?>" class="btn btn-success" />
+<?php
 }
 ?>

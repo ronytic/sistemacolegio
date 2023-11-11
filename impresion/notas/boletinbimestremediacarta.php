@@ -26,8 +26,10 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$casilleros = new casilleros;
 	$registronotas = new registronotas;
 	$config = new config;
-	$al = array_shift($alumno->mostrarTodoDatos($CodAlumno));
-	$cur = array_shift($curso->mostrarCurso($CodCurso));
+	$al = $alumno->mostrarTodoDatos($CodAlumno);
+	$al = array_shift($al);
+	$cur = $curso->mostrarCurso($CodCurso);
+	$cur = array_shift($cur);
 	if ($cur['Bimestre']) {
 		$PeriodoActualConfig = "PeriodoActualBimestre";
 	} else {
@@ -99,7 +101,8 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		$cont = 0;
 		$sumanotas = 0;
 
-		$casillas = array_shift($casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 1));
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 1);
+		$casillas = array_shift($casillas);
 		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
 		$regNotas = array_shift($regNotas);
 		$sumanotas += $regNotas['NotaFinal'];
@@ -119,7 +122,8 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$cont++;
 		}
 
-		$casillas = array_shift($casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 2));
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 2);
+		$casillas = array_shift($casillas);
 		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
 		$regNotas = array_shift($regNotas);
 		$sumanotas += $regNotas['NotaFinal'];
@@ -142,8 +146,8 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$cont++;
 		}
 
-
-		$casillas = array_shift($casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 3));
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 3);
+		$casillas = array_shift($casillas);
 		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
 		$regNotas = array_shift($regNotas);
 		$sumanotas += $regNotas['NotaFinal'];
@@ -166,8 +170,8 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$cont++;
 		}
 
-
-		$casillas = array_shift($casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 4));
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 4);
+		$casillas = array_shift($casillas);
 		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
 		$regNotas = array_shift($regNotas);
 		$sumanotas += $regNotas['NotaFinal'];
@@ -190,9 +194,10 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$cont++;
 		}
 
-
-		$casillas = array_shift($casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 5));
-		$regNotas = array_shift($registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']));
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 5);
+		$casillas = array_shift($casillas);
+		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
+		$regNotas = array_shift($regNotas);
 		$sumanotas += $regNotas['NotaFinal'];
 		$promediofinal = round($sumanotas / 4);
 
