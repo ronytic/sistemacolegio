@@ -247,7 +247,7 @@ $folder = "../../";
                     <tr class="cabecera">
                         <td width="150"><?php echo $idioma['Materias'] ?></td>
                         <?php for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) { ?>
-                            <td colspan="3"><?php echo $i ?> <?php echo $cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre']; ?></td>
+                            <td colspan="<?php echo ($cur['Dps']) ? 3 : 1 ?>"><?php echo $i ?> <?php echo $cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre']; ?></td>
                         <?php } ?>
                         <td width="90"><?php echo $idioma['PromedioAnual'] ?></td>
                         <?php if ($cur['Bimestre'] == 0) { ?>
@@ -259,15 +259,14 @@ $folder = "../../";
                         <tr></tr>
                     <?php } else { ?><tr>
                             <td></td>
-                            <td>PC</td>
-                            <td>DPS</td>
-                            <td>PT</td>
-                            <td>PC</td>
-                            <td>DPS</td>
-                            <td>PT</td>
-                            <td>PC</td>
-                            <td>DPS</td>
-                            <td>PT</td>
+                            <?php for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) {
+                                if ($cur['Dps']) { ?>
+                                    <td class="text-right">PC</td>
+                                    <td class="text-right">DPS</td>
+                                <?php } ?>
+                                <td class="text-right">PT</td>
+                            <?php } ?>
+
                             <td></td>
                             <td></td>
                             <td></td>
@@ -304,29 +303,34 @@ $folder = "../../";
                     ?>
                         <?php //echo $cantidadCuotas;
                         $mes = ($mes == "12") ? $mes - 1 : $mes;
-                        //echo $mes;
                         ?>
                         <?php if ($cantidadCuotas >= ($mes - 1)) { ?>
                             <tr>
                                 <td class="div"><?php echo $ma['Nombre']; ?></td>
                                 <?php if ($cur['Bimestre']) {
                                 ?>
-                                    <td colspan="3" class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['NotaFinal']; ?></td>
-                                    <td colspan="3" class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
-                                    <td colspan="3" class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td>
-                                    <td colspan="3" class="div der <?php echo $cur['NotaAprobacion'] > $rn4['NotaFinal'] && $rn4['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn4['NotaFinal']; ?></td>
-                                <?php
+                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['NotaFinal']; ?></td>
+                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
+                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td>
+                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn4['NotaFinal'] && $rn4['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn4['NotaFinal']; ?></td>
+                                    <?php
                                 } else {
-                                ?>
-                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['Resultado']; ?></td>
-                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['Dps']; ?></td>
-                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['NotaFinal']; ?></td>
-                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Resultado']; ?></td>
+                                    for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) {
+                                        $Resultado = ${("rn" . $i)}['Resultado'];
+                                        $Dps = ${("rn" . $i)}['Dps'];
+                                        $NotaFinal = ${("rn" . $i)}['NotaFinal'];
+                                        if ($cur['Dps']) { ?>
+                                            <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Resultado; ?></td>
+                                            <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Dps; ?></td>
+                                        <?php } ?>
+                                        <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $NotaFinal; ?></td>
+                                    <?php } ?>
+                                    <!-- <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Resultado']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Dps']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['Resultado']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['Dps']; ?></td>
-                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td>
+                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td> -->
                                 <?php } ?>
                                 <td class="div der <?php echo $cur['NotaAprobacion'] > $promedio && $promedio != 0 ? 'rojo' : ''; ?>"><?php echo $promedio ?></td>
                                 <?php if ($cur['Bimestre'] == 0) {

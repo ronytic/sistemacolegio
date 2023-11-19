@@ -122,6 +122,7 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 						break;
 				}
 			}
+			$relleno2 = '';
 			if ($relleno || $relleno2) {
 				$relleno3 = 1;
 			} else {
