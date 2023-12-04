@@ -5,12 +5,15 @@ $Post = "";
 $Session = "";
 $Ip = $_SERVER['REMOTE_ADDR'];
 @$Referencia = $_SERVER['HTTP_REFERER'];
-foreach ($_GET as $k => $v)
+/*foreach ($_GET as $k => $v)
 	$Get .= "$k=$v|";
 foreach ($_POST as $k => $v)
 	$Post .= "$k=$v|";
 foreach ($_SESSION as $k => $v)
-	$Session .= "$k=$v|";
+	$Session .= "$k=$v|";*/
+$Get = json_encode($_GET);
+$Post = json_encode($_POST);
+$Session = json_encode($_SESSION);
 //$Ip=ip2long($Ip);
 include_once(RAIZ . "class/lograstreo.php");
 $lograstreo = new lograstreo;
