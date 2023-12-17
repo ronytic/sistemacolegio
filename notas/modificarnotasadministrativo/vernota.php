@@ -26,7 +26,7 @@ if ($c != "") {
 }
 
 $TotalPeriodo = $config->mostrarConfig("TotalPeriodo", 1);
-$trimestreActual = $config->mostrarConfig("TrimestreActual", 1);
+// $trimestreActual = $config->mostrarConfig("TrimestreActual", 1);
 
 ?>
 <?php include_once($folder . "cabecerahtml.php"); ?>
