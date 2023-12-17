@@ -4,7 +4,7 @@ session_start();
 //header("Content-Type: text/html;charset=utf-8");
 if (!empty($_POST)) {
 
-/*    require_once('php-local-browscap.php');
+    /*    require_once('php-local-browscap.php');
 $navegador=get_browser_local(null,true,"lite_php_browscap.ini",true);
 print_r($navegador);*/
 
@@ -32,7 +32,7 @@ print_r($navegador);*/
         $usuario = ($_POST['usuario']);
         $pass = $_POST['pass'];
 
-//        $usuario=str_replace("ñ","n",$usuario);
+        //        $usuario=str_replace("ñ","n",$usuario);
         $usuarioAl = str_replace(array("ñ", "Ñ"), array("n", "N"), $usuario);
         $usuarioAl = strtolower($usuarioAl);
         //    echo $usuarioAl;
@@ -54,7 +54,6 @@ print_r($navegador);*/
             $reg = $alumno->loginPadre($usuario, $pass);
             $reg = array_shift($reg);
             $Nivel = 6;
-
         } elseif (preg_match('/^([a-z])*[0-9]{1,4}$/', $usuarioAl)) {
             //Alumno
             //echo $usuario;
@@ -100,7 +99,7 @@ print_r($navegador);*/
             $_SESSION['LoginSistemaColegio'] = 1;
             $_SESSION['Nivel'] = $Nivel;
             $_SESSION['Idioma'] = $reg['Idioma'];
-            echo $logusuario->optimizarTablas();
+            $logusuario->optimizarTablas();
             header("Location:" . $direccion);
         } else {
             header("Location:./?u=" . $url . '&error=1');
