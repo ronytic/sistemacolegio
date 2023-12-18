@@ -23,6 +23,6 @@ class usuario extends bd
 	function loginUsuarios($Usuario, $Password)
 	{
 		$this->campos = array("count(*) as Can,CodUsuario,Nivel,Idioma");
-		return $this->getRecords("Usuario='$Usuario' and Pass2=SHA1('$Password') and Activo=1");
+		return $this->getRecords("Usuario='$Usuario' and Pass2=SHA1('$Password') and Activo=1", '', 'Usuario');
 	}
 }
