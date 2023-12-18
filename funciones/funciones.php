@@ -255,7 +255,7 @@ function sacarIniciales($texto, $Todo = 0)
    $iniciales = "";
    $datos = explode(" ", $texto);
    for ($i = 0; $i < count($datos); $i++) {
-      $iniciales .= $datos[$i][0];
+      $iniciales .= isset($datos[$i][0]) ? $datos[$i][0] : "";
    }
    return mb_strtoupper($iniciales, "utf8");
 }
