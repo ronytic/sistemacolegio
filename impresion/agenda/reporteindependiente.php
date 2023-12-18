@@ -222,7 +222,7 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 	$i = 0;
 	foreach ($ag as $a) {
 		$i++;
-		$tipo = 0;
+		$tipo = "";
 		$mensaje = "";
 		if ($cur['Bimestre']) {
 
