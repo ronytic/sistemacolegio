@@ -222,8 +222,8 @@ class bd
 		if ($Todo == 1) {
 			$fecha = date("Y-m-d");
 			$hora = date("H:i:s");
-			$CodUsuario = $_SESSION['CodUsuarioLog'];
-			$Nivel = $_SESSION['Nivel'];
+			$CodUsuario = isset($_SESSION['CodUsuarioLog']) ? $_SESSION['CodUsuarioLog'] : 0;
+			$Nivel = isset($_SESSION['Nivel']) ? $_SESSION['Nivel'] : 0;
 
 			if (!isset($Values['Nivel']) && empty($Values['Nivel'])) {
 				$Values['Nivel'] = "$Nivel";
