@@ -253,7 +253,7 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 		}
 		$importante = "";
 		if ($a['Resaltar']) {
-			$importante = "-I";
+			$importante = " - I";
 		}
 		$m = $materia->mostrarMateria($a['CodMateria']);
 		$m = array_shift($m);
