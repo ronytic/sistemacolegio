@@ -89,20 +89,29 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$j++;
 			$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], $Periodo);
 			$casillas = array_shift($casillas);
+			if (is_null($casillas)) {
+				$pdf->CuadroCuerpo(10, "", $relleno, "C");
+				continue;
+			}
 			$regNotas = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], $Periodo);
 			$regNotas = array_shift($regNotas);
+			if (is_null($regNotas)) {
+				$pdf->CuadroCuerpo(10, "", $relleno, "C");
+				continue;
+			}
 
 			if ($regNotas['NotaFinal'] < $notareprobado) {
 				$reprobado++;
 				$pdf->CuadroCuerpoResaltar(10, $regNotas['NotaFinal'], 1, "C", 1, 1);
 				$reprobadomaterias[$j]++;
 			} else {
-				$pdf->CuadroCuerpo(10, $regNotas['NotaFinal'], $relleno, "C");
+				$pdf->CuadroCuerpo(10, $regNotas['NotaFinal'], $relleno, "C", 0);
 			}
 			$sumanotas += $regNotas['NotaFinal'];
 			$cantidadnotas++;
 		}
 		$reprobadototalcurso += $reprobado;
+		if ($cantidadnotas == 0) $cantidadnotas = 1;
 		@$promedio = round($sumanotas / $cantidadnotas); // or die("No se tiene asignado materia para ese curso");
 		$promediototalcurso += $promedio;
 		$pdf->CuadroCuerpo(5, $reprobado, $relleno, "C");

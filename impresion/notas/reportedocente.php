@@ -64,6 +64,9 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 
 	$casillas = $casilleros->mostrarDocenteMateriaCursoTrimestre($CodDocente, $CodMateria, $CodCurso, $CodPeriodo);
 	$casillas = array_shift($casillas);
+	if (is_null($casillas)) {
+		die("No tiene configurado el Casillero para este Periodo");
+	}
 	$CodCasilleros = $casillas['CodCasilleros'];
 	$Sexo = $casillas['SexoAlumno'];
 	$numcasilleros = $casillas['Casilleros'];

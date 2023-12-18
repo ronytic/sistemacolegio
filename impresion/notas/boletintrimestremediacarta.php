@@ -16,6 +16,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 
 	$observaciones = new observaciones;
 	$agenda = new agenda;
+	$titulo = $idioma["BoletinBimestral"];
 	$FechaReporte = 0;
 	include_once("../pdf.php");
 	$alumno = new alumno;
@@ -29,15 +30,10 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$al = array_shift($al);
 	$cur = $curso->mostrarCurso($CodCurso);
 	$cur = array_shift($cur);
-	$cantidadEtapas = $cur['CantidadEtapas'];
 	if ($cur['Bimestre']) {
 		$PeriodoActualConfig = "PeriodoActualBimestre";
-		$nombrePeriodo = "Bimestre";
-		$titulo = $idioma["BoletinBimestral"];
 	} else {
 		$PeriodoActualConfig = "PeriodoActualTrimestre";
-		$nombrePeriodo = "Trimestre";
-		$titulo = $idioma["BoletinTrimestral"];
 	}
 	$cnf = ($config->mostrarConfig($PeriodoActualConfig));
 	$PeriodoActual = $cnf['Valor'];
@@ -67,7 +63,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	{
 		function Cabecera()
 		{
-			global $idioma, $al, $anio, $cur, $cantidadEtapas, $nombrePeriodo;
+			global $idioma, $al, $anio, $cur;
 			$this->CuadroCabecera(20, $idioma["Nombre"] . ": ", 100, mb_strtoupper(utf8_decode($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres'])));
 			$this->CuadroCabecera(20, $idioma["Gestion"] . ": ", 60, $anio);
 			$this->ln();
@@ -75,13 +71,10 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$this->CuadroCabecera(20, $idioma["Fecha"] . ": ", 60, strftime("%d/%m/%Y"));
 			$this->ln();
 			$this->TituloCabecera(50, $idioma['Materia']);
-			for ($etapa = 1; $etapa <= $cantidadEtapas; $etapa++) {
-				$this->TituloCabecera(25, $etapa . " " . $idioma[$nombrePeriodo]);
-			}
-			// $this->TituloCabecera(25, "1 " . $idioma['Bimestre']);
-			// $this->TituloCabecera(25, "2 " . $idioma['Bimestre']);
-			// $this->TituloCabecera(25, "3 " . $idioma['Bimestre']);
-			// $this->TituloCabecera(25, "4 " . $idioma['Bimestre']);
+			$this->TituloCabecera(25, "1 " . $idioma['Bimestre']);
+			$this->TituloCabecera(25, "2 " . $idioma['Bimestre']);
+			$this->TituloCabecera(25, "3 " . $idioma['Bimestre']);
+			$this->TituloCabecera(25, "4 " . $idioma['Bimestre']);
 			$this->TituloCabecera(25, "" . $idioma['NotaFinal']);
 		}
 	}
@@ -108,142 +101,98 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		$cont = 0;
 		$sumanotas = 0;
 
-		for ($etapa = 1; $etapa <= $cantidadEtapas; $etapa++) {
-
-			$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], $etapa);
-			$casillas = array_shift($casillas);
-			if (is_null($casillas)) {
-				$pdf->CuadroCuerpo(25, "", 0, "C", $bordeC);
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 1);
+		$casillas = array_shift($casillas);
+		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
+		$regNotas = array_shift($regNotas);
+		$sumanotas += $regNotas['NotaFinal'];
+		///Primer Bimestre
+		if ($PeriodoActual >= 1) {
+			if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
+				$bordeN = 0;
 			} else {
-				$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
-				$regNotas = array_shift($regNotas);
-				$sumanotas += $regNotas['NotaFinal'];
-				///Primer Bimestre
-				if ($PeriodoActual >= 1) {
-					if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
-						$bordeN = 0;
-					} else {
-						$bordeN = 0;
-					}
-					/*$pdf->SetXY($boletin4x+63,$boletin4y+80+$i);
+				$bordeN = 0;
+			}
+			/*$pdf->SetXY($boletin4x+63,$boletin4y+80+$i);
 			$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
 			$pdf->SetXY($boletin4x+75,$boletin4y+80+$i);
 			if($casillas['Dps']==1)
 			$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS*/
-					$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
-					$cont++;
-				}
-			}
+			$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
+			$cont++;
 		}
 
-		// $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 1);
-		// $casillas = array_shift($casillas);
-		// if (is_null($casillas)) {
-		// 	$pdf->CuadroCuerpo(25, "", 0, "C", $bordeC);
-		// } else {
-		// 	$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
-		// 	$regNotas = array_shift($regNotas);
-		// 	$sumanotas += $regNotas['NotaFinal'];
-		// 	///Primer Bimestre
-		// 	if ($PeriodoActual >= 1) {
-		// 		if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
-		// 			$bordeN = 0;
-		// 		} else {
-		// 			$bordeN = 0;
-		// 		}
-		// 		/*$pdf->SetXY($boletin4x+63,$boletin4y+80+$i);
-		// 	$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
-		// 	$pdf->SetXY($boletin4x+75,$boletin4y+80+$i);
-		// 	if($casillas['Dps']==1)
-		// 	$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS*/
-		// 		$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
-		// 		$cont++;
-		// 	}
-		// }
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 2);
+		$casillas = array_shift($casillas);
+		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
+		$regNotas = array_shift($regNotas);
+		$sumanotas += $regNotas['NotaFinal'];
+		//Segundo Bimestre
+		if ($PeriodoActual >= 2) {
+			if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
+				$bordeN = 0;
+			} else {
+				$bordeN = 0;
+			}
+			/*$pdf->SetXY($boletin4x+95,$boletin4y+80+$i);
+			$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");
+			$pdf->SetXY($boletin4x+106,$boletin4y+80+$i);
+			if($casillas['Dps']==1)
+			$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");*/
+			$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");
+			$cont++;
+		}
 
-		// $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 2);
-		// $casillas = array_shift($casillas);
-		// if (is_null($casillas)) {
-		// 	$pdf->CuadroCuerpo(25, "", 0, "C", $bordeC);
-		// } else {
-		// 	$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
-		// 	$regNotas = array_shift($regNotas);
-		// 	$sumanotas += $regNotas['NotaFinal'];
-		// 	//Segundo Bimestre
-		// 	if ($PeriodoActual >= 2) {
-		// 		if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
-		// 			$bordeN = 0;
-		// 		} else {
-		// 			$bordeN = 0;
-		// 		}
-		// 		/*$pdf->SetXY($boletin4x+95,$boletin4y+80+$i);
-		// 	$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
-		// 	//$pdf->Cell(6,4,"00",$bordeC,0,"R");
-		// 	$pdf->SetXY($boletin4x+106,$boletin4y+80+$i);
-		// 	if($casillas['Dps']==1)
-		// 	$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS
-		// 	//$pdf->Cell(6,4,"00",$bordeC,0,"R");*/
-		// 		$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
-		// 		//$pdf->Cell(6,4,"00",$bordeC,0,"R");
-		// 		$cont++;
-		// 	}
-		// }
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 3);
+		$casillas = array_shift($casillas);
+		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
+		$regNotas = array_shift($regNotas);
+		$sumanotas += $regNotas['NotaFinal'];
+		///Tercer Bimestre
+		if ($PeriodoActual >= 3) {
+			if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
+				$bordeN = 0;
+			} else {
+				$bordeN = 0;
+			}
+			/*$pdf->SetXY($boletin4x+127,$boletin4y+80+$i);
+			$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");
+			$pdf->SetXY($boletin4x+138,$boletin4y+80+$i);
+			if($casillas['Dps']==1)
+			$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");*/
+			$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");
+			$cont++;
+		}
 
-		// $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 3);
-		// $casillas = array_shift($casillas);
-		// if (is_null($casillas)) {
-		// 	$pdf->CuadroCuerpo(25, "", 0, "C", $bordeC);
-		// } else {
-		// 	$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
-		// 	$regNotas = array_shift($regNotas);
-		// 	$sumanotas += $regNotas['NotaFinal'];
-		// 	///Tercer Bimestre
-		// 	if ($PeriodoActual >= 3) {
-		// 		if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
-		// 			$bordeN = 0;
-		// 		} else {
-		// 			$bordeN = 0;
-		// 		}
-		// 		/*$pdf->SetXY($boletin4x+127,$boletin4y+80+$i);
-		// 	$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
-		// 	//$pdf->Cell(6,4,"00",$bordeC,0,"R");
-		// 	$pdf->SetXY($boletin4x+138,$boletin4y+80+$i);
-		// 	if($casillas['Dps']==1)
-		// 	$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS
-		// 	//$pdf->Cell(6,4,"00",$bordeC,0,"R");*/
-		// 		$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
-		// 		//$pdf->Cell(6,4,"00",$bordeC,0,"R");
-		// 		$cont++;
-		// 	}
-		// }
-
-		// $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 4);
-		// $casillas = array_shift($casillas);
-		// if (is_null($casillas)) {
-		// 	$pdf->CuadroCuerpo(25, "", 0, "C", $bordeC);
-		// } else {
-		// 	$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
-		// 	$regNotas = array_shift($regNotas);
-		// 	$sumanotas += $regNotas['NotaFinal'];
-		// 	///Cuarto Bimestre
-		// 	if ($PeriodoActual >= 4) {
-		// 		if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
-		// 			$bordeN = 0;
-		// 		} else {
-		// 			$bordeN = 0;
-		// 		}
-		// 		/*$pdf->SetXY($boletin4x+127,$boletin4y+80+$i);
-		// 	$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
-		// 	//$pdf->Cell(6,4,"00",$bordeC,0,"R");
-		// 	$pdf->SetXY($boletin4x+138,$boletin4y+80+$i);
-		// 	if($casillas['Dps']==1)
-		// 	$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS
-		// 	//$pdf->Cell(6,4,"00",$bordeC,0,"R");*/
-		// 		$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
-		// 		//$pdf->Cell(6,4,"00",$bordeC,0,"R");
-		// 		$cont++;
-		// 	}
-		// }
+		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 4);
+		$casillas = array_shift($casillas);
+		$regNotas = $registronotas->notasBoletin($CodAlumno, $casillas['CodCasilleros']);
+		$regNotas = array_shift($regNotas);
+		$sumanotas += $regNotas['NotaFinal'];
+		///Cuarto Bimestre
+		if ($PeriodoActual >= 4) {
+			if ($cur['NotaAprobacion'] > $regNotas['NotaFinal']) {
+				$bordeN = 0;
+			} else {
+				$bordeN = 0;
+			}
+			/*$pdf->SetXY($boletin4x+127,$boletin4y+80+$i);
+			$pdf->Cell(6,4,$regNotas['Resultado'],$bordeC,0,"R");//Nota
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");
+			$pdf->SetXY($boletin4x+138,$boletin4y+80+$i);
+			if($casillas['Dps']==1)
+			$pdf->Cell(6,4,$regNotas['Dps'],$bordeC,0,"R");//DPS
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");*/
+			$pdf->CuadroCuerpo(25, $regNotas['NotaFinal'], 0, "C", $bordeC); //Puntaje Trimestral
+			//$pdf->Cell(6,4,"00",$bordeC,0,"R");
+			$cont++;
+		}
 
 		$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($mat['CodMateria'], $CodCurso, $al['Sexo'], 5);
 		$casillas = array_shift($casillas);
@@ -262,7 +211,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		} else {
 			$promedioanual = $promediofinal;
 		}
-		if ($cont == $cantidadEtapas) {
+		if ($cont == 4) {
 
 			$pdf->CuadroCuerpo(25, $promediofinal, 0, "C", $bordeC); //Promedio Anual
 
@@ -271,13 +220,10 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 
 			//$pdf->SetXY(198,80+$i);
 			//$pdf->Cell(6,4,$promedioanual,$bordeC,0,"R");//Promedio Final
-		} else {
-			$pdf->CuadroCuerpo(25, "", 0, "C", $bordeC); //Promedio Anual Vacio
 		}
 		$i += 4; //Salto para abajo
 		$pdf->ln();
 	}
-	$pdf->ln();
 	/************************INICIO*******************/
 	//Cantidad de Observaciones
 	$CodAl = $CodAlumno;

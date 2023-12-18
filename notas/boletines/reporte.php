@@ -18,7 +18,7 @@ if (isset($_POST)) {
     if ($cur['Bimestre'] == 1) {
         $nombrearchivo = "boletinbimestre$ar.php";
     } else {
-        $nombrearchivo = "boletintrimestre$ar.php";
+        $nombrearchivo = "boletinbimestre$ar.php";
     }
     $url = "../../impresion/notas/$nombrearchivo?CodAlumno=$CodAlumno&CodCurso=$CodCurso&mf=" . md5("lock");
 ?>
