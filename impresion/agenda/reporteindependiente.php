@@ -260,11 +260,11 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 		$o = $observaciones->mostrarObser($a['CodObservacion']);
 		$o = array_shift($o);
 		$pdf->CuadroCuerpo(8, $i, 0, "R", 1, 9, "B");
-		$pdf->CuadroCuerpo(40, $m["Nombre"], 0, "L", 1, "B");
-		$pdf->CuadroCuerpo(40, recortartexto($o["Nombre"], 23), 0, "L", 1, "B");
-		$pdf->CuadroCuerpo(60, recortartexto(minuscula($a["Detalle"]), 33), 0, "L", 1, "B");
-		$pdf->CuadroCuerpo(20, fecha2Str($a["Fecha"]), 0, "C", 1, "B");
-		$pdf->CuadroCuerpo(10, sacariniciales($mensaje) . $importante, 0, "L", 1, "B");
+		$pdf->CuadroCuerpo(40, $m["Nombre"], 0, "L", 1, 9, "B");
+		$pdf->CuadroCuerpo(40, recortartexto($o["Nombre"], 23), 0, "L", 1, 9, "B");
+		$pdf->CuadroCuerpo(60, recortartexto(minuscula($a["Detalle"]), 33), 0, "L", 1, 9, "B");
+		$pdf->CuadroCuerpo(20, fecha2Str($a["Fecha"]), 0, "C", 1, 9, "B");
+		$pdf->CuadroCuerpo(10, sacariniciales($mensaje) . $importante, 0, "L", 1, 9, "B");
 		$pdf->Ln();
 	}
 	$pdf->Output($titulo . " " . capitalizar($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']), "I");
