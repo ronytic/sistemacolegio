@@ -94,11 +94,10 @@ $UrlBase = url_todo();
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/bootstrap.css" rel="stylesheet">
 	<link href="<?php echo $folder; ?>css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link id="base-style" href="<?php echo $folder; ?>css/style.css" rel="stylesheet">
-	<link id="bootstrap-style" href="<?php echo $folder; ?>css/estilo.css" rel="stylesheet">
 	<!--<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">-->
 
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/ui/jquery.ui.all.css" rel="stylesheet">
-	<link id="bootstrap-style" href="<?php echo $folder; ?>css/estilo.css?123" rel="stylesheet">
+	<link id="bootstrap-style" href="<?php echo $folder; ?>css/estilo.css?1234" rel="stylesheet">
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/offline-theme-chrome.css" rel="stylesheet">
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/offline-language-spanish.css" rel="stylesheet">
 	<!-- Fin: CSS -->
