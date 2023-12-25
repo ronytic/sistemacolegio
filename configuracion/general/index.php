@@ -33,7 +33,7 @@ include_once($folder . "cabecerahtml.php");
                     <td><select class="span6" name="PeriodoActual">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
                             ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActual") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                    } ?>
+                                                                                                                                                                } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -42,7 +42,7 @@ include_once($folder . "cabecerahtml.php");
                     <td><select class="span6" name="PeriodoActualBimestre">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
                             ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActualBimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                            } ?>
+                                                                                                                                                                        } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -51,7 +51,7 @@ include_once($folder . "cabecerahtml.php");
                     <td><select class="span6" name="PeriodoActualTrimestre">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
                             ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoActualTrimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                            } ?>
+                                                                                                                                                                        } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -343,7 +343,7 @@ include_once($folder . "cabecerahtml.php");
                     <td><select class="span12" name="PeriodoNotaHabilitado">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
                             ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoNotaHabilitado") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                            } ?>
+                                                                                                                                                                        } ?>
                         </select></td>
                 </tr>
                 <tr>
@@ -352,7 +352,7 @@ include_once($folder . "cabecerahtml.php");
                     <td><select class="span12" name="PeriodoNotaHabilitadoBimestre">
                             <?php for ($i = 1; $i <= dato("TotalPeriodo"); $i++) {
                             ?><option value="<?php echo $i; ?>" class="der" <?php echo dato("PeriodoNotaHabilitadoBimestre") == $i ? 'selected' : '' ?>><?php echo $i ?></option><?php
-                                                                                                                                                                                    } ?>
+                                                                                                                                                                                } ?>
                         </select></td>
                 </tr>
                 <tr>
