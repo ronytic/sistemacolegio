@@ -49,7 +49,8 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$cur = array_shift($cur);
 	$notareprobado = $cur['NotaAprobacion'];
 	$nombresMateriasBoletin = array();
-	foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+	$cursoMateriasBoletin = $cursomateria->mostrarMaterias($CodCurso);
+	foreach ($cursoMateriasBoletin as $materiasbol) {
 		//echo $materiasbol['CodMateria'];
 		$nombremateria = $materias->mostrarMateria($materiasbol['CodMateria']);
 		$nombremateria = array_shift($nombremateria);
@@ -68,7 +69,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$reprobadototalcurso = 0;
 	$promediototalcurso = 0;
 	$j = 0;
-	foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+	foreach ($cursoMateriasBoletin as $materiasbol) {
 		$j++;
 		$reprobadomaterias[$j] = 0;
 	}
@@ -85,7 +86,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		$cantidadnotas = 0;
 		$pdf->CuadroCuerpo(8, $i, $relleno, "R");
 		$pdf->CuadroNombreSeparado(25, $al['Paterno'], 25, $al['Materno'], 35, $al['Nombres'], 1, $relleno);
-		foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+		foreach ($cursoMateriasBoletin as $materiasbol) {
 			$j++;
 			$casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], $Periodo);
 			$casillas = array_shift($casillas);
@@ -121,7 +122,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$promediototalcurso = $promediototalcurso / $i;
 	$pdf->CuadroCuerpo(93, "", 0, "C", 0);
 	$j = 0;
-	foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+	foreach ($cursoMateriasBoletin as $materiasbol) {
 		$j++;
 		$pdf->CuadroCuerpo(10, $reprobadomaterias[$j], 0, "C", 1);
 	}
