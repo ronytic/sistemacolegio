@@ -20,6 +20,7 @@ class bd
 			exit();
 		} else {
 			mysqli_query($con, "SET NAMES utf8");
+			mysqli_query($con, "SET SQL_MODE='ALLOW_INVALID_DATES'");
 			$this->l = $con;
 		}
 		if ($this->tabla == "") {
