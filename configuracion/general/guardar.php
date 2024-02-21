@@ -8,11 +8,11 @@ if (!empty($_POST)) {
         //echo "<br>";
         //echo $pk." - ".fecha2Str($pv,1)."<br>";
         if (preg_match('/Fecha|InicioTrimestre|FinTrimestre|InicioBimestre|FinBimestre/', $pk)) {
-            $valor = array("Valor" => "'" . fecha2Str($pv, 0) . "'");
+            $valor =  "" . fecha2Str($pv, 0) . "";
         } else {
-            $valor = array("Valor" => "'" . ($pv) . "'");
+            $valor =  "" . ($pv) . "";
         }
-        $config->actualizarConfig($valor, $pk);
+        $config->revisar($pk, $valor);
     }
 }
 header("Location:index.php?m=1");
