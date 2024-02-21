@@ -87,7 +87,7 @@ $PeriodoActual = $cnf['Valor']
     </div>
 
     <?php
-    $cnf = ($config->mostrarConfig("CodigoSeguimientoNotasDocente"));
+    $cnf = ($config->mostrarConfig("CodigoSeguimientoNotasDocente", 1));
     //echo $cnf['Valor'];
     ?>
     <?php include_once($folder . "pie.php"); ?>

@@ -109,7 +109,7 @@ $TotalPeriodo = $config->mostrarConfig("TotalPeriodo", 1);
     </div>
 
     <?php
-    $cnf = ($config->mostrarConfig("CodigoSeguimientoNotasDocente"));
+    $cnf = ($config->mostrarConfig("CodigoSeguimientoNotasDocente", 1));
     //echo $cnf['Valor'];
     ?>
     <?php include_once($folder . "pie.php"); ?>

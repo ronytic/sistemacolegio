@@ -131,17 +131,18 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 			} else {
 				$relleno3 = 0;
 			}
-			$pdf->CuadroCuerpoResaltar($ancho, $regNota['Nota' . $i], $relleno3, "R", 0, $relleno2, "", 8);
+			$pdf->CuadroCuerpoResaltar($ancho, (isset($regNota['Nota' . $i]) ? $regNota['Nota' . $i] : ''), $relleno3, "R", 0, $relleno2, "", 8);
 		}
-		$pdf->CuadroCuerpo(8, $regNota['Resultado'], $relleno, "C");
+		$pdf->CuadroCuerpo(8, (isset($regNota['Resultado']) ? $regNota['Resultado'] : ''), $relleno, "C");
 		if ($cur['Dps']) {
 			$pdf->CuadroCuerpo(8, $regNota['Dps'], $relleno, "C");
 		}
-		if ($regNota['NotaFinal'] < $notaReprobado) {
+		$regNotaFinal = isset($regNota['NotaFinal']) ? $regNota['NotaFinal'] : '';
+		if ($regNotaFinal < $notaReprobado) {
 			$pdf->SetFillColor(179, 179, 179);
-			$pdf->CuadroCuerpoResaltar(8, $regNota['NotaFinal'], 1, "C", 1);
+			$pdf->CuadroCuerpoResaltar(8, $regNotaFinal, 1, "C", 1);
 		} else {
-			$pdf->CuadroCuerpo(8, $regNota['NotaFinal'], $relleno, "C", 1);
+			$pdf->CuadroCuerpo(8, $regNotaFinal, $relleno, "C", 1);
 		}
 
 
