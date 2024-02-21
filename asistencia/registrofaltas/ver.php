@@ -102,34 +102,37 @@ switch ($Dia) {
             $i++;
             $asis = $asistencia->mostrarCodAlumnoFecha($a['CodAlumno'], $FechaFalta);
             $asis = array_shift($asis);
-            switch ($asis['Tipo']) {
-                case 'A': {
-                        $Tipo = $idioma["Atraso"];
-                    }
-                    break;
-                case 'F': {
-                        $Tipo = $idioma["Falta"];
-                    }
-                    break;
-                case 'C': {
-                        $Tipo = $idioma["Asistencia"];
-                    }
-                    break;
-                default: {
-                        $Tipo = "";
-                    }
-                    break;
+            $Tipo = "";
+            if (!is_null($asis)) {
+                switch ($asis['Tipo']) {
+                    case 'A': {
+                            $Tipo = $idioma["Atraso"];
+                        }
+                        break;
+                    case 'F': {
+                            $Tipo = $idioma["Falta"];
+                        }
+                        break;
+                    case 'C': {
+                            $Tipo = $idioma["Asistencia"];
+                        }
+                        break;
+                    default: {
+                            $Tipo = "";
+                        }
+                        break;
+                }
             }
         ?>
-            <tr class="<?php echo ($asis['Tipo'] == "" || $asis['Tipo'] == "F") ? 'error' : '' ?> <?php echo $asis['Tipo'] == "A" ? 'warning' : '' ?> <?php echo $asis['Tipo'] == "C" ? '' : '' ?>">
+            <tr class="<?php echo (isset($asis['Tipo']) && ($asis['Tipo'] == "" || $asis['Tipo'] == "F")) ? 'error' : '' ?> <?php echo (isset($asis['Tipo']) && $asis['Tipo'] == "A") ? 'warning' : '' ?> <?php echo (isset($asis['Tipo']) && $asis['Tipo'] == "C") ? '' : '' ?>">
                 <td class="der"><?php echo $i; ?></td>
                 <td><?php echo capitalizar($a['Paterno']) ?></td>
                 <td><?php echo capitalizar($a['Materno']) ?></td>
                 <td><?php echo capitalizar($a['Nombres']) ?></td>
                 <td><?php echo $Tipo ?></td>
-                <td><?php echo $asis['Hora'] ?></td>
+                <td><?php echo isset($asis['Tipo']) ? $asis['Hora'] : '' ?></td>
                 <td class="centrar">
-                    <?php if ($asis['Tipo'] == "") { ?>
+                    <?php if ($Tipo == "" || $asis['Tipo'] == "") { ?>
                         <input type="checkbox" name="f[<?php echo $a['CodAlumno'] ?>]">
                     <?php } ?>
                 </td>

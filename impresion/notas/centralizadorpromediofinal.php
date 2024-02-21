@@ -53,9 +53,9 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	}
 
 	$notareprobado = $cur['NotaAprobacion'];
-
+	$cursoMaterias = $cursomateria->mostrarMaterias($CodCurso);
 	$nombresMateriasBoletin = array();
-	foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+	foreach ($cursoMaterias as $materiasbol) {
 		//echo $materiasbol['CodMateria'];
 		$nombremateria = $materias->mostrarMateria($materiasbol['CodMateria']);
 		$nombremateria = array_shift($nombremateria);
@@ -72,8 +72,9 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$reprobadomaterias = array();
 	$reprobadototalcurso = 0;
 	$promediototalcurso = 0;
+
 	$j = 0;
-	foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+	foreach ($cursoMaterias as $materiasbol) {
 		$j++;
 		$reprobadomaterias[$j] = 0;
 	}
@@ -90,27 +91,42 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		$cantidadnotas = 0;
 		$pdf->CuadroCuerpo(10, $i, $relleno, "R");
 		$pdf->CuadroNombreSeparado(25, $al['Paterno'], 25, $al['Materno'], 35, $al['Nombres'], 1, $relleno);
-		foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+		foreach ($cursoMaterias as $materiasbol) {
 			$j++;
 			$casillas1 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 1);
 			$casillas1 = array_shift($casillas1);
+			if (is_null($casillas1)) {
+				continue;
+			}
 			$regNotas1 = $registronotas->mostrarRegistroNotas($casillas1['CodCasilleros'], $al['CodAlumno'], 1);
 			$regNotas1 = array_shift($regNotas1);
 			$casillas2 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 2);
 			$casillas2 = array_shift($casillas2);
+			if (is_null($casillas2)) {
+				continue;
+			}
 			$regNotas2 = $registronotas->mostrarRegistroNotas($casillas2['CodCasilleros'], $al['CodAlumno'], 2);
 			$regNotas2 = array_shift($regNotas2);
 			$casillas3 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 3);
 			$casillas3 = array_shift($casillas3);
+			if (is_null($casillas3)) {
+				continue;
+			}
 			$regNotas3 = $registronotas->mostrarRegistroNotas($casillas3['CodCasilleros'], $al['CodAlumno'], 3);
 			$regNotas3 = array_shift($regNotas3);
 
 			if ($cur['Bimestre']) {
 				$casillas4 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 4);
 				$casillas4 = array_shift($casillas4);
+				if (is_null($casillas4)) {
+					continue;
+				}
 				$regNotas4 = $registronotas->mostrarRegistroNotas($casillas4['CodCasilleros'], $al['CodAlumno'], 4);
 				$regNotas4 = array_shift($regNotas4);
-				$regNotasFinal = ($regNotas1['NotaFinal'] + $regNotas2['NotaFinal'] + $regNotas3['NotaFinal'] + $regNotas4['NotaFinal']) / 4;
+				$regNotasFinal = ($regNotas1['NotaFinal']
+					+ $regNotas2['NotaFinal'] +
+					$regNotas3['NotaFinal'] +
+					$regNotas4['NotaFinal']) / 4;
 				$regNotasFinal = round($regNotasFinal);
 			} else {
 				$regNotasFinal = ($regNotas1['NotaFinal'] + $regNotas2['NotaFinal'] + $regNotas3['NotaFinal']) / 3;
@@ -134,7 +150,12 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$cantidadnotas++;
 		}
 		$reprobadototalcurso += $reprobado;
-		@$promedio = round($sumanotas / $cantidadnotas); // or die("No se tiene asignado materia para ese curso");
+		if ($cantidadnotas == 0) {
+			//			continue;
+			$promedio = 0;
+		} else {
+			@$promedio = round($sumanotas / $cantidadnotas); // or die("No se tiene asignado materia para ese curso");
+		}
 		$promediototalcurso += $promedio;
 		$pdf->CuadroCuerpo(5, $reprobado, $relleno, "C");
 		$pdf->CuadroCuerpo(5, $promedio, $relleno, "C");
@@ -144,7 +165,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 	$promediototalcurso = $promediototalcurso / $i;
 	$pdf->CuadroCuerpo(95, "", 0, "C", 0);
 	$j = 0;
-	foreach ($cursomateria->mostrarMaterias($CodCurso) as $materiasbol) {
+	foreach ($cursoMaterias as $materiasbol) {
 		$j++;
 		$pdf->CuadroCuerpo(10, $reprobadomaterias[$j], 0, "C", 1);
 	}

@@ -61,7 +61,9 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 			}
 		}
 		$codmateria = implode(",", $codigosmateria);
-		//echo $codmateria."<br>";
+		if ($codmateria == '') {
+			continue;
+		}
 		foreach ($registroNotas->mostrarPromedioCurso($codmateria, $Orden, $Cantidad) as $regNota) {
 
 			$al = $alumnos->mostrarDatosPersonales($regNota['CodAlumno']);

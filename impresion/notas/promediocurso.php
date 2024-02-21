@@ -49,6 +49,10 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 	//echo $codmateria;
 	// $Sexo = $docMat['SexoAlumno'];
 	//
+	if ($codmateria == '') {
+		echo $idioma['NoExisteCasillerosRegistrados'];
+		exit();
+	}
 
 	$pdf = new PDF("P", "mm", "letter"); //612,792
 	$pdf->AddPage();

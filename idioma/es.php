@@ -600,7 +600,7 @@ $idioma['BimestreAvanzado'] = "Bimestre Avanzado";
 $idioma['BimestreLiteral'] = "Bimestre Literal";
 $idioma['Literal'] = "Literal";
 $idioma['NotaBimestreAvanzado'] = "Si usted selecciona bimestre avanzado, el sistema será el encargado internamente de asignar  el número de casilleros y la metodología de calificación de acuerdo al cuaderno pedagógico del registro de notas ";
-
+$idioma['NoExisteCasillerosRegistrados'] = "No Existe Casilleros Registrados para este Periodo";
 $idioma['Puntualidad'] = "Puntualidad";
 $idioma['IniciativaYCreatividad'] = "Iniciativa Y Creatividad";
 $idioma['Honestidad'] = "Honestidad";

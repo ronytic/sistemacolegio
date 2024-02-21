@@ -41,7 +41,8 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 
 	$Orden = $Orden == "1" ? $Orden = "DESC" : $Orden = "ASC";
 
-	foreach ($cur->mostrar() as $curso) { //cambiar para los diferentes Cursos
+	$cursos = $cur->mostrar();
+	foreach ($cursos as $curso) { //cambiar para los diferentes Cursos
 		$na = 0;
 		$pdf->CuadroCuerpoPersonalizado(30, $curso['Nombre'], 0, "L", 0, "UB");
 		$pdf->Ln(5);
@@ -52,6 +53,9 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 			}
 		}
 		$codmateria = implode(",", $codigosmateria);
+		if ($codmateria == '') {
+			continue;
+		}
 		foreach ($registroNotas->mostrarPromedioCurso($codmateria, $Orden, $Cantidad) as $regNota) {
 
 			$al = $alumnos->mostrarDatosPersonales($regNota['CodAlumno']);

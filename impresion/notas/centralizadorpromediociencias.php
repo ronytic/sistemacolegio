@@ -84,14 +84,28 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		foreach ($valoresMateriasBoletin as $materiasbol) {
 			$casillas1 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 1);
 			$casillas1 = array_shift($casillas1);
+
 			$regNotas1 = $registronotas->mostrarRegistroNotas($casillas1['CodCasilleros'], $al['CodAlumno'], 1);
 			$regNotas1 = array_shift($regNotas1);
+			if (is_null($casillas1)) {
+				continue;
+			}
 			$casillas2 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 2);
 			$casillas2 = array_shift($casillas2);
+			// var_dump($casillas2);
+			if (is_null($casillas2)) {
+				continue;
+			}
 			@$regnotas2 = $registronotas->mostrarRegistroNotas($casillas2['CodCasilleros'], $al['CodAlumno'], 2);
+			if (is_null($regnotas2)) {
+				continue;
+			}
 			@$regNotas2 = array_shift($regNotas2);
 			$casillas3 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 3);
 			$casillas3 = array_shift($casillas3);
+			if (is_null($casillas3)) {
+				continue;
+			}
 			$regNotas3 = $registronotas->mostrarRegistroNotas($casillas3['CodCasilleros'], $al['CodAlumno'], 3);
 			$regNotas3 = array_shift($regNotas3);
 
@@ -100,6 +114,9 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			/*Nota reforzamiento*/
 			$casillas4 = $casilleros->mostrarMateriaCursoSexoTrimestre($materiasbol['CodMateria'], $CodCurso, $al['Sexo'], 4);
 			$casillas4 = array_shift($casillas4);
+			if (is_null($casillas4)) {
+				continue;
+			}
 			$regNotas4 = $registronotas->mostrarRegistroNotas($casillas4['CodCasilleros'], $al['CodAlumno'], 4);
 			$regNotas4 = array_shift($regNotas4);
 			/*Fin nota reforzamiento*/
@@ -130,9 +147,11 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$cantidadnotas++;
 		}
 
-		@$promedio = round($sumanotas / $cantidadnotas); // or die("No se tiene asignado materia para ese curso");
-
-
+		if ($cantidadnotas == 0) {
+			$promedio = 0;
+		} else {
+			@$promedio = round($sumanotas / $cantidadnotas);
+		}
 
 		$pdf->CuadroCuerpo(5, $reprobado, $relleno, "C");
 		$pdf->CuadroCuerpo(5, $promedio, $relleno, "C");
