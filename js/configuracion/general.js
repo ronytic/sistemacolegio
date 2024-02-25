@@ -26,12 +26,15 @@ $(document).on("ready", function () {
 
 		}, "json");
 	});
-	obtenerSistemas();
-	$("#SFEObtenerSistemas").click(obtenerSistemas);
-	sincronizar();
-	$("#SFESincronizar").click(sincronizar);
-	$("[name=SFECodSucursal]").change(cambioSucursal);
-	$("[name=SFEActividades]").change(actualizarProductosSin);
+	var sistema = $("[name='SistemaFacturacion'] option:checked").val();
+	if (sistema == 'SistemaFacturacionElectronica') {
+		obtenerSistemas();
+		$("#SFEObtenerSistemas").click(obtenerSistemas);
+		sincronizar();
+		$("#SFESincronizar").click(sincronizar);
+		$("[name=SFECodSucursal]").change(cambioSucursal);
+		$("[name=SFEActividades]").change(actualizarProductosSin);
+	}
 });
 
 function obtenerSistemas() {

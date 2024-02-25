@@ -51,6 +51,7 @@ class Core
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
             'Authorization: Bearer ' . $SFEToken
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -74,6 +75,7 @@ class Core
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
             'Authorization: Bearer ' . $SFEToken
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -106,6 +108,7 @@ class Core
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
             'Authorization: Bearer ' . $SFEToken,
             'Content-Type: application/json'
         ));
@@ -141,7 +144,8 @@ class Core
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: Bearer ' . $SFEToken,
-            'Content-Type: application/json'
+            'Content-Type: application/json',
+            'Accept: application/json',
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
@@ -174,6 +178,7 @@ class Core
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
             'Authorization: Bearer ' . $SFEToken,
             'Content-Type: application/json'
         ));
@@ -209,6 +214,7 @@ class Core
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
             'Authorization: Bearer ' . $SFEToken,
             'Content-Type: application/json'
         ));
@@ -234,7 +240,7 @@ class Core
         if (empty($SFECodSucursal)) {
             $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
         }
-        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/synchronization/activities";
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/synchronization/internal/activities";
         $data = array(
             "siat_number_branch" => $SFECodSucursal,
             "siat_code_pos" => 0
@@ -244,6 +250,7 @@ class Core
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
             'Authorization: Bearer ' . $SFEToken,
             'Content-Type: application/json'
         ));
