@@ -15,13 +15,13 @@ class PDF extends PPDF
 		$this->TituloCabecera(10, "N");
 		$this->TituloCabecera(25, $idioma['Fecha']);
 		$this->TituloCabecera(20, "Nº " . $idioma['Factura']);
-		$this->TituloCabecera(25, $idioma['Nit']);
+		$this->TituloCabecera(25, $idioma['NDocumento']);
 		$this->TituloCabecera(50, $idioma['FacturaA']);
 		$this->TituloCabecera(20, $idioma['TotalBs']);
 		$this->TituloCabecera(20, $idioma['Cancelado']);
 		$this->TituloCabecera(20, $idioma['Cambio']);
 		$this->TituloCabecera(20, $idioma['Estado']);
-		$this->TituloCabecera(35, $idioma['CodigoControl']);
+		$this->TituloCabecera(35, $idioma['Codigo']);
 	}
 }
 extract($_GET);
@@ -77,7 +77,7 @@ if (count($fac)) {
 		$pdf->CuadroCuerpo(20, number_format($f['Cancelado'], 2), $na, "R", 1);
 		$pdf->CuadroCuerpo(20, number_format($f['MontoDevuelto'], 2), $na, "R", 1);
 		$pdf->CuadroCuerpo(20, $f['Estado'], $na, "", 0);
-		$pdf->CuadroCuerpo(35, $f['CodigoControl'], $na, "", 0);
+		$pdf->CuadroCuerpo(35, substr($f['CodigoControl'], -16), $na, "", 0);
 		$pdf->Ln();
 	}
 	$pdf->Linea();

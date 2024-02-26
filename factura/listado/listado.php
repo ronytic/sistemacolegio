@@ -44,8 +44,8 @@ $fac = $factura->mostrarFacturas($where)
 		<tr>
 			<th>N</th>
 			<th><?php echo $idioma['FechaFactura'] ?></th>
-			<th><?php echo $idioma['NFactura'] ?></th>
-			<th><?php echo $idioma['Nit'] ?></th>
+			<th><?php echo $idioma['NFactura'] . "/ UID " . $idioma['Factura'] ?></th>
+			<th><?php echo $idioma['NDocumento'] ?></th>
 			<th><?php echo $idioma['FacturaA'] ?></th>
 			<th><?php echo $idioma['TotalBs'] ?></th>
 			<th><?php echo $idioma['Cancelado'] ?></th>
@@ -65,11 +65,19 @@ $fac = $factura->mostrarFacturas($where)
 			$tot += $f['TotalBs'];
 			$can += $f['Cancelado'];
 			$cambio += $f['MontoDevuelto'];
+
+			$TipoFactura = $f['TipoFactura'];
+
+			if ($TipoFactura == "SistemaFacturacionElectronica") {
+				$url = "../registrosfe/ver.php?f=" . $f['CodFactura'];
+			} else {
+				$url = "ver.php?f=" . $f['CodFactura'];
+			}
 	?>
-			<tr <?php echo $f['TotalBs'] != $f['Cancelado'] ? 'class="error"' : ''; ?>>
+			<tr <?php echo $f['TotalBs'] != $f['Cancelado'] ? 'class="warning"' : ''; ?>>
 				<td><?php echo $i ?></td>
 				<td><?php echo fecha2Str($f['FechaFactura']) ?></td>
-				<td><?php echo ($f['NFactura']) ?></td>
+				<td><?php echo ($f['NFactura']) ?><br><small><?php echo $f['CodigoControl'] ?></small></td>
 				<td><?php echo ($f['Nit']) ?></td>
 				<td><?php echo ($f['Factura']) ?></td>
 				<td class="der"><?php echo number_format($f['TotalBs'], 2) ?></td>
@@ -81,7 +89,7 @@ $fac = $factura->mostrarFacturas($where)
 						<option value="Anulado" <?php echo ($f['Estado'] == "Anulado") ? 'selected="selected"' : ''; ?>><?php echo $idioma['Anulado'] ?></option>
 					</select>
 				</td>
-				<td><a href="ver.php?f=<?php echo $f['CodFactura'] ?>" target="_blank" class="btn btn-mini"><?php echo $idioma['VerFactura'] ?></a></td>
+				<td><a href="<?php echo $url ?>" target="_blank" class="btn btn-mini"><?php echo $idioma['VerFactura'] ?></a></td>
 			</tr>
 		<?php } ?>
 		<tfoot>

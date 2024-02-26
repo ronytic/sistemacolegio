@@ -30,8 +30,8 @@ if ($accion == 'obtenerposes') {
     echo json_encode($resultado);
 }
 if ($accion == 'obtenermetodosdepagos') {
-    $SFEToken = $_POST['SFEToken'];
-    $SFECodSucursal = $_POST['SFECodSucursal'];
+    $SFEToken = isset($_POST['SFEToken']) ? $_POST['SFEToken'] : '';
+    $SFECodSucursal = isset($_POST['SFECodSucursal']) ? $_POST['SFECodSucursal'] : '';
     $resultado = $core->getPaymentMethods($SFEToken, $SFECodSucursal);
     echo json_encode($resultado);
 }
@@ -60,5 +60,26 @@ if ($accion == 'obtenerProductosSin') {
     $SFECodSucursal = $_POST['SFECodSucursal'];
     $SFECodActividad = $_POST['SFECodActividad'];
     $resultado = $core->getProductService($SFEToken, $SFECodSucursal, $SFECodActividad);
+    echo json_encode($resultado);
+}
+
+if ($accion == 'obtenerTipoDocumentosIdentidad') {
+    $SFEToken = isset($_POST['SFEToken']) ? $_POST['SFEToken'] : '';
+    $SFECodSucursal = isset($_POST['SFECodSucursal']) ? $_POST['SFECodSucursal'] : '';
+    $resultado = $core->getIdentityDocumentTypes($SFEToken, $SFECodSucursal);
+    echo json_encode($resultado);
+}
+
+if ($accion == 'verificarNit') {
+    $SFEToken = isset($_POST['SFEToken']) ? $_POST['SFEToken'] : '';
+    $Nit = isset($_POST['Nit']) ? $_POST['Nit'] : '';
+    $resultado = $core->verifyNit($SFEToken, $Nit);
+    echo json_encode($resultado);
+}
+
+if ($accion == 'anularFactura') {
+    $SFEToken = isset($_POST['SFEToken']) ? $_POST['SFEToken'] : '';
+    $UIDInvoice = isset($_POST['UIDInvoice']) ? $_POST['UIDInvoice'] : '';
+    $resultado = $core->annulmentInvoice($SFEToken, $UIDInvoice);
     echo json_encode($resultado);
 }

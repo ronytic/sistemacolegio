@@ -306,4 +306,147 @@ class Core
         // }
         // return $resultado;
     }
+
+    function getIdentityDocumentTypes($SFEToken = '', $SFECodSucursal = '', $SFECodActivity = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/synchronization/internal/identitydocumenttypes";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function verifyNit($SFEToken = '', $Nit = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/nit/verify";
+        $data = array(
+            "verification_nit" => $Nit
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function sendInvoice($SFEToken = '', $dataInvoice = array())
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/invoice/electronic/education";
+        $data = $dataInvoice;
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        // echo $data_string;
+        // var_dump($url, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        // var_dump($result);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        // var_dump($resultado);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function annulmentInvoice($SFEToken = '', $uidInvoice = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/invoice/electronic/education/annulment";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+            "uid_invoice" => $uidInvoice,
+            "code_motive" => 1,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        // echo $data_string;
+        // var_dump($url, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        // var_dump($result);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        // var_dump($resultado);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
 }
