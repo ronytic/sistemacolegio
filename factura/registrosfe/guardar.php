@@ -72,6 +72,7 @@ if (!empty($_POST)) {
 		$datosFactura['detail_invoice'] = $detalleFactura;
 		var_dump($_POST, $datosFactura);
 	}
+	echo json_encode($datosFactura);
 	//require sfeconexion.php
 	require_once '../../factura/sfe/core.php';
 	$coreSFE = new Core;
