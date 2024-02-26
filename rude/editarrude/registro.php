@@ -16,7 +16,7 @@ if (!empty($_POST)) {
     $alu = array_shift($alu);
     $al = array_shift($al);
 
-    if (count($alu) >= 1) { //Si ya hay algun registro
+    if (!is_null($alu)) { //Si ya hay algun registro
         $archivo = "actualizarrude.php";
         $titulo = $idioma['ModificarRude'];
     } else {
@@ -128,8 +128,8 @@ if (!empty($_POST)) {
                     <td>::</td>
                     <td><select name="curso">
                             <?php foreach ($cur->listar() as $curso) { ?><option value="<?php echo $curso['CodCurso']; ?>" <?php if ($al['CodCurso'] == $curso['CodCurso']) {
-                                                                                                                            echo 'selected="selected"';
-                                                                                                                        } ?>><?php echo mayuscula($curso['Nombre']); ?></option><?php } ?></select></td>
+                                                                                                                                echo 'selected="selected"';
+                                                                                                                            } ?>><?php echo mayuscula($curso['Nombre']); ?></option><?php } ?></select></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['CodigoSieColegioAnterior'] ?></td>
