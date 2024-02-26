@@ -9,6 +9,7 @@ include_once("../../class/config.php");
 $tmpcola = new tmpcola;
 $alumno = new alumno;
 $curso = new curso;
+$config = new config;
 $SistemaFacturacion = $config->mostrarConfig("SistemaFacturacion", 1);
 $Estado = $Estado != "" ? "Estado LIKE '$Estado'" : "Estado LIKE '%'";
 $tmp = $tmpcola->mostrarEspera("FechaRegistro='" . fecha2Str($Fecha, 0) . "' and $Estado");
