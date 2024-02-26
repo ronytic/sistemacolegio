@@ -70,7 +70,7 @@ if (!empty($_POST)) {
 			];
 		}
 		$datosFactura['detail_invoice'] = $detalleFactura;
-		// var_dump($_POST, $datosFactura);
+		var_dump($_POST, $datosFactura);
 	}
 	//require sfeconexion.php
 	require_once '../../factura/sfe/core.php';
