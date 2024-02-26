@@ -70,14 +70,14 @@ if (!empty($_POST)) {
 			];
 		}
 		$datosFactura['detail_invoice'] = $detalleFactura;
-		var_dump($_POST, $datosFactura);
+		// var_dump($_POST, $datosFactura);
 	}
-	echo json_encode($datosFactura);
+	// echo json_encode($datosFactura);
 	//require sfeconexion.php
 	require_once '../../factura/sfe/core.php';
 	$coreSFE = new Core;
 	$respuestaFactura = $coreSFE->sendInvoice('', $datosFactura);
-	var_dump($respuestaFactura);
+	// var_dump($respuestaFactura);
 	if ($respuestaFactura['status'] == true) {
 		if ($respuestaFactura['data']['siat_code_description'] == "VALIDADA") {
 			$CUF = $respuestaFactura['data']['cuf'];
