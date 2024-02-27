@@ -69,8 +69,15 @@ class bd
 	function statusTable()
 	{
 		$nombretabla = mb_strtolower($this->tabla, "utf8");
+		$query1 = "SELECT COLUMN_NAME
+		FROM information_schema.KEY_COLUMN_USAGE
+		WHERE TABLE_NAME = '$nombretabla'
+		  AND CONSTRAINT_NAME = 'PRIMARY'";
+		$res = mysqli_query($this->l, $query1);
+		$COLUMN_NAME = mysqli_fetch_array($res);
+
 		// $query = "SHOW TABLE STATUS LIKE '$nombretabla'";
-		$query = "SELECT count(*)+1  as Auto_increment FROM " . $nombretabla . "";
+		$query = "SELECT max($COLUMN_NAME)+1  as Auto_increment FROM " . $nombretabla . "";
 		$res = mysqli_query($this->l, $query);
 		return mysqli_fetch_array($res);
 	}
