@@ -74,8 +74,8 @@ class bd
 		WHERE TABLE_NAME = '$nombretabla'
 		  AND CONSTRAINT_NAME = 'PRIMARY'";
 		$res = mysqli_query($this->l, $query1);
-		$COLUMN_NAME = mysqli_fetch_array($res);
-
+		$res = mysqli_fetch_array($res);
+		$COLUMN_NAME = $res['COLUMN_NAME'];
 		// $query = "SHOW TABLE STATUS LIKE '$nombretabla'";
 		$query = "SELECT max($COLUMN_NAME)+1  as Auto_increment FROM " . $nombretabla . "";
 		$res = mysqli_query($this->l, $query);
