@@ -69,7 +69,8 @@ class bd
 	function statusTable()
 	{
 		$nombretabla = mb_strtolower($this->tabla, "utf8");
-		$query = "SHOW TABLE STATUS LIKE '$nombretabla'";
+		// $query = "SHOW TABLE STATUS LIKE '$nombretabla'";
+		$query = "SELECT count(*)+1  as Auto_increment FROM '$nombretabla'";
 		$res = mysqli_query($this->l, $query);
 		return mysqli_fetch_array($res);
 	}
