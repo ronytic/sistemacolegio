@@ -108,7 +108,7 @@ $trimestreActual = $config->mostrarConfig("TrimestreActual", 1);
     </div>
 
     <?php
-    $cnf = ($config->mostrarConfig("CodigoSeguimientoNotasDocente"));
-    echo $cnf['Valor'];
+    // $cnf = ($config->mostrarConfig("CodigoSeguimientoNotasDocente"));
+    // echo $cnf['Valor'];
     ?>
     <?php include_once($folder . "pie.php"); ?>
