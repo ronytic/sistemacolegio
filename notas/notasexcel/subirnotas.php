@@ -67,7 +67,7 @@ if ($archivoexcel != "") {
 	/**/
 	$reg = $registronotasexcel->estadoTabla();
 	$codigo_registro = $reg['Auto_increment'];
-	print_r($reg);
+	// print_r($reg);
 	$NombreArchivoSubido = $codigo_registro . "_" . $_FILES['archivoexcel']['name'];
 	//echo $NombreArchivoSubido;
 	copy($nombrearchivo, "archivos/" . $NombreArchivoSubido);

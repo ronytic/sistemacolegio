@@ -14,7 +14,7 @@ $registronotas = new registronotas;
 $casilleros = new casilleros;
 $rne = $registronotasexcel->mostrarTodoRegistro("CodRegistroNotasExcel=" . $CodigoRegistro);
 $rne = array_shift($rne);
-print_r($rne);
+// print_r($rne);
 $nombrearchivo = "archivos/" . $rne['NombreArchivo'];
 date_default_timezone_set('America/La_Paz');
 
