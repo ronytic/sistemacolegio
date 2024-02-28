@@ -105,7 +105,7 @@ include_once($folder . "cabecerahtml.php");
           </td>
           <td colspan="3" rowspan="4">
             <span class="resaltar"><?php echo $idioma['MetodoDePago'] ?></span>:<br>
-            <select name="MetodoPago" required id="MetodoPago"></select>
+            <select name="MetodoPago" required id="MetodoPago" readonly></select>
             <div id="NumeroTarjetaGrupo" style="display: none;">
               <span class="resaltar"><?php echo $idioma['NumeroTarjeta'] ?></span>:<br>
               <input type="text" name="NumeroTarjeta" id="NumeroTarjeta" class="span12" placeholder="<?php echo $idioma['NumeroTarjeta'] ?>">
