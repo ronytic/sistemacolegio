@@ -17,6 +17,15 @@ if (isset($_GET)) {
     $confgGeneral = $conf->mostrarConfig("MontoGeneral");
     $doc = $documento->mostrarDocumento($CodAlumno);
     $doc = array_shift($doc);
+    if (is_null($doc)) {
+        $doc['CertificadoNac'] = 0;
+        $doc['LibretaEsc'] = 0;
+        $doc['LibretaVac'] = 0;
+        $doc['CedulaId'] = 0;
+        $doc['CedulaIdP'] = 0;
+        $doc['CedulaIdM'] = 0;
+        $doc['Observaciones'] = "";
+    }
     $al = $alumno->mostrarTodoDatos($CodAlumno);
     $al = array_shift($al);
 
