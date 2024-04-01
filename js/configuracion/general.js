@@ -1,6 +1,7 @@
 $(document).on("ready", function () {
 	$(".fecha").datepicker({ dateFormat: 'dd-mm-yy', numberOfMonths: 2 });
-
+	manejarCuotas();
+	$("[name=ManejarCuotas]").change(manejarCuotas);
 	revisarSistemaFacturacion();
 	$("[name='SistemaFacturacion']").change(revisarSistemaFacturacion);
 
@@ -36,6 +37,16 @@ $(document).on("ready", function () {
 		$("[name=SFEActividades]").change(actualizarProductosSin);
 	}
 });
+
+function manejarCuotas() {
+	let manejarCuotas = $("[name=ManejarCuotas] > option:checked").val();
+	console.log({ manejarCuotas })
+	if (manejarCuotas == '1') {
+		$(".cajaConfigurarCuotas").show();
+	} else {
+		$(".cajaConfigurarCuotas").hide();
+	}
+}
 
 function obtenerSistemas() {
 	let SFEToken = $("[name=SFEToken]").val();

@@ -30,17 +30,22 @@ $al = $alumno->mostrarTodoDatos($CodAlumno);
 $al = array_shift($al);
 $cur = $curso->mostrarCurso($al['CodCurso']);
 $cur = array_shift($cur);
-$Moneda = ($config->mostrarConfig("Moneda", 1));
-$FechaCuota1 = ($config->mostrarConfig("FechaCuota1", 1));
-$FechaCuota2 = ($config->mostrarConfig("FechaCuota2", 1));
-$FechaCuota3 = ($config->mostrarConfig("FechaCuota3", 1));
-$FechaCuota4 = ($config->mostrarConfig("FechaCuota4", 1));
-$FechaCuota5 = ($config->mostrarConfig("FechaCuota5", 1));
-$FechaCuota6 = ($config->mostrarConfig("FechaCuota6", 1));
-$FechaCuota7 = ($config->mostrarConfig("FechaCuota7", 1));
-$FechaCuota8 = ($config->mostrarConfig("FechaCuota8", 1));
-$FechaCuota9 = ($config->mostrarConfig("FechaCuota9", 1));
-$FechaCuota10 = ($config->mostrarConfig("FechaCuota10", 1));
+$ManejarCuotas = ($config->mostrarConfig("ManejarCuotas", 1));
+if ($ManejarCuotas == '1') {
+    $Moneda = ($config->mostrarConfig("Moneda", 1));
+    $FechaCuota1 = ($config->mostrarConfig("FechaCuota1", 1));
+    $FechaCuota2 = ($config->mostrarConfig("FechaCuota2", 1));
+    $FechaCuota3 = ($config->mostrarConfig("FechaCuota3", 1));
+    $FechaCuota4 = ($config->mostrarConfig("FechaCuota4", 1));
+    $FechaCuota5 = ($config->mostrarConfig("FechaCuota5", 1));
+    $FechaCuota6 = ($config->mostrarConfig("FechaCuota6", 1));
+    $FechaCuota7 = ($config->mostrarConfig("FechaCuota7", 1));
+    $FechaCuota8 = ($config->mostrarConfig("FechaCuota8", 1));
+    $FechaCuota9 = ($config->mostrarConfig("FechaCuota9", 1));
+    $FechaCuota10 = ($config->mostrarConfig("FechaCuota10", 1));
+} else {
+    $cantidadCuotas = 10;
+}
 $mes = date("m");
 
 //echo
@@ -54,10 +59,14 @@ $folder = "../../";
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $idioma['NSistemaInternet'] ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $idioma['TituloSistema'] ?></title>
     <link href="<?php echo $folder ?>css/bootstrap.css" type="text/css" rel="stylesheet" />
-    <link href="../../css/internet.css" type="text/css" rel="stylesheet" />
+    <link href="../../css/internet.css?1" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" href="<?php echo $folder ?>imagenes/logos/<?php echo $LogoIcono ?>" />
+    <!-- Favicon para tabley ios -->
+    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo $folder ?>imagenes/logos/<?php echo $LogoIcono ?>">
+
 </head>
 
 <body>
@@ -66,7 +75,7 @@ $folder = "../../";
             <a name="datos"></a>
             <div class="cuerpo">
                 <div class=" span2">
-                    <img src="../../imagenes/alumnos/<?php echo $Foto ?>" class="img-circle" width="70%" />
+                    <img src="../../imagenes/alumnos/<?php echo $Foto ?>" class="img-circle fotoalumno" width="100%" title="" />
                 </div>
                 <div class="datos">
 
@@ -86,47 +95,49 @@ $folder = "../../";
         </div>
     </div>
     <div class="row-fluid wrapper">
-        <div class="span3">
-            <div class="cuerpo">
-                <h2><a name="cuotas"></a><?php echo $idioma["Cuotas"] ?></h2>
-                <table class="tabla">
-                    <?php
-                    $total = 0;
-                    $totalDeuda = 0;
-                    $cantidadCuotas = 0;
-                    foreach ($cuota->mostrarCuotas($al['CodAlumno']) as $cuo) {
-                        if ($cuo['Cancelado']) {
-                            $cantidadCuotas++;
+        <?php if ($ManejarCuotas == '1') { ?>
+            <div class="span3">
+                <div class="cuerpo">
+                    <h2><a name="cuotas"></a><?php echo $idioma["Cuotas"] ?></h2>
+                    <table class="tabla">
+                        <?php
+                        $total = 0;
+                        $totalDeuda = 0;
+                        $cantidadCuotas = 0;
+                        foreach ($cuota->mostrarCuotas($al['CodAlumno']) as $cuo) {
+                            if ($cuo['Cancelado']) {
+                                $cantidadCuotas++;
+                            }
+                        ?>
+                            <tr>
+                                <td class="div"><?php echo $cuo['Numero']; ?></td>
+                                <td class="div"><?php echo $cuo['MontoPagar']; ?> <?php echo $Moneda ?></td>
+                                <td><?php echo $cuo['Cancelado'] ? $idioma['Cancelado'] : $idioma['Pendiente']; ?></td>
+                                <td><i class="icon-ok"></i></td>
+                            </tr>
+                        <?php
+                            $total += $cuo['MontoPagar'];
+                            if ($cuo['Cancelado']) {
+                                $totalDeuda += $cuo['MontoPagar'];
+                            }
                         }
-                    ?>
-                        <tr>
-                            <td class="div"><?php echo $cuo['Numero']; ?></td>
-                            <td class="div"><?php echo $cuo['MontoPagar']; ?> <?php echo $Moneda ?></td>
-                            <td><?php echo $cuo['Cancelado'] ? $idioma['Cancelado'] : $idioma['Pendiente']; ?></td>
-                            <td><i class="icon-ok"></i></td>
-                        </tr>
-                    <?php
-                        $total += $cuo['MontoPagar'];
-                        if ($cuo['Cancelado']) {
-                            $totalDeuda += $cuo['MontoPagar'];
-                        }
-                    }
-                    ?>
-                </table>
-                <div class="msgA"><?php echo $idioma['MontoAdeudado'] ?>: <?php echo $total - $totalDeuda; ?> Bs.</div>
+                        ?>
+                    </table>
+                    <div class="msgA"><?php echo $idioma['MontoAdeudado'] ?>: <?php echo $total - $totalDeuda; ?> Bs.</div>
+                </div>
             </div>
-        </div>
-        <div class="span9">
+        <?php } ?>
+        <div class="<?php echo ($ManejarCuotas == '1') ? 'span9' : 'span12'; ?>">
             <div class="cuerpo">
                 <h2><a name="agenda"></a><?php echo $idioma['Agenda'] ?></h2>
                 <?php echo $idioma['OrdenObservaciones'] ?>
                 <table class="tabla">
                     <tr class="cabecera">
                         <td width="25">Nº</td>
-                        <td width="90"><?php echo $idioma['Fecha'] ?></td>
+                        <td width="70"><?php echo $idioma['Fecha'] ?></td>
                         <td width="120"><?php echo $idioma['Materia'] ?></td>
                         <td width="150"><?php echo $idioma['Observacion'] ?></td>
-                        <td width="300"><?php echo $idioma['Detalle'] ?></td>
+                        <td width="300" class="columnaocultarmobile"><?php echo $idioma['Detalle'] ?></td>
                     </tr>
                     <?php
                     $i = 0;
@@ -139,10 +150,14 @@ $folder = "../../";
                     ?>
                         <tr>
                             <td class="div"><?php echo $i; ?></td>
-                            <td class="div"><?php echo date("d-m-Y", strtotime($ag['Fecha'])); ?></td>
+                            <td class="div"><?php echo date("d", strtotime($ag['Fecha'])) . "-" . mesNumeroToLiteralCorto(date("n", strtotime($ag['Fecha']))); ?></td>
                             <td class="div"><?php echo $ma['Nombre']; ?></td>
                             <td class="div"><?php echo $obs['Nombre']; ?></td>
-                            <td><?php echo $ag['Detalle'] ?></td>
+                            <td class="columnaocultarmobile"><?php echo $ag['Detalle'] ?></td>
+                        </tr>
+                        <tr class="divinferior filamobile">
+                            <td class="div"></td>
+                            <td class="div detalle" colspan="4"><?php echo $ag['Detalle'] ?></td>
                         </tr>
                     <?php
                     }
@@ -162,79 +177,83 @@ $folder = "../../";
         <div class="span6">
             <div class="cuerpo">
                 <h2><a name="tareaspendientes"></a><?php echo $idioma['TareasPendientes'] ?></h2>
-                <table class="tabla">
-                    <tr class="cabecera">
-                        <td width="15">Nº</td>
-                        <td width="80"><?php echo $idioma['Materia'] ?></td>
-                        <td width="160"><?php echo $idioma['Nombre'] ?></td>
-                        <td width="130"><?php echo $idioma['Detalle'] ?></td>
-                        <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
-                    </tr>
-                    <?php
-                    $i = 0;
-                    $Fecha = date("Y-m-d");
-                    foreach ($tarea->mostrarTareaCursoPendiente($al['CodCurso'], $Fecha) as $ta) {
-                        $i++;
-                        $ma = $materia->mostrarMateria($ta['CodMateria']);
-                        $ma = array_shift($ma);
-                    ?>
-                        <tr>
-                            <td class="div"><?php echo $i; ?></td>
-                            <td class="div"><?php echo $ma['Nombre']; ?></td>
-                            <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
-                            <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
-                            <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+                <div class="table-responsive">
+                    <table class="tabla">
+                        <tr class="cabecera">
+                            <td width="15">Nº</td>
+                            <td width="80"><?php echo $idioma['Materia'] ?></td>
+                            <td width="160"><?php echo $idioma['Nombre'] ?></td>
+                            <td width="130"><?php echo $idioma['Detalle'] ?></td>
+                            <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
                         </tr>
-                    <?php
-                    }
-                    if ($i == 0) {
-                    ?>
-                        <tr>
-                            <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasPendientes'] ?></td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </table>
+                        <?php
+                        $i = 0;
+                        $Fecha = date("Y-m-d");
+                        foreach ($tarea->mostrarTareaCursoPendiente($al['CodCurso'], $Fecha) as $ta) {
+                            $i++;
+                            $ma = $materia->mostrarMateria($ta['CodMateria']);
+                            $ma = array_shift($ma);
+                        ?>
+                            <tr>
+                                <td class="div"><?php echo $i; ?></td>
+                                <td class="div"><?php echo $ma['Nombre']; ?></td>
+                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
+                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
+                                <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+                            </tr>
+                        <?php
+                        }
+                        if ($i == 0) {
+                        ?>
+                            <tr>
+                                <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasPendientes'] ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="span6">
             <div class="cuerpo">
                 <h2><a name="tareasrevisadas"></a><?php echo $idioma['TareasRevisadas'] ?></h2>
-                <table class="tabla">
-                    <tr class="cabecera">
-                        <td width="15">Nº</td>
-                        <td width="80"><?php echo $idioma['Materia'] ?></td>
-                        <td width="160"><?php echo $idioma['Nombre'] ?></td>
-                        <td width="130"><?php echo $idioma['Detalle'] ?></td>
-                        <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
-                    </tr>
-                    <?php
-                    $i = 0;
-                    $Fecha = date("Y-m-d");
-                    foreach ($tarea->mostrarTareaCursoRevisadas($al['CodCurso'], $Fecha) as $ta) {
-                        $i++;
-                        $ma = $materia->mostrarMateria($ta['CodMateria']);
-                        $ma = array_shift($ma);
-                    ?>
-                        <tr>
-                            <td class="div"><?php echo $i; ?></td>
-                            <td class="div"><?php echo $ma['Nombre']; ?></td>
-                            <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
-                            <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
-                            <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+                <div class="table-responsive">
+                    <table class="tabla">
+                        <tr class="cabecera">
+                            <td width="15">Nº</td>
+                            <td width="80"><?php echo $idioma['Materia'] ?></td>
+                            <td width="160"><?php echo $idioma['Nombre'] ?></td>
+                            <td width="130"><?php echo $idioma['Detalle'] ?></td>
+                            <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
                         </tr>
-                    <?php
-                    }
-                    if ($i == 0) {
-                    ?>
-                        <tr>
-                            <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasRevisadas'] ?></td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </table>
+                        <?php
+                        $i = 0;
+                        $Fecha = date("Y-m-d");
+                        foreach ($tarea->mostrarTareaCursoRevisadas($al['CodCurso'], $Fecha) as $ta) {
+                            $i++;
+                            $ma = $materia->mostrarMateria($ta['CodMateria']);
+                            $ma = array_shift($ma);
+                        ?>
+                            <tr>
+                                <td class="div"><?php echo $i; ?></td>
+                                <td class="div"><?php echo $ma['Nombre']; ?></td>
+                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
+                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
+                                <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+                            </tr>
+                        <?php
+                        }
+                        if ($i == 0) {
+                        ?>
+                            <tr>
+                                <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasRevisadas'] ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -242,118 +261,117 @@ $folder = "../../";
         <div class="span12">
             <div class="cuerpo">
                 <h2><a name="notas"></a><?php echo $idioma['Notas'] ?></h2>
-
-                <table class="tabla">
-                    <tr class="cabecera">
-                        <td width="150"><?php echo $idioma['Materias'] ?></td>
-                        <?php for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) { ?>
-                            <td colspan="<?php echo ($cur['Dps']) ? 3 : 1 ?>"><?php echo $i ?> <?php echo $cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre']; ?></td>
-                        <?php } ?>
-                        <td width="90"><?php echo $idioma['PromedioAnual'] ?></td>
-                        <?php if ($cur['Bimestre'] == 0) { ?>
-                            <td><?php echo $idioma['Reforzamiento'] ?></td>
-                            <td><?php echo $idioma['PromedioFinal'] ?></td>
-                        <?php } ?>
-                    </tr>
-                    <?php if ($cur['Bimestre']) { ?>
-                        <tr></tr>
-                    <?php } else { ?><tr>
-                            <td></td>
-                            <?php for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) {
-                                if ($cur['Dps']) { ?>
-                                    <td class="text-right">PC</td>
-                                    <td class="text-right">DPS</td>
-                                <?php } ?>
-                                <td class="text-right">PT</td>
+                <div class="table-responsive">
+                    <table class="tabla">
+                        <tr class="cabecera">
+                            <td width="150"><?php echo $idioma['Materias'] ?></td>
+                            <?php for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) { ?>
+                                <td colspan="<?php echo ($cur['Dps']) ? 3 : 1 ?>"><?php echo $i ?> <?php echo $cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre']; ?></td>
                             <?php } ?>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td width="90"><?php echo $idioma['PromedioAnual'] ?></td>
+                            <?php if ($cur['Bimestre'] == 0) { ?>
+                                <td><?php echo $idioma['Reforzamiento'] ?></td>
+                                <td><?php echo $idioma['PromedioFinal'] ?></td>
+                            <?php } ?>
                         </tr>
-                    <?php } ?>
-                    <?php
-                    if (strtotime($Fecha) > strtotime($FechaCuota1)) {
-                    }
-
-                    foreach ($cursomateria->mostrarMaterias($al['CodCurso']) as $cm) {
-                        $ma = $materia->mostrarMateria($cm['CodMateria']);
-                        $ma = array_shift($ma);
-                        $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 1);
-                        $casillas = array_shift($casillas);
-                        $rn1 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 1);
-                        $rn1 = array_shift($rn1);
-                        $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 2);
-                        $casillas = array_shift($casillas);
-                        $rn2 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 2);
-                        $rn2 = array_shift($rn2);
-                        $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 3);
-                        $casillas = array_shift($casillas);
-                        $rn3 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 3);
-                        $rn3 = array_shift($rn3);
-                        $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 4);
-                        $casillas = array_shift($casillas);
-                        $rn4 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 4);
-                        $rn4 = array_shift($rn4);
-                        if ($cur['Bimestre']) {
-                            $promedio = $registronotas->promedioBimestre($rn1['NotaFinal'], $rn2['NotaFinal'], $rn3['NotaFinal'], $rn4['NotaFinal']);
-                        } else {
-                            $promedio = $registronotas->promedio($rn1['NotaFinal'], $rn2['NotaFinal'], $rn3['NotaFinal']);
-                        }
-                    ?>
-                        <?php //echo $cantidadCuotas;
-                        $mes = ($mes == "12") ? $mes - 1 : $mes;
-                        ?>
-                        <?php if ($cantidadCuotas >= ($mes - 1)) { ?>
-                            <tr>
-                                <td class="div"><?php echo $ma['Nombre']; ?></td>
-                                <?php if ($cur['Bimestre']) {
-                                ?>
-                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['NotaFinal']; ?></td>
-                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
-                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td>
-                                    <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn4['NotaFinal'] && $rn4['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn4['NotaFinal']; ?></td>
-                                    <?php
-                                } else {
-                                    for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) {
-                                        $Resultado = ${("rn" . $i)}['Resultado'];
-                                        $Dps = ${("rn" . $i)}['Dps'];
-                                        $NotaFinal = ${("rn" . $i)}['NotaFinal'];
-                                        if ($cur['Dps']) { ?>
-                                            <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Resultado; ?></td>
-                                            <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Dps; ?></td>
-                                        <?php } ?>
-                                        <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $NotaFinal; ?></td>
+                        <?php if ($cur['Bimestre']) { ?>
+                            <tr></tr>
+                        <?php } else { ?><tr>
+                                <td></td>
+                                <?php for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) {
+                                    if ($cur['Dps']) { ?>
+                                        <td class="text-right">PC</td>
+                                        <td class="text-right">DPS</td>
                                     <?php } ?>
-                                    <!-- <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Resultado']; ?></td>
+                                    <td class="text-right">PT</td>
+                                <?php } ?>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        <?php } ?>
+                        <?php
+
+                        foreach ($cursomateria->mostrarMaterias($al['CodCurso']) as $cm) {
+                            $ma = $materia->mostrarMateria($cm['CodMateria']);
+                            $ma = array_shift($ma);
+                            $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 1);
+                            $casillas = array_shift($casillas);
+                            $rn1 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 1);
+                            $rn1 = array_shift($rn1);
+                            $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 2);
+                            $casillas = array_shift($casillas);
+                            $rn2 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 2);
+                            $rn2 = array_shift($rn2);
+                            $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 3);
+                            $casillas = array_shift($casillas);
+                            $rn3 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 3);
+                            $rn3 = array_shift($rn3);
+                            $casillas = $casilleros->mostrarMateriaCursoSexoTrimestre($cm['CodMateria'], $al['CodCurso'], $al['Sexo'], 4);
+                            $casillas = array_shift($casillas);
+                            $rn4 = $registronotas->mostrarRegistroNotas($casillas['CodCasilleros'], $al['CodAlumno'], 4);
+                            $rn4 = array_shift($rn4);
+                            if ($cur['Bimestre']) {
+                                $promedio = $registronotas->promedioBimestre($rn1['NotaFinal'], $rn2['NotaFinal'], $rn3['NotaFinal'], $rn4['NotaFinal']);
+                            } else {
+                                $promedio = $registronotas->promedio($rn1['NotaFinal'], $rn2['NotaFinal'], $rn3['NotaFinal']);
+                            }
+                        ?>
+                            <?php //echo $cantidadCuotas;
+                            $mes = ($mes == "12") ? $mes - 1 : $mes;
+                            ?>
+                            <?php if ($cantidadCuotas >= ($mes - 1)) { ?>
+                                <tr>
+                                    <td class="div"><?php echo $ma['Nombre']; ?></td>
+                                    <?php if ($cur['Bimestre']) {
+                                    ?>
+                                        <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn1['NotaFinal'] && $rn1['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn1['NotaFinal']; ?></td>
+                                        <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
+                                        <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td>
+                                        <td colspan="" class="div der <?php echo $cur['NotaAprobacion'] > $rn4['NotaFinal'] && $rn4['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn4['NotaFinal']; ?></td>
+                                        <?php
+                                    } else {
+                                        for ($i = 1; $i <= $cur['CantidadEtapas']; $i++) {
+                                            $Resultado = ${("rn" . $i)}['Resultado'];
+                                            $Dps = ${("rn" . $i)}['Dps'];
+                                            $NotaFinal = ${("rn" . $i)}['NotaFinal'];
+                                            if ($cur['Dps']) { ?>
+                                                <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Resultado; ?></td>
+                                                <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Dps; ?></td>
+                                            <?php } ?>
+                                            <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $NotaFinal; ?></td>
+                                        <?php } ?>
+                                        <!-- <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Resultado']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Dps']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['Resultado']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['Dps']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td> -->
-                                <?php } ?>
-                                <td class="div der <?php echo $cur['NotaAprobacion'] > $promedio && $promedio != 0 ? 'rojo' : ''; ?>"><?php echo $promedio ?></td>
-                                <?php if ($cur['Bimestre'] == 0) {
-                                    if ($rn4['Nota2'] != "0") {
-                                        $promedioanual = round(($promedio + $rn4['Nota2']) / 2);
-                                    } else {
-                                        $promedioanual = $promedio;
-                                    }
-                                ?>
-                                    <td class="div der"><?php echo $rn4['Nota2'] ?></td>
-                                    <td class="der <?php echo $cur['NotaAprobacion'] > $promedioanual && $promedioanual != 0 ? 'rojo' : ''; ?>"><?php echo $promedioanual ?></td>
-                                <?php } ?>
-                            </tr>
-                        <?php } else { ?>
-                            <tr>
-                                <td colspan="13"><?php echo $idioma['DebeCancelarMensualidades'] ?></td>
-                            </tr>
-                        <?php break;
-                        } ?>
-                    <?php
-                    }
-                    ?>
-                </table>
+                                    <?php } ?>
+                                    <td class="div der <?php echo $cur['NotaAprobacion'] > $promedio && $promedio != 0 ? 'rojo' : ''; ?>"><?php echo $promedio ?></td>
+                                    <?php if ($cur['Bimestre'] == 0) {
+                                        if ($rn4['Nota2'] != "0") {
+                                            $promedioanual = round(($promedio + $rn4['Nota2']) / 2);
+                                        } else {
+                                            $promedioanual = $promedio;
+                                        }
+                                    ?>
+                                        <td class="div der"><?php echo $rn4['Nota2'] ?></td>
+                                        <td class="der <?php echo $cur['NotaAprobacion'] > $promedioanual && $promedioanual != 0 ? 'rojo' : ''; ?>"><?php echo $promedioanual ?></td>
+                                    <?php } ?>
+                                </tr>
+                            <?php } else { ?>
+                                <tr>
+                                    <td colspan="13"><?php echo $idioma['DebeCancelarMensualidades'] ?></td>
+                                </tr>
+                            <?php break;
+                            } ?>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

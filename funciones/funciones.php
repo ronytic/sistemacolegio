@@ -81,6 +81,25 @@ function campo($nombre, $tipo = "text", $valores = "", $clase = "", $required = 
          }
    }
 }
+function mesNumeroToLiteralCorto($mes)
+{
+   $meses = array(
+      1 => "Ene",
+      2 => "Feb",
+      3 => "Mar",
+      4 => "Abr",
+      5 => "May",
+      6 => "Jun",
+      7 => "Jul",
+      8 => "Ago",
+      9 => "Sep",
+      10 => "Oct",
+      11 => "Nov",
+      12 => "Dic"
+   );
+   return $meses[$mes];
+}
+
 function campos($texto, $nombre, $tipo = "text", $valores = "", $orientacion = 0, $clase = "", $required = 0, $autofocus = 0, $adicional = array(), $valorseleccion = "")
 {
    if ($tipo == "" && empty($tipo)) {

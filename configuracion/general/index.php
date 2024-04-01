@@ -3,6 +3,10 @@ include_once("../../login/check.php");
 $folder = "../../";
 $titulo = "NConfiguracionGeneral";
 include_once("../funciones.php");
+
+
+$ManejarCuotas = dato("ManejarCuotas");
+$RegirigirAlumnoVersionResumida = dato("RegirigirAlumnoVersionResumida");
 include_once($folder . "cabecerahtml.php");
 ?>
 <script language="javascript" type="text/javascript" src="../../js/configuracion/general.js"></script>
@@ -148,50 +152,58 @@ include_once($folder . "cabecerahtml.php");
         <div class="box-content">
             <table class="table table-hover table-bordered">
                 <tr>
+                    <td><?php echo $idioma['ManejarCuotas'] ?></td>
+                    <td><select class="span12" name="ManejarCuotas">
+                            <option value="0" <?php echo ($ManejarCuotas) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo ($ManejarCuotas) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['Moneda'] ?></td>
                     <td><input type="text" class="span10" name="Moneda" value="<?php echo dato("Moneda") ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota1'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota1" value="<?php echo fecha2Str(dato("FechaCuota1")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota2'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota2" value="<?php echo fecha2Str(dato("FechaCuota2")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota3'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota3" value="<?php echo fecha2Str(dato("FechaCuota3")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota4'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota4" value="<?php echo fecha2Str(dato("FechaCuota4")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota5'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota5" value="<?php echo fecha2Str(dato("FechaCuota5")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota6'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota6" value="<?php echo fecha2Str(dato("FechaCuota6")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota7'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota7" value="<?php echo fecha2Str(dato("FechaCuota7")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota8'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota8" value="<?php echo fecha2Str(dato("FechaCuota8")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota9'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota9" value="<?php echo fecha2Str(dato("FechaCuota9")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td><?php echo $idioma['FechaCuota10'] ?></td>
                     <td><input type="text" class="span6 fecha" name="FechaCuota10" value="<?php echo fecha2Str(dato("FechaCuota10")) ?>"></td>
                 </tr>
-                <tr>
+                <tr class="cajaConfigurarCuotas">
                     <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
                 </tr>
             </table>
@@ -738,6 +750,18 @@ include_once($folder . "cabecerahtml.php");
             </div>
             <div class="box-content">
                 <table class="table table-bordered table-hover">
+                    <tr>
+                        <td>
+                            <?php echo $idioma['RedirigirAlumnoVersionResumida'] ?>
+                            <div class="pequeno"><?php echo $idioma['RedirigirAlumnoVersionResumidaDetalle'] ?></div>
+                        </td>
+                        <td>
+                            <select class="span12" name="RedirigirAlumnoVersionResumida">
+                                <option value="0" <?php echo ($RegirigirAlumnoVersionResumida) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                                <option value="1" <?php echo ($RegirigirAlumnoVersionResumida) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td width="150"><?php echo $idioma['UrlInternet'] ?></td>
                         <td><input type="text" class="span12" name="UrlInternet" value="<?php echo (dato("UrlInternet")) ?>"></td>

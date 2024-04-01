@@ -1,7 +1,16 @@
 <?php
 //show errors php
 error_reporting(E_ALL);
-include_once "login/check.php";
+require_once "login/check.php";
+require_once "class/config.php";
+if (isset($_SESSION['Nivel']) && in_array($_SESSION['Nivel'], [6, 7])) {
+    $configAux = new config;
+    $redirigirAlumno = $configAux->mostrarConfig('RedirigirAlumnoVersionResumida', 1);
+    if ($redirigirAlumno == 1) {
+        header("Location:internet/alumno/");
+    }
+}
+
 $folder = '';
 $titulo = "NPaginaPrincipal";
 ?>
