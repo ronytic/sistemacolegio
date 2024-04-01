@@ -73,6 +73,9 @@ if (!empty($_POST)) {
 	$FechaInsc = date("Y-m-d");
 	$HoraIns = date(" H:i:s");
 	$CodAlumno = $CodAl;
+	$alumnoDatoAnterior = $al->mostrarTodoDatos($CodAlumno);
+	$alumnoDatoAnterior = array_shift($alumnoDatoAnterior);
+
 	$cnf = ($conf->mostrarConfig("CodBarra"));
 	$CodBarra = trim($cnf['Valor']) . $CodAlumno;
 	$CodUsuarioAlumno = trim(minuscula(quitarSimbolos($Paterno))) . $CodAlumno;
@@ -90,6 +93,7 @@ if (!empty($_POST)) {
 	$MontoGeneral = $cur['MontoCuota'];
 
 	$valuesDoc = array(
+		'CodAlumno' => $CodAlumno,
 		'CertificadoNac' => $CertificadoNac,
 		'LibretaEsc' => $LibretaEsc,
 		'LibretaVac' => $LibretaVac,
@@ -146,10 +150,20 @@ if (!empty($_POST)) {
 		//'HoraIns'=>"'$HoraIns'",
 		'UsuarioAlumno' => "'$CodUsuarioAlumno'",
 		'CodBarra' => "'$CodBarra'",
-		'Password' => "'$Password'",
-		'PasswordP' => "'$PasswordP'",
-		'UsuarioPadre' => "'$UsuarioPadre'"
+		// 'Password' => "'$Password'",
+		// 'PasswordP' => "'$PasswordP'",
+		// 'UsuarioPadre' => "'$UsuarioPadre'"
 	);
+	if ($alumnoDatoAnterior['PasswordP'] == "") {
+		$valuesAl['PasswordP'] = "'$PasswordP'";
+	}
+	if ($alumnoDatoAnterior['Password'] == "") {
+		$valuesAl['Password'] = "'$Password'";
+	}
+	if ($alumnoDatoAnterior['UsuarioPadre'] == "") {
+		$valuesAl['UsuarioPadre'] = "'$UsuarioPadre'";
+	}
+
 
 
 	$fechaCuota = date("Y-m-d H:i:s");
@@ -171,6 +185,12 @@ if (!empty($_POST)) {
 		$valuesAl = array_merge(array("Foto" => "'$NombreFoto'"), $valuesAl);
 	}
 	$al->actualizarDatosAlumno($valuesAl, $CodAlumno);
-	$doc->actualizarDocumento($valuesDoc, $CodAlumno);
+	$documentosAnterior = $doc->mostrarDocumento($CodAlumno);
+	if (count($documentosAnterior) > 0) {
+		$doc->actualizarDocumento($valuesDoc, $CodAlumno);
+	} else {
+		$doc->guardarDocumento($valuesDoc);
+	}
+
 	header("Location:../alumno/datosalumno/?CodAlumno=" . $CodAlumno);
 }
