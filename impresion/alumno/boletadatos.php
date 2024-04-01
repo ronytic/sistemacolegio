@@ -22,6 +22,7 @@ if (!empty($_GET)) {
 	$UrlInternet = $config->mostrarConfig("UrlInternet", 1);
 	$NumeroServicioMensajeria = $config->mostrarConfig("NumeroServicioMensajeria", 1);
 	$Telefono = $config->mostrarConfig("Telefono", 1);
+	$MostrarDatosSMSBoletaAlumnos = $config->mostrarConfig("MostrarDatosSMSBoletaAlumnos", 1);
 
 	$UrlInternet = str_replace(array("http://", "https://", "/"), "", $UrlInternet);
 
@@ -76,28 +77,31 @@ if (!empty($_GET)) {
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["Sexo"] . ": ", 0, "L", $borde, "B");
 	$pdf->CuadroCuerpo(60, $al['Sexo'] ? $idioma['Masculino'] : $idioma['Femenino'], 0, "", $borde);
-
-	$pdf->CuadroCuerpoPersonalizado(50, $idioma["ActivarSMS"] . ": ", 0, "L", $borde, "B");
-	$pdf->CuadroCuerpo(60, capitalizar($al['ActivarSMS'] ? $idioma['Activado'] : $idioma['Desactivado']), 0, "", $borde);
+	if ($MostrarDatosSMSBoletaAlumnos == "1") {
+		$pdf->CuadroCuerpoPersonalizado(50, $idioma["ActivarSMS"] . ": ", 0, "L", $borde, "B");
+		$pdf->CuadroCuerpo(60, capitalizar($al['ActivarSMS'] ? $idioma['Activado'] : $idioma['Desactivado']), 0, "", $borde);
+	}
 
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["FechaNacimiento"] . ": ", 0, "L", $borde, "B");
 	$pdf->CuadroCuerpo(60, (strftime("%d " . $idioma['De'] . " %B de %Y", strtotime($al['FechaNac']))), 0, "", $borde);
-
-	$pdf->CuadroCuerpoPersonalizado(50, $idioma["CelularSMS"] . ": ", 0, "L", $borde, "B");
-	$pdf->CuadroCuerpo(60, capitalizar($al['CelularSMS']), 0, "", $borde);
-
+	if ($MostrarDatosSMSBoletaAlumnos == "1") {
+		$pdf->CuadroCuerpoPersonalizado(50, $idioma["CelularSMS"] . ": ", 0, "L", $borde, "B");
+		$pdf->CuadroCuerpo(60, capitalizar($al['CelularSMS']), 0, "", $borde);
+	}
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["CedulaIdentidad"] . ": ", 0, "L", $borde, "B");
 	$pdf->CuadroCuerpo(60, capitalizar($al['Ci']), 0, "", $borde);
 
-	$pdf->CuadroCuerpoPersonalizado(75, $idioma["NumeroServicioMensajeria"] . ": ", 1, "L", $borde, "B");
-
+	if ($MostrarDatosSMSBoletaAlumnos == "1") {
+		$pdf->CuadroCuerpoPersonalizado(75, $idioma["NumeroServicioMensajeria"] . ": ", 1, "L", $borde, "B");
+	}
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["Curso"] . ": ", 0, "L", $borde, "B");
 	$pdf->CuadroCuerpo(60, $cur['Nombre']);
-
-	$pdf->CuadroCuerpo(60, capitalizar($NumeroServicioMensajeria), 0, "", $borde, 14);
+	if ($MostrarDatosSMSBoletaAlumnos == "1") {
+		$pdf->CuadroCuerpo(60, capitalizar($NumeroServicioMensajeria), 0, "", $borde, 14);
+	}
 
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["Direccion"] . ": ", 0, "L", $borde, "B");

@@ -296,6 +296,13 @@ include_once($folder . "cabecerahtml.php");
         <div class="box-content">
             <table class="table table-bordered table-hover">
                 <tr>
+                    <td width="60%"><?php echo $idioma['MostrarDatosSMSBoletaAlumnos'] ?></td>
+                    <td><select class="span12" name="MostrarDatosSMSBoletaAlumnos">
+                            <option value="0" <?php echo (dato("MostrarDatosSMSBoletaAlumnos")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo (dato("MostrarDatosSMSBoletaAlumnos")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select></td>
+                </tr>
+                <tr>
                     <td width="60%"><?php echo $idioma['EstadoSms'] ?></td>
                     <td><select class="span12" name="EstadoSms">
                             <option value="NoEnviar" <?php echo (dato("EstadoSms")) == "NoEnviar" ? 'selected' : '' ?>><?php echo $idioma['NoEnviar'] ?></option>

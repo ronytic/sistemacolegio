@@ -119,11 +119,11 @@ if (isset($_POST)) {
                 </tr>
                 <tr>
                     <td><?php echo $idioma['AñoTitulacion'] ?></td>
-                    <td><?php campo("DPAnoTitulacion", "text", $doc['DPAnoTitulacion'], "span12", 1, $idioma['IngreseSu'] . $idioma['AñoTitulacion']); ?></td>
+                    <td><?php campo("DPAnoTitulacion", "text", $doc['DPAnoTitulacion'], "span12", 0, $idioma['IngreseSu'] . $idioma['AñoTitulacion']); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Titulo'] ?></td>
-                    <td><?php campo("DPTitulo", "text", $doc['DPTitulo'], "span12", 1, $idioma['IngreseSu'] . $idioma['Titulo']); ?></td>
+                    <td><?php campo("DPTitulo", "text", $doc['DPTitulo'], "span12", 0, $idioma['IngreseSu'] . $idioma['Titulo']); ?></td>
                 </tr>
             </table>
         </div>
@@ -134,23 +134,23 @@ if (isset($_POST)) {
             <table class="table table-bordered table-hover">
                 <tr>
                     <td><?php echo $idioma['Cargo'] ?></td>
-                    <td><?php campo("DTCargo", "text", $doc['DTCargo'], "span12", 1, $idioma['IngreseSu'] . $idioma['Cargo']); ?></td>
+                    <td><?php campo("DTCargo", "text", $doc['DTCargo'], "span12", 0, $idioma['IngreseSu'] . $idioma['Cargo']); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['CargaHoraria'] ?></td>
-                    <td><?php campo("DTCargaHoraria", "text", $doc['DTCargaHoraria'], "span12", 1, $idioma['IngreseSu'] . $idioma['CargaHoraria']); ?></td>
+                    <td><?php campo("DTCargaHoraria", "text", $doc['DTCargaHoraria'], "span12", 0, $idioma['IngreseSu'] . $idioma['CargaHoraria']); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Antiguedad'] ?></td>
-                    <td><?php campo("DTAntiguedad", "text", $doc['DTAntiguedad'], "span12", 1, $idioma['IngreseSu'] . $idioma['Antiguedad']); ?></td>
+                    <td><?php campo("DTAntiguedad", "text", $doc['DTAntiguedad'], "span12", 0, $idioma['IngreseSu'] . $idioma['Antiguedad']); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Categoria'] ?></td>
-                    <td><?php campo("DTCategoria", "text", $doc['DTCategoria'], "span12", 1, $idioma['IngreseSu'] . $idioma['Categoria']); ?></td>
+                    <td><?php campo("DTCategoria", "text", $doc['DTCategoria'], "span12", 0, $idioma['IngreseSu'] . $idioma['Categoria']); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Observacion'] ?></td>
-                    <td><?php campo("Observacion", "text", $doc['Observacion'], "span12", 1, $idioma['IngreseSu'] . $idioma['Observacion']); ?></td>
+                    <td><?php campo("Observacion", "text", $doc['Observacion'], "span12", 0, $idioma['IngreseSu'] . $idioma['Observacion']); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Docente'] ?> <?php echo $idioma['Activo'] ?></td>

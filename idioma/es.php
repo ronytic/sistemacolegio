@@ -561,6 +561,7 @@ $idioma['Activado'] = "Activado";
 $idioma['Desactivado'] = "Desactivado";
 $idioma['DatosAccesoInternet'] = "Datos de Acceso a Internet";
 $idioma['DatosAccesoSistema'] = "Datos de Acceso al Sistema";
+$idioma['MostrarDatosSMSBoletaAlumnos'] = "Mostrar Datos de SMS en Boleta de Alumnos";
 //Docente
 $idioma['NombreDocente'] = "Nombre del Docente";
 $idioma['FrecuenciaAcceso'] = "Frecuencia de Accesos";
