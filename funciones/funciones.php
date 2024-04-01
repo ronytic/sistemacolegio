@@ -385,9 +385,10 @@ function promedio($NotaTotal, $Cantidad, $Cifras = 0)
 {
    return @round($NotaTotal / $Cantidad, $Cifras);
 }
+
 function usuarioPadre($cipadre, $cimadre)
 {
-   if ($cipadre != "" && !preg_match('/-*/', $cipadre)) {
+   if ($cipadre != "" && !preg_match('/-+/', $cipadre)) {
       $usuario = $cipadre;
    } else {
       $usuario = $cimadre;

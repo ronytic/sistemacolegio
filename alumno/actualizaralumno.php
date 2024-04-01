@@ -79,8 +79,7 @@ if (!empty($_POST)) {
 
 	$Password = rand(1000, 9999);
 	$PasswordP = rand(1000, 9999);
-
-	if ($CiPadre != "" && $CiMadre != "") {
+	if ($CiPadre != "" || $CiMadre != "") {
 		$UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
 	} else {
 		$UsuarioPadre = "";
