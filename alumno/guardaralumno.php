@@ -192,7 +192,6 @@ if (!empty($_POST)) {
 		$valuesAl = array_merge(array("Foto" => "'$NombreFoto'"), $valuesAl);
 	}
 
-	//print_r($valuesDoc);
 	$al->insertarAlumno($valuesAl);
 	$doc->guardarDocumento($valuesDoc);
 
