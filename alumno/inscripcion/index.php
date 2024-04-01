@@ -41,7 +41,7 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                     <td class="der"><?php echo $idioma['Curso'] ?></td>
                     <td><select name="Curso" id="Curso" class="span12">
                             <?php foreach ($curso->listar() as $cur) {
-                                ?>
+                            ?>
                                 <option value="<?php echo $cur['CodCurso'] ?>" rel-cuota="<?php echo $cur['MontoCuota'] ?>"><?php echo $cur['Nombre'] ?></option>
                             <?php
                             } ?>
@@ -221,11 +221,11 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
             <table class="tabla table-hover">
                 <tr>
                     <td class="der"><?php echo $idioma['Nit'] ?></td>
-                    <td><?php campo("Nit", "text", "", "span12", 1, "", 0, array("maxlength" => 30)) ?></td>
+                    <td><?php campo("Nit", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
                 <tr>
                     <td class="der"><?php echo $idioma['NombreFacturar'] ?></td>
-                    <td><?php campo("FacturaA", "text", "", "span12", 1, "", 0, array("maxlength" => 30)) ?></td>
+                    <td><?php campo("FacturaA", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
             </table>
         </div>

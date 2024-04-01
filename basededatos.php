@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$database = "colegio2019";
+$database = "sistema_colegio";
 
 /*$user="redcampu_csb";
 $pass="83034888";

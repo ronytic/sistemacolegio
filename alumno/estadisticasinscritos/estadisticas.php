@@ -74,8 +74,12 @@ if (!empty($_POST)) {
             $CantidadTotalV += $varones['Cantidad'];
 
             //$CantidadNuevos=$CantidadCurso['CantidadCurso']-$cn['CantidadNuevo'];
-            $CantidadNuevos = $cn['CantidadNuevo'];
-            $CantidadNuevo += $CantidadNuevos;
+            if (!is_null($cn)) {
+                $CantidadNuevos = $cn['CantidadNuevo'];
+                $CantidadNuevo += $CantidadNuevos;
+            } else {
+                $CantidadNuevos = 0; //No hay nuevos
+            }
         ?>
             <tr class="contenido">
                 <td><?php

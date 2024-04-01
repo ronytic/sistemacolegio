@@ -236,11 +236,11 @@ if (isset($_GET)) {
                 <table class="tabla">
                     <tr>
                         <td class="der"><?php echo $idioma['Nit'] ?></td>
-                        <td><?php campo("Nit", "text", capitalizar($al["Nit"]), "span12", 1, "", 0, array("maxlength" => 30)) ?></td>
+                        <td><?php campo("Nit", "text", capitalizar($al["Nit"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['NombreFacturar'] ?></td>
-                        <td><?php campo("FacturaA", "text", capitalizar($al["FacturaA"]), "span12", 1, "", 0, array("maxlength" => 30)) ?></td>
+                        <td><?php campo("FacturaA", "text", capitalizar($al["FacturaA"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
                 </table>
             </div>

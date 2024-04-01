@@ -7,23 +7,23 @@ $(document).ready(function (e) {
 	// if($("#Ci").val()!=""){$('#CedulaId').attr('checked','checked');}
 	/*$('#Ci').keyup(function(e) {
 		 if($(this).val()!=""){
-			 $('#CedulaId').attr('checked','checked');
+			 $('#CedulaId').attr('checked','checked');	
 		 }else{
-			 $('#CedulaId').attr('checked','');
+			 $('#CedulaId').attr('checked','');	
 		 }
 	 });
 	 $('#CiMadre').keyup(function(e) {
 		 if($(this).val()!=""){
-			 $('#CedulaIdM').attr('checked','checked');
+			 $('#CedulaIdM').attr('checked','checked');	
 		 }else{
-			 $('#CedulaIdM').attr('checked','');
+			 $('#CedulaIdM').attr('checked','');	
 		 }
 	 });
 	 $('#CiPadre').keyup(function(e) {
 		 if($(this).val()!=""){
-			 $('#CedulaIdP').attr('checked','checked');
+			 $('#CedulaIdP').attr('checked','checked');	
 		 }else{
-			 $('#CedulaIdP').attr('checked','');
+			 $('#CedulaIdP').attr('checked','');	
 		 }
 	 });*/
 	//alert(MontoKinder);
@@ -64,7 +64,11 @@ $(document).ready(function (e) {
 	});
 
 	MontoBeca = $("#MontoBeca").val();
-	// $("#PorcentajeBeca").val((MontoBeca * 100 / MontoGeneral).toFixed(2));
+	var PorcentajeBeca = (MontoBeca * 100 / MontoGeneral);
+	if (isNaN(PorcentajeBeca)) {
+		PorcentajeBeca = 0;
+	}
+	$("#PorcentajeBeca").val(PorcentajeBeca.toFixed(2));
 
 	$("#PorcentajeBeca").keyup(function (e) {
 		var valor = $(this).val();
