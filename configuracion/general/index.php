@@ -7,7 +7,7 @@ include_once("../funciones.php");
 
 $ManejarCuotas = dato("ManejarCuotas");
 $ManejarTareas = dato("ManejarTareas");
-$RegirigirAlumnoVersionResumida = dato("RegirigirAlumnoVersionResumida");
+$RedirigirAlumnoVersionResumida = dato("RedirigirAlumnoVersionResumida");
 include_once($folder . "cabecerahtml.php");
 ?>
 <script language="javascript" type="text/javascript" src="../../js/configuracion/general.js"></script>
@@ -780,8 +780,8 @@ include_once($folder . "cabecerahtml.php");
                         </td>
                         <td>
                             <select class="span12" name="RedirigirAlumnoVersionResumida">
-                                <option value="0" <?php echo ($RegirigirAlumnoVersionResumida) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
-                                <option value="1" <?php echo ($RegirigirAlumnoVersionResumida) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                                <option value="0" <?php echo ($RedirigirAlumnoVersionResumida) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                                <option value="1" <?php echo ($RedirigirAlumnoVersionResumida) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
                             </select>
                         </td>
                     </tr>
