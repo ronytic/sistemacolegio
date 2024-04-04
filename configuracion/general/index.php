@@ -6,6 +6,7 @@ include_once("../funciones.php");
 
 
 $ManejarCuotas = dato("ManejarCuotas");
+$ManejarTareas = dato("ManejarTareas");
 $RegirigirAlumnoVersionResumida = dato("RegirigirAlumnoVersionResumida");
 include_once($folder . "cabecerahtml.php");
 ?>
@@ -205,6 +206,21 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
                 <tr class="cajaConfigurarCuotas">
                     <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="box-header">
+            <h2><?php echo $idioma['Tareas'] ?><a name="Tareas"></a></h2>
+        </div>
+        <div class="box-content">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <td><?php echo $idioma['ManejarTareas'] ?></td>
+                    <td><select class="span12" name="ManejarTareas">
+                            <option value="0" <?php echo ($ManejarTareas) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo ($ManejarTareas) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select>
+                    </td>
                 </tr>
             </table>
         </div>

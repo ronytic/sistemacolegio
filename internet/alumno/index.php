@@ -31,6 +31,7 @@ $al = array_shift($al);
 $cur = $curso->mostrarCurso($al['CodCurso']);
 $cur = array_shift($cur);
 $ManejarCuotas = ($config->mostrarConfig("ManejarCuotas", 1));
+$ManejarTareas = ($config->mostrarConfig("ManejarTareas", 1));
 if ($ManejarCuotas == '1') {
     $Moneda = ($config->mostrarConfig("Moneda", 1));
     $FechaCuota1 = ($config->mostrarConfig("FechaCuota1", 1));
@@ -173,90 +174,92 @@ $folder = "../../";
             </div>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="cuerpo">
-                <h2><a name="tareaspendientes"></a><?php echo $idioma['TareasPendientes'] ?></h2>
-                <div class="table-responsive">
-                    <table class="tabla">
-                        <tr class="cabecera">
-                            <td width="15">Nº</td>
-                            <td width="80"><?php echo $idioma['Materia'] ?></td>
-                            <td width="160"><?php echo $idioma['Nombre'] ?></td>
-                            <td width="130"><?php echo $idioma['Detalle'] ?></td>
-                            <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
-                        </tr>
-                        <?php
-                        $i = 0;
-                        $Fecha = date("Y-m-d");
-                        foreach ($tarea->mostrarTareaCursoPendiente($al['CodCurso'], $Fecha) as $ta) {
-                            $i++;
-                            $ma = $materia->mostrarMateria($ta['CodMateria']);
-                            $ma = array_shift($ma);
-                        ?>
-                            <tr>
-                                <td class="div"><?php echo $i; ?></td>
-                                <td class="div"><?php echo $ma['Nombre']; ?></td>
-                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
-                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
-                                <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+    <?php if ($ManejarCuotas == '1') { ?>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="cuerpo">
+                    <h2><a name="tareaspendientes"></a><?php echo $idioma['TareasPendientes'] ?></h2>
+                    <div class="table-responsive">
+                        <table class="tabla">
+                            <tr class="cabecera">
+                                <td width="15">Nº</td>
+                                <td width="80"><?php echo $idioma['Materia'] ?></td>
+                                <td width="160"><?php echo $idioma['Nombre'] ?></td>
+                                <td width="130"><?php echo $idioma['Detalle'] ?></td>
+                                <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
                             </tr>
-                        <?php
-                        }
-                        if ($i == 0) {
-                        ?>
-                            <tr>
-                                <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasPendientes'] ?></td>
+                            <?php
+                            $i = 0;
+                            $Fecha = date("Y-m-d");
+                            foreach ($tarea->mostrarTareaCursoPendiente($al['CodCurso'], $Fecha) as $ta) {
+                                $i++;
+                                $ma = $materia->mostrarMateria($ta['CodMateria']);
+                                $ma = array_shift($ma);
+                            ?>
+                                <tr>
+                                    <td class="div"><?php echo $i; ?></td>
+                                    <td class="div"><?php echo $ma['Nombre']; ?></td>
+                                    <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
+                                    <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
+                                    <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+                                </tr>
+                            <?php
+                            }
+                            if ($i == 0) {
+                            ?>
+                                <tr>
+                                    <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasPendientes'] ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="cuerpo">
+                    <h2><a name="tareasrevisadas"></a><?php echo $idioma['TareasRevisadas'] ?></h2>
+                    <div class="table-responsive">
+                        <table class="tabla">
+                            <tr class="cabecera">
+                                <td width="15">Nº</td>
+                                <td width="80"><?php echo $idioma['Materia'] ?></td>
+                                <td width="160"><?php echo $idioma['Nombre'] ?></td>
+                                <td width="130"><?php echo $idioma['Detalle'] ?></td>
+                                <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
+                            <?php
+                            $i = 0;
+                            $Fecha = date("Y-m-d");
+                            foreach ($tarea->mostrarTareaCursoRevisadas($al['CodCurso'], $Fecha) as $ta) {
+                                $i++;
+                                $ma = $materia->mostrarMateria($ta['CodMateria']);
+                                $ma = array_shift($ma);
+                            ?>
+                                <tr>
+                                    <td class="div"><?php echo $i; ?></td>
+                                    <td class="div"><?php echo $ma['Nombre']; ?></td>
+                                    <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
+                                    <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
+                                    <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
+                                </tr>
+                            <?php
+                            }
+                            if ($i == 0) {
+                            ?>
+                                <tr>
+                                    <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasRevisadas'] ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="span6">
-            <div class="cuerpo">
-                <h2><a name="tareasrevisadas"></a><?php echo $idioma['TareasRevisadas'] ?></h2>
-                <div class="table-responsive">
-                    <table class="tabla">
-                        <tr class="cabecera">
-                            <td width="15">Nº</td>
-                            <td width="80"><?php echo $idioma['Materia'] ?></td>
-                            <td width="160"><?php echo $idioma['Nombre'] ?></td>
-                            <td width="130"><?php echo $idioma['Detalle'] ?></td>
-                            <td width="80"><span title="<?php echo $idioma['FechaPresentacion'] ?>"><?php echo $idioma['Fecha'] ?></span></td>
-                        </tr>
-                        <?php
-                        $i = 0;
-                        $Fecha = date("Y-m-d");
-                        foreach ($tarea->mostrarTareaCursoRevisadas($al['CodCurso'], $Fecha) as $ta) {
-                            $i++;
-                            $ma = $materia->mostrarMateria($ta['CodMateria']);
-                            $ma = array_shift($ma);
-                        ?>
-                            <tr>
-                                <td class="div"><?php echo $i; ?></td>
-                                <td class="div"><?php echo $ma['Nombre']; ?></td>
-                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Nombre'], "UTF-8")); ?></td>
-                                <td class="div"><?php echo ucfirst(mb_strtolower($ta['Descripcion'], "UTF-8")); ?></td>
-                                <td><?php echo utf8_encode(strftime("%A, %d-%b", strtotime($ta['FechaPresentacion']))) ?></td>
-                            </tr>
-                        <?php
-                        }
-                        if ($i == 0) {
-                        ?>
-                            <tr>
-                                <td colspan="5" class="centrar"><?php echo $idioma['NoTieneTareasRevisadas'] ?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php } ?>
     <div class="row-fluid">
         <div class="span12">
             <div class="cuerpo">

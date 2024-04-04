@@ -158,6 +158,7 @@ $idioma['TarjetaCuotas'] = "Tarjeta de Cuotas";
 $idioma['BoletaDatos'] = "Boleta de Datos";
 $idioma['PagarCuotas'] = "Pagar Cuotas";
 $idioma['ManejarCuotas'] = "Manejar Cuotas";
+$idioma['ManejarTareas'] = "Manejar Tareas";
 
 $idioma['DebeCancelarMensualidades'] = "Debe de Cancelar Mensualidades para ver este sector del Sistema, Muchas Gracias";
 $idioma['Modificar'] = "Modificar";
