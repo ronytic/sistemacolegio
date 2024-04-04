@@ -174,7 +174,7 @@ $folder = "../../";
             </div>
         </div>
     </div>
-    <?php if ($ManejarCuotas == '1') { ?>
+    <?php if ($ManejarTareas == '1') { ?>
         <div class="row-fluid">
             <div class="span6">
                 <div class="cuerpo">
