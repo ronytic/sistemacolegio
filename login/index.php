@@ -76,11 +76,19 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
                         </div>
                     <?php
                     }
-                    if (isset($_GET['error'])) {
+                    if (isset($_GET['error']) && $_GET['error'] == 1) {
                     ?>
                         <div class="alert alert-info">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <?php echo $idioma['DatosErroneos'] ?>
+                        </div>
+                    <?php
+                    }
+                    if (isset($_GET['error']) && $_GET['error'] == 2) {
+                    ?>
+                        <div class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <?php echo $idioma['AccesoRestringido'] ?>
                         </div>
                     <?php
                     }

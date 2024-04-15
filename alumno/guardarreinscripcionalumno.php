@@ -72,6 +72,7 @@ if (!empty($_POST)) {
 	$OcupMadre = $_POST['OcupMadre'];
 	$CelularM = $_POST['CelularM'];
 	$Email = $_POST['Email'];
+	$AccesoSistema = $_POST['AccesoSistema'];
 	//
 	$Nit = $_POST['Nit'];
 	$FacturaA = $_POST['FacturaA'];
@@ -166,7 +167,8 @@ if (!empty($_POST)) {
 		'CodBarra' => "'$CodBarra'",
 		'Password' => "'$Password'",
 		'PasswordP' => "'$PasswordP'",
-		'UsuarioPadre' => "'$UsuarioPadre'"
+		'UsuarioPadre' => "'$UsuarioPadre'",
+		'AccesoSistema' => "'$AccesoSistema'",
 	);
 
 	$fechaCuota = date("Y-m-d H:i:s");

@@ -562,6 +562,9 @@ $idioma['Activado'] = "Activado";
 $idioma['Desactivado'] = "Desactivado";
 $idioma['DatosAccesoInternet'] = "Datos de Acceso a Internet";
 $idioma['DatosAccesoSistema'] = "Datos de Acceso al Sistema";
+$idioma['AccesoSistema'] = "Acceso al Sistema";
+$idioma['HabilitaDeshabilitaAccesoSistema'] = "Habilita o Deshabilita el Acceso al Sistema";
+$idioma['AccesoRestringido'] = "El Acesso al Sistema está Restringido, consulte con Dirección";
 $idioma['MostrarDatosSMSBoletaAlumnos'] = "Mostrar Datos de SMS en Boleta de Alumnos";
 //Docente
 $idioma['NombreDocente'] = "Nombre del Docente";

@@ -200,12 +200,12 @@ class alumno extends bd
 	*/
 	function loginPadre($Usuario, $Password)
 	{
-		$this->campos = array("count(*) as Can,CodAlumno as CodUsuario");
+		$this->campos = array("count(*) as Can,CodAlumno as CodUsuario, AccesoSistema");
 		return $this->getRecords("UsuarioPadre='$Usuario' and PasswordP='$Password'", '', 'CodAlumno');
 	}
 	function loginAlumno($Usuario, $Password)
 	{
-		$this->campos = array("count(*) as Can,CodAlumno as CodUsuario");
+		$this->campos = array("count(*) as Can,CodAlumno as CodUsuario, AccesoSistema");
 		return $this->getRecords("UsuarioAlumno='$Usuario' and Password='$Password'", '', 'CodAlumno');
 	}
 	function insertarAlumno($Values)

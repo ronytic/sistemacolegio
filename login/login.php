@@ -54,18 +54,21 @@ print_r($navegador);*/
             $reg = $alumno->loginPadre($usuario, $pass);
             $reg = array_shift($reg);
             $Nivel = 6;
+            $sw = 0;
         } elseif (preg_match('/^([a-z])*[0-9]{1,4}$/', $usuarioAl)) {
             //Alumno
             //echo $usuario;
             $reg = $alumno->loginAlumno($usuario, $pass);
             $reg = array_shift($reg);
             $Nivel = 7;
+            $sw = 0;
         } elseif (preg_match('/^[0-9]+[a-z]*$/', $usuario)) {
             //Docente
 
             $reg = $docente->loginDocente($usuario, $pass);
             $reg = array_shift($reg);
             $Nivel = 3;
+            $sw = 0;
         } else {
             //echo $sql;
             header("Location:./?u=" . $url . '&error=1');
@@ -82,6 +85,13 @@ print_r($navegador);*/
         }
 
         if ($reg['Can'] == 1) {
+            if ($Nivel == 6 || $Nivel == 7) {
+                var_dump($reg);
+                if ($reg['AccesoSistema'] == 0) {
+                    header("Location:./?u=" . $url . '&error=2');
+                    exit();
+                }
+            }
             $valuesLog = array(
                 "CodUsuario" => $codUsuario,
                 "Nivel" => $Nivel,

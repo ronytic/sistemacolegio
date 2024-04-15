@@ -214,6 +214,19 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 </tr>
             </table>
         </div>
+
+        <div class="box-header">
+            <h2><?php echo $idioma['AccesoSistema'] ?></h2>
+        </div>
+        <div class="box-content">
+            <table class="tabla">
+                <tr>
+                    <td class="der" width="50%"><?php echo $idioma['AccesoSistema'] ?><br><small><?php echo $idioma['HabilitaDeshabilitaAccesoSistema'] ?></small></td>
+                    <td><?php campo("AccesoSistema", "select", array("1" => $idioma['Si'], "0" => $idioma['No']), "span12", 0, "", 0, array("maxlength" => 30), 1) ?></td>
+                </tr>
+            </table>
+        </div>
+
         <div class="box-header">
             <h2><?php echo $idioma['DatosFactura'] ?></h2>
         </div>

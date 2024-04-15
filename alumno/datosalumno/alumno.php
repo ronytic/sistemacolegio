@@ -42,6 +42,8 @@ if (isset($_GET)) {
     if (!file_exists($ima) || empty($al['Foto'])) {
         $ima = $folder . "imagenes/alumnos/0.jpg";
     }
+
+    $AccesoSistema = isset($al["AccesoSistema"]) ? $al["AccesoSistema"] : 1;
 ?>
     <?php include_once($folder . "cabecerahtml.php"); ?>
     <script language="javascript" type="text/javascript" src="../../js/alumno/inscripcion.js"></script>
@@ -238,6 +240,19 @@ if (isset($_GET)) {
                     </tr>
                 </table>
             </div>
+
+            <div class="box-header">
+                <h2><?php echo $idioma['AccesoSistema'] ?></h2>
+            </div>
+            <div class="box-content">
+                <table class="tabla">
+                    <tr>
+                        <td class="der" width="50%"><?php echo $idioma['AccesoSistema'] ?><br><small><?php echo $idioma['HabilitaDeshabilitaAccesoSistema'] ?></small></td>
+                        <td><?php campo("AccesoSistema", "select", array("1" => $idioma['Si'], "0" => $idioma['No']), "span12", 0, "", 0, array("maxlength" => 30), $AccesoSistema) ?></td>
+                    </tr>
+                </table>
+            </div>
+
             <div class="box-header">
                 <h2><?php echo $idioma['DatosFactura'] ?></h2>
             </div>
