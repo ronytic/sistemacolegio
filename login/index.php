@@ -32,7 +32,7 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>.::<?php echo $idioma['AccesoSistema'] ?> | <?php echo $title; ?> | <?php echo $idioma['TituloSistema'] ?>::.</title>
+    <title><?php echo $title; ?> | <?php echo $idioma['TituloSistema'] ?></title>
     <link href="<?php echo $folder ?>css/bootstrap.css" type="text/css" rel="stylesheet" media="all" />
     <link href="css/estilo2.css" type="text/css" rel="stylesheet" media="all" />
     <link rel="shortcut icon" href="../imagenes/logos/<?php echo $LogoIcono ?>" />
