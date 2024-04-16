@@ -198,7 +198,7 @@ switch ($Nivel) {
                 <a href="#">Dashboard</a> <span class="divider">/</span>
             </li>
 			<?php */ ?>
-						<?php if ($Nivel == 1 || $Nivel == 2) { ?>
+						<?php if ($Nivel == 1 || $Nivel == 2 || $Nivel == 4 || $Nivel == 5) { ?>
 							<div class="pull-right input-append span5" style="margin-top:-5px;margin-bottom:5px;">
 								<br class="visible-phone visible-tablet">
 								<form action="<?php echo $folder ?>alumno/busqueda/" method="post">
