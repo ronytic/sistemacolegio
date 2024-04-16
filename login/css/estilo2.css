@@ -136,4 +136,7 @@ hr.plomo {
     z-index: -1;
     /* opacity: 0.5; */
   }
+  .mensajes {
+    margin-top: 10px;
+  }
 }
