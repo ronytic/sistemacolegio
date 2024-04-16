@@ -102,16 +102,7 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
                         <input type="submit" value="<?php echo $idioma['Ingresar'] ?>" class="enviar" />
                     </form>
                     <a href="#" class="ayuda"><?php echo $idioma['NoPuedeIngresar'] ?></a>
-                    <hr class="plomo" />
-                    <span><?php echo $idioma['Idioma'] ?>:</span>
-                    <a href="i.php?i=es" class="idioma <?php echo $idiomaCookie == 'es' ? ' plomo' : ''; ?>">Castellano</a>|<a href="i.php?i=ay" class="idioma <?php echo $idiomaCookie == 'ay' ? ' plomo' : ''; ?>">Aymara</a>|<a href="i.php?i=qu" class="idioma <?php echo $idiomaCookie == 'qu' ? ' plomo' : ''; ?>">Quechua</a>|<a href="i.php?i=gu" class="idioma <?php echo $idiomaCookie == 'gu' ? ' plomo' : ''; ?>">Guarani</a>|<a href="i.php?i=en" class="idioma <?php echo $idiomaCookie == 'en' ? ' plomo' : ''; ?>">Ingles</a>
 
-                    <br /> <span class="recomendacion"><?php echo $idioma['RecomendacionUsoSistema'] ?> <img src="../imagenes/inicio/maximizar.jpg" class="img-polaroid" /></span>
-
-                    <?php if ($ActualizacionNavegador != "") { ?>
-                        <br />
-                        <a href="<?php echo $ActualizacionNavegador; ?>" target="_blank"><?php echo $idioma['ActualizarNavegador'] ?></a>
-                    <?php } ?>
                 </div>
             </div>
             <div class="offset1 span6">
@@ -134,11 +125,33 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
                     </ul>
 
                 </div>
-                <?php if ($CodigoAdicionalSistemaLogin != "") { ?>
-                    <hr /><?php echo $CodigoAdicionalSistemaLogin;
-                        } ?>
+
             </div>
 
+        </div>
+        <div class="row-fluid">
+            <div class="offset1 span4 login" style="margin-top: 0px;">
+                <hr class="plomo" />
+                <span><?php echo $idioma['Idioma'] ?>:</span>
+                <a href="i.php?i=es" class="idioma <?php echo $idiomaCookie == 'es' ? ' plomo' : ''; ?>">Castellano</a>|
+                <a href="i.php?i=ay" class="idioma <?php echo $idiomaCookie == 'ay' ? ' plomo' : ''; ?>">Aymara</a>|
+                <a href="i.php?i=qu" class="idioma <?php echo $idiomaCookie == 'qu' ? ' plomo' : ''; ?>">Quechua</a>|
+                <a href="i.php?i=gu" class="idioma <?php echo $idiomaCookie == 'gu' ? ' plomo' : ''; ?>">Guarani</a>|
+                <a href="i.php?i=en" class="idioma <?php echo $idiomaCookie == 'en' ? ' plomo' : ''; ?>">Ingles</a>
+
+                <br /> <span class="recomendacion"><?php echo $idioma['RecomendacionUsoSistema'] ?> <img src="../imagenes/inicio/maximizar.jpg" class="img-polaroid" /></span>
+
+                <?php if ($ActualizacionNavegador != "") { ?>
+                    <br />
+                    <a href="<?php echo $ActualizacionNavegador; ?>" target="_blank"><?php echo $idioma['ActualizarNavegador'] ?></a>
+                <?php } ?>
+            </div>
+            <div class="offset1 span6">
+                <?php if ($CodigoAdicionalSistemaLogin != "") { ?>
+                    <hr style="margin-top: 0px;" />
+                <?php echo $CodigoAdicionalSistemaLogin;
+                } ?>
+            </div>
         </div>
         <div class="row-fluid">
             <div class="span12">
