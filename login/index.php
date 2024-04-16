@@ -34,7 +34,7 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php echo $title; ?> | <?php echo $idioma['TituloSistema'] ?></title>
     <link href="<?php echo $folder ?>css/bootstrap.css" type="text/css" rel="stylesheet" media="all" />
-    <link href="css/estilo2.css?v1" type="text/css" rel="stylesheet" media="all" />
+    <link href="css/estilo2.css?v2" type="text/css" rel="stylesheet" media="all" />
     <link rel="shortcut icon" href="../imagenes/logos/<?php echo $LogoIcono ?>" />
     <!-- start: Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
