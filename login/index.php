@@ -26,6 +26,7 @@ $CodigoSeguimientoSistema = $config->mostrarConfig("CodigoSeguimientoSistema", 1
 $Telefono = $config->mostrarConfig("Telefono", 1);
 $folder = "../";
 $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
+$anunciosLogin = $anuncioslogin->mostrarAnuncios();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -111,8 +112,8 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
                     <hr />
                     <ul>
                         <?php
-                        if (count($anuncioslogin->mostrarAnuncios()) > 0) {
-                            foreach ($anuncioslogin->mostrarAnuncios() as $anuncios) {
+                        if (count($anunciosLogin) > 0) {
+                            foreach ($anunciosLogin as $anuncios) {
                         ?>
                                 <li class="<?php echo $anuncios['Resaltar'] ? 'resaltar' : '' ?>"><?php echo $anuncios['Mensaje'] ?></li>
                             <?php
