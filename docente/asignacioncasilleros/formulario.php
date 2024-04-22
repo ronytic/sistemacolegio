@@ -83,9 +83,9 @@ if (!empty($_POST['CodDocente'])) {
         </tr>
         <tr id="FilaTipoNota" class="">
             <td><?php echo $idioma['TipoRegistroNotas'] ?>:<br />
-                <select name="TipoNota" id="TipoNota" class="span12">
+                <select name="TipoNota" id="TipoNota" class="span12" readonly>
                     <option value=""><?php echo $idioma['Normal'] ?></option>
-                    <option value="avanzado"><?php echo $idioma['Avanzado'] ?></option>
+                    <option value="avanzado" selected><?php echo $idioma['Avanzado'] ?></option>
                     <option value="literal"><?php echo $idioma['Literal'] ?></option>
                 </select>
                 <div class="alert alert-error"><?php echo $idioma['NotaAvanzado'] ?></div>
