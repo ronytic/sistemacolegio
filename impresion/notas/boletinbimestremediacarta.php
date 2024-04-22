@@ -74,7 +74,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 			$this->CuadroCabecera(20, $idioma["Curso"] . ": ", 100, $cur['Nombre']);
 			$this->CuadroCabecera(20, $idioma["Fecha"] . ": ", 60, strftime("%d/%m/%Y"));
 			$this->ln();
-			$this->TituloCabecera(50, $idioma['Materia']);
+			$this->TituloCabecera(60, $idioma['Materia']);
 			for ($etapa = 1; $etapa <= $cantidadEtapas; $etapa++) {
 				$this->TituloCabecera(25, $etapa . " " . $idioma[$nombrePeriodo]);
 			}
@@ -100,11 +100,11 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 		$mat = $materias->mostrarMateria($matbol['CodMateria']);
 		$mat = array_shift($mat);
 		if ($matbol['Alterno'] == 1)
-			$pdf->CuadroCuerpo(50, $mat['Nombre'], 0, "L", $bordeC);
+			$pdf->CuadroCuerpo(60, $mat['Nombre'], 0, "L", $bordeC);
 		if ($matbol['Alterno'] == 2)
-			$pdf->CuadroCuerpo(50, $mat['NombreAlterno1'], 0, "L", $bordeC);
+			$pdf->CuadroCuerpo(60, $mat['NombreAlterno1'], 0, "L", $bordeC);
 		if ($matbol['Alterno'] == 3)
-			$pdf->CuadroCuerpo(50, $mat['NombreAlterno2'], 0, "L", $bordeC);
+			$pdf->CuadroCuerpo(60, $mat['NombreAlterno2'], 0, "L", $bordeC);
 		$cont = 0;
 		$sumanotas = 0;
 
@@ -257,7 +257,7 @@ if (!empty($_GET) && isset($_GET['mf']) && $_GET['mf'] == md5("lock")) {
 
 		$promediofinal = round($sumanotas / 4);
 
-		if ($regNotas['Nota2'] != 0) {
+		if (isset($regNotas) && $regNotas['Nota2'] != 0) {
 			$promedioanual = round(($promediofinal + $regNotas['Nota2']) / 2);
 		} else {
 			$promedioanual = $promediofinal;

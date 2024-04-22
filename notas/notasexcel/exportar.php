@@ -60,8 +60,11 @@ $RangoNotaDps4 = $config->mostrarConfig("RangoNotaDps4", 1);
 $RangoNotaDps5 = $config->mostrarConfig("RangoNotaDps5", 1);
 $RangoNotaDps6 = $config->mostrarConfig("RangoNotaDps6", 1);
 
-if ($casillas['TipoNota'] == "avanzado") {
+if ($cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
 	$FormulaCalificaciones = "n4 n10 + n15 + n20 +";
+}
+if (!$cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+	$FormulaCalificaciones = "n2 n7 + n12 + n14 + n16 +";
 }
 
 if ($RegistroNotaHabilitado == 1) {
@@ -123,7 +126,7 @@ $tipoarchivo = $f;
 $nombrearchivo = "SAAC_" . quitarSimbolos($materiaabreviado) . "_" . quitarSimbolos($cursoabreviado) . "_" . quitarSimbolos($periodoabreaviado) . "_" . date("Y");
 $valores = array(
 	"NombreArchivo" => "'$nombrearchivo'",
-	"Codigo" => "'" . md5($codigocasilleros) . "'",
+	"Codigo" => "'" . base64_encode($codigocasilleros) . "'",
 	"CodDocenteMateriaCurso" => "'$codigodocentemateriacurso'",
 	"CodCasilleros" => "'$codigocasilleros'",
 	"CodDocente" => "'$codigodocente'",
@@ -151,7 +154,7 @@ $validLocale = PHPExcel_Settings::setLocale($locale);
 //Propiedades del Documento
 $doc->getProperties()->setCreator("Desarrollado por Ronald Franz Nina Layme - Cel:73230568")
 	->setLastModifiedBy("Desarrollado por Ronald Franz Nina Layme - Cel:73230568")
-	->setTitle("Registro de Notas - Sistema Académico Administrativo para Colegios Desarrollado por Ronald Franz Nina Layme - Cel:73230568")
+	->setTitle("Registro de Notas - Sistema Académico Administrativo para Unidades Educativas Privadas Desarrollado por Ronald Franz Nina Layme - Cel:73230568")
 	->setSubject("Sistema Académico Administrativo para Colegios")
 	->setDescription("Sistema Académico Administrativo para Colegios, Registro de Notas")
 	->setKeywords("Sistema Académico Administrativo para Colegios")
@@ -280,23 +283,28 @@ $doc->getActiveSheet()->setCellValue('D10', mayuscula($idioma['Nombres']))
 $col = '';
 $y = '';
 for ($j = 1; $j <= $cantidadcasilleros; $j++) {
-	if ($casillas['TipoNota'] == "avanzado") {
-		if ($j == 4 || $j == 10 || $j == 15 || $j == 20) {
+	$TamanoLetra = 11;
+	$colorfondo = "FFFFFF";
+	if ($cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+		if (in_array($j, [4, 10, 15, 20])) {
 			$TamanoLetra = 18;
 			$colorfondo = "c2ffc5";
-		} else {
-			if ($j == 3 || $j == 9 || $j == 14 || $j == 19) {
-				$TamanoLetra = 11;
-				$colorfondo = "d5eafd";
-			} else {
-				$TamanoLetra = 11;
-				$colorfondo = "FFFFFF";
-			}
+		} else if (in_array($j, [3, 9, 14, 19])) {
+			$TamanoLetra = 11;
+			$colorfondo = "d5eafd";
 		}
-	} else {
-		$TamanoLetra = 11;
-		$colorfondo = "FFFFFF";
 	}
+	if (!$cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+		if (in_array($j, [2, 7, 12, 14, 16])) {
+			$TamanoLetra = 13;
+			$colorfondo = "c2ffc5";
+		}
+		/*else if (in_array($j, [3, 9, 14, 19])) {
+			$TamanoLetra = 11;
+			$colorfondo = "d5eafd";
+		}*/
+	}
+
 	$col = adicionar('D', $j);
 	$y = $col;
 	$doc->getActiveSheet()->setCellValue($col . '10', sacarIniciales($casillas['NombreCasilla' . $j]))
@@ -359,8 +367,8 @@ foreach ($a as $al) {
 	//echo "<br>";
 	for ($j = 1; $j <= $cantidadcasilleros; $j++) {
 		$protegidodimension = 0;
-		if ($casillas['TipoNota'] == "avanzado") {
-			if ($j == 4 || $j == 10 || $j == 15 || $j == 20) {
+		if ($cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+			if (in_array($j, [4, 10, 15, 20])) {
 				//POR SI es dimensión
 				$TamanoLetra = 18;
 				$colorfondo = "c2ffc5";
@@ -384,19 +392,52 @@ foreach ($a as $al) {
 						}
 						break;
 				}
+			} else if (in_array($j, [3, 9, 14, 19])) { //Por Autoevaluación
+				$TamanoLetra = 11;
+				$colorfondo = "d5eafd";
+				$no = $regNota['Nota' . $j];
+				$tipotexto = "";
 			} else {
-				if ($j == 3 || $j == 9 || $j == 14 || $j == 19) { //Por Autoevaluación
-					$TamanoLetra = 11;
-					$colorfondo = "d5eafd";
-					$no = $regNota['Nota' . $j];
-					$tipotexto = "";
-				} else {
-					$TamanoLetra = 11;
-					$colorfondo = $i % 2 == 0 ? 'FFE699' : 'FFFFFF';
-					$no = $regNota['Nota' . $j];
-					$tipotexto = "";
+				$TamanoLetra = 11;
+				$colorfondo = $i % 2 == 0 ? 'FFE699' : 'FFFFFF';
+				$no = $regNota['Nota' . $j];
+				$tipotexto = "";
+			}
+			$protegidodimension = 0;
+		} elseif (!$cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+			if (in_array($j, [2, 7, 12, 14, 16])) {
+				//POR SI es dimensión
+				$TamanoLetra = 18;
+				$colorfondo = "c2ffc5";
+				$tipotexto = "B";
+				$protegidodimension = 1;
+				switch ($j) {
+					case 2: {
+							$no = "=ROUND(AVERAGE(E$x:E$x)*0.05,0)";
+						}
+						break;
+					case 7: {
+							$no = "=ROUND(AVERAGE(G$x:J$x)*0.45,0)";
+						}
+						break;
+					case 12: {
+							$no = "=ROUND(AVERAGE(L$x:O$x)*0.40,0)";
+						}
+						break;
+					case 14: {
+							$no = "=ROUND(AVERAGE(Q$x:Q$x)*0.05,0)";
+						}
+						break;
+					case 16: {
+							$no = "=ROUND(AVERAGE(S$x:S$x)*0.05,0)";
+						}
+						break;
 				}
-				$protegidodimension = 0;
+			} else {
+				$TamanoLetra = 11;
+				$colorfondo = $i % 2 == 0 ? 'FFE699' : 'FFFFFF';
+				$no = $regNota['Nota' . $j];
+				$tipotexto = "";
 			}
 		} else {
 			$TamanoLetra = 11;

@@ -27,7 +27,14 @@ if (!empty($_POST)) {
 
 	$casillas = $casilleros->mostrarDocenteMateriaCursoTrimestre($CodDocente, $CodMateria, $CodCurso, $CodPeriodo);
 	$casillas = array_shift($casillas);
-
+	if (is_null($casillas)) {
+?>
+		<div class="alert alert-danger">
+			<?php echo $idioma['NoTieneAsignadoCasilleros']; ?>
+		</div>
+	<?php
+		exit;
+	}
 	$CodCasilleros = $casillas['CodCasilleros'];
 	$Sexo = $casillas['SexoAlumno'];
 	$numcasilleros = $casillas['Casilleros'];
@@ -101,11 +108,11 @@ if (!empty($_POST)) {
 		<thead>
 			<tr>
 				<th colspan="<?php echo $numcasilleros + 7 ?>">
-					<?php echo $idioma['Curso'] ?>: <?php echo $cur['Nombre'] ?> |
-					<?php echo $idioma['Materia'] ?>: <?php echo $mat['Nombre'] ?> |
-					<?php echo $cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre'] ?>:<?php echo $CodPeriodo ?> |
-					<?php echo $idioma['NotaCalifcacion'] ?>: <?php echo $cur['NotaTope'] ?> |
-					<?php echo $idioma['NotaAprobacion'] ?>: <?php echo $cur['NotaAprobacion'] ?>
+					<small><?php echo $idioma['Curso'] ?>:</small> <?php echo $cur['Nombre'] ?> |
+					<small><?php echo $idioma['Materia'] ?>:</small> <?php echo $mat['Nombre'] ?> |
+					<small><?php echo $cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre'] ?>:</small><?php echo $CodPeriodo ?> |
+					<small><?php echo $idioma['NotaCalifcacion'] ?>: </small><?php echo $cur['NotaTope'] ?> |
+					<small><?php echo $idioma['NotaAprobacion'] ?>:</small> <?php echo $cur['NotaAprobacion'] ?>
 				</th>
 			</tr>
 			<tr>
@@ -137,15 +144,34 @@ if (!empty($_POST)) {
 				<td><?php echo capitalizar($al['Nombres']); ?></td>
 				<?php for ($i = 1; $i <= $numcasilleros; $i++) {
 
-					if ($i == 4 ||  $i == 10 || $i == 15 || $i == 20) {
-						$verde = 'verde';
-					} else {
-						$verde = '';
+					$verde = '';
+					$amarillo = '';
+					$lectura = '';
+					if ($cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+						if (in_array($i, [4, 10, 15, 20])) {
+							$verde = 'verde';
+							$lectura = 'readonly="readonly"';
+							$tabindex = "";
+						} else {
+							$numero++;
+							$tabindex = 'tabindex="' . $numero . '"';
+						}
+						if (in_array($i,  [3, 9, 14, 19])) {
+							$amarillo = 'amarillo';
+						}
 					}
-					if ($i == 3 || $i == 9 || $i == 14 || $i == 19) {
-						$amarillo = 'amarillo';
-					} else {
-						$amarillo = '';
+					if (!$cur['Bimestre'] && $casillas['TipoNota'] == "avanzado") {
+						if (in_array($i, [2, 7, 12, 14, 16])) {
+							$verde = 'verde';
+							$lectura = 'readonly="readonly"';
+							$tabindex = "";
+						} else {
+							$numero++;
+							$tabindex = 'tabindex="' . $numero . '"';
+						}
+						if (in_array($i,  [])) {
+							$amarillo = 'amarillo';
+						}
 					}
 
 					if ($casillas['TipoNota'] == "") {
@@ -160,18 +186,9 @@ if (!empty($_POST)) {
 							$verde = '';
 						}
 					}
-					if (($i == 4 || $i == 10 || $i == 15 || $i == 20) & $casillas['TipoNota'] == "avanzado") {
-						$lectura = 'readonly="readonly"';
-						$tabindex = "";
-					} else {
-						$lectura = '';
-						//$verde='';
-						$numero++;
-						$tabindex = 'tabindex="' . $numero . '"';
-					}
 				?>
 					<td style="text-align:center" class="<?php echo $verde . " " . $amarillo ?>">
-						<input type="text" size="3" maxlength="<?php echo strlen($casillas['LimiteCasilla' . $i]) ?>" class="input-mini nota <?php echo ($i == $numcasilleros) ? 'final' : ''; ?> al_<?php echo $al['CodAlumno'] ?>_<?php echo $i; ?> " value="<?php echo $regNota['Nota' . $i] ?>" id="al[<?php echo $na; ?>][n<?php echo $i; ?>]" rel="<?php echo $al['CodAlumno'] ?>" data-posicion="" data-col="<?php echo $i; ?>" data-row="<?php echo $al['CodAlumno']; ?>" data-cod="<?php echo $CodCasilleros; ?>" <?php echo $restringir ?> style="max-width:30px !important" <?php echo $tabindex ?>" <?php echo $lectura ?> />
+						<input type="text" size="3" maxlength="<?php echo strlen($casillas['LimiteCasilla' . $i]) ?>" class="input-mini nota <?php echo ($i == $numcasilleros) ? 'final' : ''; ?> al_<?php echo $al['CodAlumno'] ?>_<?php echo $i; ?> " value="<?php echo $regNota['Nota' . $i] ?>" id="al[<?php echo $na; ?>][n<?php echo $i; ?>]" rel="<?php echo $al['CodAlumno'] ?>" data-posicion="" data-col="<?php echo $i; ?>" data-row="<?php echo $al['CodAlumno']; ?>" data-cod="<?php echo $CodCasilleros; ?>" <?php echo $restringir ?> style="max-width:30px !important" <?php echo $tabindex ?> <?php echo $lectura ?> />
 					</td>
 				<?php
 				}

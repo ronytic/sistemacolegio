@@ -7,11 +7,13 @@ ini_set('display_startup_errors', TRUE);*/
 include_once("../../class/registronotasexcel.php");
 include_once("../../class/registronotas.php");
 include_once("../../class/casilleros.php");
+include_once("../../class/curso.php");
 $CodigoRegistro = $_SESSION['CodigoRegistro'];
 
 $registronotasexcel = new registronotasexcel;
 $registronotas = new registronotas;
 $casilleros = new casilleros;
+$curso = new curso;
 $rne = $registronotasexcel->mostrarTodoRegistro("CodRegistroNotasExcel=" . $CodigoRegistro);
 $rne = array_shift($rne);
 // print_r($rne);
@@ -44,6 +46,9 @@ $codigodocentemateriacurso = $dact->getCell('G3')->getValue();
 $cantidadalumnos = $dact->getCell('E6')->getValue();
 $cantidadcasilleros = $dact->getCell('E7')->getValue();
 $TipoNota = $dact->getCell('F7')->getValue();
+
+$cur = $curso->mostrarCurso($codigocurso);
+$cur = array_shift($cur);
 $notas = array();
 
 $CantidadAprobados = $dact->getCell('C7')->getCalculatedValue();
@@ -61,7 +66,7 @@ for ($i = 11; $i <= $totalalto; $i++) {
 	$poscol = "D";
 	for ($j = 1; $j <= $cantidadcasilleros; $j++) {
 		$poscol = adicionar($poscol, 1);
-		if ($TipoNota == "avanzado") {
+		if ($cur['Bimestre'] && $TipoNota == "avanzado") {
 			//echo $j;
 			switch ($j) {
 				case 4: {
@@ -81,12 +86,12 @@ for ($i = 11; $i <= $totalalto; $i++) {
 					}
 					break;
 				default: {
-						$vn = $dact->getCell($poscol . $i)->getValue();
+						$vn = $dact->getCell($poscol . $i)->getCalculatedValue();
 					}
 					break;
 			}
 		} else {
-			$vn = $dact->getCell($poscol . $i)->getValue();
+			$vn = $dact->getCell($poscol . $i)->getCalculatedValue();
 		}
 		$n[$j] = $vn;
 	}

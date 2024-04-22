@@ -15,10 +15,17 @@ if (!empty($_POST)) {
 	$cur = array_shift($cur);
 	$casillas = ($casilleros->mostrarDocenteMateriaCursoTrimestre($CodDocente, $CodMateria, $CodCurso, $CodPeriodo));
 	$casillas = array_shift($casillas);
-
+	if (is_null($casillas)) {
+?>
+		<div class="alert alert-danger">
+			<?php echo $idioma['NoTieneAsignadoCasilleros']; ?>
+		</div>
+	<?php
+		exit;
+	}
 	$CodCasilleros = $casillas['CodCasilleros'];
 	$numcasilleros = $casillas['Casilleros'];
-?>
+	?>
 	<!--<div style="display:inline-block;">-->
 	<div class="box-content">
 		<?php echo $idioma['Curso'] ?>: <strong><?php echo $cur['Nombre'] ?> </strong> |

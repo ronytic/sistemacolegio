@@ -15,7 +15,9 @@ if (!empty($_POST)) {
 	$alumno = new alumno;
 	$casilleros = new casilleros;
 	$docentemateriacurso = new docentemateriacurso;
-	$casillas = $casilleros->estadoTabla();
+	//$casillas = $casilleros->estadoTabla();
+	//var_dump($casillas);
+	//exit;
 
 	$registroNotas = new registronotas;
 	$Periodo = $_POST['Periodo'];
@@ -40,8 +42,7 @@ if (!empty($_POST)) {
 	$cur = array_shift($cur);
 
 
-	if (count($casi)) {
-?>
+	if (count($casi)) { ?>
 		<div class="alert alert-error">
 			<strong>
 				<?php echo $idioma['CasillerosRegistrado']; ?>
@@ -52,13 +53,14 @@ if (!empty($_POST)) {
 	<?php
 		exit();
 	}
+
 	if ($TipoNota == "avanzado") {
-		$Casillas = 20;
+		$Casillas = $cur['Bimestre'] ? 20 : 16;
 	}
-	$CodCasilleros = $casillas['Auto_increment'];
+	//$CodCasilleros = $casillas['Auto_increment'];
 	$Dps = $cur['Dps'];
 	$valDM = array(
-		'CodCasilleros' => $CodCasilleros,
+		//'CodCasilleros' => $CodCasilleros,
 		'CodDocenteMateriaCurso' => $docmateriacurso['CodDocenteMateriaCurso'],
 		'Casilleros' => $Casillas,
 		'Trimestre' => $Periodo,
@@ -242,22 +244,140 @@ if (!empty($_POST)) {
 							}
 						}
 				}
+			} elseif ($cur['Bimestre'] == 0) {
+				switch ($TipoNota) {
+					case "avanzado": {
+							switch ($i) {
+								case 1: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . "'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 2: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Ser'] . "'";
+										$valDM['LimiteCasilla' . $i] = 5;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 3: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 1'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 4: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 2'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 5: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 3'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 6: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 4'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 7: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Saber'] . "'";
+										$valDM['LimiteCasilla' . $i] = 45;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 8: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 1'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 9: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 2'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 10: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 3'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 11: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " 4'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 12: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Hacer'] . "'";
+										$valDM['LimiteCasilla' . $i] = 40;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 13: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . "'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 14: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Decidir'] . "'";
+										$valDM['LimiteCasilla' . $i] = 5;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 15: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Valor'] . " '";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+								case 16: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Autoevaluacion'] . "'";
+										$valDM['LimiteCasilla' . $i] = 5;
+										$valDM['LimiteMinCasilla' . $i] = 0;
+									}
+									break;
+							}
+						}
+						break;
+					case "literal": {
+							switch ($i) {
+								case 1: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Literal'] . "'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 10;
+									}
+									break;
+								case 2: {
+										$valDM['NombreCasilla' . $i] = "'" . $idioma['Nota'] . "'";
+										$valDM['LimiteCasilla' . $i] = 100;
+										$valDM['LimiteMinCasilla' . $i] = 10;
+									}
+									break;
+							}
+						}
+						break;
+				}
 			} else { //Sacnado para Fines de Bimestre
-				$valDM['NombreCasilla' . $i] = "'Casilla $i'";
+				$valDM['NombreCasilla' . $i] = "'" . $idioma['Casilla'] . " " . $i . "'";
 				$valDM['LimiteCasilla' . $i] = $cur['NotaTope'];
 				$valDM['LimiteMinCasilla' . $i] = 0;
 			}
 		} else {
-			$valDM['NombreCasilla' . $i] = "'Casilla $i'";
+			$valDM['NombreCasilla' . $i] = "'" . $idioma['Casilla'] . " " . $i . "'";
 			$valDM['LimiteCasilla' . $i] = 0;
 			$valDM['LimiteMinCasilla' . $i] = 0;
 		}
 	}
 	$casilleros->insertarRegistro($valDM);
-	/*echo "<pre>";
-    print_r($valDM);
-    echo "</pre>";*/
-	//print_r($valDM);
+	$CodCasilleros = $casilleros->ultimo();
 	$alumnos = $alumno->mostrarAlumnosCurso($docmateriacurso['CodCurso'], $docmateriacurso['SexoAlumno'], 2);
 	foreach ($alumnos as $al) {
 		$valRN = array(
@@ -275,7 +395,6 @@ if (!empty($_POST)) {
 		$valRN['NotaFinal'] = 0;
 		$registroNotas->insertarRegistro($valRN);
 	}
-	//print_r($_POST);
 
 	//Sacar Datos para mostrar
 

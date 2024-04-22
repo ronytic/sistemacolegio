@@ -18,18 +18,33 @@ function respuestaInicial(data) {
 	});
 	cambiarCantidad();
 	$("input[name=CodDocenteMateriaCurso]").change(cambiarCantidad);
+	cambiarTipoNota();
+	$("select[name=TipoNota]").change(cambiarTipoNota);
+
+	function cambiarTipoNota(e) {
+		var TipoNota = $("select[name=TipoNota] > option:checked").val();
+		// alert(TipoNota);
+		if (TipoNota == "avanzado" || TipoNota == "literal") {
+			$("select[name=casillas]").val(4).attr("disabled", "disabled");
+			$("#habilitarmodificarformula,#formula").hide();
+		} else {
+			$("select[name=casillas]").removeAttr("disabled");
+			$("#habilitarmodificarformula,#formula").show();
+		}
+		$('#formula').click();
+	}
 	function cambiarCantidad(e) {
-		valorbimestre = parseInt($(this).attr("data-bimestre"));
+		/*valorbimestre = parseInt($(this).attr("data-bimestre"));
 		if (valorbimestre == 1) {
 			$("#FilaTipoNota").show();
 			//$("#TipoNota").val("");
-			$("select[name=casillas]").val(4).attr("disabled", "disabled");
+			// $("select[name=casillas]").val(4).attr("disabled", "disabled");
 		} else {
-			$("#FilaTipoNota").hide();
+			// $("#FilaTipoNota").hide();
 			$("#TipoNota").val("");
 			$("select[name=casillas]").val($("select[name=casillas]").val()).removeAttr("disabled");
 		}
-		$('#formula').click();
+		$('#formula').click();*/
 	}
 	$('#formula').click();
 	$("select[name=casillas]").change(function (e) {
@@ -41,6 +56,11 @@ function respuestaInicial(data) {
 		var Casillas = $("select[name=casillas]").val();
 		var Formula = $("textarea[name=formula]").val();
 		var CodDocenteMateriaCurso = $("input[name=CodDocenteMateriaCurso]:checked").val();
+		if (CodDocenteMateriaCurso == undefined) {
+			alert(DebeSeleccionarCursoMateria);
+			return false;
+		}
+		console.log({ TipoNota, Periodo, Casillas, Formula, CodDocenteMateriaCurso });
 		if (confirm(GuardarConfiguracionCasilleros + "\n" + NoSePodraModificar)) {
 			$.post('guardar.php', { 'TipoNota': TipoNota, 'Periodo': Periodo, 'CodDocenteMateriaCurso': CodDocenteMateriaCurso, 'Casillas': Casillas, 'Formula': Formula }, respuesta2);
 		}

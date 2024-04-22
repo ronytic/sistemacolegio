@@ -81,14 +81,14 @@ if (!empty($_POST['CodDocente'])) {
                 </select>
             </td>
         </tr>
-        <tr id="FilaTipoNota" class="ocultar">
-            <td><?php echo $idioma['TipoBimestre'] ?>:<br />
+        <tr id="FilaTipoNota" class="">
+            <td><?php echo $idioma['TipoRegistroNotas'] ?>:<br />
                 <select name="TipoNota" id="TipoNota" class="span12">
-                    <option value=""><?php echo $idioma['BimestreNormal'] ?></option>
-                    <option value="avanzado"><?php echo $idioma['BimestreAvanzado'] ?></option>
-                    <option value="literal"><?php echo $idioma['BimestreLiteral'] ?></option>
+                    <option value=""><?php echo $idioma['Normal'] ?></option>
+                    <option value="avanzado"><?php echo $idioma['Avanzado'] ?></option>
+                    <option value="literal"><?php echo $idioma['Literal'] ?></option>
                 </select>
-                <div class="alert alert-error"><?php echo $idioma['NotaBimestreAvanzado'] ?></div>
+                <div class="alert alert-error"><?php echo $idioma['NotaAvanzado'] ?></div>
             </td>
         </tr>
         <tr>
@@ -101,7 +101,7 @@ if (!empty($_POST['CodDocente'])) {
             </td>
         </tr>
         <tr>
-            <td><?php echo $idioma['FormulaCalificacion'] ?><br />
+            <td><?php echo $idioma['FormulaCalificacion'] ?>:<br />
                 <textarea name="formula" class="nocap span12" rows="4" readonly></textarea>
                 <a class="btn btn-mini pull-left" id="formula"><?php echo $idioma['PromedioPorDefecto'] ?></a>
                 <a class="btn btn-mini pull-right" id="habilitarmodificarformula"><i class="icon-pencil"></i></a>
@@ -115,4 +115,5 @@ if (!empty($_POST['CodDocente'])) {
 <script language="javascript" type="text/javascript">
     var GuardarConfiguracionCasilleros = "<?php echo $idioma['GuardarConfiguracionCasilleros'] ?>";
     var NoSePodraModificar = "<?php echo $idioma['NoSePodraModificar'] ?>";
+    var DebeSeleccionarCursoMateria = "<?php echo $idioma['DebeSeleccionarCursoMateria'] ?>";
 </script>

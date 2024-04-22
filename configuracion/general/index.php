@@ -373,6 +373,22 @@ include_once($folder . "cabecerahtml.php");
                         </select></td>
                 </tr>
                 <tr>
+                    <td><?php echo $idioma['VisibleRegistroNotaHabilitado'] ?><div class="pequeno"><?php echo $idioma['VisibleRegistroNotaHabilitadoE'] ?></div>
+                    </td>
+                    <td><select class="span12" name="VisibleRegistroNotaHabilitado">
+                            <option value="0" <?php echo (dato("VisibleRegistroNotaHabilitado")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo (dato("VisibleRegistroNotaHabilitado")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><?php echo $idioma['VisibleNotasPPFFAlumno'] ?><div class="pequeno"><?php echo $idioma['VisibleNotasPPFFAlumnoE'] ?></div>
+                    </td>
+                    <td><select class="span12" name="VisibleNotasPPFFAlumno">
+                            <option value="0" <?php echo (dato("VisibleNotasPPFFAlumno")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo (dato("VisibleNotasPPFFAlumno")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select></td>
+                </tr>
+                <tr>
                     <td><?php echo $idioma['PeriodoNotaHabilitado'] ?><div class="pequeno"><?php echo $idioma['PeriodoNotaHabilitadoE'] ?></div>
                     </td>
                     <td><select class="span12" name="PeriodoNotaHabilitado">

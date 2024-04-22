@@ -23,7 +23,7 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 			global $mat, $CodPeriodo;
 			global $Etiquetas, $idioma;
 			$this->CuadroCabecera(13, $idioma['Curso'] . ":", 35, $cur['Nombre']);
-			$this->CuadroCabecera(15, $idioma['Materia'] . ":", 35, $mat['Nombre']);
+			$this->CuadroCabecera(15, $idioma['Materia'] . ":", 65, $mat['Nombre']);
 			$this->CuadroCabecera(25, ($cur['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre']) . ":", 10, $CodPeriodo);
 			$this->Pagina();
 			$this->ln();

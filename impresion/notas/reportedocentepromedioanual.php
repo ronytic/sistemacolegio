@@ -24,7 +24,7 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 			$Periodo = $curso['Bimestre'] ? $idioma['Bimestre'] : $idioma['Trimestre'];
 			$Periodo = recortarTexto($Periodo, 4, "");
 			$this->CuadroCabecera(13, $idioma['Curso'] . ":", 35, $curso['Nombre']);
-			$this->CuadroCabecera(15, $idioma['Materia'] . ":", 35, $mat['Nombre']);
+			$this->CuadroCabecera(15, $idioma['Materia'] . ":", 65, $mat['Nombre']);
 			$this->Pagina();
 			$this->ln();
 			$this->TituloCabecera(5, "N");
@@ -55,8 +55,6 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 	$docmateriacurso = array_shift($docmateriacurso);
 
 	$Sexo = $docmateriacurso['SexoAlumno'];
-	$cnf = ($config->mostrarConfig("NotaReprobacion"));
-	$notaReprobado = $cnf['Valor'];
 
 	$pdf = new PDF("P", "mm", "letter"); //612,792
 	$pdf->AddPage();
@@ -67,6 +65,10 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 		for ($i = 1; $i <= $curso['CantidadEtapas']; $i++) {
 			$cas = $casilleros->mostrarMateriaCursoSexoTrimestre($CodMateria, $CodCurso, $Sexo, $i);
 			$cas = array_shift($cas);
+			if (is_null($cas)) {
+				$regNotaFinal = 0;
+				continue;
+			}
 			$CodCasilleros = $cas['CodCasilleros'];
 			${"regNota" . $i} = $registroNotas->mostrarRegistroNotas($CodCasilleros, $al['CodAlumno'], $i);
 			${"regNota" . $i} = array_shift(${"regNota" . $i});
@@ -83,7 +85,13 @@ if (!empty($_GET) && md5("lock") == $_GET['lock']) {
 		$pdf->CuadroNombreSeparado(24, $al['Paterno'], 24, $al['Materno'], 35, $al['Nombres'], 1, $relleno);
 
 		for ($i = 1; $i <= $curso['CantidadEtapas']; $i++) {
-			$pdf->CuadroCuerpo(15, ${"regNota" . $i}['NotaFinal'], $relleno, "C");
+			if (isset(${"regNota" . $i}['NotaFinal'])) {
+				$notaFinal = ${"regNota" . $i}['NotaFinal'];
+			} else {
+				$notaFinal = 0;
+			}
+
+			$pdf->CuadroCuerpo(15, $notaFinal, $relleno, "C");
 		}
 		//$pdf->CuadroCuerpo(15,${"regNota".$i}['NotaFinal'],$relleno,"C");
 		//$pdf->CuadroCuerpo(15,$regNota2['NotaFinal'],$relleno,"C");

@@ -19,8 +19,10 @@ if (!empty($_POST)) {
 	$NumeroNota = $_POST['NumeroNota'];
 	$Nota = $_POST['Nota'];
 	$TipoNota = $_POST['TipoNota'];
-	//$al=array_shift($alumno->mostrarDatos($CodAlumno));
-	//$cur=array_shift($curso->mostrarCurso($al['CodCurso']));
+	$al = $alumno->mostrarTodoDatos($CodAlumno);
+	$al = array_shift($al);
+	$cur = $curso->mostrarCurso($al['CodCurso']);
+	$cur = array_shift($cur);
 
 	$trimestre = $casillas['Trimestre'];
 	$Nota = trim($Nota);
@@ -46,7 +48,7 @@ if (!empty($_POST)) {
 	//obtenemos formulafinalpromedio
 	//echo $docMateria['FormulaCalificaciones'];
 	//print_r($_POST);
-	if ($TipoNota == "avanzado") {
+	if ($cur['Bimestre'] && $TipoNota == "avanzado") {
 		//print_r($valuesNotas);
 		$PD1 = round((($valuesNotas['casilla1'] + $valuesNotas['casilla2'] + $valuesNotas['casilla3']) / 3) * 0.2);
 		//$P1=(($valuesNotas['casilla7']+$valuesNotas['casilla8'])/2);
@@ -57,6 +59,16 @@ if (!empty($_POST)) {
 		$PB = $PD1 + $PD2 + $PD3 + $PD4;
 		//echo $PD1;
 		$notaResultado = $PB;
+	} elseif (!$cur['Bimestre'] && $TipoNota == "avanzado") {
+		$PD1 = round((($valuesNotas['casilla1'])) * 0.05);
+		$PD2 = round((($valuesNotas['casilla3'] + $valuesNotas['casilla4'] + $valuesNotas['casilla5'] + $valuesNotas['casilla6']) / 4) * 0.45);
+		$PD3 = round((($valuesNotas['casilla8'] + $valuesNotas['casilla9'] + $valuesNotas['casilla10'] + $valuesNotas['casilla11']) / 4) * 0.40);
+		$PD4 = round((($valuesNotas['casilla13'])) * 0.05);
+		$PD5 = round((($valuesNotas['casilla15'])) * 0.05);
+
+		$PB = $PD1 + $PD2 + $PD3 + $PD4 + $PD5;
+		//echo $PD1;
+		$notaResultado = $PB;
 	} else {
 		$notaResultado = $fn->polaco($casillas['FormulaCalificaciones'], $valuesNotas);
 	}
@@ -64,7 +76,7 @@ if (!empty($_POST)) {
 		if ($casillas['Dps'] == 1) {
 			$notaResultado = 22; // Sacamos nota Minima para cada Uno
 		} else {
-			$notaResultado = 27; // Sacamos nota Minima para cada Uno	sui no tiene dps
+			$notaResultado = 27; // Sacamos nota Minima para cada Uno	si no tiene dps
 		}
 	}
 	if ($casillas['Dps'] == 1) { ///Condicion para la nota de 35
@@ -76,11 +88,16 @@ if (!empty($_POST)) {
 			$notaResultado = 36;
 		}
 	}
-	if ($TipoNota == "avanzado") {
+	if ($cur['Bimestre'] && $TipoNota == "avanzado") {
 		$notafinal = $notaResultado;
 		$valuesNotaDps = array("Nota4" => $PD1, "Nota10" => $PD2, "Nota15" => $PD3, "Nota20" => $PD4, "Resultado" => $notaResultado, 'Dps' => "0", 'NotaFinal' => $notafinal);
 		$regNota->actualizarNota($valuesNotaDps, $Where);
-		$resultado = array("TipoNota" => $TipoNota, "PD1" => $PD1, "PD2" => $PD2, "PD3" => $PD3, "PD4" => $PD4, "CodAlumno" => $CodAlumno, "Resultado" => $notaResultado, 'Dps' => "0", "NotaFinal" => $notafinal);
+		$resultado = array("Bimestre" => $cur['Bimestre'], "TipoNota" => $TipoNota, "PD1" => $PD1, "PD2" => $PD2, "PD3" => $PD3, "PD4" => $PD4, "CodAlumno" => $CodAlumno, "Resultado" => $notaResultado, 'Dps' => "0", "NotaFinal" => $notafinal);
+	} elseif (!$cur['Bimestre'] && $TipoNota == "avanzado") {
+		$notafinal = $notaResultado;
+		$valuesNotaDps = array("Nota2" => $PD1, "Nota7" => $PD2, "Nota12" => $PD3, "Nota14" => $PD4, "Nota16" => $PD5, "Resultado" => $notaResultado, 'Dps' => "0", 'NotaFinal' => $notafinal);
+		$regNota->actualizarNota($valuesNotaDps, $Where);
+		$resultado = array("Bimestre" => $cur['Bimestre'], "TipoNota" => $TipoNota, "PD1" => $PD1, "PD2" => $PD2, "PD3" => $PD3, "PD4" => $PD4, "PD5" => $PD5, "CodAlumno" => $CodAlumno, "Resultado" => $notaResultado, 'Dps' => "0", "NotaFinal" => $notafinal);
 	} else {
 		//echo $docMateria['FormulaCalificaciones'];
 		//imprimimos resultados

@@ -16,10 +16,7 @@ $config = new config;
 $CodDocente = $_SESSION['CodUsuarioLog'];
 $_SESSION['CodDocente'] = $CodDocente;
 
-$cnf = ($config->mostrarConfig("TotalPeriodo"));
-$TotalPeriodo = $cnf['Valor'];
-$cnf = ($config->mostrarConfig("TrimestreActual"));
-$trimestreActual = $cnf['Valor']
+$TotalPeriodo = ($config->mostrarConfig("TotalPeriodo", 1));
 ?>
 <?php include_once($folder . "cabecerahtml.php"); ?>
 <script language="javascript" type="text/javascript" src="../../js/notas/cambiarnombre.js"></script>

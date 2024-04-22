@@ -10,7 +10,7 @@ if (!empty($_POST)) {
 	<a class="btn btn-danger" href="<?php echo $url ?>" target="_blank"><?php echo $idioma['AbrirOtraVentana'] ?></a>
 	<hr />
 	<?php echo $idioma['ReporteImpresion'] ?>, <?php echo $idioma['TamanoCarta'] ?>
-	<iframe src="<?php echo $url; ?>" width="100%" height="800"></iframe>
+	<iframe src="<?php echo $url; ?>" width="100%" height="800" frameborder="0"></iframe>
 <?php
 }
 ?>
