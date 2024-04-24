@@ -413,23 +413,23 @@ foreach ($a as $al) {
 				$protegidodimension = 1;
 				switch ($j) {
 					case 2: {
-							$no = "=ROUND(AVERAGE(E$x:E$x)*0.05,0)";
+							$no = "=IFERROR(ROUND(AVERAGE(E$x:E$x)*0.05,0),\"\")";
 						}
 						break;
 					case 7: {
-							$no = "=ROUND(AVERAGE(G$x:J$x)*0.45,0)";
+							$no = "=IFERROR(ROUND(AVERAGE(G$x:J$x)*0.45,0),\"\")";
 						}
 						break;
 					case 12: {
-							$no = "=ROUND(AVERAGE(L$x:O$x)*0.40,0)";
+							$no = "=IFERROR(ROUND(AVERAGE(L$x:O$x)*0.40,0),\"\")";
 						}
 						break;
 					case 14: {
-							$no = "=ROUND(AVERAGE(Q$x:Q$x)*0.05,0)";
+							$no = "=IFERROR(ROUND(AVERAGE(Q$x:Q$x)*0.05,0),\"\")";
 						}
 						break;
 					case 16: {
-							$no = "=ROUND(AVERAGE(S$x:S$x)*0.05,0)";
+							$no = "=IFERROR(ROUND(AVERAGE(S$x:S$x)*0.05,0),\"\")";
 						}
 						break;
 				}
@@ -479,7 +479,7 @@ foreach ($a as $al) {
 		}
 	}
 	$colorfondo = $i % 2 == 0 ? 'FFE699' : 'FFFFFF';
-	$resultadoformula = "=ROUND(" . convertir($formula, "E", $x) . ",0)";
+	$resultadoformula = "=IFERROR(ROUND(" . convertir($formula, "E", $x) . ",0),\"\")";
 	//NotaResultado
 	$col = adicionar($col, 1);
 	$nry = $col;
@@ -501,7 +501,7 @@ foreach ($a as $al) {
 	//Nota Final
 	$col = adicionar($col, 1);
 	$nf = $col;
-	$ff = "=" . $nry . $x . "+" . $ndps . $x;
+	$ff = "=IFERROR(" . $nry . $x . "+" . $ndps . $x . ",0)";
 	$doc->getActiveSheet()->setCellValue($col . $x, $ff)
 		->getStyle($col . $x)->applyFromArray(estilo(14, "000000", "B", $colorfondo, "right", "center", 'thin', '000000'));
 	$validaNotaFinal = '[Red][<' . $NotaAprobacion . ']#;[Black][>=' . $NotaAprobacion . ']#;';
