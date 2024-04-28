@@ -850,6 +850,7 @@ $idioma['ActualizarBaseDatosInternet'] = "Update INTERNET Database";
 $idioma['Mensaje'] = "Message";
 $idioma['Resaltar'] = "Highlight";
 $idioma['NuevoMensaje'] = "New message";
+$idioma['Imagen'] = "Image";
 $idioma['Ip'] = "Ip";
 $idioma['Agente'] = "Browser Agent";
 $idioma['Lenguaje'] = "Language";

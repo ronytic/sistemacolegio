@@ -849,6 +849,7 @@ $idioma['NoExisteAccesos'] = "No existen accesos al sistema para la búsqueda re
 $idioma['ActualizarBaseDatosInternet'] = "Actualizar Base de Datos de INTERNET";
 $idioma['Mensaje'] = "Mensaje";
 $idioma['Resaltar'] = "Resaltar";
+$idioma['Imagen'] = "Imagen";
 $idioma['NuevoMensaje'] = "Nuevo Mensaje";
 $idioma['Ip'] = "Ip";
 $idioma['Agente'] = "Agente Navegador";
