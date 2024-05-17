@@ -21,7 +21,7 @@ if (isset($_POST)) {
                     <th><?php echo $idioma['Telefono'] ?></th>
                     <th><?php echo $idioma['Celular'] ?></th>
                 <?php } elseif ($listado == "DatosFormacionProfesional") { ?>
-                    <th><?php echo $idioma['Rda'] ?></th>
+                    <th><?php echo $idioma['RDA'] ?></th>
                     <th><?php echo $idioma['Universidad'] ?></th>
                     <th><?php echo $idioma['AñoIngreso'] ?></th>
                     <th><?php echo $idioma['AñoEgreso'] ?></th>
@@ -32,6 +32,9 @@ if (isset($_POST)) {
                     <th><?php echo $idioma['CargaHoraria'] ?></th>
                     <th><?php echo $idioma['Antiguedad'] ?></th>
                     <th><?php echo $idioma['Categoria'] ?></th>
+                <?php } elseif ($listado == "DatosAccesoParaSistema") { ?>
+                    <th><?php echo $idioma['Usuario'] ?></th>
+                    <th><?php echo $idioma['Contrasena'] ?></th>
                 <?php } ?>
             </tr>
         </thead>
@@ -52,7 +55,7 @@ if (isset($_POST)) {
                     <td><?php echo capitalizar($doc['Telefono']) ?></td>
                     <td><?php echo capitalizar($doc['Celular']) ?></td>
                 <?php } elseif ($listado == "DatosFormacionProfesional") { ?>
-                    <td><?php echo capitalizar($doc['Rda']) ?></td>
+                    <td><?php echo capitalizar($doc['RDA']) ?></td>
                     <td><?php echo capitalizar($doc['DPUniversidad']) ?></td>
                     <td><?php echo capitalizar($doc['DPAnoIngreso']) ?></td>
                     <td><?php echo capitalizar($doc['DPAnoEgreso']) ?></td>
@@ -63,6 +66,9 @@ if (isset($_POST)) {
                     <td><?php echo capitalizar($doc['DTCargaHoraria']) ?></td>
                     <td><?php echo capitalizar($doc['DTAntiguedad']) ?></td>
                     <td><?php echo capitalizar($doc['DTCategoria']) ?></td>
+                <?php } elseif ($listado == "DatosAccesoParaSistema") { ?>
+                    <td><?php echo capitalizar($doc['Usuario']) ?></td>
+                    <td><?php echo capitalizar($doc['Password']) ?></td>
                 <?php } ?>
             </tr>
         <?php
