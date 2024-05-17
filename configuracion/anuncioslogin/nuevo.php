@@ -21,6 +21,7 @@ if (isset($_POST)) {
             <tr>
                 <td><?php echo $idioma['Imagen'] ?><br>
                     <input type="file" name="Imagen" accept="image/*" class="span12">
+                </td>
             </tr>
             <tr>
                 <td><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>

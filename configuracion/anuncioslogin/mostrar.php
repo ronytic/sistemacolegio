@@ -22,8 +22,11 @@ if (count($men)) {
 			<tr>
 				<td class="der"><?php echo $i ?></td>
 				<td><?php echo $m['Mensaje'] ?>
+					<br>
 					<?php if ($m['Imagen'] != "") { ?>
-						<img src="../../<?php echo $m['Imagen'] ?>" class="img-polaroid" />
+						<a href="../../<?php echo $m['Imagen'] ?>" class="" target="_blank">
+							<img src="../../<?php echo $m['Imagen'] ?>" class="img-polaroid" height="100" style="height:200px" />
+						</a>
 				</td>
 			<?php } ?>
 			<td class="der"><?php echo $m['Resaltar'] ? $idioma['Si'] : $idioma['No'] ?></td>

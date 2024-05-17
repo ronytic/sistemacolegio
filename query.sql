@@ -16,4 +16,4 @@ ALTER TABLE materias
 MODIFY COLUMN NombreAlterno2 varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL;
 -- Date: 2024-04-25 00:00
 ALTER TABLE anuncioslogin
-ADD COLUMN Imagen LONGTEXT;
+ADD COLUMN Imagen LONGTEXT after Resaltar;

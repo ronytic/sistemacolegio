@@ -18,11 +18,6 @@ if (!empty($_POST['CodAnunciosLogin'])) {
 			<tr>
 				<td><?php echo $idioma['Mensaje'] ?><br>
 					<textarea value="" name="Mensaje" class="span12" placeholder="" rows="5"><?php echo $men['Mensaje'] ?></textarea>
-					<?php if ($men['Imagen'] != "") { ?>
-						<img src="../../<?php echo $men['Imagen'] ?>" class="img-polaroid" />
-					<?php } ?>
-					<input type="file" name="Imagen" accept="image/*" class="span12">
-
 				</td>
 			</tr>
 			<tr>
@@ -30,7 +25,14 @@ if (!empty($_POST['CodAnunciosLogin'])) {
 					<?php campo("Resaltar", "select", array("1" => $idioma["Si"], "0" => $idioma["No"]), "span12", 1, "", 0, "", $men['Resaltar']) ?>
 				</td>
 			</tr>
-
+			<tr>
+				<td><?php echo $idioma['Imagen'] ?><br>
+					<?php if ($men['Imagen'] != "") { ?>
+						<img src="../../<?php echo $men['Imagen'] ?>" class="img-polaroid" />
+					<?php } ?>
+					<input type="file" name="Imagen" accept="image/*" class="span12">
+				</td>
+			</tr>
 			<tr>
 				<td><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
 			</tr>
