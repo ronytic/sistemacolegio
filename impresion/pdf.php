@@ -165,7 +165,7 @@ class PPDF extends FPDF_Protection
 		// Arial italic 8
 		$BordePie = 0;
 		$this->Fuente("I", 7.5);
-		$this->Cell($this->ancho, 0, "", 1, 1);
+		$this->Cell($this->ancho + 5, 0, "", 1, 1);
 		if ($this->ancho <= 200) {
 
 			$Resto = 35;
@@ -173,14 +173,14 @@ class PPDF extends FPDF_Protection
 			$DatosReporteGenerado = utf8_decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " ";
 			$this->Cell(60, 3, $DatosReporteGenerado, $BordePie, 0, "L");
 
+			$this->Cell((round(($this->ancho - 50) / 2) + 55 - 0), 3, utf8_decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
+			$this->ln();
+			$this->Cell((round(($this->ancho - 50) / 2) + 0), 3, $idioma['Por'] . ": " . $DatosUsuario, $BordePie, 0, "L");
 
 			$this->Fuente("I", 8);
 			$this->Cell((round(($this->ancho - 50) / 2) + 30 - $Resto), 3, utf8_decode($lema), $BordePie, 0, "C");
 			$this->Fuente("I", 7);
 
-			$this->Cell((round(($this->ancho - 50) / 2) + 0), 3, utf8_decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
-			$this->ln();
-			$this->Cell((round(($this->ancho - 50) / 2) + 55), 3, $idioma['Por'] . ": " . $DatosUsuario, $BordePie, 0, "L");
 			$this->Cell((round(($this->ancho - 50) / 2) + 00), 3, "Desarrollado por Ronald Nina", $BordePie, 0, "R");
 		} else {
 
@@ -202,6 +202,7 @@ class PPDF extends FPDF_Protection
 			if ($this->CurOrientation == "P" || $this->OrientacionObligada == "L") {
 				$this->Cell((round(($this->ancho - 50) / 2) + 0), 3, utf8_decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
 				$this->ln();
+
 				$this->Cell((round(($this->ancho - 50) / 2) + 50), 3, $idioma['Por'] . ": " . $DatosUsuario, $BordePie, 0, "L");
 				$this->Cell((round(($this->ancho - 50) / 2) + 00), 3, "Desarrollado por Ronald Nina", $BordePie, 0, "R");
 			} else {
