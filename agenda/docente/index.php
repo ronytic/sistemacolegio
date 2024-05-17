@@ -31,7 +31,7 @@ $_SESSION['CodDocente'] = $CodDocente;
             <?php foreach ($docmateriacurso->mostrarDocenteOrdenCurso($CodDocente) as $cur) {
                 $c = $curso->mostrarCurso($cur['CodCurso']);
                 $c = $c = array_shift($c);
-                ?>
+            ?>
                 <option value="<?php echo $c['CodCurso']; ?>"><?php echo $c['Nombre']; ?></option>
             <?php } ?>
         </select>
@@ -43,7 +43,7 @@ $_SESSION['CodDocente'] = $CodDocente;
             <?php foreach ($docmateriacurso->mostrarDocenteMateria($CodDocente) as $docMat) {
                 $m = $materias->mostrarMateria($docMat['CodMateria']);
                 $m = array_shift($m);
-                ?>
+            ?>
                 <option value="<?php echo $m['CodMateria']; ?>"><?php echo $m['Nombre']; ?></option>
             <?php } ?>
         </select>

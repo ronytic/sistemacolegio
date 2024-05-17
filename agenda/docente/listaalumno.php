@@ -13,7 +13,7 @@ if (!empty($_POST)) {
 	$dmc = array_shift($dmc);
 	$Sexo = $dmc['SexoAlumno'];
 	foreach ($alumnos->mostrarAlumnosCurso($CodCurso, $Sexo) as $al) {
-		?>
+?>
 		<option value="<?php echo $al['CodAlumno']; ?>"><?php echo capitalizar($al['Paterno']); ?> <?php echo capitalizar($al['Materno']); ?> <?php echo capitalizar($al['Nombres']); ?></option>
 <?php
 	}

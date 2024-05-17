@@ -16,6 +16,7 @@ $TotalPeriodo = ($config->mostrarConfig("TotalPeriodo", 1));
 
 $folder = "../../";
 $titulo = "NAsesor";
+$tipo = '';
 include_once("../../cabecerahtml.php");
 ?>
 <script language="javascript" type="text/javascript" src="../../js/docente/asesor.js"></script>
@@ -26,7 +27,7 @@ include_once("../../cabecerahtml.php");
     </div>
     <div class="box-content">
         <?php if (count($ase)) {
-            ?>
+        ?>
             <form class="formulario" action="verreporte.php" method="post">
                 <table class="table table-bordered">
                     <tr>
@@ -34,9 +35,9 @@ include_once("../../cabecerahtml.php");
                             <?php echo $idioma['Curso'] ?>:
                             <select name="CodCurso" class="span12" id="CodCurso">
                                 <?php foreach ($ase as $a) {
-                                        $cur = $curso->mostrarCurso($a['CodCurso']);
-                                        $cur = array_shift($cur);
-                                        ?>
+                                    $cur = $curso->mostrarCurso($a['CodCurso']);
+                                    $cur = array_shift($cur);
+                                ?>
                                     <option value="<?php echo $a['CodCurso'] ?>"><?php echo $cur['Nombre'] ?></option>
                                 <?php } ?>
                             </select>
@@ -72,7 +73,7 @@ include_once("../../cabecerahtml.php");
             </form>
         <?php
         } else {
-            ?>
+        ?>
             <div class="alert alert-error"><?php echo $idioma['NoEsAsesor'] ?></div>
         <?php
         } ?>

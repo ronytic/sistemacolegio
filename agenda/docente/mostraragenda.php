@@ -103,8 +103,8 @@ if (!empty($_POST)) {
 			$al = $alumno->mostrarDatosPersonales($a['CodAlumno']);
 			$al = array_shift($al);
 
+			$tipo = '';
 			if ($cur['Bimestre']) {
-				$tipo = '';
 				if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre1)) {
 					$tipo = 1;
 				}
@@ -134,14 +134,14 @@ if (!empty($_POST)) {
 			<tr class="contenido">
 				<td><?php switch ($tipo) {
 						case 1: { ?><div class="cverde" title="<?php echo $mensaje ?>"></div><?php }
-																										break;
-																									case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>"></div><?php }
-																																															break;
-																																														case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>"></div><?php }
-																																																																			break;
-																																																																		case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>"></div><?php }
-																																																																																							break;
-																																																																																					} ?><?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>"></div><?php } ?></td>
+																							break;
+																						case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>"></div><?php }
+																																									break;
+																																								case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>"></div><?php }
+																																																															break;
+																																																														case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>"></div><?php }
+																																																																																			break;
+																																																																																	} ?><?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>"></div><?php } ?></td>
 				<td><?php echo capitalizar($al['Paterno'] . " " . acortarPalabra($al['Nombres'])) ?></td>
 				<td><small><?php echo $o['Nombre']; ?></small></td>
 				<td><?php echo fecha2Str($a['Fecha']); ?></td>
