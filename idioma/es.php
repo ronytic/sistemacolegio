@@ -160,6 +160,14 @@ $idioma['PagarCuotas'] = "Pagar Cuotas";
 $idioma['ManejarCuotas'] = "Manejar Cuotas";
 $idioma['ManejarTareas'] = "Manejar Tareas";
 
+$idioma['Lunes'] = "Lunes";
+$idioma['Martes'] = "Martes";
+$idioma['Miercoles'] = "Miércoles";
+$idioma['Jueves'] = "Jueves";
+$idioma['Viernes'] = "Viernes";
+$idioma['Sabado'] = "Sábado";
+$idioma['Domingo'] = "Domingo";
+
 $idioma['DebeCancelarMensualidades'] = "Debe de Cancelar Mensualidades para ver este sector del Sistema, Muchas Gracias";
 $idioma['Modificar'] = "Modificar";
 $idioma['Configuracion'] = "Configuración";

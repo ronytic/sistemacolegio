@@ -72,10 +72,10 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 	$pdf->Ln();
 	$pdf->Ln();
 	$i = 0;
-	$pdf->CuadroCuerpo(5, "N", 1, "R", 1, "", "B");
-	$pdf->CuadroCuerpo(50, $idioma['Curso'], 1, "C", 1, "", "B");
-	$pdf->CuadroCuerpo(50, $idioma['Materia'], 1, "C", 1, "", "B");
-	$pdf->CuadroCuerpo(50, $idioma['Alumnos'], 1, "C", 1, "", "B");
+	$pdf->CuadroCuerpo(5, "N", 1, "R", 1, 9, "B");
+	$pdf->CuadroCuerpo(40, $idioma['Curso'], 1, "C", 1, 9, "B");
+	$pdf->CuadroCuerpo(60, $idioma['Materia'], 1, "C", 1, 9, "B");
+	$pdf->CuadroCuerpo(50, $idioma['Alumnos'], 1, "C", 1, 9, "B");
 	$pdf->Ln();
 	foreach ($docentemateriacurso->mostrarDocenteGrupo($CodDocente, "") as $dmc) {
 		$i++;
@@ -99,8 +99,8 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 				break;
 		}
 		$pdf->CuadroCuerpo(5, $i, $relleno, "R", 1);
-		$pdf->CuadroCuerpo(50, $cur['Nombre'], $relleno, "", 1);
-		$pdf->CuadroCuerpo(50, $mat['Nombre'], $relleno, "", 1);
+		$pdf->CuadroCuerpo(40, $cur['Nombre'], $relleno, "", 1);
+		$pdf->CuadroCuerpo(60, $mat['Nombre'], $relleno, "", 1);
 		$pdf->CuadroCuerpo(50, $TextoSexo, $relleno, "", 1);
 		$pdf->ln();
 	}

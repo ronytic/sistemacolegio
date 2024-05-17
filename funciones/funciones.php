@@ -286,6 +286,20 @@ function sacarToolTip($Texto, $Etiqueta = "", $Tipo = "I", $Cantidad = 3)
       <span title="<?php echo $Texto ?>"><?php echo $Tipo == "0" ? $T : ($Tipo == "I" ? sacarIniciales($T) : recortarTexto($T, $Cantidad, "")); ?></span>
    <?php
 }
+function diaSemana($dia)
+{
+   global $idioma;
+   $dias = array(
+      1 => $idioma["Lunes"],
+      2 => $idioma["Martes"],
+      3 => $idioma["Miercoles"],
+      4 => $idioma["Jueves"],
+      5 => $idioma["Viernes"],
+      6 => $idioma["Sabado"],
+      7 => $idioma["Domingo"]
+   );
+   return $dias[$dia];
+}
 function recortarTexto($texto, $limite = 100, $terminador = "...")
 {
    $texto = trim($texto);
