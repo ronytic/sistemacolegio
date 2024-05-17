@@ -206,7 +206,7 @@ class PPDF extends FPDF_Protection
 				$this->Cell((round(($this->ancho - 50) / 2) + 50), 3, $idioma['Por'] . ": " . $DatosUsuario, $BordePie, 0, "L");
 				$this->Cell((round(($this->ancho - 50) / 2) + 00), 3, "Desarrollado por Ronald Nina", $BordePie, 0, "R");
 			} else {
-				$this->Cell((round(($this->ancho - 50) / 2) - 5), 3, utf8_decode($idioma['TituloSistema'] . " - Desarrollado por Ronald Nina"), $BordePie, 0, "R");
+				$this->Cell((round(($this->ancho - 50) / 2) + 1), 3, utf8_decode($idioma['TituloSistema'] . " - Desarrollado por Ronald Nina"), $BordePie, 0, "R");
 			}
 
 			//$this->Cell(60,4,utf8_decode($idioma['ReporteGenerado']).": ".date('d-m-Y H:i:s'),0,0,"R");
