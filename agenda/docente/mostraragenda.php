@@ -92,7 +92,7 @@ if (!empty($_POST)) {
 				<th style="min-width:15px"></th>
 				<th><?php echo $idioma['Alumnos'] ?></th>
 				<th><?php echo $idioma['Observacion'] ?></th>
-				<th width="60"><?php echo $idioma['Fecha'] ?></th>
+				<th width="80"><?php echo $idioma['Fecha'] ?></th>
 				<th><?php echo $idioma['Detalle'] ?></th>
 			</tr>
 		</thead>
@@ -132,16 +132,26 @@ if (!empty($_POST)) {
 			}
 		?>
 			<tr class="contenido">
-				<td><?php switch ($tipo) {
-						case 1: { ?><div class="cverde" title="<?php echo $mensaje ?>"></div><?php }
-																							break;
-																						case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>"></div><?php }
-																																									break;
-																																								case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>"></div><?php }
-																																																															break;
-																																																														case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>"></div><?php }
-																																																																																			break;
-																																																																																	} ?><?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>"></div><?php } ?></td>
+				<td>
+					<?php switch ($tipo) {
+						case 1: { ?>
+								<div class="cverde" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+							<?php }
+							break;
+						case 2: { ?>
+								<div class="cazul" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+							<?php }
+							break;
+						case 3: { ?>
+								<div class="cnaranja" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+							<?php }
+							break;
+						case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+					<?php }
+							break;
+					} ?>
+					<?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>" style="width:5px;height:18px"></div><?php } ?>
+				</td>
 				<td><?php echo capitalizar($al['Paterno'] . " " . acortarPalabra($al['Nombres'])) ?></td>
 				<td><small><?php echo $o['Nombre']; ?></small></td>
 				<td><?php echo fecha2Str($a['Fecha']); ?></td>

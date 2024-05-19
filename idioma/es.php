@@ -479,6 +479,9 @@ $idioma['DireccionPaginaWeb'] = "Dirección de la Página Web";
 $idioma['ReInscribir'] = "ReInscribir";
 $idioma['ImprimirTarjetaCuotasCombinada'] = "Tarjeta de Cuotas Combinada";
 $idioma['RegistrarFacturaCombinada'] = "Factura Combinada";
+$idioma['RegistrarObservacion'] = "Registrar Observación";
+$idioma['FechaObservacion'] = "Fecha de Observación";
+$idioma['AgendaDocenteCambiarFechaRegistro'] = "Cambiar Fecha de Registro en la Agenda del Docente";
 //Pdf
 $idioma['Pagina'] = "Página";
 $idioma['GeneradoPor'] = "Generado Por";

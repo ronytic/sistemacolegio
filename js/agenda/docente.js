@@ -8,7 +8,7 @@ $(document).ready(function () {
 	buscadorLista($("#tobservacion"), $("select[name=Observacion]"));
 	CodCurso = $("select[name=Curso]").val();
 	CodMateria = $("select[name=Materia]").val();
-	$("#fecha").datepicker({ dateFormat: 'dd-mm-yy', maxDate: "0 D" });
+
 	$.post("listaalumno.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria }, alumnos);
 	$.post("mostrarAgenda.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria, 'rand': Math.random() }, reporteAgenda);
 	$('select[name=Curso]').change(function () {

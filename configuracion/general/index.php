@@ -302,6 +302,13 @@ include_once($folder . "cabecerahtml.php");
                         </select></td>
                 </tr>
                 <tr>
+                    <td><?php echo $idioma['AgendaDocenteCambiarFechaRegistro'] ?></td>
+                    <td><select class="span12" name="AgendaDocenteCambiarFechaRegistro">
+                            <option value="0" <?php echo (dato("AgendaDocenteCambiarFechaRegistro")) == "0" ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo (dato("AgendaDocenteCambiarFechaRegistro")) == "1" ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select></td>
+                </tr>
+                <tr>
                     <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
                 </tr>
             </table>
