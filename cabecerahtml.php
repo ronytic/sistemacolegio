@@ -37,19 +37,30 @@ $noti3 = $notificacionesi->listarmensajes($_SESSION['Nivel'], 3);
 /*Fin de Notificaciones*/
 ?>
 <?php
-/*Codigo para ver qen que menu nos encontramos*/
+/*Codigo para ver en que menu nos encontramos*/
 $rurl = str_replace("index.php", "", $_SERVER['SCRIPT_NAME']);
-$rurl = str_replace("/" . $directory, "", $rurl);
+if ($directory != '') {
+	$rurl = str_replace("/" . $directory, "", $rurl);
+}
 $rurl = explode("/", $rurl);
-$rmenu = array_shift($rurl) . "/";
+if ($directory != '') {
+	$rmenu = array_shift($rurl) . "/";
+} else {
+	$rmenu = $rurl[1] . "/";
+}
+// var_dump($rmenu);
 
 $rsubmenu = implode("/", $rurl);
-//echo $rmenu;
 $textomenu = "";
 $textosubmenu = "";
 $urlSubMenu = explode("/", $rsubmenu);
-$urlSubMenu = $urlSubMenu[0] . "/";
-//echo $urlSubMenu;
+if ($directory != '') {
+	$urlSubMenu = $urlSubMenu[0] . "/";
+} else {
+	if (isset($urlSubMenu[2])) {
+		$urlSubMenu = $urlSubMenu[2] . "/";
+	}
+}
 /*Fin de Obtenemos para el Menu*/
 $Nivel = $_SESSION['Nivel'];
 $CodUsuario = $_SESSION['CodUsuarioLog'];

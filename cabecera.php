@@ -118,7 +118,7 @@ switch ($Nivel) {
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked">
 						<li class="nav-header hidden-tablet"><?php echo $idioma['Menu'] ?></li>
-						<li><a href="<?php echo $folder; ?>index.php"><i class="icon-home"></i><span> <?php echo $idioma['Inicio'] ?></span></a>
+						<li class="<?php echo $rmenu == '/' ? 'active' : '' ?>"><a href="<?php echo $folder; ?>index.php"><i class="icon-home"></i><span> <?php echo $idioma['Inicio'] ?></span></a>
 						</li>
 						<?php
 						foreach ($menu->mostrar($Nivel, "Lateral") as $m) {
@@ -127,7 +127,9 @@ switch ($Nivel) {
 												$textomenu = $idioma[$m['Nombre']];
 												echo 'active';
 											} ?>">
-								<a href="#"><i class="<?php echo $m['Imagen']; ?> "></i><span class=""> <?php echo $idioma[$m['Nombre']]; ?></span> <span class="pull-right"><i class="icon-chevron-down abrir" rel="<?php echo $m['Url'] ?>"></i></span></a>
+								<a href="#">
+									<i class="<?php echo $m['Imagen']; ?> "></i>
+									<span class=""> <?php echo $idioma[$m['Nombre']]; ?></span> <span class="pull-right"><i class="icon-chevron-down abrir" rel="<?php echo $m['Url'] ?>"></i></span></a>
 								<?php
 								$subm = $submenu->mostrar($Nivel, $m['CodMenu']);
 								if (count($subm)) {
