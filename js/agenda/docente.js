@@ -10,7 +10,8 @@ $(document).ready(function () {
 	CodMateria = $("select[name=Materia]").val();
 
 	$.post("listaalumno.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria }, alumnos);
-	$.post("mostrarAgenda.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria, 'rand': Math.random() }, reporteAgenda);
+	// $.post("mostraragenda.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria, 'rand': Math.random() }, reporteAgenda);
+	mostrarAgenda();
 	$('select[name=Curso]').change(function () {
 		CodCurso = $(this).val();
 		$.post("listaalumno.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria }, alumnos);
