@@ -26,7 +26,7 @@ $CodDocente = $_SESSION['CodUsuarioLog'];
 $_SESSION['CodDocente'] = $CodDocente;
 ?>
 <?php include_once($folder . "cabecerahtml.php"); ?>
-<script language="javascript" type="text/javascript" src="../../js/agenda/docente.js"></script>
+<script language="javascript" type="text/javascript" src="../../js/agenda/docente.js?1"></script>
 <script language="javascript">
     $(document).ready(function(e) {
         <?php if ($AgendaDocenteCambiarFechaRegistro) : ?>
