@@ -40,7 +40,7 @@ class PPDF extends FPDF_Protection
 		$this->SetLeftMargin(18);
 		$this->SetAutoPageBreak(true, 15);
 		global $title, $gestion, $titulo, $logo, $idioma;
-		$fecha = capitalizar(strftime("%A, %d ")) . $idioma['De'] . capitalizar(strftime(" %B ")) . $idioma['De'] . strftime(" %Y");
+		$fecha = capitalizar(diaSemana(date("N")) . strftime(", %d ")) . $idioma['De'] . " " . mes(date("n")) . " " . $idioma['De'] . strftime(" %Y");
 
 		$this->Image("../../imagenes/logos/" . $logo, 10, 10, 20, 20);
 		$this->Fuente("", $tam);

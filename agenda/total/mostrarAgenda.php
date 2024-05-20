@@ -86,35 +86,21 @@ if (isset($_POST)) {
 
 	/*Sacando Fecha de Trimestre*/
 	if ($cur['Bimestre']) {
-		$cnf = $config->mostrarConfig("InicioBimestre1");
-		$fechaInicioBimestre1 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinBimestre1");
-		$fechaFinBimestre1 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("InicioBimestre2");
-		$fechaInicioBimestre2 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinBimestre2");
-		$fechaFinBimestre2 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("InicioBimestre3");
-		$fechaInicioBimestre3 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinBimestre3");
-		$fechaFinBimestre3 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("InicioBimestre4");
-		$fechaInicioBimestre4 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinBimestre4");
-		$fechaFinBimestre4 = $cnf['Valor'];
+		$fechaInicioBimestre1 = $config->mostrarConfig("InicioBimestre1", 1);
+		$fechaFinBimestre1 = $config->mostrarConfig("FinBimestre1", 1);
+		$fechaInicioBimestre2 = $config->mostrarConfig("InicioBimestre2", 1);
+		$fechaFinBimestre2 = $config->mostrarConfig("FinBimestre2", 1);
+		$fechaInicioBimestre3 = $config->mostrarConfig("InicioBimestre3", 1);
+		$fechaFinBimestre3 = $config->mostrarConfig("FinBimestre3", 1);
+		$fechaInicioBimestre4 = $config->mostrarConfig("InicioBimestre4", 1);
+		$fechaFinBimestre4 = $config->mostrarConfig("FinBimestre4", 1);
 	} else {
-		$cnf = $config->mostrarConfig("InicioTrimestre1");
-		$fechaInicioTrimestre1 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinTrimestre1");
-		$fechaFinTrimestre1 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("InicioTrimestre2");
-		$fechaInicioTrimestre2 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinTrimestre2");
-		$fechaFinTrimestre2 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("InicioTrimestre3");
-		$fechaInicioTrimestre3 = $cnf['Valor'];
-		$cnf = $config->mostrarConfig("FinTrimestre3");
-		$fechaFinTrimestre3 = $cnf['Valor'];
+		$fechaInicioTrimestre1 = $config->mostrarConfig("InicioTrimestre1", 1);
+		$fechaFinTrimestre1 = $config->mostrarConfig("FinTrimestre1", 1);
+		$fechaInicioTrimestre2 = $config->mostrarConfig("InicioTrimestre2", 1);
+		$fechaFinTrimestre2 = $config->mostrarConfig("FinTrimestre2", 1);
+		$fechaInicioTrimestre3 = $config->mostrarConfig("InicioTrimestre3", 1);
+		$fechaFinTrimestre3 = $config->mostrarConfig("FinTrimestre3", 1);
 	}
 	/*Fin de Sacando Información de Trimestre*/
 	if (isset($_POST['CodMateria'])) {
@@ -169,7 +155,7 @@ if (isset($_POST)) {
 					<th><?php echo $idioma['Materia'] ?></th>
 					<th width="100"><?php echo $idioma['Observacion'] ?></th>
 					<th><?php echo $idioma['Detalle'] ?></th>
-					<th width="75"><?php echo $idioma['Fecha'] ?></th>
+					<th width="85"><?php echo $idioma['Fecha'] ?></th>
 					<th></th>
 				</tr>
 			</thead>
@@ -219,20 +205,29 @@ if (isset($_POST)) {
 					<td>
 						<?php
 						switch ($tipo) {
-							case 1: { ?><div class="cverde" title="<?php echo $mensaje ?>"></div><?php }
-																										break;
-																									case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>"></div><?php }
-																																												break;
-																																											case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>"></div><?php }
-																																																																break;
-																																																															case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>"></div><?php }
-																																																																																	break;
-																																																																															}
-																																																																																		?><?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>"></div><?php } ?></td>
+							case 1: { ?><div class="cverde" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+								<?php }
+								break;
+							case 2: { ?><div class="cazul" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+								<?php }
+								break;
+							case 3: { ?><div class="cnaranja" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+								<?php }
+								break;
+							case 4: { ?><div class="cnegro" title="<?php echo $mensaje ?>" style="width:5px;height:18px"></div>
+						<?php }
+								break;
+						}
+						?>
+						<?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>" style="width:5px;height:18px"></div><?php } ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $m['Nombre'] ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $o['Nombre'] ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $a['Detalle']; ?></td>
-					<td class="<?php echo $resaltar ?> der"><?php echo date("d-m-Y", strtotime($a['Fecha'])); ?> <?php echo date("H:i:s", strtotime($a['HoraRegistro'])); ?></td>
+					<td class="<?php echo $resaltar ?> der">
+						<div title="<?php echo ($idioma['FechaRegistro']) ?>: <?php echo date("d-m-Y", strtotime($a['FechaRegistro'])); ?>
+							<?php echo date("H:i:s", strtotime($a['HoraRegistro'])); ?>"><?php echo date("d-m-Y", strtotime($a['Fecha'])); ?><div>
+
+					</td>
 
 					<td class="centrar">
 						<?php if (trim($al['CelularSMS']) != "" && $al['ActivarSMS']) { ?>
