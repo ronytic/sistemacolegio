@@ -9,6 +9,7 @@ include_once("../class/cuota.php");
 include_once("../class/documento.php");
 include_once("../class/config.php");
 include_once("../class/curso.php");
+
 if (!empty($_POST)) {
 	$folder = "../";
 	$al = new alumno;
@@ -84,10 +85,15 @@ if (!empty($_POST)) {
 	$CodBarra = trim($cnf['Valor']) . $CodAlumno;
 	$CodUsuarioAlumno = trim(minuscula(quitarSimbolos($Paterno))) . $CodAlumno;
 
-	$Password = rand(1000, 9999);
-	$PasswordP = rand(1000, 9999);
+	//fecha de nacimiento debe ser su password
+	$Password = date("jnY", strtotime($FechaNac));
+	$PasswordP = date("jnY", strtotime($FechaNac));
+
+	// $Password = rand(1000, 9999);
+	// $PasswordP = rand(1000, 9999);
 	if ($CiPadre != "" && $CiMadre != "") {
-		$UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+		// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+		$UsuarioPadre = $Ci;
 	} else {
 		$UsuarioPadre = "";
 	}

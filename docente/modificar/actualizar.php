@@ -6,6 +6,7 @@ if (isset($_POST)) {
 	include_once("../../class/docente.php");
 	$docente = new docente;
 	$Usuario = $CodDocente . mb_strtolower(quitarSimbolos($Paterno), "utf8");
+	$Password = date("jnY", strtotime($FechaNac));
 	$valores = array(
 		"Paterno" => "'$Paterno'",
 		"Materno" => "'$Materno'",
@@ -33,11 +34,17 @@ if (isset($_POST)) {
 		"DTCategoria" => "'$DTCategoria'",
 		"Observacion" => "'$Observacion'",
 		"Usuario" => "'$Usuario'",
-		"Activo" => "'$Activo'"
+		"Activo" => "'$Activo'",
+		"Password" => "'$Password'"
 	);
-	if ($NombreFoto = subirArchivo($_FILES['Foto'], "imagenes/docentes/")) {
+	if (isset($_FILES['Foto']) && $_FILES['Foto']['error'] == 0) {
+		$NombreFoto = $_FILES['Foto']['name'];
+		@copy($_FILES['Foto']['tmp_name'], $folder . "imagenes/docentes/" . $NombreFoto);
 		$valores = array_merge(array("Foto" => "'$NombreFoto'"), $valores);
 	}
+	// if ($NombreFoto = subirArchivo($_FILES['Foto'], "imagenes/docentes/")) {
+	// 	$valores = array_merge(array("Foto" => "'$NombreFoto'"), $valores);
+	// }
 	if ($docente->actualizarDocente($valores, "CodDocente=" . $CodDocente)) {
 ?>
 		<div class="alert alert-success">

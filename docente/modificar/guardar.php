@@ -6,7 +6,8 @@ if (isset($_POST)) {
 	include_once("../../class/docente.php");
 	$docente = new docente;
 	$Usuario = $CodDocente . mb_strtolower(quitarSimbolos($Paterno), "utf8");
-	$contra = mb_strtolower(generarPalabra(), "utf8");
+	// $contra = mb_strtolower(generarPalabra(), "utf8");
+	$Password = date("jnY", strtotime($FechaNac));
 	$CodBarra = "P" . rand(100000, 999999) . "" . rand(10, 99);
 	$valores = array(
 		"Paterno" => "'$Paterno'",
@@ -35,7 +36,8 @@ if (isset($_POST)) {
 		"DTCategoria" => "'$DTCategoria'",
 		"Observacion" => "'$Observacion'",
 		"Usuario" => "'$Usuario'",
-		"Password" => "'$contra'",
+		// "Password" => "'$contra'",
+		"Password" => "'$Password'",
 		"CodBarra" => "'$CodBarra'"
 	);
 	if (isset($_FILES['Foto']) && $NombreFoto = subirArchivo($_FILES['Foto'], "imagenes/docentes/")) {

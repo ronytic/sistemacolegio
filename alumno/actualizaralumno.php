@@ -81,10 +81,15 @@ if (!empty($_POST)) {
 	$CodBarra = trim($cnf['Valor']) . $CodAlumno;
 	$CodUsuarioAlumno = trim(minuscula(quitarSimbolos($Paterno))) . $CodAlumno;
 
-	$Password = rand(1000, 9999);
-	$PasswordP = rand(1000, 9999);
+	// $Password = rand(1000, 9999);
+	// $PasswordP = rand(1000, 9999);
+
+	$Password = date("jnY", strtotime($FechaNac));
+	$PasswordP = date("jnY", strtotime($FechaNac));
+
 	if ($CiPadre != "" || $CiMadre != "") {
-		$UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+		// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+		$UsuarioPadre = $Ci;
 	} else {
 		$UsuarioPadre = "";
 	}
@@ -151,9 +156,9 @@ if (!empty($_POST)) {
 		//'HoraIns'=>"'$HoraIns'",
 		'UsuarioAlumno' => "'$CodUsuarioAlumno'",
 		'CodBarra' => "'$CodBarra'",
-		// 'Password' => "'$Password'",
-		// 'PasswordP' => "'$PasswordP'",
-		// 'UsuarioPadre' => "'$UsuarioPadre'",
+		'Password' => "'$Password'",
+		'PasswordP' => "'$PasswordP'",
+		'UsuarioPadre' => "'$UsuarioPadre'",
 		'AccesoSistema' => "'$AccesoSistema'",
 	);
 	if ($alumnoDatoAnterior['PasswordP'] == "") {

@@ -115,11 +115,13 @@ $anunciosLogin = $anuncioslogin->mostrarAnuncios();
                         if (count($anunciosLogin) > 0) {
                             foreach ($anunciosLogin as $anuncios) {
                         ?>
-                                <li class="<?php echo $anuncios['Resaltar'] ? 'resaltar' : '' ?>"><?php echo $anuncios['Mensaje'] ?>
+                                <li class="<?php echo $anuncios['Resaltar'] ? 'resaltar' : '' ?><?php echo $anuncios['Imagen'] != "" ? 'imagen' : '' ?>">
+                                    <?php echo $anuncios['Mensaje'] ?>
                                     <?php if ($anuncios['Imagen'] != "") { ?>
                                         <img src="../<?php echo $anuncios['Imagen'] ?>" class="img-polaroid" />
                                 </li>
                             <?php } ?>
+                            <hr>
                         <?php
                             }
                         } else {

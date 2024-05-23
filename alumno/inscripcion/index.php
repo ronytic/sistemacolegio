@@ -71,9 +71,9 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                     <td class="der"><?php echo $idioma['FechaNacimiento'] ?></td>
                     <td><?php campo("FechaNac", "text", "", "span6", 1, "", 0, array("maxlength" => 10)) ?> (Ej:23-07-1990)</td>
                 </tr>
-                <tr class="ocultar">
+                <tr>
                     <td class="der"><?php echo $idioma['CedulaIdentidad'] ?></td>
-                    <td><?php campo("Ci", "text", "", "span6", 0, "", 0, array("maxlength" => 12)) ?></td>
+                    <td><?php campo("Ci", "text", "", "span12", 0, "", 0, array("maxlength" => 12)) ?></td>
                 </tr>
                 <tr class="ocultar">
                     <td class="der"><?php echo $idioma['Zona'] ?></td>
@@ -277,6 +277,64 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 </tr>
             </table>
         </div>
+
+        <div class="box-header">
+            <?php echo $idioma['DatosPadreFamilia'] ?>
+        </div>
+        <div class="box-content">
+            <table class="tabla table-hover">
+                <tr>
+                    <td class="der"><?php echo $idioma['ApellidosPadre'] ?></td>
+                    <td><?php campo("ApellidosPadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['NombrePadre'] ?></td>
+                    <td><?php campo("NombrePadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['CiPadre'] ?></td>
+                    <td><?php campo("CiPadre", "text", "", "span12", 0, "", 0, array("maxlength" => 20)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['OcupacionPadre'] ?></td>
+                    <td><?php campo("OcupPadre", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['CelularPadre'] ?></td>
+                    <td><?php campo("CelularP", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['ApellidosMadre'] ?></td>
+                    <td><?php campo("ApellidosMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['NombreMadre'] ?></td>
+                    <td><?php campo("NombreMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['CiMadre'] ?></td>
+                    <td><?php campo("CiMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 20)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['OcupacionMadre'] ?></td>
+                    <td><?php campo("OcupMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['CelularMadre'] ?></td>
+                    <td><?php campo("CelularM", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['Email'] ?></td>
+                    <td><?php campo("Email", "email", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
+                </tr>
+            </table>
+        </div>
+
         <div class="box-content">
             <input type="submit" value="<?php echo $idioma['RegistrarAlumno'] ?>" class="btn btn-success" />
             <input type="reset" class="btn" value="<?php echo $idioma['Vaciar'] ?>">
