@@ -300,6 +300,25 @@ function diaSemana($dia)
    );
    return $dias[$dia];
 }
+function mes($mes)
+{
+   global $idioma;
+   $meses = array(
+      1 => $idioma["Enero"],
+      2 => $idioma["Febrero"],
+      3 => $idioma["Marzo"],
+      4 => $idioma["Abril"],
+      5 => $idioma["Mayo"],
+      6 => $idioma["Junio"],
+      7 => $idioma["Julio"],
+      8 => $idioma["Agosto"],
+      9 => $idioma["Septiembre"],
+      10 => $idioma["Octubre"],
+      11 => $idioma["Noviembre"],
+      12 => $idioma["Diciembre"]
+   );
+   return $meses[$mes];
+}
 function recortarTexto($texto, $limite = 100, $terminador = "...")
 {
    $texto = trim($texto);

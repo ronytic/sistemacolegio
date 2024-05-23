@@ -9,8 +9,6 @@ $(document).ready(function () {
 	CodCurso = $("select[name=Curso]").val();
 	CodMateria = $("select[name=Materia]").val();
 	$("#fecha").datepicker({ dateFormat: 'dd-mm-yy', maxDate: "0 D" });
-
-	// cargarAlumnosYAgenda();
 	$.post("listaalumno.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria }, alumnos);
 	$.post("mostrarAgenda.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria, 'rand': Math.random() }, reporteAgenda);
 	$('select[name=Curso]').change(function () {
@@ -44,12 +42,6 @@ $(document).ready(function () {
 	});
 
 });
-
-// function cargarAlumnosYAgenda() {
-// 	$.post("listaalumno.php", { 'CodCurso': CodCurso, 'CodMateria': CodMateria }, alumnos);
-// 	mostrarAgenda();
-// }
-
 function mostrarAgenda() {
 	Busqueda = $("#Busqueda").attr("checked") ? true : false;
 	CodAlumno = $("#alumnos").val();

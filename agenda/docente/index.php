@@ -5,6 +5,7 @@ include_once("../../class/docente.php");
 include_once("../../class/docentemateriacurso.php");
 include_once("../../class/materias.php");
 include_once("../../class/observaciones.php");
+include_once("../../class/config.php");
 $titulo = "NRegistroAgenda";
 $folder = "../../";
 $docente = new docente;
@@ -12,14 +13,28 @@ $curso = new curso;
 $docmateriacurso = new docentemateriacurso;
 $materias = new materias;
 $observaciones = new observaciones;
+$config = new config;
+$AgendaDocenteCambiarFechaRegistro = $config->mostrarConfig('AgendaDocenteCambiarFechaRegistro', 1);
+if (is_null($AgendaDocenteCambiarFechaRegistro)) {
+    $AgendaDocenteCambiarFechaRegistro = 0;
+}
+$arrayFecha =  array("maxlength" => 10);
+if ($AgendaDocenteCambiarFechaRegistro == 0) {
+    $arrayFecha = array("maxlength" => 10, "readonly" => "readonly");
+}
 $CodDocente = $_SESSION['CodUsuarioLog'];
 $_SESSION['CodDocente'] = $CodDocente;
 ?>
 <?php include_once($folder . "cabecerahtml.php"); ?>
-<script language="javascript" type="text/javascript" src="../../js/agenda/docente.js"></script>
+<script language="javascript" type="text/javascript" src="../../js/agenda/docente.js?1"></script>
 <script language="javascript">
     $(document).ready(function(e) {
-
+        <?php if ($AgendaDocenteCambiarFechaRegistro) : ?>
+            $("#Fecha").datepicker({
+                dateFormat: 'dd-mm-yy',
+                maxDate: "0 D"
+            });
+        <?php endif; ?>
     });
 </script>
 <?php include_once($folder . "cabecera.php"); ?>
@@ -71,8 +86,8 @@ $_SESSION['CodDocente'] = $CodDocente;
             <div class="span7">
                 <table class="table table-hover table-striped table-bordered">
                     <tr>
-                        <td><?php echo $idioma["Fecha"] ?>:<br />
-                            <?php campo("Fecha", "text", date("d-m-Y"), "span12", 1, "", 0, array("maxlength" => 10)) ?>
+                        <td><?php echo $idioma["FechaObservacion"] ?>:<br />
+                            <?php campo("Fecha", "text", date("d-m-Y"), "span12", 1, "", 0, $arrayFecha) ?>
                         </td>
                     </tr>
 
@@ -89,7 +104,7 @@ $_SESSION['CodDocente'] = $CodDocente;
                         </td>
                     </tr>
                 </table>
-                <input type="submit" value="<?php echo $idioma["Registrar"] ?>" class="btn btn-success" id="registrar" /><br />
+                <input type="submit" value="<?php echo $idioma["RegistrarObservacion"] ?>" class="btn btn-success" id="registrar" /><br />
                 <?php echo $idioma["ParaEliminarAnotacionConsulteRegente"] ?>.
             </div>
         </div>
