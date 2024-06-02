@@ -198,6 +198,8 @@ function inicio() {
 		e.preventDefault();
 		$('#noti').popover('hide');
 	});
+
+
 }
 function cargandoG(destino) {
 	$(destino).html('<img src="' + folder + 'imagenes/cargador/cargador.gif"/>');
@@ -215,4 +217,22 @@ function sacarIniciales(texto) {
 }
 jQuery.fn.reset = function () {
 	$(this).each(function () { this.reset(); });
+}
+
+function agregarCargandoIframe(idIframe = "#pdf", parentIframeCreated = false) {
+	let parentIframe = "parentIframe";
+	let idParentIframe = "#" + parentIframe;
+	if (idIframe === null) {
+		idIframe = "#pdf";
+	}
+	$(idIframe).attr('frameborder', '0');
+	if (parentIframeCreated == false || parentIframeCreated == null) {
+		$(idIframe).wrap("<div id='" + parentIframe + "'></div>");
+	}
+	$(idParentIframe).before('<div id="loadingIframe">' + MensajeCargando + '...<img src="' + folder + '/imagenes/cargador/cargador.gif"></div>');
+	$(idParentIframe).css("display", "none");
+	$(idIframe).on('load', function () {
+		$('#loadingIframe').hide();
+		$(idParentIframe).show();
+	});
 }
