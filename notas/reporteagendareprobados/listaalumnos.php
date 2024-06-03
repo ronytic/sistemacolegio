@@ -31,6 +31,11 @@ if (!empty($_POST)) {
 	$PeriodoFin = ($config->mostrarConfig('Fin' . $fin . $Periodo, 1));
 	$casillas = $casilleros->mostrarMateriaCursoTrimestre($CodMateria, $CodCurso, $Periodo);
 	$casillas = array_shift($casillas);
+	if (is_null($casillas)) { ?>
+		<div class="alert alert-success"><?php echo $idioma['NoExisteRegistroAgenda'] ?></div>
+	<?php
+		exit();
+	}
 	$RN = $registronotas->notasCentralizadorAgenda($casillas['CodCasilleros'], $Periodo, $notareprobacion);
 	if (!count($RN)) { ?>
 		<div class="alert alert-success"><?php echo $idioma['NoExistenReprobadosParaEstaMateria'] ?></div>
