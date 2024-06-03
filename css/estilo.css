@@ -400,8 +400,7 @@ div.horizontal:hover {
 .listanotificacion li:hover {
   background-color: #eaeaea;
 }
-.listanotificacion li span {
-}
+
 .listanotificacion li div {
   display: inline-block;
 }
@@ -416,4 +415,8 @@ div.horizontal:hover {
 
 .box-header {
   margin-top: 15px;
+}
+
+.btn:focus {
+  background-position: 0 0px !important;
 }

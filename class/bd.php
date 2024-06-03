@@ -6,10 +6,10 @@ if (!defined("RAIZ")) {
 include_once(RAIZ . "basededatos.php");
 class bd
 {
-	var $l;
-	var $tabla;
-	var $resultado;
-	var $campos = array();
+	public $l;
+	public $tabla;
+	public $resultado;
+	public $campos = array();
 	function __construct()
 	{
 		global $host, $user, $pass, $database, $puerto;

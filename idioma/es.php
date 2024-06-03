@@ -118,6 +118,7 @@ $idioma['NListadoAlumnoParaBoletin'] = "Listado de Alumnos para generación de B
 $idioma['NObservacionesFrecuentes'] = "Observaciones Frecuentes";
 $idioma['NModificarAreaCurso'] = "Modificar Area del Curso";
 $idioma['NModificarMaterias'] = "Modificar Materias";
+$idioma['MateriaNoSeleccionada'] = 'Materia No Seleccionada';
 $idioma['NModificarObservaciones'] = "Modificar Observaciones";
 $idioma['NModificarUsuarios'] = "Modificar Usuarios";
 $idioma['NVerTareas'] = "Ver Tareas";
