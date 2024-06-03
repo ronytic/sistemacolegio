@@ -1181,6 +1181,9 @@ $idioma['VerTodosLosAccesos'] = "Ver Todos los Accesos";
 $idioma['Recaudado'] = "Recaudado";
 /*Mensajes Globales Javascript*/
 $idioma['EliminarRegistro'] = "¿Seguro que desea eliminar este registro?";
+$idioma['ConfiguracionExportacion'] = "Configuración de Exportación";
+$idioma['DatosExportados'] = "Datos a ser Exportados";
+$idioma['NoHayMateriasAsignadasExportar'] = "No hay Materias Asignadas para Exportar";
 /*Fin Mensajes*/
 
 //Curso
