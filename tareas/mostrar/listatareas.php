@@ -14,7 +14,15 @@ if (!empty($_POST)) {
 	$cur = array_shift($cur);
 	$mat = $materias->mostrarMateria($CodMateria);
 	$mat = array_shift($mat);
+	if (is_null($mat)) {
 ?>
+		<div class="alert alert-error">
+			<?php echo $idioma['MateriaNoSeleccionada'] ?>
+		</div>
+	<?php
+		exit();
+	}
+	?>
 	<a href="#" id="exportarexcel" class="btn btn-mini btn-success"><?php echo $idioma['ExportarExcel'] ?></a>
 	<table class="table table-bordered table-striped table-hover">
 		<thead>
@@ -43,12 +51,13 @@ if (!empty($_POST)) {
 				</tr>
 			<?php
 			}
-		} else {
-			?><tr class="error">
+		} else { ?>
+			<tr class="error">
 				<td colspan="4"><?php echo $idioma['NoExisteTareasRegistradas'] ?></td>
-			</tr><?php
-				}
-					?>
+			</tr>
+		<?php
+		}
+		?>
 	</table>
 <?php
 }
