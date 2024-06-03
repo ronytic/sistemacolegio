@@ -30,7 +30,7 @@ if (!empty($_GET['CodAl'])) {
     if (!file_exists($ima) || empty($al['Foto'])) {
         $ima = $folder . "imagenes/alumnos/0.jpg";
     }
-    ?>
+?>
     <?php include_once($folder . "cabecerahtml.php"); ?>
     <script language="javascript" type="text/javascript" src="../../js/agenda/registro.js"></script>
     <script language="javascript">
@@ -72,7 +72,7 @@ if (!empty($_GET['CodAl'])) {
 
     <div class="span3 box">
 
-        <div class="" style="">
+        <div>
             <div class="box-header"><?php echo $idioma['Acciones'] ?></div>
             <div class="box-content">
                 <a class="btn btn-danger registrar"><?php echo $idioma['Registrar'] ?></a> <a class="btn terminar"><?php echo $idioma['Terminar'] ?></a><br /><br />
@@ -92,12 +92,12 @@ if (!empty($_GET['CodAl'])) {
                 <input type="search" name="sMateria" class="span12" placeholder="<?php echo $idioma['BuscarMateriaPor'] ?>" />
                 <select name="Materia" class="span12">
                     <?php
-                        foreach ($materia->mostrarMaterias() as $m) {
-                            ?>
+                    foreach ($materia->mostrarMaterias() as $m) {
+                    ?>
                         <option value="<?php echo $m['CodMateria']; ?>"><?php echo $m['Nombre']; ?></option>
                     <?php
-                        }
-                        ?>
+                    }
+                    ?>
                 </select>
             </div>
         </div>
@@ -109,12 +109,12 @@ if (!empty($_GET['CodAl'])) {
                     <input type="search" name="sObservaciones" class="span12" placeholder="<?php echo $idioma['BuscarObservacionesPor'] ?>" />
                     <select name="Observaciones">
                         <?php
-                            foreach ($observaciones->mostrarObservaciones() as $o) {
-                                ?>
+                        foreach ($observaciones->mostrarObservaciones() as $o) {
+                        ?>
                             <option value="<?php echo $o['CodObservacion']; ?>"><?php echo $o['Nombre']; ?></option>
                         <?php
-                            }
-                            ?>
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -148,5 +148,5 @@ if (!empty($_GET['CodAl'])) {
 
         <?php include_once($folder . "pie.php"); ?>
     <?php
-    }
+}
     ?>

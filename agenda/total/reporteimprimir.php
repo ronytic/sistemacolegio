@@ -13,7 +13,7 @@ if (isset($_POST)) {
 	<a href="#" class="btn btn-success" id="registrarimpresion" data-archivo="Reporte Agenda" data-alumno="<?php echo $CodAlumno; ?>"><?php echo $idioma['RegistrarImpresion'] ?></a>
 	<hr />
 	<strong><?php echo $idioma['ReporteImpresion']; ?></strong>
-	<iframe src="<?php echo $url ?>" height="700" width="100%" name="pdf"></iframe>
+	<iframe src="<?php echo $url ?>" height="700" width="100%" name="pdf" id="pdf"></iframe>
 	<a href="#" class="btn" id="mostrarimpresion"><?php echo $idioma['MostrarImpresion'] ?></a>
 	<div id="respuestaimpresion"></div>
 <?php
