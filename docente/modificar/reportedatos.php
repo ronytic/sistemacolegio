@@ -7,5 +7,9 @@ if (isset($_POST)) {
 ?>
     <a class="btn btn-danger" target="_blank" href="<?php echo $url; ?>"><?php echo $idioma['AbrirOtraVentana'] ?></a>
     <hr />
-    <iframe src="<?php echo $url ?>" width="100%" height="600"></iframe>
-<?php } ?>
+    <div id="parentIframe">
+        <iframe src="<?php echo $url ?>" width="100%" height="600" id="pdf" title=""></iframe>
+    </div>
+<?php
+}
+?>

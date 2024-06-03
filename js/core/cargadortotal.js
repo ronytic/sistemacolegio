@@ -1,6 +1,7 @@
 $(document).on("ready", inicio);
 var RedirigirLogin = 0;
 function inicio() {
+	agregarCargandoIframe('#pdf', false);
 	$(document).on('submit', 'form.formulario', function (e) {
 		e.preventDefault(); // prevent native submit
 		var percent = $("#respuestaformulario")
@@ -21,6 +22,7 @@ function inicio() {
 				//bar.width("100%");
 				//percent.html("100%");
 				$("#respuestaformulario").html(xhr.responseText);
+				agregarCargandoIframe('#pdf', true);
 				$("table").stickyTableHeaders();
 				$("table.inicio").stickyTableHeaders('destroy');
 			}
@@ -233,6 +235,7 @@ function agregarCargandoIframe(idIframe = "#pdf", parentIframeCreated = false) {
 	$(idParentIframe).css("display", "none");
 	$(idIframe).on('load', function () {
 		$('#loadingIframe').hide();
-		$(idParentIframe).show();
+		//$(idParentIframe).show();
+		$(idParentIframe).css("display", "block");
 	});
 }

@@ -1,12 +1,13 @@
-function lanzadorC(CodCurso){
-	
+function lanzadorC(CodCurso) {
+
 }
-function respuesta1(data){
+function respuesta1(data) {
 	$("#configuracion").html(data);
-	$("#reporte").click(function(e) {
-		$.post("resumen.php",{'CodCurso':CodCurso,"Rand":Math.random()},respuesta2);
-    });
+	$("#reporte").click(function (e) {
+		$.post("resumen.php", { 'CodCurso': CodCurso, "Rand": Math.random() }, respuesta2);
+	});
 }
-function respuesta2(data){
+function respuesta2(data) {
 	$("#respuesta").html(data);
+	agregarCargandoIframe('#pdf', true);
 }

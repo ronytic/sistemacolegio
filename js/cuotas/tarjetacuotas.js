@@ -1,4 +1,5 @@
-var file="verDocumento.php";
-function respuesta(data){
+var file = "verDocumento.php";
+function respuesta(data) {
 	$("#respuesta").html(data);
+	agregarCargandoIframe('#pdf', false);
 }
