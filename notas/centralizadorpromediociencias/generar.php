@@ -8,7 +8,7 @@ if (!empty($_POST)) {
 ?>
     <a href="<?php echo $url; ?>" class="btn btn-danger" target="_blank"><?php echo $idioma['AbrirOtraVentana'] ?></a>
     <hr />
-    <iframe width="100%" height="600" src="<?php echo $url ?>"></iframe>
+    <iframe width="100%" height="600" src="<?php echo $url ?>" id="pdf"></iframe>
 <?php
 }
 ?>

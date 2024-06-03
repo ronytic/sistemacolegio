@@ -15,8 +15,7 @@ $CodDocente = $_SESSION['CodDocente'];
 $config = new config;
 $cnf = ($config->mostrarConfig("TotalPeriodo"));
 $TotalPeriodo = $cnf['Valor'];
-$cnf = ($config->mostrarConfig("TrimestreActual"));
-$trimestreActual = $cnf['Valor']
+
 ?>
 <?php include_once("../../cabecerahtml.php"); ?>
 <script language="javascript" type="text/javascript" src="../../js/notas/reportedocente.js"></script>
