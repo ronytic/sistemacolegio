@@ -87,12 +87,12 @@ if (!empty($_POST)) {
 	$Password = date("jnY", strtotime($FechaNac));
 	$PasswordP = date("jnY", strtotime($FechaNac));
 
-	if ($CiPadre != "" || $CiMadre != "") {
-		// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
-		$UsuarioPadre = $Ci;
-	} else {
-		$UsuarioPadre = "";
-	}
+	// if ($CiPadre != "" || $CiMadre != "") {
+	// 	// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+	// } else {
+	// 	$UsuarioPadre = "";
+	// }
+	$UsuarioPadre = $Ci;
 
 	$cur = $curso->mostrarCurso($CodCurso);
 	$cur = array_shift($cur);

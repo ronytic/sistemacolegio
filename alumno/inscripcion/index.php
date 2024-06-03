@@ -73,7 +73,7 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 </tr>
                 <tr>
                     <td class="der"><?php echo $idioma['CedulaIdentidad'] ?></td>
-                    <td><?php campo("Ci", "text", "", "span12", 0, "", 0, array("maxlength" => 12)) ?></td>
+                    <td><?php campo("Ci", "text", "", "span12", 1, "", 0, array("maxlength" => 12)) ?></td>
                 </tr>
                 <tr class="ocultar">
                     <td class="der"><?php echo $idioma['Zona'] ?></td>

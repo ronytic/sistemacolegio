@@ -94,13 +94,16 @@ if (!empty($_POST)) {
 	$CodUsuarioAlumno = trim(mb_strtolower(quitarSimbolos($Paterno), "UTF-8")) . $CodAlumno;
 
 
-	$Password = rand(1000, 9999);
-	$PasswordP = rand(1000, 9999);
-	if ($CiPadre != "" && $CiMadre != "") {
-		$UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
-	} else {
-		$UsuarioPadre = "";
-	}
+	// $Password = rand(1000, 9999);
+	// $PasswordP = rand(1000, 9999);
+	// if ($CiPadre != "" || $CiMadre != "") {
+	// 	// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+	// } else {
+	// 	$UsuarioPadre = "";
+	// }
+	$UsuarioPadre = $Ci;
+	$Password = date("jnY", strtotime($FechaNac));
+	$PasswordP = date("jnY", strtotime($FechaNac));
 
 	$cur = $curso->mostrarCurso($CodCurso);
 	$cur = array_shift($cur);

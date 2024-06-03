@@ -49,14 +49,19 @@ if (!empty($_POST)) {
 		"IdiomaM" => "'{$_POST['idiomaM']}'",
 		"Lugar" => "'EL ALTO'"
 	);
-	$usuarioPadre = usuarioPadre($_POST['CedulaPadre'], $_POST['CedulaMadre']);
+	// $usuarioPadre = usuarioPadre($_POST['CedulaPadre'], $_POST['CedulaMadre']);
+	$usuarioPadre = trim($_POST['numeroDoc']);
+	$passwordP = '';
+	if ($_POST['fechaNac'] != '') {
+		$passwordP = date("jnY", strtotime($_POST['fechaNac']));
+	}
 	$valuesAlumno = array(
 		"Paterno" => "'" . mb_strtolower($_POST['paterno'], "UTF-8") . "'",
 		"Materno" => "'" . mb_strtolower($_POST['materno'], "UTF-8") . "'",
 		"Nombres" => "'" . mb_strtolower($_POST['nombres'], "UTF-8") . "'",
 		"LugarNac" => "'" . mb_strtolower($_POST['departamentoNacA'], "UTF-8") . "'",
 		"FechaNac" => "'" . fecha2Str($_POST['fechaNac'], 0) . "'",
-		"Ci" => "'{$_POST['numeroDoc']}'",
+		"Ci" => "'{$usuarioPadre}'",
 		"Sexo" => $_POST['sexo'],
 		"Zona" => "'" . mb_strtolower($_POST['zonaA'], "UTF-8") . "'",
 		"Calle" => "'" . mb_strtolower($_POST['calleA'], "UTF-8") . "'",
@@ -77,7 +82,9 @@ if (!empty($_POST)) {
 		"CiMadre" => "'" . mb_strtolower($_POST['CedulaMadre'], "UTF-8") . "'",
 		"OcupMadre" => "'" . mb_strtolower($_POST['ocupacionM'], "UTF-8") . "'",
 		"CelularM" => "'" . mb_strtolower($_POST['telefonoM'], "UTF-8") . "'",
-		"UsuarioPadre" => "'$usuarioPadre'"
+		"UsuarioPadre" => "'$usuarioPadre'",
+		"PasswordP" => "'{$passwordP}'",
+		"Password" => "'{$passwordP}'",
 	);
 	$rude->actualizarDatosAlumno($values, $CodAlumno);
 	$alumno->actualizarDatosAlumno($valuesAlumno, $CodAlumno);

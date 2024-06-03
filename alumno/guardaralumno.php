@@ -91,12 +91,12 @@ if (!empty($_POST)) {
 
 	// $Password = rand(1000, 9999);
 	// $PasswordP = rand(1000, 9999);
-	if ($CiPadre != "" && $CiMadre != "") {
-		// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
-		$UsuarioPadre = $Ci;
-	} else {
-		$UsuarioPadre = "";
-	}
+	// if ($CiPadre != "" && $CiMadre != "") {
+	// 	// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);
+	// } else {
+	// 	$UsuarioPadre = "";
+	// }
+	$UsuarioPadre = $Ci;
 
 	$cur = $curso->mostrarCurso($CodCurso);
 	$cur = array_shift($cur);
