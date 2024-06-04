@@ -193,7 +193,7 @@ switch ($Nivel) {
 					<ul class="breadcrumb">
 						<li>
 							<a href="<?php echo $folder; ?>"><?php echo $idioma['Inicio'] ?></a> <span class="navegacion"> > <a href="<?php echo $folder; ?><?php echo $rmenu; ?>"><?php echo $textomenu != "" ? $textomenu . "" : '' ?></a> <?php echo $textomenu != "" ? ">" : '' ?>
-								<?php echo $idioma[$titulo] != "" ? $idioma[$titulo] : $titulo; ?> </span>
+								<?php echo (isset($idioma[$titulo]) && $idioma[$titulo] != "") ? $idioma[$titulo] : $titulo; ?> </span>
 						</li>
 						<?php /*?>
             <li>

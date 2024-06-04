@@ -157,7 +157,7 @@
 	</script>
 	*/ ?>
     <script language="javascript">
-    	var TituloDocumento = "<?php echo $idioma[$titulo] ?>";
+    	var TituloDocumento = "<?php echo (isset($idioma[$titulo]) && $idioma[$titulo] != "") ? $idioma[$titulo] : $titulo; ?>";
     	var folder = "<?php echo $folder ?>";
     	var mensajeg = Array();
     	mensajeg['EliminarRegistro'] = "<?php echo $idioma['EliminarRegistro'] ?>";
