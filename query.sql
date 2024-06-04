@@ -17,3 +17,5 @@ MODIFY COLUMN NombreAlterno2 varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_
 -- Date: 2024-04-25 00:00
 ALTER TABLE anuncioslogin
 ADD COLUMN Imagen LONGTEXT after Resaltar;
+-- Date: 2024-06-03 19:26
+ALTER TABLE notificaciones CHANGE CodMensajes CodNotificaciones int unsigned auto_increment NOT NULL;
