@@ -921,6 +921,17 @@ $idioma['SobreNombre'] = "SobreNombre";
 $idioma['RepetirContrasena'] = "Repetir Contraseña";
 $idioma['ContrasenaNoIgual'] = "Las contraseñas no son Iguales";
 $idioma['ContrasenaIgual'] = "Las contraseñas son Iguales";
+$idioma['AlMenos'] = "Al menos";
+$idioma['UnCaracterEspecial'] = "un caracter especial";
+$idioma['UnCaracterMayuscula'] = "un caracter mayúscula";
+$idioma['UnCaracterMinuscula'] = "un caracter minúscula";
+$idioma['LetrasCaracteres'] = "Letras y/o caracteres";
+$idioma['UnNumero'] = "un número";
+$idioma['Fuerte'] = "Fuerte";
+$idioma['Debil'] = "Débil";
+$idioma['MuyDebil'] = "Muy Débil";
+$idioma['Promedio'] = "Promedio";
+$idioma['Medio'] = "Medio";
 
 //Asistencia
 $idioma['RegistrarAsistencia'] = "Registrar Asistencia";

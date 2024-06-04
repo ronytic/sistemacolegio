@@ -734,5 +734,24 @@ function convertirCuotaEnMes($cuota)
    }
    return $mes;
 }
-
+function htmlListadoCriteriosContrasena()
+{
+   global $idioma;
+   ?>
+      <script>
+         var FuerteMensajeValidacion = "<?= $idioma['Fuerte'] ?>";
+         var MedioMensajeValidacion = "<?= $idioma['Medio'] ?>";
+         var DebilMensajeValidacion = "<?= $idioma['Debil'] ?>";
+         var MuyDebilMensajeValidacion = "<?= $idioma['MuyDebil'] ?>";
+         var PromedioMensajeValidacion = "<?= $idioma['Promedio'] ?>";
+      </script>
+      <ul class="pswd_info" id="passwordCriterion">
+         <li data-criterion="length" class="invalid">5-15 <strong><?php echo $idioma['LetrasCaracteres'] ?></strong></li>
+         <li data-criterion="capital" class="invalid"><?php echo $idioma['AlMenos'] ?> <strong><?php echo $idioma['UnCaracterMayuscula'] ?></strong></li>
+         <li data-criterion="small" class="invalid"><?php echo $idioma['AlMenos'] ?> <strong><?php echo $idioma['UnCaracterMinuscula'] ?></strong></li>
+         <li data-criterion="number" class="invalid"><?php echo $idioma['AlMenos'] ?> <strong><?php echo $idioma['UnNumero'] ?></strong></li>
+         <li data-criterion="special" class="invalid"><?php echo $idioma['AlMenos'] ?> <strong><?php echo $idioma['UnCaracterEspecial'] ?></strong></li>
+      </ul>
+   <?php
+}
    ?>

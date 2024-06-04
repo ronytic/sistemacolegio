@@ -17,7 +17,11 @@ $NoRevisar = 1;
 include_once($folder . "cabecerahtml.php");
 ?>
 <script language="javascript" type="text/javascript" src="../../js/core/plugins/jquery.alphanumeric.pack.js"></script>
+<!-- <script language="javascript" type="text/javascript" src="../../js/core/plugins/BootstrapStrength/bootstrap-strength.min.js"></script> -->
+<script language="javascript" type="text/javascript" src="../../js/core/plugins/check-strength-password/asset/password-strength.js"></script>
 <script language="javascript" type="text/javascript" src="../../js/usuario/configuracion.js"></script>
+<link rel="stylesheet" href="../../js/core/plugins/check-strength-password/asset/password-strength.css">
+
 <script language="javascript">
     var ContrasenaNoIgual = "<?php echo $idioma['ContrasenaNoIgual'] ?>";
 </script>
@@ -56,7 +60,10 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Contrasena'] ?>:</td>
-                    <td><?php campo("Pass", "password", "", "span6", 0, $idioma['Contrasena']) ?></td>
+                    <td><?php campo("Pass", "password", "", "span6", 0, $idioma['Contrasena']) ?>
+                        <div id="password-strength-status"></div>
+                        <?php htmlListadoCriteriosContrasena(); ?>
+                    </td>
                 </tr>
                 <tr>
                     <td><?php echo $idioma['RepetirContrasena'] ?>:</td>
