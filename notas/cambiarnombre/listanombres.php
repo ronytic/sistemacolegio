@@ -46,7 +46,7 @@ if (!empty($_POST)) {
 			$na++; ?>
 			<tr>
 				<td><?php echo $na; ?></td>
-				<td><input type="text" value="<?php echo $casillas['NombreCasilla' . $i]; ?>" name="NombreCasilla<?php echo $i ?>" class="nombre" /></td>
+				<td><input type="text" value="<?php echo $casillas['NombreCasilla' . $i]; ?>" name="NombreCasilla<?php echo $i ?>" class="nombre" style="width:80%" maxlength="255" /></td>
 			</tr>
 		<?php } ?>
 	</table>

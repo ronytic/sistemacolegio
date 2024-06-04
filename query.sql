@@ -19,3 +19,29 @@ ALTER TABLE anuncioslogin
 ADD COLUMN Imagen LONGTEXT after Resaltar;
 -- Date: 2024-06-03 19:26
 ALTER TABLE notificaciones CHANGE CodMensajes CodNotificaciones int unsigned auto_increment NOT NULL;
+
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla1 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla2 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla3 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla4 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla5 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla6 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla7 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla8 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla9 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla10 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla11 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla12 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla13 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla14 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla15 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla16 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla17 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla18 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla19 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla25 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla24 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla23 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla22 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla21 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
+ALTER TABLE casilleros MODIFY COLUMN NombreCasilla20 varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL;
