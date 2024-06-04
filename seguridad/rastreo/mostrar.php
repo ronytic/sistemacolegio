@@ -39,7 +39,7 @@ if (!empty($_POST)) {
 					<th>N</th>
 					<th><?php echo $idioma['Usuario'] ?></th>
 					<th></th>
-					<th width="300" style="max-width:300px"><?php echo $idioma['Datos'] ?></th>
+					<th width="600" style="max-width:600px"><?php echo $idioma['Datos'] ?></th>
 					<th>IP</th>
 					<th><?php echo $idioma['Hora'] ?></th>
 				</tr>
@@ -123,8 +123,8 @@ if (!empty($_POST)) {
 							<strong><?php echo $idioma['Archivo'] ?>:</strong> <?php echo $lg['Archivo'] ?><br><strong><?php echo $idioma['Referencia'] ?>:</strong> <?php echo $lg['Referencia'] ?>
 						</div>
 					</td>
-					<td>
-						<div class="pequeno">
+					<td width="600" style="max-width:600px">
+						<div class="pequeno" style="overflow-y: auto;">
 							<strong>Get</strong>:<?php echo $lg['Get'] ?><br>
 							<strong>Post</strong>:<?php echo $lg['Post'] ?>
 						</div>

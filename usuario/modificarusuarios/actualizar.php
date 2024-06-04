@@ -20,13 +20,13 @@ if (!empty($_POST)) {
 		"Activo" => "'$Activo'",
 	);
 	if ($Pass != "") {
-		$valores = array_merge(array("Pass" => "'$Pass'", "Pass2" => "SHA1('$Pass')"), $valores);
+		$valores = array_merge(array("Pass2" => "SHA1('$Pass')"), $valores);
 	}
 	if ($usuario->actualizarRegistro($valores, "CodUsuario=$CodUsuario")) {
-		?><div class="alert alert-success"><?php echo $idioma['DatosGuardadosCorrectamente'] ?></div>
+?><div class="alert alert-success"><?php echo $idioma['DatosGuardadosCorrectamente'] ?></div>
 	<?php
-		} else {
-			?><div class="alert alert-error"><?php echo $idioma['DatosGuardadosError'] ?></div>
+	} else {
+	?><div class="alert alert-error"><?php echo $idioma['DatosGuardadosError'] ?></div>
 <?php
 	}
 }

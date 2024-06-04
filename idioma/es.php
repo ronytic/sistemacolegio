@@ -919,7 +919,8 @@ $idioma['DatosUsuario'] = "Datos del Usuario";
 $idioma['GuardarConfiguracion'] = "Guardar Configuración";
 $idioma['SobreNombre'] = "SobreNombre";
 $idioma['RepetirContrasena'] = "Repetir Contraseña";
-$idioma['ContrasenaNoIgual'] = "Contraseña No son Iguales";
+$idioma['ContrasenaNoIgual'] = "Las contraseñas no son Iguales";
+$idioma['ContrasenaIgual'] = "Las contraseñas son Iguales";
 
 //Asistencia
 $idioma['RegistrarAsistencia'] = "Registrar Asistencia";
@@ -1092,7 +1093,7 @@ $idioma['ListadoUsuarios'] = "Listado de Usuarios";
 $idioma['NuevoUsuario'] = "Nuevo Usuario";
 $idioma['NoExisteUsuariosRegistrados'] = "No Existen Usuarios Registrados";
 $idioma['ModificarUsuario'] = "Modificar Usuario";
-$idioma['NotaContrasena'] = "La Contraseña será Modificada si introduce una nueva, si lo deja vacio mantendra la contraseña asignada anteriormente";
+$idioma['NotaContrasena'] = "La Contraseña será Modificada si introduce una nueva, si lo deja vacio mantendrá la contraseña asignada anteriormente";
 $idioma['NotaContrasenaNueva'] = "Introduzca la contraseña que le será asignado al Usuario";
 $idioma['Apodo'] = "Apodo";
 $idioma['Habilitado'] = "Habilitado";

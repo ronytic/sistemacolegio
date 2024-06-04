@@ -734,4 +734,5 @@ function convertirCuotaEnMes($cuota)
    }
    return $mes;
 }
+
    ?>
