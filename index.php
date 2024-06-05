@@ -10,7 +10,6 @@ if (isset($_SESSION['Nivel']) && in_array($_SESSION['Nivel'], [6, 7])) {
         header("Location:internet/alumno/");
     }
 }
-
 $folder = '';
 $titulo = "NPaginaPrincipal";
 ?>
@@ -40,7 +39,14 @@ $titulo = "NPaginaPrincipal";
                 <table>
                     <tr>
                         <td><?php echo $idioma['FechaCuotas'] ?><br><?php campo("FechaCuotas", "text", date("d-m-Y"), "input-medium") ?></td>
-                        <td><a href="factura/registro/" class="btn btn-mini"><i class="icon-plus"></i><?php echo $idioma['RegistrarFactura'] ?></a>
+                        <td>
+                            <?php
+                            $urlRegistroFactura = 'factura/registro/';
+                            if (isset($SistemaFacturacion) && $SistemaFacturacion == 'SistemaFacturacionElectronica') {
+                                $urlRegistroFactura = 'factura/registrosfe/';
+                            }
+                            ?>
+                            <a href="<?php echo $urlRegistroFactura ?>" class="btn btn-mini"><i class="icon-plus"></i><?php echo $idioma['RegistrarFactura'] ?></a>
                             <a href="cuotas/pagar/" class="btn btn-mini"><i class="icon-plus"></i><?php echo $idioma['RegistrarNuevosPagos'] ?></a>
                         </td>
                     </tr>
