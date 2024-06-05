@@ -20,7 +20,7 @@ if (!empty($_POST['CodAlumno'])) {
 	if (!count($cuo)) {
 		$cuo['Numero'] = "SinDeuda";
 	}
-	$nombres = capitalizar($al['Paterno']) . " " . capitalizar($al['Materno']) . " " . capitalizar($al['Nombres']) . " ";
+	$nombres = capitalizar($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']) . " ";
 	$valores = array(
 		"Alumno" => $nombres,
 		"Cuota" => $cuo['Numero'],

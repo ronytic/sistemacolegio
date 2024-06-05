@@ -420,3 +420,18 @@ div.horizontal:hover {
 .btn:focus {
   background-position: 0 0px !important;
 }
+/*
+ Table
+*/
+.tableverticalnone {
+  border: 1px solid #dddddd;
+}
+
+.tableverticalnone th,
+.tableverticalnone td {
+  border-left: none;
+}
+.anchocuota {
+  min-width: 100px;
+  max-width: 100px;
+}

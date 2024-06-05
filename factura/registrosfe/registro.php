@@ -14,7 +14,7 @@ if (isset($_POST)) {
             </div>
         </td>
         <td><input type="hidden" name="a[<?php echo $l ?>][CodCuota]" rel="<?php echo $l ?>">
-            <select class="input-mini MostrarCuota" name="a[<?php echo $l ?>][Cuota]" rel="<?php echo $l ?>">
+            <select class="input MostrarCuota anchocuota" name="a[<?php echo $l ?>][Cuota]" rel="<?php echo $l ?>">
             </select>
         </td>
         <td>

@@ -58,7 +58,7 @@ include_once($folder . "cabecerahtml.php");
       <div class="alert alert-error"><?php echo $idioma['NFacturaDuplicado'] ?></div>
     <?php } ?>
     <form action="guardar.php" method="post" id="formulario">
-      <table class="table table-bordered inicio">
+      <table class="table table-bordered inicio tableverticalnone">
         <thead>
           <!-- <tr>
             <th><?php echo $idioma['Fecha'] ?>:<br><input type="text" class="fecha" name="FechaFactura" value="<?php echo fecha2Str() ?>" required></th>
@@ -78,9 +78,8 @@ include_once($folder . "cabecerahtml.php");
 
           </tr>
         </thead>
-
       </table>
-      <table class="table table-bordered table-hover table-condensed inicio">
+      <table class="table table-bordered table-hover table-condensed inicio tableverticalnone">
         <thead>
           <tr>
             <th>N</th>
