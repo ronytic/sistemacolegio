@@ -4,7 +4,6 @@ if (isset($_POST)) {
 	$sino = array(1 => $idioma['Si'], 0 => $idioma['No']);
 	$valoridioma = array("es" => "Castellano", "ay" => 'Aymara', "qu" => "Quechua", "gu" => 'Guarani', "en" => 'Ingles');
 
-	$valoridioma = array("es" => "Castellano", "ay" => 'Aymara', "qu" => "Quechua", "gu" => 'Guarani', "en" => 'Ingles');
 	if ($_SESSION['Nivel'] == "1") {
 		$tipo['1'] = $idioma['Administrador'];
 	}
