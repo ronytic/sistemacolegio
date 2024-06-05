@@ -10,14 +10,20 @@ $(document).on("ready", function () {
 	$("#Pass,#PassRepetir").keyup(function () {
 		var Pass = $("#Pass").val();
 		var PassRepetir = $("#PassRepetir").val();
-		if (Pass == PassRepetir && fortaleza >= 4) {
-			$("#contrasenaigual").show();
-			$("#contrasenanoigual").hide();
-			$("#botonSubmit").removeAttr("disabled");
+		if (Pass != '') {
+			if (Pass == PassRepetir && fortaleza >= 4) {
+				$("#contrasenaigual").show();
+				$("#contrasenanoigual").hide();
+				$("#botonSubmit").removeAttr("disabled");
+			} else {
+				$("#contrasenaigual").hide();
+				$("#contrasenanoigual").show();
+				$("#botonSubmit").attr("disabled", "disabled");
+			}
 		} else {
 			$("#contrasenaigual").hide();
-			$("#contrasenanoigual").show();
-			$("#botonSubmit").attr("disabled", "disabled");
+			$("#contrasenanoigual").hide();
+			$("#botonSubmit").removeAttr("disabled");
 		}
 	});
 

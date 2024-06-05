@@ -109,7 +109,7 @@ $UrlBase = url_todo();
 	<!--<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">-->
 
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/ui/jquery.ui.all.css" rel="stylesheet">
-	<link id="bootstrap-style" href="<?php echo $folder; ?>css/estilo.css?12341" rel="stylesheet">
+	<link id="bootstrap-style" href="<?php echo $folder; ?>css/estilo.css?v1" rel="stylesheet">
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/offline-theme-chrome.css" rel="stylesheet">
 	<link id="bootstrap-style" href="<?php echo $folder; ?>css/offline-language-spanish.css" rel="stylesheet">
 	<!-- Fin: CSS -->

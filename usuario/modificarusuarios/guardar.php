@@ -30,10 +30,10 @@ if (!empty($_POST)) {
 		"HoraRegistro" => "'$HoraUsuario'",
 	);
 	if ($usuario->insertarRegistro($valores, 0)) {
-		?><div class="alert alert-success"><?php echo $idioma['DatosGuardadosCorrectamente'] ?></div>
+?><div class="alert alert-success"><?php echo $idioma['DatosGuardadosCorrectamente'] ?></div>
 	<?php
-		} else {
-			?><div class="alert alert-error"><?php echo $idioma['DatosGuardadosError'] ?></div>
+	} else {
+	?><div class="alert alert-error"><?php echo $idioma['DatosGuardadosError'] ?></div>
 <?php
 	}
 }

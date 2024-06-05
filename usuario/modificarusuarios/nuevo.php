@@ -19,17 +19,17 @@ if (isset($_POST)) {
 		<table class="table table-bordered table-striped">
 			<tr>
 				<td><?php echo $idioma['Paterno'] ?><br>
-					<input type="text" value="<?php echo isset($usua) ? $usua['Paterno'] : '' ?>" name="Paterno" class="span12" placeholder="">
+					<input type="text" value="<?php echo isset($usua) ? $usua['Paterno'] : '' ?>" name="Paterno" class="span12" placeholder="" required>
 				</td>
 			</tr>
 			<tr>
 				<td><?php echo $idioma['Materno'] ?><br>
-					<input type="text" value="<?php echo isset($usua) ? $usua['Materno'] : '' ?>" name="Materno" class="span12" placeholder="">
+					<input type="text" value="<?php echo isset($usua) ? $usua['Materno'] : '' ?>" name="Materno" class="span12" placeholder="" required>
 				</td>
 			</tr>
 			<tr>
 				<td><?php echo $idioma['Nombres'] ?><br>
-					<input type="text" value="<?php echo isset($usua) ? $usua['Nombres'] : '' ?>" name="Nombres" class="span12" placeholder="">
+					<input type="text" value="<?php echo isset($usua) ? $usua['Nombres'] : '' ?>" name="Nombres" class="span12" placeholder="" required>
 				</td>
 			</tr>
 			<tr>
@@ -39,13 +39,14 @@ if (isset($_POST)) {
 			</tr>
 			<tr>
 				<td><?php echo $idioma['Usuario'] ?><br>
-					<input type="text" value="<?php echo isset($usua) ? $usua['Usuario'] : '' ?>" name="Usuario" class="span12" placeholder="">
+					<input type="text" value="<?php echo isset($usua) ? $usua['Usuario'] : '' ?>" name="Usuario" class="span12" placeholder="" required>
 				</td>
 			</tr>
 			<tr>
 				<td><?php echo $idioma['Contrasena'] ?><br>
-					<input type="text" value="" name="Pass" class="span12" placeholder="">
+					<input type="text" value="" name="Pass" class="span12" placeholder="" id="Pass" required>
 					<small><?php echo $idioma['NotaContrasenaNueva'] ?></small>
+					<?php htmlListadoCriteriosContrasena(); ?>
 				</td>
 			</tr>
 			<tr>
@@ -89,7 +90,7 @@ if (isset($_POST)) {
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
+				<td><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>" id="guardar"></td>
 			</tr>
 		</table>
 	</form>

@@ -60,7 +60,7 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
                 <tr>
                     <td><?php echo $idioma['Contrasena'] ?>:</td>
-                    <td><?php campo("Pass", "password", "", "span6", 0, $idioma['Contrasena']) ?>
+                    <td><?php campo("Pass", "password", "", "span6", 0, $idioma['Contrasena'], 0, ['autocomplete' => 'off']) ?>
                         <div id="password-strength-status"></div>
                         <?php htmlListadoCriteriosContrasena(); ?>
                     </td>
@@ -68,7 +68,7 @@ include_once($folder . "cabecerahtml.php");
                 <tr>
                     <td><?php echo $idioma['RepetirContrasena'] ?>:</td>
                     <td>
-                        <?php campo("PassRepetir", "password", "", "span6", 0, $idioma['RepetirContrasena']) ?>
+                        <?php campo("PassRepetir", "password", "", "span6", 0, $idioma['RepetirContrasena'], 0, ['autocomplete' => 'off']) ?>
                         <div id="contrasenaigual" class="alert alert-success" style="display:none"><?php echo $idioma['ContrasenaIgual'] ?></div>
                         <div id="contrasenanoigual" class="alert alert-error" style="display:none"><?php echo $idioma['ContrasenaNoIgual'] ?></div>
                     </td>

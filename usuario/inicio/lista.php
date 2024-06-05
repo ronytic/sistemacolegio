@@ -24,10 +24,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $usuario->mostrarDatos($lu['CodUsuario']);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['Administrador'];
-					$Foto = "imagenes/usuario/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/usuario/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 			case "2": {
@@ -35,10 +35,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $usuario->mostrarDatos($lu['CodUsuario']);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['Director'];
-					$Foto = "imagenes/usuario/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/usuario/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 			case "3": {
@@ -46,10 +46,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $docente->mostrarDocente($lu['CodUsuario']);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['Docente'];
-					$Foto = "imagenes/docentes/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/docentes/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 			case "4": {
@@ -57,10 +57,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $usuario->mostrarDatos($lu['CodUsuario']);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['Secretaria'];
-					$Foto = "imagenes/usuario/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/usuario/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 			case "5": {
@@ -68,10 +68,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $usuario->mostrarDatos($lu['CodUsuario']);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['Regente'];
-					$Foto = "imagenes/usuario/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/usuario/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 			case "6": {
@@ -79,10 +79,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $alumno->mostrarTodoDatos($lu['CodUsuario'], 2);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['PadreFamilia'];
-					$Foto = "imagenes/alumnos/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/alumnos/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 			case "7": {
@@ -90,10 +90,10 @@ $logu = $logusuario->mostrarUsuariosCantidad(4, $Tipo);
 					$ul = $alumno->mostrarTodoDatos($lu['CodUsuario'], 2);
 					$ul = array_shift($ul);
 					$tipousuario = $idioma['Alumno'];
-					$Foto = "imagenes/alumnos/" . $ul['Foto'];
-					$Paterno = $ul['Paterno'];
-					$Materno = $ul['Materno'];
-					$Nombres = $ul['Nombres'];
+					$Foto = "imagenes/alumnos/" . ($ul['Foto'] ?? '0.jpg');
+					$Paterno = $ul['Paterno'] ?? '';
+					$Materno = $ul['Materno'] ?? '';
+					$Nombres = $ul['Nombres'] ?? '';
 				}
 				break;
 		}

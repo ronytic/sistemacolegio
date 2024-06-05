@@ -8,6 +8,8 @@ include_once($folder . "cabecerahtml.php");
 <?php /*<script type="text/javascript" src="../../js/core/plugins/jquery.chosen.min.js" language="javascript"></script> */ ?>
 <script language="javascript" type="text/javascript" src="../../js/core/plugins/jquery.alphanumeric.pack.js"></script>
 <script language="javascript" type="text/javascript" src="../../js/usuario/modificarusuarios.js"></script>
+<script language="javascript" type="text/javascript" src="../../js/core/plugins/check-strength-password/asset/password-strength.js"></script>
+<link rel="stylesheet" href="../../js/core/plugins/check-strength-password/asset/password-strength.css">
 <script language="javascript">
     var MensajeEliminar = "<?php echo htmlspecialchars($idioma['MensajeEliminarUsuario']) ?>";
     var MensajeModificar = "<?php echo htmlspecialchars($idioma['MensajeModificarUsuario']) ?>";

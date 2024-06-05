@@ -745,6 +745,7 @@ function htmlListadoCriteriosContrasena()
          var MuyDebilMensajeValidacion = "<?= $idioma['MuyDebil'] ?>";
          var PromedioMensajeValidacion = "<?= $idioma['Promedio'] ?>";
       </script>
+      <div id="password-strength-status"></div>
       <ul class="pswd_info" id="passwordCriterion">
          <li data-criterion="length" class="invalid">5-15 <strong><?php echo $idioma['LetrasCaracteres'] ?></strong></li>
          <li data-criterion="capital" class="invalid"><?php echo $idioma['AlMenos'] ?> <strong><?php echo $idioma['UnCaracterMayuscula'] ?></strong></li>
