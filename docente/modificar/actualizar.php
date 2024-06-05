@@ -6,7 +6,7 @@ if (isset($_POST)) {
 	include_once("../../class/docente.php");
 	$docente = new docente;
 	$Usuario = $CodDocente . mb_strtolower(quitarSimbolos($Paterno), "utf8");
-	$Password = date("jnY", strtotime($FechaNac));
+	$Password = date("Y", strtotime($FechaNac));
 	$valores = array(
 		"Paterno" => "'$Paterno'",
 		"Materno" => "'$Materno'",

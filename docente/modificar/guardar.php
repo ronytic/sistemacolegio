@@ -7,7 +7,7 @@ if (isset($_POST)) {
 	$docente = new docente;
 	$Usuario = $CodDocente . mb_strtolower(quitarSimbolos($Paterno), "utf8");
 	// $contra = mb_strtolower(generarPalabra(), "utf8");
-	$Password = date("jnY", strtotime($FechaNac));
+	$Password = date("Y", strtotime($FechaNac));
 	$CodBarra = "P" . rand(100000, 999999) . "" . rand(10, 99);
 	$valores = array(
 		"Paterno" => "'$Paterno'",
