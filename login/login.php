@@ -53,6 +53,7 @@ print_r($navegador);*/
             //Padre de familia
             $reg = $alumno->loginPadre($usuario, $pass);
             $reg = array_shift($reg);
+            $reg['Idioma'] = $_COOKIE['Idioma'];
             $Nivel = 6;
             $sw = 0;
         } elseif (preg_match('/^([a-z])*[0-9]{1,4}$/', $usuarioAl)) {
@@ -60,13 +61,14 @@ print_r($navegador);*/
             //echo $usuario;
             $reg = $alumno->loginAlumno($usuario, $pass);
             $reg = array_shift($reg);
+            $reg['Idioma'] = $_COOKIE['Idioma'];
             $Nivel = 7;
             $sw = 0;
         } elseif (preg_match('/^[0-9]+[a-z]*$/', $usuario)) {
             //Docente
-
             $reg = $docente->loginDocente($usuario, $pass);
             $reg = array_shift($reg);
+            $reg['Idioma'] = $_COOKIE['Idioma'];
             $Nivel = 3;
             $sw = 0;
         } else {
@@ -104,7 +106,7 @@ print_r($navegador);*/
                 "Lenguaje" => "'$lenguaje'",
             );
             $logusuario->insertarRegistro($valuesLog, 0);
-            //mysql_query("INSERT INTO logusuarios VALUES(NULL,$codUsuario,$Nivel,'$url','$fecha','$hora','$agente','$ip','$referencia','$lenguaje')");
+
             $_SESSION['CodUsuarioLog'] = $codUsuario;
             $_SESSION['LoginSistemaColegio'] = 1;
             $_SESSION['Nivel'] = $Nivel;

@@ -12,6 +12,7 @@ if (!(isset($_SESSION["LoginSistemaColegio"]) && $_SESSION['LoginSistemaColegio'
     if (!file_exists(RAIZ . "idioma/" . $idiomaarchivo . ".php")) {
         $idiomaarchivo = "es";
     }
+
     include_once RAIZ . "idioma/" . $idiomaarchivo . ".php";
 
     include_once RAIZ . "funciones/funciones.php";

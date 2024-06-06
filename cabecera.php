@@ -90,6 +90,9 @@ switch ($Nivel) {
 							<li><a href="<?php echo $folder; ?>../csb2012/"><?php echo $idioma['Sistema'] ?> 2012</a></li>
 							<li><a href="<?php echo $folder; ?>../colegio2013/"><?php echo $idioma['Sistema'] ?> 2013</a></li>
 						<?php endif; ?>
+						<?php if ($_SESSION['Nivel'] == 3 || $_SESSION['Nivel'] == 6 || $_SESSION['Nivel'] == 7) : ?>
+							<li><a href="<?php echo $folder; ?>usuario/cambiarcontrasena/"><?php echo $idioma['CambiarContraseña'] ?></a></li>
+						<?php endif; ?>
 						<li class="divider"></li>
 						<li><a href="<?php echo $folder; ?>login/logout.php"><?php echo $idioma['SalirSistema'] ?></a></li>
 					</ul>

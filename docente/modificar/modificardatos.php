@@ -88,7 +88,7 @@ if (isset($_POST)) {
                 </tr>
                 <tr class="resaltar">
                     <td><?php echo $idioma['Contraseña'] ?></td>
-                    <td class="resaltar"><span id="pass"><?php echo $doc['Password'] ?></span> <a href="cambiarcontrasena.php" class="btn btn-danger btn-mini enlacepost" data-campos="CodDocente=<?php echo $CodDocente ?>" data-respuesta="#pass" data-mensaje="<?php echo $idioma['SeguroCambiarContraseña'] ?>	"><?php echo $idioma['CambiarContraseña'] ?></a></td>
+                    <td class="resaltar"><span id="pass"><?php echo $doc['Password'] ?></span> <a href="cambiarcontrasena.php" class="btn btn-danger btn-mini enlacepost" data-campos="CodDocente=<?php echo $CodDocente ?>" data-respuesta="#pass" data-mensaje="<?php echo $idioma['SeguroCambiarContraseña'] ?>"><?php echo $idioma['CambiarContraseña'] ?></a></td>
                 </tr>
             </table>
         </div>

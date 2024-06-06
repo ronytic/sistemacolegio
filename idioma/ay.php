@@ -28,7 +28,7 @@ $idioma['Configuracion'] = "Configuración";
 $idioma['Notificacion'] = "Notificaciones";
 $idioma['TareaPendiente'] = "Tareas Pendientes";
 $idioma['Mensajes'] = "Mensajes";
-$idioma['Agenda'] = "Agenda";
+$idioma['Agenda'] = "Sapüru Uñakipañataki";
 $idioma['MisActividades'] = "Mis Actividades";
 $idioma['Salir'] = "Salir";
 $idioma['VersionResumida'] = "Versión Resumida del Sistema";
@@ -40,7 +40,7 @@ $idioma['TotalObservaciones'] = "Total de Observaciones";
 $idioma['AccesosUsuarioSistema'] = "Accesos de Usuarios al Sistema";
 //Menu
 $idioma['Menu'] = "Menú";
-$idioma['Inicio'] = "Inicio";
+$idioma['Inicio'] = "Qalltaña";
 
 //Navegación
 $idioma['NInscripcionAlumnoNuevo'] = "Inscripción Alumno Nuevo";
@@ -1038,7 +1038,7 @@ $idioma['ListadoMensajes'] = "Listado de Mensajes";
 $idioma['NoExisteMensajesRegistrados'] = "No Existen Mensajes Registrados";
 $idioma['Error'] = "Error";
 $idioma['Advertencia'] = "Advertencia";
-$idioma['Comunicado'] = "Comunicado";
+$idioma['Comunicado'] = "Sapüru Uñakipañataki";
 $idioma['Tipo'] = "Tipo";
 $idioma['NivelUsuario'] = "Nivel de Usuario";
 $idioma['TipoMensaje'] = "Tipo de Mensaje";
@@ -1179,7 +1179,6 @@ $idioma['NotaValido'] = "Una Materia se le asigna con el valor 'SI' cuando la Ma
 $idioma['NotaPromedioCiencias'] = "Se le asgina el valor de si cuando la Materia se tomará como parte para calcular la nota de la materia combinada";
 $idioma['NoExisteMateriasRegistrados'] = "No Existen Materias Registradas";
 /*Internet*/
-$idioma['Inicio'] = "Inicio";
 $idioma['Cuotas'] = "Cuotas";
 $idioma['Pendiente'] = "Pendiente";
 $idioma['Cancelado'] = "Cancelado";

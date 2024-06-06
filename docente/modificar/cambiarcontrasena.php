@@ -4,7 +4,10 @@ if (isset($_POST)) {
 	include_once("../../class/docente.php");
 	$docente = new docente;
 	extract($_POST);
-	$contra = mb_strtolower(generarPalabra(), "utf8");
+	$doc = $docente->mostrarTodoDatosDocente($CodDocente);
+	$doc = array_shift($doc);
+	$contra = date("Y", strtotime($doc['FechaNac']));
+	//$contra = mb_strtolower(generarPalabra(), "utf8");
 	$valores = array("Password" => "'$contra'");
 
 	if ($docente->actualizarRegistro($valores, $CodDocente)) {
