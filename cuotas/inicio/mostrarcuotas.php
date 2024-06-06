@@ -8,7 +8,7 @@ if (isset($_POST)) {
 	$alumno = new alumno;
 	$curso = new curso;
 	$Desde = fecha2Str($_POST['Fecha'], 0);
-	$cuotas = $cuota->mostrarCuotasWhere("cuota c,alumno a", "a.Paterno,a.Materno,a.Nombres,a.CodCurso,c.*", "c.CodAlumno=a.CodALumno and DATE(c.Fecha) = '$Desde' and c.Cancelado=1 ", "a.CodCurso,c.Factura,c.Numero");
+	$cuotas = $cuota->mostrarCuotasWhere("cuota c, alumno a, curso cur", "a.Paterno,a.Materno,a.Nombres,a.CodCurso,c.*,cur.Abreviado", "c.CodAlumno=a.CodAlumno and a.CodCurso = cur.CodCurso and DATE(c.Fecha) = '$Desde' and c.Cancelado=1 ", "a.CodCurso,c.Factura,c.Numero");
 	$MontoTotal = 0;
 	$i = 0;
 	if (count($cuotas)) {
@@ -37,19 +37,18 @@ if (isset($_POST)) {
 			<?php
 			foreach ($cuotas as $cuo) {
 				$i++;
-				$al = $alumno->mostrarTodoDatos($cuo['CodAlumno']);
-				$al = array_shift($al);
-				$nombre = explode(" ", $al['Nombres']);
-				$nombre = array_shift($nombre);
-				$cur = $curso->mostrarCurso($al['CodCurso']);
-				$cur = array_shift($cur);
+				// $al = $alumno->mostrarTodoDatos($cuo['CodAlumno']);
+				// $al = array_shift($al);
+				// $nombre = explode(" ", $al['Nombres']);
+				// $nombre = array_shift($nombre);
+				// $cur = $curso->mostrarCurso($al['CodCurso']);
+				// $cur = array_shift($cur);
 				$fechaPago = date("d-m-Y", strtotime($cuo['Fecha']));
-				$MontoTotal += $cuo['MontoPagar'];
 			?>
 				<tr>
 					<td><?php echo $i; ?></td>
-					<td><?php echo capitalizar($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']); ?></td>
-					<td><small><?php echo $cur['Abreviado']; ?></small></td>
+					<td><?php echo capitalizar($cuo['Paterno'] . " " . $cuo['Materno'] . " " . $cuo['Nombres']); ?></td>
+					<td><small><?php echo $cuo['Abreviado']; ?></small></td>
 					<td><small><?php echo fecha2Str($cuo['Fecha']); ?></small></td>
 					<td><?php echo $cuo['Numero']; ?></td>
 					<td><?php echo $cuo['Factura']; ?></td>
