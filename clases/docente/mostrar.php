@@ -60,7 +60,7 @@ if (isset($_POST)) {
 						} ?>
 						<hr class="separador">
 						<div class="mostrarHora centrar" title="<?php echo $idioma['FechaRegistro'] ?>"><?php echo fecha2Str($c['FechaRegistro']) . " " . hora2Str($c['HoraRegistro']) ?><?php if ($c['CodAlumno'] != "0") { ?> - <?php echo capitalizar($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']);
-																																																					} ?></div>
+																																																								} ?></div>
 					</td>
 					<td>
 						<?php if ($c['CodDocente'] == $CodDocente) { ?><a class="btn btn-mini eliminar" rel="<?php echo $c['CodClases'] ?>" title="<?php echo $idioma['Eliminar'] ?>">x</a><?php } ?>

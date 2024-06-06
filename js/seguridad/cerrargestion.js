@@ -1,18 +1,18 @@
-$(document).ready(function(e) {
-	$("#respuesta").ajaxStart(function() {
-			$("#resultadosubida").html('');
-            $("#imagencargador").show("fast");
-        });
-    $("#cerrargestion").click(function(e) {
-        if(confirm(SeguroCerrarGestion)){
-            $.post("cerrar.php",function(data){
+$(document).ready(function (e) {
+    $("#respuesta").ajaxStart(function () {
+        $("#resultadosubida").html('');
+        $("#imagencargador").show("fast");
+    });
+    $("#cerrargestion").click(function (e) {
+        if (confirm(SeguroCerrarGestion)) {
+            $.post("cerrar.php", function (data) {
                 $("#imagencargador").hide("fast");
-                $("#resultadocierre").html(""+data+"");
+                $("#resultadocierre").html("" + data + "");
 
             });
         }
-		e.preventDefault();
-		e.stopPropagation();
-		return false;
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
     });
 });

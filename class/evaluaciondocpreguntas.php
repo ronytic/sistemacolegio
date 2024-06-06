@@ -1,6 +1,6 @@
-<?php 
+<?php
 include_once 'bd.php';
-class evaluaciondocpreguntas extends bd{
-	var $tabla="evaluacionDocPreguntas";
+class evaluaciondocpreguntas extends bd
+{
+	var $tabla = "evaluacionDocPreguntas";
 }
- ?>

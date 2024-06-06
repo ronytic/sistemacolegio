@@ -1,23 +1,26 @@
 <?php
 include_once("../../login/check.php");
-if(!empty($_POST)){
+if (!empty($_POST)) {
 	extract($_POST);
 	include_once("../../class/observaciones.php");
-	$observaciones=new observaciones;
-	$valores=array("Nombre"=>"'$Nombre'",
-				"NivelObservacion"=>"'$NivelObservacion'",
-				"Docente"=>"'$Docente'",
-				"Posicion"=>"'$Posicion'",
-				"Permanente"=>"'0'",
+	$observaciones = new observaciones;
+	$valores = array(
+		"Nombre" => "'$Nombre'",
+		"NivelObservacion" => "'$NivelObservacion'",
+		"Docente" => "'$Docente'",
+		"Posicion" => "'$Posicion'",
+		"Permanente" => "'0'",
 	);
-	if($observaciones->insertarRegistro($valores)){
-		?><div class="alert alert-success"><?php echo $idioma['DatosGuardadosCorrectamente']?></div>
-        <?php	
-	}else{
-		?><div class="alert alert-error"><?php echo $idioma['DatosGuardadosError']?></div>
-        <?php
+	if ($observaciones->insertarRegistro($valores)) {
+?><div class="alert alert-success"><?php echo $idioma['DatosGuardadosCorrectamente'] ?></div>
+	<?php
+	} else {
+	?><div class="alert alert-error"><?php echo $idioma['DatosGuardadosError'] ?></div>
+<?php
 	}
 }
 ?>
 
-<script language="javascript">mostrar();</script>
+<script language="javascript">
+	mostrar();
+</script>

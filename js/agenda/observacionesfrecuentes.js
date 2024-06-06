@@ -1,28 +1,28 @@
-$(document).on("ready",function(){
-	mostrar();	
-	$(document).on("click",".eliminar",function(e){
+$(document).on("ready", function () {
+	mostrar();
+	$(document).on("click", ".eliminar", function (e) {
 		e.preventDefault();
-		if(confirm(MensajeEliminar)){
-			var CodObservacionesFrecuentes=$(this).attr("rel");
-			$.post("eliminar.php",{'CodObservacionesFrecuentes':CodObservacionesFrecuentes},function(data){mostrar();});
+		if (confirm(MensajeEliminar)) {
+			var CodObservacionesFrecuentes = $(this).attr("rel");
+			$.post("eliminar.php", { 'CodObservacionesFrecuentes': CodObservacionesFrecuentes }, function (data) { mostrar(); });
 		}
 	});
-	$(document).on("click",".modificar",function(e){
+	$(document).on("click", ".modificar", function (e) {
 		e.preventDefault();
-		if(confirm(MensajeModificar)){
+		if (confirm(MensajeModificar)) {
 			cargandoG("#configuracion");
-			var CodObservacionesFrecuentes=$(this).attr("rel");
-			$.post("modificar.php",{'CodObservacionesFrecuentes':CodObservacionesFrecuentes},function(data){$(".configuracion").html(data);});
+			var CodObservacionesFrecuentes = $(this).attr("rel");
+			$.post("modificar.php", { 'CodObservacionesFrecuentes': CodObservacionesFrecuentes }, function (data) { $(".configuracion").html(data); });
 		}
 	});
-	$(document).on("click","#nuevo",function(e){
+	$(document).on("click", "#nuevo", function (e) {
 		e.preventDefault();
 		cargandoG("#configuracion");
-		var CodObservacionesFrecuentes=$(this).attr("rel");
-		$.post("nuevo.php",{'CodObservacionesFrecuentes':CodObservacionesFrecuentes},function(data){$(".configuracion").html(data);});
+		var CodObservacionesFrecuentes = $(this).attr("rel");
+		$.post("nuevo.php", { 'CodObservacionesFrecuentes': CodObservacionesFrecuentes }, function (data) { $(".configuracion").html(data); });
 	});
 });
-function mostrar(){
+function mostrar() {
 	cargandoG("#listadocursos");
-	$.post("mostrar.php","",function(data){$("#listadocursos").html(data)});	
+	$.post("mostrar.php", "", function (data) { $("#listadocursos").html(data) });
 }

@@ -1,11 +1,11 @@
-var file="formularioAsignacion.php";
-var fileP="../../";
-function respuesta(data){
+var file = "formularioAsignacion.php";
+var fileP = "../../";
+function respuesta(data) {
 	$("#respuesta").html(data);
-	$("#formuCodigo").submit(function(e) {
+	$("#formuCodigo").submit(function (e) {
 		e.preventDefault();
-        var Codigo=$("input[name=Codigo]").val();
-		$.post("guardarCodigo.php",{'CodAlumno':CodAlumno,'CodBarra':Codigo},respuesta);
-		
-    });
+		var Codigo = $("input[name=Codigo]").val();
+		$.post("guardarCodigo.php", { 'CodAlumno': CodAlumno, 'CodBarra': Codigo }, respuesta);
+
+	});
 }

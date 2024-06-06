@@ -36,10 +36,10 @@ if (count($us)) {
                 <td><?php echo $tipo[$m['Nivel']] ?></td>
                 <td>
                     <a href="#" class="btn btn-mini modificar" title="<?php echo $idioma['Modificar'] ?>" rel="<?php echo $m['CodUsuario'] ?>"><i class="icon-pencil"></i></a>
-                    <?php //if (isset($m['Permanente']) && $m['Permanente'] == 0) { 
+                    <?php //if (isset($m['Permanente']) && $m['Permanente'] == 0) {
                     ?>
                     <a href="#" class="btn btn-mini eliminar" title="<?php echo $idioma['Eliminar'] ?>" rel="<?php echo $m['CodUsuario'] ?>"><i class="icon-remove"></i></a>
-                    <?php //} 
+                    <?php //}
                     ?>
                 </td>
             </tr>

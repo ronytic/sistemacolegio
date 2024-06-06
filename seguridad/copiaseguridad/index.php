@@ -8,30 +8,30 @@ include_once("../../basededatos.php");
 //$usuario = "root";
 /* Password para la conexion a Mysql. */
 //$passwd = "";
- /* Host para la conexion a Mysql. */
+/* Host para la conexion a Mysql. */
 //$host = "localhost";
 /* Base de Datos que se seleccionará. */
 //$bd = "csb2012";
 /* Nombre del fichero que se descargará. */
-$fechahora=date("Y_m_d_H_i_s");
-$nombre = "backup_{$database}_".$fechahora.".dat";
-/* Determina si la tabla será vaciada (si existe) cuando  restauremos la tabla. */            
+$fechahora = date("Y_m_d_H_i_s");
+$nombre = "backup_{$database}_" . $fechahora . ".dat";
+/* Determina si la tabla será vaciada (si existe) cuando  restauremos la tabla. */
 $drop = true;
-/* 
+/*
 * Array que contiene las tablas de la base de datos que seran resguardadas.
 * Puede especificarse un valor false para resguardar todas las tablas
 * de la base de datos especificada en  $bd.
-* 
+*
 * Ejs.:
 * $tablas = false;
 *    o
 * $tablas = array("tabla1", "tabla2", "tablaetc");
-* 
+*
 */
-$ln=mysql_connect($host,$user,$pass);
+$ln = mysql_connect($host, $user, $pass);
 mysql_select_db($database);
 $tablas = false;
-/* 
+/*
 * Tipo de compresion.
 * Puede ser "gz", "bz2", o false (sin comprimir)
 */
@@ -45,10 +45,10 @@ $compresion = false;
 
 
 /* Se busca las tablas en la base de datos */
-if ( empty($tablas) ) {
+if (empty($tablas)) {
     $consulta = "SHOW TABLES FROM $database;";
     $respuesta = mysql_query($consulta, $ln)
-    or die("No se pudo ejecutar la consulta: ".mysql_error());
+        or die("No se pudo ejecutar la consulta: " . mysql_error());
     while ($fila = mysql_fetch_array($respuesta, MYSQL_NUM)) {
         $tablas[] = $fila[0];
     }
@@ -64,13 +64,13 @@ $info['phpver'] = phpversion();
 ob_start();
 print_r($tablas);
 $representacion = ob_get_contents();
-ob_end_clean ();
+ob_end_clean();
 preg_match_all('/(\[\d+\] => .*)\n/', $representacion, $matches);
 $info['tablas'] = implode(";  ", $matches[1]);
 $dump = <<<EOT
 # +===================================================================
 # |
-# | Generado el {$info['fecha']} a las {$info['hora']} 
+# | Generado el {$info['fecha']} a las {$info['hora']}
 # | Servidor: {$_SERVER['HTTP_HOST']}
 # | MySQL Version: {$info['mysqlver']}
 # | PHP Version: {$info['phpver']}
@@ -81,11 +81,11 @@ $dump = <<<EOT
 
 EOT;
 foreach ($tablas as $tabla) {
-    
+
     $drop_table_query = "";
     $create_table_query = "";
     $insert_into_query = "";
-    
+
     /* Se halla el query que será capaz vaciar la tabla. */
     if ($drop) {
         $drop_table_query = "DROP TABLE IF EXISTS `$tabla`;";
@@ -97,30 +97,30 @@ foreach ($tablas as $tabla) {
     $create_table_query = "";
     $consulta = "SHOW CREATE TABLE $tabla;";
     $respuesta = mysql_query($consulta, $ln)
-    or die("No se pudo ejecutar la consulta: ".mysql_error());
+        or die("No se pudo ejecutar la consulta: " . mysql_error());
     while ($fila = mysql_fetch_array($respuesta, MYSQL_NUM)) {
-            $create_table_query = $fila[1].";";
+        $create_table_query = $fila[1] . ";";
     }
-    
+
     /* Se halla el query que será capaz de insertar los datos. */
     $insert_into_query = "";
     $consulta = "SELECT * FROM $tabla;";
     $respuesta = mysql_query($consulta, $ln)
-    or die("No se pudo ejecutar la consulta: ".mysql_error());
+        or die("No se pudo ejecutar la consulta: " . mysql_error());
     while ($fila = mysql_fetch_array($respuesta, MYSQL_ASSOC)) {
-            $columnas = array_keys($fila);
-            foreach ($columnas as $columna) {
-                if ( gettype($fila[$columna]) == "NULL" ) {
-                    $values[] = "NULL";
-                } else {
-                    $values[] = "'".mysql_real_escape_string($fila[$columna])."'";
-                }
+        $columnas = array_keys($fila);
+        foreach ($columnas as $columna) {
+            if (gettype($fila[$columna]) == "NULL") {
+                $values[] = "NULL";
+            } else {
+                $values[] = "'" . mysql_real_escape_string($fila[$columna]) . "'";
             }
-            $insert_into_query .= "INSERT INTO `$tabla` VALUES (".implode(", ", $values).");\n";
-            unset($values);
+        }
+        $insert_into_query .= "INSERT INTO `$tabla` VALUES (" . implode(", ", $values) . ");\n";
+        unset($values);
     }
-    
-$dump .= <<<EOT
+
+    $dump .= <<<EOT
 
 # | Vaciado de tabla '$tabla'
 # +------------------------------------->
@@ -151,7 +151,7 @@ if ( !headers_sent() ) {
         header("Content-type: application/x-gzip");
         echo gzencode($dump, 9);
         break;
-    case "bz2": 
+    case "bz2":
         header("Content-Disposition: attachment; filename=$nombre.bz2");
         header("Content-type: application/x-bzip2");
         echo bzcompress($dump, 9);
@@ -168,12 +168,10 @@ if ( !headers_sent() ) {
 header("Content-disposition: attachment; filename=$nombre");
 //header("Content-Type: application/force-download");
 header("Content-Transfer-Encoding: binary");
-header("Content-Length: ".strlen($dump));
+header("Content-Length: " . strlen($dump));
 header("Pragma: no-cache");
 header("Expires: 0");
 print $dump;
 //$f=fopen($nombre,"w+");
 //fwrite($f,$dump);
 //fclose($f);
-?> 
-

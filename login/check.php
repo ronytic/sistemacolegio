@@ -9,7 +9,9 @@ if (!(isset($_SESSION["LoginSistemaColegio"]) && $_SESSION['LoginSistemaColegio'
     header("Location:" . url_base() . $directory . "login/?u=" . $_SERVER['PHP_SELF']);
 } else {
     $idiomaarchivo = $_SESSION['Idioma'] != "" ? $_SESSION['Idioma'] : "es";
-    if (!file_exists(RAIZ . "idioma/" . $idiomaarchivo . ".php")) {$idiomaarchivo = "es";}
+    if (!file_exists(RAIZ . "idioma/" . $idiomaarchivo . ".php")) {
+        $idiomaarchivo = "es";
+    }
     include_once RAIZ . "idioma/" . $idiomaarchivo . ".php";
 
     include_once RAIZ . "funciones/funciones.php";

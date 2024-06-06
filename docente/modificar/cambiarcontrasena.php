@@ -1,15 +1,15 @@
 <?php
 include_once("../../login/check.php");
-if(isset($_POST)){
+if (isset($_POST)) {
 	include_once("../../class/docente.php");
-	$docente=new docente;
+	$docente = new docente;
 	extract($_POST);
-	$contra=mb_strtolower(generarPalabra(),"utf8");
-	$valores=array("Password"=>"'$contra'");
+	$contra = mb_strtolower(generarPalabra(), "utf8");
+	$valores = array("Password" => "'$contra'");
 
-	if($docente->actualizarRegistro($valores,$CodDocente)){
+	if ($docente->actualizarRegistro($valores, $CodDocente)) {
 		echo $contra;
-	}else{
+	} else {
 		echo $idioma['NoseGuardo'];
 	}
 }

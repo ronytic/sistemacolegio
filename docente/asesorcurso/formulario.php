@@ -4,7 +4,7 @@ if (isset($_POST)) {
 	include_once("../../class/curso.php");
 	$curso = new curso;
 
-	?>
+?>
 	<div class="alert alert-info guardarE"><strong><?php echo $idioma['SeleccionarCurso'] ?></strong></div>
 	<table class="table table-bordered table-hover">
 		<tr>

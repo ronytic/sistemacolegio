@@ -1,4 +1,4 @@
-var file="formulario.php";
-function respuesta(data){
+var file = "formulario.php";
+function respuesta(data) {
 	$("#respuesta").html(data);
 }

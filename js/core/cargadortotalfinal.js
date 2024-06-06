@@ -12,12 +12,12 @@
 }
 $.extend( $.fn.dataTableExt.oPagination, {
 	 "oLanguage": {
-            "sLengthMenu": "Displaysss _MENU_ records per page",
-            "sZeroRecords": "Nothing found - sorry",
-            "sInfo": "Showing _START_ to _END_ of _TOTAL_ records",
-            "sInfoEmpty": "Showing 0 to 0 of 0 records",
-            "sInfoFiltered": "(filtered from _MAX_ total records)"
-        },
+			"sLengthMenu": "Displaysss _MENU_ records per page",
+			"sZeroRecords": "Nothing found - sorry",
+			"sInfo": "Showing _START_ to _END_ of _TOTAL_ records",
+			"sInfoEmpty": "Showing 0 to 0 of 0 records",
+			"sInfoFiltered": "(filtered from _MAX_ total records)"
+		},
 	"bootstrap": {
 		"fnInit": function( oSettings, nPaging, fnDraw ) {
 			var oLang = oSettings.oLanguage.oPaginate;

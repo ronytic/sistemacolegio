@@ -29,14 +29,14 @@ if (!empty($_POST)) {
 			"Mensaje" => "'$Mensaje'"
 		);
 		$smsenviado->insertarRegistro($valores);
-		?>
+?>
 		<div class="alert alert-success">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<?php echo $idioma['MensajeEnviadoCorrectamente'] ?>
 		</div>
 	<?php
-		} else {
-			?>
+	} else {
+	?>
 		<div class="alert alert-error">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<?php echo $idioma['MensajeEnviadoError'] ?>

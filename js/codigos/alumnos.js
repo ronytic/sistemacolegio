@@ -1,5 +1,5 @@
-var file="codigos.php";
-var fileP="../../";
-function respuesta(data){
+var file = "codigos.php";
+var fileP = "../../";
+function respuesta(data) {
 	$("#respuesta").html(data);
 }
