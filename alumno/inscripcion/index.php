@@ -240,6 +240,10 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                     <td class="der"><?php echo $idioma['NombreFacturar'] ?></td>
                     <td><?php campo("FacturaA", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
+                <tr>
+                    <td class="der"><?php echo $idioma['Email'] ?></td>
+                    <td><?php campo("Email", "email", "", "span12", 0, "", 0, array("maxlength" => 150)) ?></td>
+                </tr>
             </table>
         </div>
         <div class="box-header">
@@ -327,10 +331,6 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 <tr>
                     <td class="der"><?php echo $idioma['CelularMadre'] ?></td>
                     <td><?php campo("CelularM", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['Email'] ?></td>
-                    <td><?php campo("Email", "email", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
                 </tr>
             </table>
         </div>

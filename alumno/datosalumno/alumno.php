@@ -234,10 +234,6 @@ if (isset($_GET)) {
                         <td class="der"><?php echo $idioma['CelularMadre'] ?></td>
                         <td><?php campo("CelularM", "text", capitalizar($al["CelularM"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
-                    <tr>
-                        <td class="der"><?php echo $idioma['Email'] ?></td>
-                        <td><?php campo("Email", "email", $al['Email'], "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
-                    </tr>
                 </table>
             </div>
 
@@ -265,6 +261,10 @@ if (isset($_GET)) {
                     <tr>
                         <td class="der"><?php echo $idioma['NombreFacturar'] ?></td>
                         <td><?php campo("FacturaA", "text", capitalizar($al["FacturaA"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['Email'] ?></td>
+                        <td><?php campo("Email", "email", $al['Email'], "span12", 0, "", 0, array("maxlength" => 150)) ?></td>
                     </tr>
                 </table>
             </div>

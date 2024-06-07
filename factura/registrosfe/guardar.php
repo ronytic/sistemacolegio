@@ -22,6 +22,12 @@ if (!empty($_POST)) {
 	$alumno = new alumno;
 	$al = $alumno->mostrarTodoDatos($CodAlumno);
 	$al = array_shift($al);
+	$valoresFacturasActualizar = [
+		'Email' => "'$Email'",
+		'Nit' => "'$NumeroDocumento'",
+		'FacturaA' => "'$NombreFactura'",
+	];
+	$alumno->actualizarDatosAlumno($valoresFacturasActualizar, $CodAlumno);
 	$SistemaFacturacion = $config->mostrarConfig("SistemaFacturacion", 1);
 	if ($SistemaFacturacion == "SistemaFacturacionElectronica") {
 		$SFECodPos = $config->mostrarConfig("SFECodPos", 1);
@@ -198,7 +204,7 @@ if (!empty($_POST)) {
 	} else {
 		$mensaje = $respuestaFactura['message'];
 		$tipo = "error";
-		// header("Location:ver.php?m=" . base64_encode($mensaje));
+		header("Location:ver.php?m=" . base64_encode($mensaje));
 	}
 	exit();
 
