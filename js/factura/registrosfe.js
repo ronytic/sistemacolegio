@@ -6,6 +6,18 @@ $(document).ready(function (e) {
 	var TipoBusqueda = "";
 	var Registro = 0;
 
+	$.post('verificarconexion.php', {}, function (data) {
+		let html = '';
+		if (data && data.status == true) {
+			html = '<div class="badge badge-success"><i class="icon-ok icon-white"></i> ' + CorrectaConexionServidor + '</div>';
+		} else {
+			html = '<div class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> ' + ErrorConexionServidor + '</div>';
+
+			$("#overlayer").css({ "height": ($("#contenidoRegistroFactura").height() + 50) + "px" });
+		}
+		$('#respuestaConexionServidor').html(html);
+	}, 'json');
+
 	$.post('../../configuracion/general/sfeconexion.php', {
 		'accion': 'obtenerTipoDocumentosIdentidad'
 	}, function (data) {
@@ -103,6 +115,9 @@ $(document).ready(function (e) {
 		});
 		$(".TotalBs").val(sumaTotal.toFixed(2));
 	});
+	$(document).on("focus", ".Cancelado", function (e) {
+		$(this).select();
+	});
 	$(document).on("change", ".Cancelado", function (e) {
 		TotalT = parseFloat($(".TotalBs").val());
 		Cancelado = parseFloat($(".Cancelado").val());
@@ -182,7 +197,7 @@ $(document).ready(function (e) {
 			$(".der").numeric({ allow: '.' });
 		});
 	}
-	$(document).on("submit", "#formulario", function (e) {
+	$(document).on("submit", "#formularioSFE", function (e) {
 		if (confirm(EstaSeguroRegistrarFactura)) {
 		} else {
 			e.preventDefault();
@@ -206,10 +221,10 @@ $(document).ready(function (e) {
 			$("#seleccionar").click();
 		}
 	}
-	$("#Guardar").click(function (e) {
-		e.preventDefault();
-		$("#formulario").submit();
-	});
+	// $("#Guardar").click(function (e) {
+	// 	e.preventDefault();
+	// 	$("#formulario").submit();
+	// });
 });
 
 function verificarNit() {

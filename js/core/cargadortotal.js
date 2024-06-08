@@ -48,6 +48,7 @@ function inicio() {
 	//$(window).trigger('resize.stickyTableHeaders');
 	//$("table:not(.inicio)").stickyTableHeaders();
 	/*Fin Gestionar Tabla*/
+	// $("input[type=date]").datepicker({ changeMonth: true, changeYear: true, yearRange: "c-100:c+10" });
 	$("input.fechatodo").datepicker({ changeMonth: true, changeYear: true });
 	$("input.fechatope").datepicker({ changeMonth: true, changeYear: true, "maxDate": '+0D', dateFormat: 'dd-mm-yy' });
 	//Al INICIO

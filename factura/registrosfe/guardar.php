@@ -1,4 +1,5 @@
 <?php
+
 include_once("../../login/check.php");
 if (!empty($_POST)) {
 	/*echo "<pre>";
@@ -85,7 +86,7 @@ if (!empty($_POST)) {
 	$respuestaFactura = $coreSFE->sendInvoice('', $datosFactura);
 	// var_dump($respuestaFactura);
 	if ($respuestaFactura['status'] == true) {
-		if ($respuestaFactura['data']['siat_code_description'] == "VALIDADA") {
+		if ($respuestaFactura['data']['siat_code_description'] == "VALIDADA" || $respuestaFactura['data']['status_invoice'] == 'Pending_Offline') {
 			$CUF = $respuestaFactura['data']['cuf'];
 			$UIDInvoice = $respuestaFactura['data']['uid_invoice'];
 			$NumeroFactura = $respuestaFactura['data']['invoice_number'];

@@ -463,4 +463,317 @@ class Core
         // }
         // return $resultado;
     }
+
+    function getSignificantEvents($SFEToken = '', $SFECodSucursal = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/synchronization/internal/significantevents";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function startSignificantEvent($SFEToken = '', $SFECodSucursal = '', $eventReasonCode = 1, $description = '', $codeDocumentSector = 11)
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/events/start";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+            "event_reason_code" => $eventReasonCode,
+            "description" => $description,
+            "code_document_sector" => $codeDocumentSector,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function showRegisteredEvents($SFEToken = '', $SFECodSucursal = '', $eventDate = '', $eventStatus = '', $codeDocumentSector = 11)
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/events/showregistered";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+            "code_document_sector" => $codeDocumentSector,
+            "event_date" => $eventDate,
+            "event_status" => $eventStatus,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function sendPackages($SFEToken = '', $SFECodSucursal = '', $uidEvent = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/events/package";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+            "uid_event" => $uidEvent,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function endSignificantEvent($SFEToken = '', $SFECodSucursal = '', $uidEvent = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/events/end";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+            "uid_event" => $uidEvent,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function cancelSignificantEvent($SFEToken = '', $SFECodSucursal = '', $uidEvent = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/events/cancel";
+        $data = array(
+            "siat_number_branch" => $SFECodSucursal,
+            "siat_code_pos" => 0,
+            "uid_event" => $uidEvent,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function sendEmail($SFEToken = '', $SFECodSucursal = '', $uidInvoice = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/invoice/sendemail";
+        $data = array(
+            "uid_invoice" => $uidInvoice,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+        // if ($resultado['status']) {
+        //     if (count($resultado['data']) == 1) {
+        //         $this->config->revisar('SFECodSucursal', "'" . $resultado['data'][0]['siat_number_branch'] . "'");
+        //     }
+        // }
+        // return $resultado;
+    }
+
+    function verifyStatusServer($SFEToken = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        if (empty($SFECodSucursal)) {
+            $SFECodSucursal = $this->config->mostrarConfig('SFECodSucursal', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/verifystatusserver";
+        $data = array();
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+    }
+
+    function verifyStatuServerSIN($SFEToken = '')
+    {
+        if (empty($SFEToken)) {
+            $SFEToken = $this->config->mostrarConfig('SFEToken', 1);
+        }
+        $url = $this->config->mostrarConfig('SFEUrl', 1) . "/verify_communication_siat";
+        $data = array(
+            "show_urls" => false,
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $SFEToken,
+            'Content-Type: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        $resultado = json_decode($result, true);
+        return $resultado;
+    }
 }

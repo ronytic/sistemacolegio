@@ -35,6 +35,8 @@ include_once($folder . "cabecerahtml.php");
   var MensajeEliminarRegistro = "<?php echo $idioma['MensajeEliminarRegistro'] ?>";
   var EstaSeguroRegistrarFactura = "<?php echo $idioma['EstaSeguroRegistrarFactura'] ?>";
   var NFacturaDuplicado = "<?php echo $idioma['NFacturaDuplicado'] ?>";
+  var ErrorConexionServidor = "<?php echo $idioma['ErrorConexionServidor'] ?>";
+  var CorrectaConexionServidor = "<?php echo $idioma['CorrectaConexionServidor'] ?>";
   var CodAlumno = "<?php echo $CodAlumno ?>";
   var CodigosAlumnos = new Array(<?php echo implode(",", $codigosalumnos) ?>);
   var ContarAlumnos = <?php echo $contardividido - 1 ?>;
@@ -51,13 +53,15 @@ include_once($folder . "cabecerahtml.php");
 <?php include_once($folder . "cabecera.php"); ?>
 <div class="span12 box">
   <div class="box-header">
-    <h2><?php echo $idioma['RegistrarFactura'] ?> </h2>
+    <h2><?php echo $idioma['RegistrarFactura'] ?></h2>
+    <div class="pull-right" id="respuestaConexionServidor"></div>
   </div>
-  <div class="box-content">
+  <div class="box-content" id="contenidoRegistroFactura">
+    <div id="overlayer" style="background-color:rgba(255,255,255,0.85);width:100%;position:absolute"></div>
     <?php if (isset($_GET['f']) && $_GET['f'] == 1) { ?>
       <div class="alert alert-error"><?php echo $idioma['NFacturaDuplicado'] ?></div>
     <?php } ?>
-    <form action="guardar.php" method="post" id="formulario">
+    <form action="guardar.php" method="post" id="formularioSFE">
       <table class="table table-bordered inicio tableverticalnone">
         <thead>
           <!-- <tr>
@@ -125,7 +129,7 @@ include_once($folder . "cabecerahtml.php");
         </tr>
         <tr class="info">
           <td class="resaltar der" colspan="2"><?php echo $idioma['Cancelado'] ?>: </td>
-          <td><input type="text" name="Cancelado" class="input-small der Cancelado" value="0.00"></td>
+          <td><input type="text" name="Cancelado" class="input-small der Cancelado" value="0.00" required></td>
           <td></td>
         </tr>
         <tr class="warning">

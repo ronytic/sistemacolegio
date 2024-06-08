@@ -18,6 +18,7 @@ $mensaje = base64_decode($mensaje);
 
 include_once($folder . "cabecerahtml.php");
 ?>
+<script src="../../js/factura/ver.js"></script>
 <?php include_once($folder . "cabecera.php"); ?>
 <div class="span12 box">
     <div class="box-content">
@@ -43,7 +44,7 @@ include_once($folder . "cabecerahtml.php");
                 <table class="table">
                     <tr>
                         <td class="der">CUF:</td>
-                        <td><b><?php echo $fac['CodigoControl'] ?></b></td>
+                        <td><b><?php echo $fac['LlaveDosificacion'] ?></b></td>
                     </tr>
                     <tr>
                         <td class="der">UID <?php echo $idioma['Factura'] ?>:</td>
@@ -55,11 +56,19 @@ include_once($folder . "cabecerahtml.php");
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['CorreoElectronico'] ?>:</td>
-                        <td><b><?php echo $RequestSIN['client_email'] ?></b></td>
+                        <td><b><?php echo $RequestSIN['client_email'] ?></b> <a class="btn btn-success btn-mini enlacecorreo" href="reenviarcorreo.php?uidFactura=<?php echo $ResponseSIN['data']['uid_invoice'] ?>" data-respuesta="#respuestaReenvioCorreo" data-mensaje="<?php echo $idioma['SeguroReenviarCorreo'] ?>"><?php echo $idioma['ReenviarCorreo'] ?></a>
+                            <div id="respuestaReenvioCorreo" style="display:inline-block; width:500px">
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="der"><?php echo $idioma['Estado'] ?>:</td>
+                        <td class=" der"><?php echo $idioma['Estado'] ?>:
+                        </td>
                         <td><b><?php echo $fac['Estado'] ?></b></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['EstadoFactura'] ?>:</td>
+                        <td><b><?php echo $ResponseSIN['data']['status_invoice'] ?></b></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['EnlaceSIN'] ?>:</td>

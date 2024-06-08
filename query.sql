@@ -45,3 +45,9 @@ ALTER TABLE casilleros MODIFY COLUMN NombreCasilla23 varchar(255) CHARACTER SET 
 ALTER TABLE casilleros MODIFY COLUMN NombreCasilla22 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL;
 ALTER TABLE casilleros MODIFY COLUMN NombreCasilla21 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL;
 ALTER TABLE casilleros MODIFY COLUMN NombreCasilla20 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL;
+
+--- 2024-06-07 17:18
+insert into
+	submenu
+	(`CodMenu`,	`Nombre`,`Url`,`Imagen`,`Admin`,`Director`,`Profesor`,`Secretaria`,`Regente`,`Padre`,`Alumno`,`Orden`,`Internet`,`Activo`)
+values(19,'RegistrarEventoSignificativo','registroeventosignificativo/','eventosignificativo.png',1,1,0,0,0,0,0,10,0,1);
