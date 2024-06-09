@@ -29,7 +29,7 @@ if ($contardividido > 1) {
 
 include_once($folder . "cabecerahtml.php");
 ?>
-<script language="javascript" type="text/javascript" src="../../js/factura/registrosfe.js"></script>
+<script language="javascript" type="text/javascript" src="../../js/factura/registrosfe.js?v1"></script>
 <script language="javascript" type="text/javascript" src="../../js/core/plugins/jquery.alphanumeric.pack.js"></script>
 <script language="javascript" type="text/javascript">
   var MensajeEliminarRegistro = "<?php echo $idioma['MensajeEliminarRegistro'] ?>";
