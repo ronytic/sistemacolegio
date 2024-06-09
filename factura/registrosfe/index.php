@@ -57,7 +57,7 @@ include_once($folder . "cabecerahtml.php");
     <div class="pull-right" id="respuestaConexionServidor"></div>
   </div>
   <div class="box-content" id="contenidoRegistroFactura">
-    <div id="overlayer" style="background-color:rgba(255,255,255,0.85);width:100%;position:absolute"></div>
+    <div id="overlayer" style="background-color:rgba(255,255,255,0.85);width:0%;position:absolute"></div>
     <?php if (isset($_GET['f']) && $_GET['f'] == 1) { ?>
       <div class="alert alert-error"><?php echo $idioma['NFacturaDuplicado'] ?></div>
     <?php } ?>

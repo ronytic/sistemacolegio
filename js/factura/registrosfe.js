@@ -13,7 +13,7 @@ $(document).ready(function (e) {
 		} else {
 			html = '<div class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> ' + ErrorConexionServidor + '</div>';
 
-			$("#overlayer").css({ "height": ($("#contenidoRegistroFactura").height() + 50) + "px" });
+			$("#overlayer").css({ "height": ($("#contenidoRegistroFactura").height() + 50) + "px", "width": ($("#contenidoRegistroFactura").width() + 0) + "px" });
 		}
 		$('#respuestaConexionServidor').html(html);
 	}, 'json');
