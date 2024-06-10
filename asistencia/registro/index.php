@@ -41,7 +41,7 @@ include_once($folder . "cabecerahtml.php");
             <h2><?php echo $idioma['Hora'] ?></h2>
         </div>
         <div class="box-content">
-            <div id="fechaasistencia"><?php echo utf8_encode(strftime("%A, %d de %B del %Y")); ?></div>
+            <div id="fechaasistencia"><?php echo capitalizar(diaSemana(date("N")) . strftime(", %d ")) . $idioma['De'] . " " . mes(date("n")) . " " . $idioma['De'] . strftime(" %Y"); ?></div>
             <div id="horaasistencia">00:00:00</div>
         </div>
     </div>
