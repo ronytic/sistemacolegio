@@ -6,7 +6,7 @@ require_once '../class/curso.php';
 
 $alumno = new alumno();
 $curso = new curso;
-$cursos = $curso->mostrarTodoRegistro("CodCurso=1");
+$cursos = $curso->mostrarTodoRegistro();
 $cuota = new cuota();
 foreach ($cursos as $cur) {
     $alumnos = $alumno->mostrarDatosAlumnos($cur['CodCurso'], 0);
