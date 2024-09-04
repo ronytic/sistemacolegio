@@ -18,6 +18,7 @@ print_r($navegador);*/
     $docente = new docente;
     $logusuario = new logusuario;
 
+    $idioma = $_COOKIE['Idioma'] ?? '';
     $url = $_POST['u'];
     if (empty($directory) || $directory == "") {
         $u = $url;
@@ -53,7 +54,7 @@ print_r($navegador);*/
             //Padre de familia
             $reg = $alumno->loginPadre($usuario, $pass);
             $reg = array_shift($reg);
-            $reg['Idioma'] = $_COOKIE['Idioma'];
+            $reg['Idioma'] = $idioma;
             $Nivel = 6;
             $sw = 0;
         } elseif (preg_match('/^([a-z])*[0-9]{1,4}$/', $usuarioAl)) {
@@ -61,14 +62,14 @@ print_r($navegador);*/
             //echo $usuario;
             $reg = $alumno->loginAlumno($usuario, $pass);
             $reg = array_shift($reg);
-            $reg['Idioma'] = $_COOKIE['Idioma'];
+            $reg['Idioma'] = $idioma;
             $Nivel = 7;
             $sw = 0;
         } elseif (preg_match('/^[0-9]+[a-z]*$/', $usuario)) {
             //Docente
             $reg = $docente->loginDocente($usuario, $pass);
             $reg = array_shift($reg);
-            $reg['Idioma'] = $_COOKIE['Idioma'];
+            $reg['Idioma'] = $idioma;
             $Nivel = 3;
             $sw = 0;
         } else {
