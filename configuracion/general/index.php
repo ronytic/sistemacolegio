@@ -790,24 +790,34 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
             </table>
         </div>
+        <div class="box-header">
+            <h2><?php echo $idioma['AccesoSistema'] ?><a name="accesosistema"></a></h2>
+        </div>
+        <div class="box-content">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td>
+                        <?php echo $idioma['RedirigirAlumnoVersionResumida'] ?>
+                        <div class="pequeno"><?php echo $idioma['RedirigirAlumnoVersionResumidaDetalle'] ?></div>
+                    </td>
+                    <td>
+                        <select class="span12" name="RedirigirAlumnoVersionResumida">
+                            <option value="0" <?php echo ($RedirigirAlumnoVersionResumida) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo ($RedirigirAlumnoVersionResumida) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
+                </tr>
+            </table>
+        </div>
         <?php if ($_SESSION['Nivel'] == 1) : ?>
             <div class="box-header">
                 <h2><?php echo $idioma['Avanzado'] ?><a name="avanzado"></a></h2>
             </div>
             <div class="box-content">
                 <table class="table table-bordered table-hover">
-                    <tr>
-                        <td>
-                            <?php echo $idioma['RedirigirAlumnoVersionResumida'] ?>
-                            <div class="pequeno"><?php echo $idioma['RedirigirAlumnoVersionResumidaDetalle'] ?></div>
-                        </td>
-                        <td>
-                            <select class="span12" name="RedirigirAlumnoVersionResumida">
-                                <option value="0" <?php echo ($RedirigirAlumnoVersionResumida) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
-                                <option value="1" <?php echo ($RedirigirAlumnoVersionResumida) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
-                            </select>
-                        </td>
-                    </tr>
                     <tr>
                         <td width="150"><?php echo $idioma['UrlInternet'] ?></td>
                         <td><input type="text" class="span12" name="UrlInternet" value="<?php echo (dato("UrlInternet")) ?>"></td>
