@@ -77,9 +77,11 @@ class bd
 		$res = mysqli_fetch_array($res);
 		$COLUMN_NAME = $res['COLUMN_NAME'];
 		// $query = "SHOW TABLE STATUS LIKE '$nombretabla'";
-		$query = "SELECT max($COLUMN_NAME)+1  as Auto_increment FROM " . $nombretabla . "";
+		$query = "SELECT COALESCE(max($COLUMN_NAME),0) + 1  as Auto_increment FROM " . $nombretabla . "";
 		$res = mysqli_query($this->l, $query);
-		return mysqli_fetch_array($res);
+		$res = mysqli_fetch_array($res);
+		$res['Auto_increment'] = (int)$res['Auto_increment'];
+		return $res;
 	}
 	function getRecords($where_str = false, $order_str = false, $group_str = false, $count = false, $start = 0, $order_strDesc = false)
 	{

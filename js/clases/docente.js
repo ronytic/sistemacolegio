@@ -4,6 +4,7 @@ $(document).on("ready", function () {
 	actualizar(event);
 	$("select[name=CodMateria]").change(actualizar);
 	$("select[name=CodCurso]").change(actualizar);
+	$("#FechaPresentacion").datepicker({ dateFormat: 'yy-mm-dd' });
 	$("#files").change(cambioArchivo);
 	$(document).on('submit', 'form#formulario', function (e) {
 		e.preventDefault(); // prevent native submit

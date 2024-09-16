@@ -1572,3 +1572,8 @@ $idioma['CorreoEnviadoCorrectamente'] = "Correo Enviado Correctamente";
 $idioma['ErrorEnviarCorreo'] = "Error al enviar el Correo";
 $idioma['ErrorConexionServidor'] = "Error de Conexión con el Servidor";
 $idioma['CorrectaConexionServidor'] = "Conexión Exitosa con el Servidor";
+
+$idioma['DatosClase'] = "Datos de la Clase";
+$idioma['NombreClase'] = "Nombre de la Clase";
+$idioma['Ej:ClaseLunes25/06/2024'] = "Ej: Clase Lunes 25/06/2024";
+$idioma['DetalleClase'] = "Detalle de la Clase";
