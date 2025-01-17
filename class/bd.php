@@ -28,6 +28,14 @@ class bd
 			$nombretabla = mb_strtolower($this->tabla, "utf8");
 		}
 	}
+	function verificarExistenciaTabla()
+	{
+		$nombretabla = mb_strtolower($this->tabla, "utf8");
+		$query = "SHOW TABLES LIKE '$nombretabla'";
+		$res = mysqli_query($this->l, $query);
+		$res = mysqli_fetch_array($res);
+		return $res;
+	}
 	function __destruct()
 	{
 		@mysqli_close($this->l);

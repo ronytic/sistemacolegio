@@ -1,5 +1,10 @@
 <?php
 include_once("../../login/check.php");
+if (empty($_POST['CodAlumno']) || $_POST['CodAlumno'] == 'null') {
+    echo "El curso no tiene Alumnos asignados.";
+    exit();
+}
+
 if (isset($_POST)) {
     $folder = "../../";
     $CodAlumno = $_POST['CodAlumno'];

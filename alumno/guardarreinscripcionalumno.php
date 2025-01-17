@@ -22,8 +22,9 @@ if (!empty($_POST)) {
 
 	$tmprude = $tmp_rude->mostrarDatos($CodAlu);
 	$tmprude = array_shift($tmprude);
-	//	print_r($tmprude);
-	//	exit();
+
+	// var_dump($tmprude);
+	// exit();
 	/**/
 	//$cnf=$conf->mostrarConfig();
 
@@ -209,49 +210,49 @@ if (!empty($_POST)) {
 	$alumno->insertarAlumno($valuesAl);
 	$documento->guardarDocumento($valuesDoc);
 
-	$valuesRude = array(
-		'CodAlumno' => $CodAlumno,
-		'PaisN' => "'" . $tmprude['PaisN'] . "'",
-		'ProvinciaN' => "'" . $tmprude['ProvinciaN'] . "'",
-		'LocalidadN' => "'" . $tmprude['LocalidadN'] . "'",
-		'Documento' => $tmprude['Documento'],
-		'CertOfi' => "'" . $tmprude['CertOfi'] . "'",
-		'CertLibro' => "'" . $tmprude['CertLibro'] . "'",
-		'CertPartida' => "'" . $tmprude['CertPartida'] . "'",
-		'CertFolio' => "'" . $tmprude['CertFolio'] . "'",
-		'Paralelo' => "'" . $tmprude['Paralelo'] . "'",
-		'Turno' => "'" . $tmprude['Turno'] . "'",
-		'CodigoSie' => "''",
-		'NombreUnidad' => "''",
-		'ProvinciaE' => "'" . $tmprude['ProvinciaE'] . "'",
-		'MunicipioE' => "'" . $tmprude['MunicipioE'] . "'",
-		'ComunidadE' => "'" . $tmprude['ComunidadE'] . "'",
-		'LenguaMater' => "'" . $tmprude['LenguaMater'] . "'",
-		'CastellanoI' => $tmprude['CastellanoI'],
-		'AymaraI' => $tmprude['AymaraI'],
-		'InglesI' => $tmprude['InglesI'],
-		'PerteneceA' => "'" . $tmprude['PerteneceA'] . "'",
-		'CentroSalud' => $tmprude['CentroSalud'],
-		'VecesCentro' => "'" . $tmprude['VecesCentro'] . "'",
-		'Discapacidad' => "'" . $tmprude['Discapacidad'] . "'",
-		'AguaDomicilio' => $tmprude['AguaDomicilio'],
-		'Electricidad' => $tmprude['Electricidad'],
-		'Alcantarillado' => $tmprude['Alcantarillado'],
-		'Trabaja' => "'" . $tmprude['Trabaja'] . "'",
-		'InternetCasa' => $tmprude['InternetCasa'],
-		'Transporte' => "'" . $tmprude['Transporte'] . "'",
-		'TiempoLlegada' => "'" . $tmprude['TiempoLlegada'] . "'",
-		'InstruccionP' => "'" . $tmprude['InstruccionP'] . "'",
-		'IdiomaP' => "'" . $tmprude['IdiomaP'] . "'",
-		'ParentescoP' => "'" . $tmprude['ParentescoP'] . "'",
-		'InstruccionM' => "'" . $tmprude['InstruccionM'] . "'",
-		'IdiomaM' => "'" . $tmprude['IdiomaM'] . "'",
-		'Lugar' => "'" . $tmprude['Lugar'] . "'",
-		'FechaReg' => "'" . date("Y-m-d H:i:s") . "'",
-	);
-
-	$classrude->insertarAlumno($valuesRude);
-
+	if ($tmprude != null) {
+		$valuesRude = array(
+			'CodAlumno' => $CodAlumno,
+			'PaisN' => "'" . ($tmprude['PaisN'] ?? "") . "'",
+			'ProvinciaN' => "'" . $tmprude['ProvinciaN'] . "'",
+			'LocalidadN' => "'" . $tmprude['LocalidadN'] . "'",
+			'Documento' => $tmprude['Documento'],
+			'CertOfi' => "'" . $tmprude['CertOfi'] . "'",
+			'CertLibro' => "'" . $tmprude['CertLibro'] . "'",
+			'CertPartida' => "'" . $tmprude['CertPartida'] . "'",
+			'CertFolio' => "'" . $tmprude['CertFolio'] . "'",
+			'Paralelo' => "'" . $tmprude['Paralelo'] . "'",
+			'Turno' => "'" . $tmprude['Turno'] . "'",
+			'CodigoSie' => "''",
+			'NombreUnidad' => "''",
+			'ProvinciaE' => "'" . $tmprude['ProvinciaE'] . "'",
+			'MunicipioE' => "'" . $tmprude['MunicipioE'] . "'",
+			'ComunidadE' => "'" . $tmprude['ComunidadE'] . "'",
+			'LenguaMater' => "'" . $tmprude['LenguaMater'] . "'",
+			'CastellanoI' => $tmprude['CastellanoI'],
+			'AymaraI' => $tmprude['AymaraI'],
+			'InglesI' => $tmprude['InglesI'],
+			'PerteneceA' => "'" . $tmprude['PerteneceA'] . "'",
+			'CentroSalud' => $tmprude['CentroSalud'],
+			'VecesCentro' => "'" . $tmprude['VecesCentro'] . "'",
+			'Discapacidad' => "'" . $tmprude['Discapacidad'] . "'",
+			'AguaDomicilio' => $tmprude['AguaDomicilio'],
+			'Electricidad' => $tmprude['Electricidad'],
+			'Alcantarillado' => $tmprude['Alcantarillado'],
+			'Trabaja' => "'" . $tmprude['Trabaja'] . "'",
+			'InternetCasa' => $tmprude['InternetCasa'],
+			'Transporte' => "'" . $tmprude['Transporte'] . "'",
+			'TiempoLlegada' => "'" . $tmprude['TiempoLlegada'] . "'",
+			'InstruccionP' => "'" . $tmprude['InstruccionP'] . "'",
+			'IdiomaP' => "'" . $tmprude['IdiomaP'] . "'",
+			'ParentescoP' => "'" . $tmprude['ParentescoP'] . "'",
+			'InstruccionM' => "'" . $tmprude['InstruccionM'] . "'",
+			'IdiomaM' => "'" . $tmprude['IdiomaM'] . "'",
+			'Lugar' => "'" . $tmprude['Lugar'] . "'",
+			'FechaReg' => "'" . date("Y-m-d H:i:s") . "'",
+		);
+		$classrude->insertarAlumno($valuesRude);
+	}
 
 
 	$tmpalumno->actualizarVisor($CodAlu);

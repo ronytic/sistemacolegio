@@ -8,6 +8,7 @@ if (isset($_POST)) {
 	<a class="btn btn-success" href="alumno.php?CodAlumno=<?php echo $CodAlumno ?>"><?php echo $idioma['ModificarDatos'] ?></a>
 	<hr />
 	<div id="reporte"></div>
+
 <?php
 }
 ?>

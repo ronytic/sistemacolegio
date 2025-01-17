@@ -81,6 +81,14 @@ $Gestion = $config->mostrarConfig("Gestion", 1);
 $VersionSistema = $config->mostrarConfig("VersionSistema", 1);
 $SistemaFacturacion = $config->mostrarConfig("SistemaFacturacion", 1);
 
+$AlertaGestionAnterior = $config->mostrarConfig("AlertaGestionAnterior", 1) ?? 0;
+
+
+include_once("class/gestionanterior.php");
+$gestionanterior = new gestionanterior;
+$GestionesAnteriores = $gestionanterior->mostrarGestionAnterior();
+
+
 
 include_once("funciones/url.php");
 $UrlBase = url_todo();

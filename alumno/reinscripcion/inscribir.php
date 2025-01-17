@@ -19,6 +19,9 @@ if (isset($_GET)) {
     $confgGeneral = $conf->mostrarConfig("MontoGeneral");
     $doc = $tmp_documento->mostrarDocumento($CodAlumno);
     $doc = array_shift($doc);
+    // if ($doc == null) {
+    //     $doc['CertificadoNac'] = 0;
+    // }
     $al = $tmp_alumno->mostrarTodoDatos($CodAlumno, 2);
     $al = array_shift($al);
 
@@ -233,6 +236,19 @@ if (isset($_GET)) {
                     </tr>
                 </table>
             </div>
+
+            <div class="box-header">
+                <h2><?php echo $idioma['AccesoSistema'] ?></h2>
+            </div>
+            <div class="box-content">
+                <table class="tabla">
+                    <tr>
+                        <td class="der" width="50%"><?php echo $idioma['AccesoSistema'] ?><br><small><?php echo $idioma['HabilitaDeshabilitaAccesoSistema'] ?></small></td>
+                        <td><?php campo("AccesoSistema", "select", array("1" => $idioma['Si'], "0" => $idioma['No']), "span12", 0, "", 0, array("maxlength" => 30), 1) ?></td>
+                    </tr>
+                </table>
+            </div>
+
             <div class="box-header">
                 <h2><?php echo $idioma['DatosFactura'] ?></h2>
             </div>
@@ -240,11 +256,11 @@ if (isset($_GET)) {
                 <table class="tabla">
                     <tr>
                         <td class="der"><?php echo $idioma['Nit'] ?></td>
-                        <td><?php campo("Nit", "text", capitalizar($al["Nit"]), "span12", 1, "", 0, array("maxlength" => 30)) ?></td>
+                        <td><?php campo("Nit", "text", capitalizar($al["Nit"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['NombreFacturar'] ?></td>
-                        <td><?php campo("FacturaA", "text", capitalizar($al["FacturaA"]), "span12", 1, "", 0, array("maxlength" => 30)) ?></td>
+                        <td><?php campo("FacturaA", "text", capitalizar($al["FacturaA"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
                 </table>
             </div>
@@ -255,31 +271,31 @@ if (isset($_GET)) {
                 <table class="tabla">
                     <tr>
                         <td class="der"><label for="CertificadoNac"><?php echo $idioma['CertificadoNacimiento'] ?></label></td>
-                        <td><?php campo("CertificadoNac", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CertificadoNac']) ?></td>
+                        <td><?php campo("CertificadoNac", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CertificadoNac'] ?? 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><label for="LibretaEsc"><?php echo $idioma['LibretaEscolar'] ?></label></td>
-                        <td><?php campo("LibretaEsc", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['LibretaEsc']) ?></td>
+                        <td><?php campo("LibretaEsc", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['LibretaEsc'] ?? 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><label for="LibretaVac"><?php echo $idioma['LibretaVacunas'] ?></label></td>
-                        <td><?php campo("LibretaVac", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['LibretaVac']) ?></td>
+                        <td><?php campo("LibretaVac", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['LibretaVac'] ?? 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><label for="CedulaId"><?php echo $idioma['CiAlumno'] ?></label></td>
-                        <td><?php campo("CedulaId", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CedulaId']) ?></td>
+                        <td><?php campo("CedulaId", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CedulaId'] ?? 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><label for="CedulaIdP"><?php echo $idioma['CiPadre'] ?></label></td>
-                        <td><?php campo("CedulaIdP", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CedulaIdP']) ?></td>
+                        <td><?php campo("CedulaIdP", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CedulaIdP'] ?? 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><label for="CedulaIdM"><?php echo $idioma['CiMadre'] ?></label></td>
-                        <td><?php campo("CedulaIdM", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CedulaIdM']) ?></td>
+                        <td><?php campo("CedulaIdM", "checkbox", "1", "span12", 0, "", 0, array("maxlength" => 50), $doc['CedulaIdM'] ?? 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['ObservacionesDocumentos'] ?></td>
-                        <td><?php campo("ObservacionesDoc", "textarea", $doc['Observaciones'], "span12", 0, "", 0, array("cols" => 30, "rows" => 5), 0) ?></td>
+                        <td><?php campo("ObservacionesDoc", "textarea", $doc['Observaciones'] ?? "", "span12", 0, "", 0, array("cols" => 30, "rows" => 5), 0) ?></td>
                     </tr>
                 </table>
             </div>

@@ -1577,3 +1577,6 @@ $idioma['DatosClase'] = "Datos de la Clase";
 $idioma['NombreClase'] = "Nombre de la Clase";
 $idioma['Ej:ClaseLunes25/06/2024'] = "Ej: Clase Lunes 25/06/2024";
 $idioma['DetalleClase'] = "Detalle de la Clase";
+$idioma['Alerta'] = "ALERTA";
+$idioma['AlertaGestionAnterior'] = "TRABAJANDO CON GESTIÓN ANTERIOR";
+$idioma['Contraseñas'] = "Contraseñas";

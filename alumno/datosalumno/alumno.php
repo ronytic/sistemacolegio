@@ -268,6 +268,24 @@ if (isset($_GET)) {
                     </tr>
                 </table>
             </div>
+
+            <!-- Modificar contraseña del alumno o padre de familia -->
+            <div class="box-header">
+                <h2><?php echo $idioma['Contraseñas'] ?></h2>
+            </div>
+            <div class="box-content">
+                <table class="tabla">
+                    <tr>
+                        <td class="der"><?php echo $idioma['Password'] ?></td>
+                        <td><?php campo("Password", "text", capitalizar($al["Password"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['PasswordP'] ?></td>
+                        <td><?php campo("PasswordP", "text", capitalizar($al["PasswordP"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                    </tr>
+                </table>
+            </div>
+
             <div class="box-header">
                 <h2><?php echo $idioma['Documentos'] ?></h2>
             </div>

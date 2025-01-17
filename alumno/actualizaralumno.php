@@ -14,6 +14,9 @@ if (!empty($_POST)) {
 	$curso = new curso;
 	/**/
 
+	$Password = $_POST['Password'];
+	$PasswordP = $_POST['PasswordP'];
+
 
 	$CodAl = $_POST['Matricula'];
 	$CodCurso = $_POST['Curso'];

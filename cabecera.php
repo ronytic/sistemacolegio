@@ -61,7 +61,6 @@ switch ($Nivel) {
 					<a class="btn" href="#" id="noti" data-titulo="<?php echo $idioma['Notificacion'] ?>">
 						<i class="icon-bell"></i><span class="hidden-phone hidden-tablet"> <?php echo $idioma['Notificacion'] ?></span> <span class="label label-important hidden-phone"><?php echo count($noti1) ?></span> <span class="label label-success hidden-phone"><?php echo count($noti3) ?></span>
 					</a>
-
 					<?php foreach ($menu->mostrar($Nivel, "Superior") as $m) { ?>
 						<a class="btn" href="<?php echo $folder ?><?php echo $m['Url'] ?>">
 							<i class="<?php echo $m['Imagen'] ?>"></i>
@@ -87,8 +86,13 @@ switch ($Nivel) {
 						<?php if ($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2 || $_SESSION['Nivel'] == 4 || $_SESSION['Nivel'] == 5) : ?>
 							<li><a href="<?php echo $folder; ?>usuario/configuracion/"><?php echo $idioma['Configuracion'] ?></a></li>
 							<li class="divider"></li>
-							<li><a href="<?php echo $folder; ?>../csb2012/"><?php echo $idioma['Sistema'] ?> 2012</a></li>
-							<li><a href="<?php echo $folder; ?>../colegio2013/"><?php echo $idioma['Sistema'] ?> 2013</a></li>
+							<?php foreach ($GestionesAnteriores as $ga) { ?>
+								<?php if ($ga['EnlaceExterno'] == 0) {
+									$ga['Url'] = $folder . $ga['Url'];
+								} ?>
+
+								<li><a href="<?php echo $ga['Url'] ?>"><?php echo $ga['Label'] ?></a></li>
+							<?php } ?>
 						<?php endif; ?>
 						<?php if ($_SESSION['Nivel'] == 3 || $_SESSION['Nivel'] == 6 || $_SESSION['Nivel'] == 7) : ?>
 							<li><a href="<?php echo $folder; ?>usuario/cambiarcontrasena/"><?php echo $idioma['CambiarContraseña'] ?></a></li>
@@ -97,7 +101,7 @@ switch ($Nivel) {
 						<li><a href="<?php echo $folder; ?>login/logout.php"><?php echo $idioma['SalirSistema'] ?></a></li>
 					</ul>
 					<a class="btn" href="<?php echo $folder; ?>login/logout.php" title="<?php echo $idioma['SalirSistema']; ?>"><i class="icon-off"></i></a>
-					<!-- Fin: Menu Deslisable -->
+					<!-- Fin: Menu Deslizable -->
 
 				</div>
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse" title="<?php echo $idioma['MostrarMenu'] ?>"><span class="visible-phone"><small><?php echo $idioma['MostrarMenu'] ?></small></span>
@@ -114,8 +118,15 @@ switch ($Nivel) {
 	<!-- start: Header -->
 
 	<div class="container-fluid">
-		<div class="row-fluid">
+		<!-- Alerta -->
+		<?php if ($AlertaGestionAnterior) { ?>
+			<div class="alert alert-error text-center">
 
+				<strong><?php echo $idioma['Alerta'] ?>: <?php echo $idioma['AlertaGestionAnterior'] ?></strong>
+			</div>
+		<?php } ?>
+		<!-- Fin Alerta -->
+		<div class="row-fluid">
 			<!-- Inicio: Menu Principal -->
 			<div class="span2 main-menu-span">
 				<div class="nav-collapse sidebar-nav">
