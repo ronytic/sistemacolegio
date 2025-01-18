@@ -246,6 +246,23 @@ if (isset($_GET)) {
                         <td class="der" width="50%"><?php echo $idioma['AccesoSistema'] ?><br><small><?php echo $idioma['HabilitaDeshabilitaAccesoSistema'] ?></small></td>
                         <td><?php campo("AccesoSistema", "select", array("1" => $idioma['Si'], "0" => $idioma['No']), "span12", 0, "", 0, array("maxlength" => 30), $AccesoSistema) ?></td>
                     </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['Password'] ?></td>
+                        <td>
+                            <?php campo("Password", "password", capitalizar($al["Password"]), "span10", 0, "", 0, array("maxlength" => 30)) ?>
+                            <button class="btn btn-secondary mostrarPasswordClass" style="margin-bottom: 10px;" data-target="Password">
+                                <i class="icon-eye-open"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['PasswordP'] ?></td>
+                        <td><?php campo("PasswordP", "password", capitalizar($al["PasswordP"]), "span10", 0, "", 0, array("maxlength" => 30)) ?>
+                            <button class="btn btn-secondary mostrarPasswordClass" style="margin-bottom: 10px;" data-target="PasswordP">
+                                <i class="icon-eye-open"></i>
+                            </button>
+                        </td>
+                    </tr>
                 </table>
             </div>
 
@@ -265,32 +282,6 @@ if (isset($_GET)) {
                     <tr>
                         <td class="der"><?php echo $idioma['Email'] ?></td>
                         <td><?php campo("Email", "email", $al['Email'], "span12", 0, "", 0, array("maxlength" => 150)) ?></td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- Modificar contraseña del alumno o padre de familia -->
-            <div class="box-header">
-                <h2><?php echo $idioma['Contraseñas'] ?></h2>
-            </div>
-            <div class="box-content">
-                <table class="tabla">
-                    <tr>
-                        <td class="der"><?php echo $idioma['Password'] ?></td>
-                        <td>
-                            <?php campo("Password", "password", capitalizar($al["Password"]), "span10", 0, "", 0, array("maxlength" => 30)) ?>
-                            <button class="btn btn-secondary mostrarPasswordClass" style="margin-bottom: 10px;" data-target="Password">
-                                <i class="icon-eye-open"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="der"><?php echo $idioma['PasswordP'] ?></td>
-                        <td><?php campo("PasswordP", "password", capitalizar($al["PasswordP"]), "span10", 0, "", 0, array("maxlength" => 30)) ?>
-                            <button class="btn btn-secondary mostrarPasswordClass" style="margin-bottom: 10px;" data-target="PasswordP">
-                                <i class="icon-eye-open"></i>
-                            </button>
-                        </td>
                     </tr>
                 </table>
             </div>

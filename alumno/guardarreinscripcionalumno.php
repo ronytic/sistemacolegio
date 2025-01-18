@@ -103,8 +103,17 @@ if (!empty($_POST)) {
 	// 	$UsuarioPadre = "";
 	// }
 	$UsuarioPadre = $Ci;
-	$Password = date("jnY", strtotime($FechaNac));
-	$PasswordP = date("jnY", strtotime($FechaNac));
+
+	if (isset($_POST['Password']) && $_POST['Password'] != '') {
+		$Password = $_POST['Password'];
+	} else {
+		$Password = date("jnY", strtotime($FechaNac));
+	}
+	if (isset($_POST['PasswordP']) && $_POST['PasswordP'] != '') {
+		$PasswordP = $_POST['PasswordP'];
+	} else {
+		$PasswordP = date("jnY", strtotime($FechaNac));
+	}
 
 	$cur = $curso->mostrarCurso($CodCurso);
 	$cur = array_shift($cur);
