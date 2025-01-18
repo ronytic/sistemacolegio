@@ -590,7 +590,7 @@ ADD FOREIGN KEY (`CodAlumno`) REFERENCES `tmp_alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
 DROP TABLE logusuarios;
--- 2025-01-10 
+-- 2025-01-10
 CREATE TABLE gestionesanteriores (
 	CodGestionAnterior INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	Url VARCHAR(255),
@@ -602,5 +602,5 @@ INSERT INTO `sanjose2025`.`config` (`Nombre`, `Valor`)
 VALUES ('AlertaGestionAnterior', '1');
 -- 2025-01-16
 UPDATE `submenu`
-SET `CodMenu` = '1'
+SET `CodMenu` = '1', Nombre = 'RegistroEnEspera', Orden = 15, Url = 'espera/'
 WHERE (`CodSubmenu` = '4');

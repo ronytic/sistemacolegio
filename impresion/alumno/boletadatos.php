@@ -37,9 +37,7 @@ if (!empty($_GET)) {
 		else
 			$pdf->Cell($w, $h, utf8_decode($t), 0, 0, $align);
 	}
-	class PDF extends PPDF
-	{
-	}
+	class PDF extends PPDF {}
 	$pdf = new PDF("L", "mm", array(140, 216));
 	$pdf->OrientacionObligada = "L";
 	$borde = 0;
@@ -116,13 +114,13 @@ if (!empty($_GET)) {
 
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(60, $idioma["UsuarioPadreFamilia"] . ": ", 0, "L", $borde, "B");
-	$pdf->CuadroCuerpo(40, capitalizar($al['UsuarioPadre']), 0, "", $borde);
+	$pdf->CuadroCuerpo(40, ($al['UsuarioPadre']), 0, "", $borde);
 
 	$pdf->CuadroCuerpo(60, capitalizar($Telefono), 0, "", $borde, 14);
 
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(60, $idioma["ContrasenaPadreFamilia"] . ": ", 0, "L", $borde, "B");
-	$pdf->CuadroCuerpo(40, capitalizar($al['PasswordP']), 0, "", $borde);
+	$pdf->CuadroCuerpo(40, ($al['PasswordP']), 0, "", $borde);
 
 
 
@@ -134,7 +132,7 @@ if (!empty($_GET)) {
 
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(60, $idioma["ContrasenaAlumno"] . ": ", 0, "L", $borde, "B");
-	$pdf->CuadroCuerpo(40, capitalizar($al['Password']), 0, "", $borde);
+	$pdf->CuadroCuerpo(40, ($al['Password']), 0, "", $borde);
 
 	$pdf->CuadroCuerpo(60, ($UrlInternet), 0, "", $borde, 14);
 	$pdf->ln(7);
