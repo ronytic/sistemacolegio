@@ -82,12 +82,13 @@ $VersionSistema = $config->mostrarConfig("VersionSistema", 1);
 $SistemaFacturacion = $config->mostrarConfig("SistemaFacturacion", 1);
 
 $AlertaGestionAnterior = $config->mostrarConfig("AlertaGestionAnterior", 1) ?? 0;
-
+$ManejarCuotas = $config->mostrarConfig("ManejarCuotas", 1) ?? 0;
 
 include_once("class/gestionanterior.php");
 $gestionanterior = new gestionanterior;
 $GestionesAnteriores = $gestionanterior->mostrarGestionAnterior();
-
+$PuertoUsb = $config->mostrarConfig("PuertoUsb", 1);
+$ManejarRude = $config->mostrarConfig("ManejarRude", 1);
 
 
 include_once("funciones/url.php");

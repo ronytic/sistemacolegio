@@ -27,6 +27,29 @@ $(document).ready(function (e) {
 		 }
 	 });*/
 	//alert(MontoKinder);
+	$(".mostrarPasswordClass").toggle(function (e) {
+		e.preventDefault();
+		$(this).find('i').removeClass('icon-eye-open').addClass('icon-eye-close');
+
+		let target = ($(this).data('target'));
+		let $input = $("#" + target);
+
+		$clone = $input.clone().attr('type', 'text');
+
+		$input.replaceWith($clone);
+
+	}, function (e) {
+		e.preventDefault();
+		$(this).find('i').removeClass('icon-eye-close').addClass('icon-eye-open');
+
+		let target = ($(this).data('target'));
+		let $input = $("#" + target);
+
+		$clone = $input.clone().attr('type', 'password');
+
+		$input.replaceWith($clone);
+	}
+	);
 	verifica()
 	$("#Curso").change(function (e) {
 

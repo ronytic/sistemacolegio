@@ -7,6 +7,7 @@ include_once("../funciones.php");
 
 $ManejarCuotas = dato("ManejarCuotas");
 $ManejarTareas = dato("ManejarTareas");
+$ManejarRude = dato("ManejarRude");
 $RedirigirAlumnoVersionResumida = dato("RedirigirAlumnoVersionResumida");
 include_once($folder . "cabecerahtml.php");
 ?>
@@ -224,6 +225,23 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
             </table>
         </div>
+
+        <div class="box-header">
+            <h2><?php echo $idioma['Rude'] ?><a name="Rude"></a></h2>
+        </div>
+        <div class="box-content">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <td><?php echo $idioma['ManejarRude'] ?></td>
+                    <td><select class="span12" name="ManejarRude">
+                            <option value="0" <?php echo ($ManejarRude) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                            <option value="1" <?php echo ($ManejarRude) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <div class="box-header">
             <h2><?php echo $idioma['PosicionBoletin'] ?><a name="posicionboletin"></a></h2>
         </div>
@@ -596,6 +614,7 @@ include_once($folder . "cabecerahtml.php");
                     <td><?php echo $idioma['SistemaFacturacion'] ?><div class="pequeno"><?php echo $idioma['SistemaFacturacionT'] ?></div>
                     </td>
                     <td><select class="span12" name="SistemaFacturacion">
+                            <option value="0" <?php echo (dato("SistemaFacturacion")) == '0' ? 'selected' : '' ?>><?php echo $idioma['NoUsarFacturacion'] ?></option>
                             <option value="Antiguo" <?php echo (dato("SistemaFacturacion")) == 'Antiguo' ? 'selected' : '' ?>><?php echo $idioma['SistemaFacturacionComputarizada'] ?></option>
                             <option value="NuevoQR" <?php echo (dato("SistemaFacturacion")) == 'NuevoQR' ? 'selected' : '' ?>><?php echo $idioma['NuevoSistemaFacturacion'] ?></option>
                             <option value="SistemaFacturacionElectronica" <?php echo (dato("SistemaFacturacion")) == 'SistemaFacturacionElectronica' ? 'selected' : '' ?>><?php echo $idioma['SistemaFacturacionElectronica'] ?></option>

@@ -6,6 +6,9 @@ if (isset($_POST)) {
 	$alumno = new alumno;
 	$al = $alumno->mostrarDatosPersonales($CodAlumno);
 	$al = array_shift($al);
+	if ($al == null) {
+		return;
+	}
 ?>
 	<?php echo $idioma['DatosAlumno'] ?>:<br>
 	<strong><?php echo capitalizar($al['Paterno']) ?> <?php echo capitalizar($al['Materno']) ?> <?php echo capitalizar($al['Nombres']) ?></strong>

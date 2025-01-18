@@ -11,6 +11,7 @@ $conf = new config;
 $ma = $al->estadoTabla();
 $confgKinder = $conf->mostrarConfig("MontoKinder");
 $confgGeneral = $conf->mostrarConfig("MontoGeneral");
+
 $cursovalor = array();
 foreach ($curso->listar() as $cur) {
     $cursovalor[$cur['CodCurso']] = $cur['Nombre'];
@@ -63,7 +64,7 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                     <td class="der"><?php echo $idioma['Sexo'] ?></td>
                     <td><?php campo("Sexo", "select", $sexovalor, "span8", 1, "", 0) ?></td>
                 </tr>
-                <tr class="ocultar">
+                <tr class="">
                     <td class="der"><?php echo $idioma['LugarNacimiento'] ?></td>
                     <td><?php campo("LugarNac", "text", "La Paz", "span12", 1, "La Paz", 0, array("maxlength" => 30)) ?></td>
                 </tr>
@@ -73,33 +74,33 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 </tr>
                 <tr>
                     <td class="der"><?php echo $idioma['CedulaIdentidad'] ?></td>
-                    <td><?php campo("Ci", "text", "", "span12", 1, "", 0, array("maxlength" => 12)) ?></td>
+                    <td><?php campo("Ci", "text", "", "span6", 1, "", 0, array("maxlength" => 12)) ?></td>
                 </tr>
-                <tr class="ocultar">
+                <tr class="">
                     <td class="der"><?php echo $idioma['Zona'] ?></td>
                     <td><?php campo("Zona", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr class="ocultar">
+                <tr class="">
                     <td class="der"><?php echo $idioma['Calle'] ?></td>
                     <td><?php campo("Calle", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr class="ocultar">
+                <tr class="">
                     <td class="der"><?php echo $idioma['Numero'] ?></td>
                     <td><?php campo("Numero", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr class="ocultar">
+                <tr class="">
                     <td class="der"><?php echo $idioma['TelefonoCasa'] ?></td>
                     <td><?php campo("TelefonoCasa", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr class="ocultar">
+                <tr class="">
                     <td class="der"><?php echo $idioma['Celular'] ?></td>
                     <td><?php campo("Celular", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr class="">
+                <tr class="<?php echo (isset($PuertoUsb) && $PuertoUsb == "0") ? 'ocultar' : '' ?>">
                     <td class="der"><?php echo $idioma['CelularSMS'] ?></td>
                     <td><?php campo("CelularSMS", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr class="">
+                <tr class="<?php echo (isset($PuertoUsb) && $PuertoUsb == "0") ? 'ocultar' : '' ?>">
                     <td class="der"><?php echo $idioma['ActivarEnvioSms'] ?></td>
                     <td><?php campo("ActivarSMS", "select", array("0" => $idioma['No'], "1" => $idioma['Si']), "span12", 0, "", 0, array("maxlength" => 30), 1) ?></td>
                 </tr>
@@ -158,10 +159,10 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
         </div>
     </div>
     <div class="box span6">
-        <div class="box-header ocultar">
+        <div class="box-header">
             <?php echo $idioma['DatosPadreFamilia'] ?>
         </div>
-        <div class="box-content ocultar">
+        <div class="box-content">
             <table class="tabla table-hover">
                 <tr>
                     <td class="der"><?php echo $idioma['ApellidosPadre'] ?></td>
@@ -208,10 +209,6 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                     <td class="der"><?php echo $idioma['CelularMadre'] ?></td>
                     <td><?php campo("CelularM", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['Email'] ?></td>
-                    <td><?php campo("Email", "email", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
-                </tr>
             </table>
         </div>
 
@@ -227,10 +224,10 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
             </table>
         </div>
 
-        <div class="box-header">
+        <div class="box-header <?php echo isset($SistemaFacturacion) && $SistemaFacturacion == "0" ? 'ocultar' : '' ?>">
             <h2><?php echo $idioma['DatosFactura'] ?></h2>
         </div>
-        <div class="box-content">
+        <div class="box-content <?php echo isset($SistemaFacturacion) && $SistemaFacturacion == "0" ? 'ocultar' : '' ?>">
             <table class="tabla table-hover">
                 <tr>
                     <td class="der"><?php echo $idioma['Nit'] ?></td>
@@ -246,6 +243,7 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 </tr>
             </table>
         </div>
+
         <div class="box-header">
             <h2><?php echo $idioma['Documentos'] ?></h2>
         </div>
@@ -278,59 +276,6 @@ $sinovalor = array(0 => $idioma["No"], 1 => $idioma["Si"]);
                 <tr>
                     <td class="der"><?php echo $idioma['ObservacionesDocumentos'] ?></td>
                     <td><?php campo("ObservacionesDoc", "textarea", "", "span12", 0, "", 0, array("cols" => 30, "rows" => 5), 0) ?></td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="box-header">
-            <?php echo $idioma['DatosPadreFamilia'] ?>
-        </div>
-        <div class="box-content">
-            <table class="tabla table-hover">
-                <tr>
-                    <td class="der"><?php echo $idioma['ApellidosPadre'] ?></td>
-                    <td><?php campo("ApellidosPadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['NombrePadre'] ?></td>
-                    <td><?php campo("NombrePadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['CiPadre'] ?></td>
-                    <td><?php campo("CiPadre", "text", "", "span12", 0, "", 0, array("maxlength" => 20)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['OcupacionPadre'] ?></td>
-                    <td><?php campo("OcupPadre", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['CelularPadre'] ?></td>
-                    <td><?php campo("CelularP", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <hr />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['ApellidosMadre'] ?></td>
-                    <td><?php campo("ApellidosMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['NombreMadre'] ?></td>
-                    <td><?php campo("NombreMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 50)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['CiMadre'] ?></td>
-                    <td><?php campo("CiMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 20)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['OcupacionMadre'] ?></td>
-                    <td><?php campo("OcupMadre", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
-                </tr>
-                <tr>
-                    <td class="der"><?php echo $idioma['CelularMadre'] ?></td>
-                    <td><?php campo("CelularM", "text", "", "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                 </tr>
             </table>
         </div>

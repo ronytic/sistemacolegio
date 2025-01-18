@@ -121,11 +121,11 @@ if (isset($_GET)) {
                         <td class="der"><?php echo $idioma['Celular'] ?></td>
                         <td><?php campo("Celular", "text", capitalizar($al["Celular"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
-                    <tr class="">
+                    <tr class="<?php echo (isset($PuertoUsb) && $PuertoUsb == "0") ? 'ocultar' : '' ?>">
                         <td class="der"><?php echo $idioma['CelularSMS'] ?></td>
                         <td><?php campo("CelularSMS", "text", capitalizar($al["CelularSMS"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
-                    <tr class="">
+                    <tr class="<?php echo (isset($PuertoUsb) && $PuertoUsb == "0") ? 'ocultar' : '' ?>">
                         <td class="der"><?php echo $idioma['ActivarEnvioSms'] ?></td>
                         <td><?php campo("ActivarSMS", "select", array("0" => $idioma['No'], "1" => $idioma['Si']), "span12", 0, "", 0, array("maxlength" => 30), $al["ActivarSMS"]) ?></td>
                     </tr>
@@ -249,10 +249,10 @@ if (isset($_GET)) {
                 </table>
             </div>
 
-            <div class="box-header">
+            <div class="box-header <?php echo isset($SistemaFacturacion) && $SistemaFacturacion == "0" ? 'ocultar' : '' ?>">
                 <h2><?php echo $idioma['DatosFactura'] ?></h2>
             </div>
-            <div class="box-content">
+            <div class="box-content <?php echo isset($SistemaFacturacion) && $SistemaFacturacion == "0" ? 'ocultar' : '' ?>">
                 <table class="tabla">
                     <tr>
                         <td class="der"><?php echo $idioma['Nit'] ?></td>
@@ -277,11 +277,20 @@ if (isset($_GET)) {
                 <table class="tabla">
                     <tr>
                         <td class="der"><?php echo $idioma['Password'] ?></td>
-                        <td><?php campo("Password", "text", capitalizar($al["Password"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                        <td>
+                            <?php campo("Password", "password", capitalizar($al["Password"]), "span10", 0, "", 0, array("maxlength" => 30)) ?>
+                            <button class="btn btn-secondary mostrarPasswordClass" style="margin-bottom: 10px;" data-target="Password">
+                                <i class="icon-eye-open"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['PasswordP'] ?></td>
-                        <td><?php campo("PasswordP", "text", capitalizar($al["PasswordP"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                        <td><?php campo("PasswordP", "password", capitalizar($al["PasswordP"]), "span10", 0, "", 0, array("maxlength" => 30)) ?>
+                            <button class="btn btn-secondary mostrarPasswordClass" style="margin-bottom: 10px;" data-target="PasswordP">
+                                <i class="icon-eye-open"></i>
+                            </button>
+                        </td>
                     </tr>
                 </table>
             </div>

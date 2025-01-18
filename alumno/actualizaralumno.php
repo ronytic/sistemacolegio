@@ -14,8 +14,7 @@ if (!empty($_POST)) {
 	$curso = new curso;
 	/**/
 
-	$Password = $_POST['Password'];
-	$PasswordP = $_POST['PasswordP'];
+
 
 
 	$CodAl = $_POST['Matricula'];
@@ -86,9 +85,19 @@ if (!empty($_POST)) {
 
 	// $Password = rand(1000, 9999);
 	// $PasswordP = rand(1000, 9999);
+	$Password = $_POST['Password'];
+	$PasswordP = $_POST['PasswordP'];
 
-	$Password = date("jnY", strtotime($FechaNac));
-	$PasswordP = date("jnY", strtotime($FechaNac));
+	if (isset($_POST['Password']) && $_POST['Password'] != '') {
+		$Password = $_POST['Password'];
+	} else {
+		$Password = date("jnY", strtotime($FechaNac));
+	}
+	if (isset($_POST['PasswordP']) && $_POST['PasswordP'] != '') {
+		$PasswordP = $_POST['PasswordP'];
+	} else {
+		$PasswordP = date("jnY", strtotime($FechaNac));
+	}
 
 	// if ($CiPadre != "" || $CiMadre != "") {
 	// 	// $UsuarioPadre = usuarioPadre($CiPadre, $CiMadre);

@@ -2,6 +2,9 @@
 include_once("../../login/check.php");
 if (!empty($_POST)) {
     $CodAlumno = $_POST['CodAlumno'];
+    if ($CodAlumno == 'null') {
+        return;
+    }
     $url = "../../impresion/alumno/boletadatos.php?CodAlumno=" . $CodAlumno;
 ?>
     <div id="parentIframe">

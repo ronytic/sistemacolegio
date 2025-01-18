@@ -136,6 +136,21 @@ switch ($Nivel) {
 						</li>
 						<?php
 						foreach ($menu->mostrar($Nivel, "Lateral") as $m) {
+							if ($m['Nombre'] == 'Cuotas' && $ManejarCuotas == 0) {
+								continue;
+							}
+
+							if ($m['Nombre'] == 'Factura' && isset($SistemaFacturacion) && $SistemaFacturacion == '0') {
+								continue;
+							}
+
+							if ($m['Nombre'] == 'Msms' && isset($PuertoUsb) && $PuertoUsb == 0) {
+								continue;
+							}
+
+							if ($m['Nombre'] == 'Rude' && isset($ManejarRude) && $ManejarRude == 0) {
+								continue;
+							}
 						?>
 							<li class="funo <?php if ($rmenu == $m['Url']) {
 												$textomenu = $idioma[$m['Nombre']];
@@ -151,6 +166,7 @@ switch ($Nivel) {
 									<ul class="oculto submenu">
 										<?php
 										foreach ($subm as $sm) {
+
 											if ($m['Nombre'] == 'Factura' && isset($SistemaFacturacion) && $SistemaFacturacion == 'SistemaFacturacionElectronica') {
 												if ($sm['Nombre'] == 'RegistroPersonalizado') {
 													continue;
@@ -159,6 +175,7 @@ switch ($Nivel) {
 													continue;
 												}
 											}
+
 											$UrlInternet = "";
 											if ($sm['Internet'] == "1" && $Internet == 0) {
 												$UrlInternet = "redirigir.php";

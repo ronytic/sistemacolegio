@@ -20,6 +20,9 @@ if ($SistemaFacturacion == 'SistemaFacturacionElectronica') {
 	$urlFactura = "registro";
 }
 
+$PuertoUsb = $config->mostrarConfig("PuertoUsb", 1);
+$ManejarCuotas = $config->mostrarConfig("ManejarCuotas", 1);
+$ManejarRude = $config->mostrarConfig("ManejarRude", 1);
 
 if (count($tmp)) {
 	$i = 0;
@@ -65,21 +68,35 @@ if (count($tmp)) {
 				<td>
 					<?php if ($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2) { ?>
 						<!--<a href="cambiar.php?Ruta=../../alumno/inscribirhermano/inscribir.php&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small " ><?php echo $idioma['InscribirHermano'] ?></a>-->
-						<a href="cambiar.php?Ruta=../../factura/<?php echo $urlFactura ?>&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small " target="_blank"><?php echo $idioma['Factura'] ?></a>
-						<a href="cambiar.php?Ruta=../../cuotas/tarjetacuotas&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small " target="_blank"><?php echo $idioma['TarjetaCuotas'] ?></a>
-
-						<?php if ($contarhermano > 1) { ?>
+						<?php if ($ManejarCuotas == 1) { ?>
+							<a href="cambiar.php?Ruta=../../factura/<?php echo $urlFactura ?>&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small " target="_blank"><?php echo $idioma['Factura'] ?></a>
+							<a href="cambiar.php?Ruta=../../cuotas/tarjetacuotas&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small " target="_blank"><?php echo $idioma['TarjetaCuotas'] ?></a>
+						<?php } ?>
+						<?php if ($contarhermano > 1 && $ManejarCuotas == 1) { ?>
 							<br />
 							<a href="../../factura/registro/index2.php?CodAlumno=<?php echo $codhermanos ?>" class="btn btn-small btn-info" target="_blank"><?php echo $idioma['RegistrarFacturaCombinada'] ?></a>
 							<a href="../../impresion/cuotas/tarjetadecuotas.php?CodAlumno=<?php echo $codhermanos ?>" class="btn btn-small btn-info" target="_blank"><?php echo $idioma['ImprimirTarjetaCuotasCombinada'] ?></a>
 
 						<?php } ?>
-
-						<hr />
+						<?php if ($contarhermano > 1 && $ManejarCuotas == 1) { ?>
+							<hr />
+						<?php } ?>
 					<?php } ?>
-					<a href="redirigir.php?Ruta=../editarrude&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank"><?php echo mayuscula($idioma['Rude']) ?></a>
-					<a href="redirigir.php?Ruta=../../sms/revisardatos&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank" title="<?php echo $idioma['RevisarCelularEnvioMensajes'] ?>"><?php echo $idioma['RevisarCelular'] ?></a>
-					<a href="redirigir.php?Ruta=../../sms/enviarmensaje&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank" title="<?php echo $idioma['EnviarMensajeBienvenida'] ?>"><?php echo $idioma['EnviarMensajeBienvenida'] ?></a>
+
+					<a href="redirigir.php?Ruta=../../alumno/datosalumno/alumno.php&CodAlumno=<?php echo $t['CodAlumno'] ?>&Personalizado=1" class="btn btn-small" target="_blank"><?php echo ($idioma['ModificarDatos']) ?></a>
+
+					<?php
+					if ($ManejarRude == 1) {
+					?>
+						<a href="redirigir.php?Ruta=../../rude/editarrude&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank"><?php echo mayuscula($idioma['Rude']) ?></a>
+					<?php
+					}
+					?>
+
+					<?php if ($PuertoUsb != 0) { ?>
+						<a href="redirigir.php?Ruta=../../sms/revisardatos&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank" title="<?php echo $idioma['RevisarCelularEnvioMensajes'] ?>"><?php echo $idioma['RevisarCelular'] ?></a>
+						<a href="redirigir.php?Ruta=../../sms/enviarmensaje&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank" title="<?php echo $idioma['EnviarMensajeBienvenida'] ?>"><?php echo $idioma['EnviarMensajeBienvenida'] ?></a>
+					<?php } ?>
 					<a href="redirigir.php?Ruta=../../alumno/boletadatos&CodAlumno=<?php echo $t['CodAlumno'] ?>" class="btn btn-small" target="_blank" title="<?php echo $idioma['RevisarCelularEnvioMensajes'] ?>"><?php echo $idioma['ImprimirDatos'] ?></a>
 				</td>
 			</tr>

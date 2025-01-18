@@ -25,6 +25,10 @@ if (isset($_GET)) {
     $al = $tmp_alumno->mostrarTodoDatos($CodAlumno, 2);
     $al = array_shift($al);
 
+    $curTmp = $curso->mostrarCurso($al['CodCurso']);
+    $curTmp = array_shift($curTmp);
+
+
     $cursovalor = array();
     foreach ($curso->listar() as $cur) {
         $cursovalor[$cur['CodCurso']] = $cur['Nombre'];
@@ -58,6 +62,10 @@ if (isset($_GET)) {
                     <tr>
                         <td class="der"><?php echo $idioma['Matricula'] ?></td>
                         <td><?php campo("Matricula", "text", $ma['Auto_increment'], "span12", 1, "", 0, array("readonly" => "readonly")) ?></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><small><?php echo $idioma['CursoAnterior'] ?></small></td>
+                        <td><?php echo $curTmp['Nombre'] ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['Curso'] ?></td>
@@ -261,6 +269,10 @@ if (isset($_GET)) {
                     <tr>
                         <td class="der"><?php echo $idioma['NombreFacturar'] ?></td>
                         <td><?php campo("FacturaA", "text", capitalizar($al["FacturaA"]), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['Email'] ?></td>
+                        <td><?php campo("Email", "email", "", "span12", 0, "", 0, array("maxlength" => 150)) ?></td>
                     </tr>
                 </table>
             </div>

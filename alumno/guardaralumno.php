@@ -210,5 +210,5 @@ if (!empty($_POST)) {
 	include_once("../class/tmpcola.php");
 	$tmpcola = new tmpcola;
 	$tmpcola->insertarRegistro(array("CodAlumno" => $CodAlumno, "Estado" => "'Espera'"));
-	header("Location:../rude/esperarude/?CodAlumno=" . $CodAlumno);
+	header("Location:../alumno/espera/?CodAlumno=" . $CodAlumno);
 }
