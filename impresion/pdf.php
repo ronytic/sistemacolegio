@@ -54,7 +54,7 @@ class PPDF extends FPDF_Protection
 		$this->Cell($this->ancho, 4, utf8_decode($titulo), 0, 5, "C");
 		$this->ln(5);
 		if (!isset($FechaReporte)) {
-			$this->CuadroCabecera(32, $idioma['FechaReporte'] . ": ", 50, utf8_encode($fecha));
+			$this->CuadroCabecera(32, $idioma['FechaReporte'] . ": ", 50, ($fecha));
 			$this->ln(5);
 		}
 
