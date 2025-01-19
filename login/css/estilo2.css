@@ -18,7 +18,7 @@ body {
   color: white;
 
   text-shadow: none;
-  margin: 10px 0px 10px 10px;
+  margin: 0px 0px 0px 0px;
   font-size: 1.2em;
   line-height: 1.5em;
 
@@ -31,7 +31,7 @@ body {
 }
 
 .mensajes ul li.imagen img {
-  width: 98%;
+  width: 100%;
 }
 
 .login {

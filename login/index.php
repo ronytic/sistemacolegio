@@ -118,7 +118,7 @@ $anunciosLogin = $anuncioslogin->mostrarAnuncios();
                                 <li class="<?php echo $anuncios['Resaltar'] ? 'resaltar' : '' ?><?php echo $anuncios['Imagen'] != "" ? 'imagen' : '' ?>">
                                     <?php echo $anuncios['Mensaje'] ?>
                                     <?php if ($anuncios['Imagen'] != "") { ?>
-                                        <img src="../<?php echo $anuncios['Imagen'] ?>" class="img-polaroid" />
+                                        <img src="../<?php echo $anuncios['Imagen'] ?>" class="" />
                                 </li>
                             <?php } ?>
                             <hr>
