@@ -46,7 +46,7 @@ if (isset($_POST)) {
         function mostrarAgenda($actividades, $Fecha)
         {
             global $idioma, $Botones, $Nivel, $CodUsuario;
-            $FechaTexto = mb_strtolower((diaSemana(date("N")) . strftime(", %d ")) . $idioma['De'] . " " . mes(date("n")) . " " . $idioma['De'] . strftime(" %Y"));
+            $FechaTexto = mb_strtolower(textoDia($Fecha));
             if (count($actividades)) :
             ?>
         <tr>

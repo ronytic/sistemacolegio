@@ -23,7 +23,7 @@ class alumno extends bd
 	function contarInscritoFechas()
 	{
 		$this->campos = array('count(*) as CantidadFecha,FechaIns');
-		return $this->getRecords(" Retirado=0", false, "FechaIns");
+		return $this->getRecords(" Retirado=0", "FechaIns", "FechaIns");
 	}
 	function contarInscritoCurso()
 	{
@@ -34,6 +34,18 @@ class alumno extends bd
 	{
 		$this->campos = array(' Count(*) as Cantidad');
 		return $this->getRecords($where);
+	}
+
+	function cantidadAlumnosGeneral()
+	{
+		$this->tabla = "alumno a";
+		$this->campos = array('a.CodCurso CCurso,
+								c.Nombre NombreCurso,
+								count(*) as CantidadTotal,
+								(SELECT count(*) M FROM alumno WHERE CodCurso= CCurso and Sexo=0 and Retirado=0) as TotalFemenino,
+								(SELECT count(*) M FROM alumno WHERE CodCurso= CCurso and Sexo=1 and Retirado=0) as TotalMasculino,
+								(SELECT count(*) M FROM alumno WHERE CodCurso= CCurso and Retirado=0 and Procedencia != "") as TotalNuevo');
+		return $this->getRecords("a.Retirado=0", "c.CodCursoArea,c.Nombre", "a.CodCurso", false, 0, false, "LEFT JOIN curso c ON a.CodCurso=c.CodCurso");
 	}
 	function mostrarTodoDatos($CodAlumno, $Retirado = 0)
 	{

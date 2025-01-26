@@ -7,21 +7,33 @@ if (!empty($_POST)) {
     $rude = new alumno;
     $curso = new curso;
     @$CodAlumno = $_POST['CodAlumno'];
-    $CantidadTotal = $al->contarInscritosTotal();
-    $CantidadTotal = $CantidadTotal[0];
+
+    $CantidadTotal = 0;
     $CantidadTotalV = 0;
     $CantidadTotalM = 0;
-    $CantidadNuevo = 0;
+    $CantidadNuevos = 0;
+
+
+    $titulos = array();
+    $cantidad = array();
+    $inscritosXDias = $al->contarInscritoFechas();
+    foreach ($inscritosXDias as $k => $CantidadFechas) {
+        $textoDia = ucfirst(mb_strtolower(textoDia($CantidadFechas['FechaIns'])));
+        $inscritosXDias[$k]['TextoDia'] = $textoDia;
+        array_push($titulos, "'" . $textoDia . "'");
+        array_push($cantidad, $CantidadFechas['CantidadFecha']);
+        $CantidadTotal += $CantidadFechas['CantidadFecha'];
+    }
+    $titulos = implode(",", $titulos);
+    $cantidad = implode(",", $cantidad);
 ?>
     <table class="table">
         <thead>
             <tr>
-                <th><?php echo $idioma['CantidadTotalInscritos'] ?></th>
+                <th width="50%" class="der"><?php echo $idioma['CantidadTotalInscritos'] ?></th>
+                <th width="50%" class="alert alert-info"><?php echo $CantidadTotal; ?> <?php echo $idioma['Alumnos'] ?></th>
             </tr>
         </thead>
-        <tr class="contenido">
-            <td><?php echo $CantidadTotal['CantidadTotal']; ?> <?php echo $idioma['Alumnos'] ?></td>
-        </tr>
     </table>
     <div id="reporte"></div>
     <a href="#" class="imprimir btn btn-info btn-mini"><?php echo $idioma['Imprimir'] ?></a><br>
@@ -34,20 +46,15 @@ if (!empty($_POST)) {
             </tr>
         </thead>
         <?php
-        $titulos = array();
-        $cantidad = array();
-        foreach ($al->contarInscritoFechas() as $CantidadFechas) {
-            array_push($titulos, "'" . utf8_encode(strftime("%A, %d de %B de %Y", strtotime($CantidadFechas['FechaIns']))) . "'");
-            array_push($cantidad, $CantidadFechas['CantidadFecha']);
+
+        foreach ($inscritosXDias as $CantidadFechas) {
         ?>
             <tr class="contenido">
-                <td><?php echo utf8_encode(strftime("%A, %d de %B de %Y", strtotime($CantidadFechas['FechaIns']))); ?></td>
+                <td><?php echo $CantidadFechas['TextoDia']; ?></td>
                 <td><?php echo $CantidadFechas['CantidadFecha']; ?> <?php echo $idioma['Alumnos'] ?></td>
             </tr>
         <?php
         }
-        $titulos = implode(",", $titulos);
-        $cantidad = implode(",", $cantidad);
         ?>
     </table>
     <a href="#" class="btn btn-success btn-mini" id="exportarexcel"><?php echo $idioma['ExportarExcel'] ?></a>
@@ -61,36 +68,28 @@ if (!empty($_POST)) {
                 <th colspan="2"><?php echo $idioma['Nuevos'] ?></th>
             </tr>
         </thead>
-        <?php foreach ($al->contarInscritoCurso() as $CantidadCurso) {
-            $var = $al->cantidadAlumno("Sexo=1 and CodCurso={$CantidadCurso['CodCurso']} and Retirado=0");
-            $varones = array_shift($var);
-            $muj = $al->cantidadAlumno("Sexo=0 and CodCurso={$CantidadCurso['CodCurso']} and Retirado=0");
-            $mujeres = array_shift($muj);
+        <?php
+        $cursos = $al->cantidadAlumnosGeneral();
+        $CantidadTotal = 0;
+        foreach ($cursos as $row) {
 
-            $cns = $rude->contarInscritoNuevoCurso($CantidadCurso['CodCurso']);
-            $cn = array_shift($cns);
+            $cantidadMasculino = $row['TotalMasculino'] ?? 0;
+            $cantidadFemenino = $row['TotalFemenino'] ?? 0;
+            $cantidadNuevos = $row['TotalNuevo'] ?? 0;
 
-            $CantidadTotalM += $mujeres['Cantidad'];
-            $CantidadTotalV += $varones['Cantidad'];
+            $CantidadTotalM += $cantidadFemenino;
+            $CantidadTotalV += $cantidadMasculino;
+            $CantidadNuevos += $cantidadNuevos;
+            $CantidadTotal += $row['CantidadTotal'];
 
-            //$CantidadNuevos=$CantidadCurso['CantidadCurso']-$cn['CantidadNuevo'];
-            if (!is_null($cn)) {
-                $CantidadNuevos = $cn['CantidadNuevo'];
-                $CantidadNuevo += $CantidadNuevos;
-            } else {
-                $CantidadNuevos = 0; //No hay nuevos
-            }
         ?>
             <tr class="contenido">
-                <td><?php
-                    $cur = $curso->mostrarCurso($CantidadCurso['CodCurso']);
-                    $cur = array_shift($cur);
-                    echo $cur['Nombre']; ?></td>
-                <td><?php echo $CantidadCurso['CantidadCurso']; ?> <?php echo $idioma['Alumnos'] ?></td>
-                <td><?php echo $varones['Cantidad']; ?> <?php echo $idioma['Alumnos'] ?></td>
-                <td><?php echo $mujeres['Cantidad'] ?> <?php echo $idioma['Alumnas'] ?></td>
-                <td class="text-right"><?php echo $CantidadNuevos ?> </td>
-                <td><a class="btn btn-mini vermasnuevo" title="<?php echo $idioma["VerAlumnosNuevos"] ?>" rel="<?php echo $CantidadCurso['CodCurso'] ?>"><i class="icon-chevron-down"></i></a></td>
+                <td><?php echo $row['NombreCurso']; ?></td>
+                <td><?php echo $row['CantidadTotal']; ?> <?php echo $idioma['Alumnos'] ?></td>
+                <td><?php echo $cantidadMasculino; ?> <?php echo $idioma['Alumnos'] ?></td>
+                <td><?php echo $cantidadFemenino; ?> <?php echo $idioma['Alumnas'] ?></td>
+                <td class="text-right"><?php echo $cantidadNuevos ?> </td>
+                <td><a class="btn btn-mini vermasnuevo" title="<?php echo $idioma["VerAlumnosNuevos"] ?>" rel="<?php echo $row['CCurso'] ?>"><i class="icon-chevron-down"></i></a></td>
 
             </tr>
         <?php
@@ -99,10 +98,10 @@ if (!empty($_POST)) {
         <tfoot>
             <tr class="contenido resaltar">
                 <th><?php echo $idioma['TodoColegio'] ?></th>
-                <th><?php echo $CantidadTotal['CantidadTotal']; ?> <?php echo $idioma['Alumnos'] ?></th>
+                <th><?php echo $CantidadTotal; ?> <?php echo $idioma['Alumnos'] ?></th>
                 <th><?php echo $CantidadTotalV; ?> <?php echo $idioma['Alumnos'] ?></th>
                 <th><?php echo $CantidadTotalM ?> <?php echo $idioma['Alumnas'] ?></th>
-                <th><?php echo $CantidadNuevo; ?></th>
+                <th><?php echo $CantidadNuevos; ?></th>
                 <th></th>
             </tr>
         </tfoot>
@@ -142,7 +141,7 @@ if (!empty($_POST)) {
                     text: '<?php echo $idioma['EstadisticasInscritos'] ?>'
                 },
                 subtitle: {
-                    text: '<?php echo $idioma['Fecha'] ?>: <?php echo fecha2Str() ?>'
+                    text: '<?php echo $idioma['Fecha'] ?>: <?php echo  textoDia(date("Y-m-d")) ?>'
                 },
                 xAxis: {
                     categories: [<?php echo $titulos ?>],

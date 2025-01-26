@@ -82,7 +82,7 @@ if (!empty($_GET)) {
 
 	$pdf->ln();
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["FechaNacimiento"] . ": ", 0, "L", $borde, "B");
-	$pdf->CuadroCuerpo(60, (strftime("%d " . $idioma['De'] . " %B de %Y", strtotime($al['FechaNac']))), 0, "", $borde);
+	$pdf->CuadroCuerpo(60, textoDia($al['FechaNac'], 0), 0, "", $borde);
 	if ($MostrarDatosSMSBoletaAlumnos == "1") {
 		$pdf->CuadroCuerpoPersonalizado(50, $idioma["CelularSMS"] . ": ", 0, "L", $borde, "B");
 		$pdf->CuadroCuerpo(60, capitalizar($al['CelularSMS']), 0, "", $borde);

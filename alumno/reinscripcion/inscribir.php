@@ -146,19 +146,19 @@ if (isset($_GET)) {
                 <table class="tabla table-hover">
                     <tr>
                         <td class="der"><?php echo $idioma['Procedencia'] ?></td>
-                        <td><?php campo("Procedencia", "text", capitalizar($al['Procedencia']), "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
+                        <td><?php campo("Procedencia", "text", '', "span12", 0, "", 0, array("maxlength" => 30)) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['Repitente'] ?></td>
-                        <td><?php campo("Repitente", "select", $sinovalor, "span12", 1, "", 0, array("maxlength" => 30), $al['Repitente']) ?></td>
+                        <td><?php campo("Repitente", "select", $sinovalor, "span12", 1, "", 0, array("maxlength" => 30), 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['Traspaso'] ?></td>
-                        <td><?php campo("Traspaso", "select", $sinovalor, "span12", 1, "", 0, array("maxlength" => 30), $al['Traspaso']) ?></td>
+                        <td><?php campo("Traspaso", "select", $sinovalor, "span12", 1, "", 0, array("maxlength" => 30), 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['Becado'] ?></td>
-                        <td><?php campo("Becado", "select", $sinovalor, "span12", 1, "", 0, array("maxlength" => 30), $al['Becado']) ?></td>
+                        <td><?php campo("Becado", "select", $sinovalor, "span12", 1, "", 0, array("maxlength" => 30), 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['MontoBeca'] ?></td>
@@ -170,7 +170,7 @@ if (isset($_GET)) {
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['Retirado'] ?></td>
-                        <td><?php campo("Retirado", "select", $sinovalor, "span12", 0, "", 0, array("maxlength" => 30), $al['Retirado']) ?></td>
+                        <td><?php campo("Retirado", "select", $sinovalor, "span12", 0, "", 0, array("maxlength" => 30), 0) ?></td>
                     </tr>
                     <tr>
                         <td class="der"><?php echo $idioma['FechaRetiro'] ?></td>

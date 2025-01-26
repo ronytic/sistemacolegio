@@ -100,6 +100,7 @@ function mesNumeroToLiteralCorto($mes)
    return $meses[$mes];
 }
 
+
 function campos($texto, $nombre, $tipo = "text", $valores = "", $orientacion = 0, $clase = "", $required = 0, $autofocus = 0, $adicional = array(), $valorseleccion = "")
 {
    if ($tipo == "" && empty($tipo)) {
@@ -684,50 +685,51 @@ function cambiopalabra($numero)
 
 function convertirCuotaEnMes($cuota)
 {
+   global $idioma;
    //1 = Febrero hasta el 10 que es noviembre crear el switch
    switch ($cuota) {
       case "1": {
-            $mes = "Febrero";
+            $mes = $idioma["Febrero"];
          }
          break;
       case "2": {
-            $mes = "Marzo";
+            $mes = $idioma["Marzo"];
          }
          break;
       case "3": {
-            $mes = "Abril";
+            $mes = $idioma["Abril"];
          }
          break;
       case "4": {
-            $mes = "Mayo";
+            $mes = $idioma["Mayo"];
          }
          break;
       case "5": {
-            $mes = "Junio";
+            $mes = $idioma["Junio"];
          }
          break;
       case "6": {
-            $mes = "Julio";
+            $mes = $idioma["Julio"];
          }
          break;
       case "7": {
-            $mes = "Agosto";
+            $mes = $idioma["Agosto"];
          }
          break;
       case "8": {
-            $mes = "Septiembre";
+            $mes = $idioma["Septiembre"];
          }
          break;
       case "9": {
-            $mes = "Octubre";
+            $mes = $idioma["Octubre"];
          }
          break;
       case "10": {
-            $mes = "Noviembre";
+            $mes = $idioma["Noviembre"];
          }
          break;
       case "11": {
-            $mes = "Diciembre";
+            $mes = $idioma["Diciembre"];
          }
          break;
       default: {
@@ -757,5 +759,30 @@ function htmlListadoCriteriosContrasena()
          <li data-criterion="special" class="invalid"><?php echo $idioma['AlMenos'] ?> <strong><?php echo $idioma['UnCaracterEspecial'] ?></strong></li>
       </ul>
    <?php
+}
+
+function textoDia($fecha, $incluirDia = 1, $incluirHora = 0)
+{
+   global $idioma;
+   $fecha = strtotime($fecha);
+   $dia = date("d", $fecha);
+   $mes = date("n", $fecha);
+   $anio = date("Y", $fecha);
+   if ($incluirHora == 1) {
+      $hora = date("H:i", $fecha);
+   } else {
+      $hora = "";
+   }
+   $diaSemana = date("N", $fecha);
+   $texto = "";
+   if ($incluirDia == 1) {
+      $texto .= diaSemana($diaSemana) . ", ";
+   }
+   $texto .= $dia . " " . $idioma['De'] . " " . mes($mes) . " " . $idioma['De'] . " " . $anio;
+   if ($hora != "") {
+      $texto .= ", " . $hora;
+   }
+
+   return $texto;
 }
    ?>

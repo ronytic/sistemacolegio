@@ -91,7 +91,7 @@ class bd
 		$res['Auto_increment'] = (int)$res['Auto_increment'];
 		return $res;
 	}
-	function getRecords($where_str = false, $order_str = false, $group_str = false, $count = false, $start = 0, $order_strDesc = false)
+	function getRecords($where_str = false, $order_str = false, $group_str = false, $count = false, $start = 0, $order_strDesc = false, $joinTables = false)
 	{
 		if (empty($this->campos) || !isset($this->campos)) {
 			$this->campos = array('*');
@@ -107,8 +107,10 @@ class bd
 		} else {
 			$nombretabla = mb_strtolower($this->tabla, "utf8");
 		}
+		if ($joinTables) {
+			$nombretabla = $nombretabla . " " . $joinTables;
+		}
 		$query = "SELECT $camposs FROM {$nombretabla} $where $group $order $count";
-		// echo $query . "<br>";
 		return $this->sql($query);
 	}
 	public function getRecord($id)
