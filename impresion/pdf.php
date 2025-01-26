@@ -45,13 +45,13 @@ class PPDF extends FPDF_Protection
 		$this->Image("../../imagenes/logos/" . $logo, 10, 10, 20, 20);
 		$this->Fuente("", $tam);
 		$this->SetXY(34, 12);
-		$this->Cell(70, 4, utf8_decode($title), 0, 0, "L");
+		$this->Cell(70, 4, utf8Decode($title), 0, 0, "L");
 		$this->Fuente("B", 8);
 		$this->SetXY(34, 16);
-		$this->Cell(70, 4, utf8_decode($gestion), 0, 0, "L");
+		$this->Cell(70, 4, utf8Decode($gestion), 0, 0, "L");
 		$this->ln(10);
 		$this->Fuente("B", 18);
-		$this->Cell($this->ancho, 4, utf8_decode($titulo), 0, 5, "C");
+		$this->Cell($this->ancho, 4, utf8Decode($titulo), 0, 5, "C");
 		$this->ln(5);
 		if (!isset($FechaReporte)) {
 			$this->CuadroCabecera(32, $idioma['FechaReporte'] . ": ", 50, ($fecha));
@@ -84,30 +84,30 @@ class PPDF extends FPDF_Protection
 	function CuadroCabecera($txt1Ancho, $txt1, $txt2Ancho, $txt2)
 	{
 		$this->Fuente("B");
-		$this->Cell($txt1Ancho, 4, utf8_decode($txt1), 0, 0, "L");
+		$this->Cell($txt1Ancho, 4, utf8Decode($txt1), 0, 0, "L");
 		$this->Fuente("");
-		$this->Cell($txt2Ancho, 4, utf8_decode($txt2), 0, 0, "L");
+		$this->Cell($txt2Ancho, 4, utf8Decode($txt2), 0, 0, "L");
 	}
 	function TituloCabecera($txtAncho, $txt, $tam = 10, $borde = 1, $align = "C")
 	{
 		$this->Fuente("B", $tam);
-		$this->Cell($txtAncho, 4, utf8_decode($txt), $borde, 0, $align);
+		$this->Cell($txtAncho, 4, utf8Decode($txt), $borde, 0, $align);
 	}
 	function CuadroCuerpo($txtAncho, $txt, $relleno = 0, $align = "L", $borde = 0, $tam = 9, $tipo = "")
 	{
 
 		$this->Fuente($tipo, $tam);
-		$this->Cell($txtAncho, $this->altocelda, utf8_decode($txt), $borde, 0, $align, $relleno);
+		$this->Cell($txtAncho, $this->altocelda, utf8Decode($txt), $borde, 0, $align, $relleno);
 	}
 	function CuadroCuerpoMulti($txtAncho, $txt, $relleno = 0, $align = "L", $borde = 0, $tam = 9, $tipo = "")
 	{
 		$this->Fuente($tipo, $tam);
-		$this->MultiCell($txtAncho, 5, utf8_decode($txt), $borde, $align, $relleno);
+		$this->MultiCell($txtAncho, 5, utf8Decode($txt), $borde, $align, $relleno);
 	}
 	function CuadroCuerpoPersonalizado($txtAncho, $txt, $relleno = 0, $align = "L", $borde = 0, $tipo = "", $tam = 10)
 	{
 		$this->Fuente($tipo, $tam);
-		$this->Cell($txtAncho, 5, utf8_decode($txt), $borde, 0, $align, $relleno);
+		$this->Cell($txtAncho, 5, utf8Decode($txt), $borde, 0, $align, $relleno);
 	}
 	function CuadroCuerpoResaltar($txtAncho, $txt, $relleno = 0, $align = "L", $borde = 0, $resaltar = 2, $tipo = "", $tam = 10)
 	{
@@ -124,7 +124,7 @@ class PPDF extends FPDF_Protection
 				}
 				break;
 		}
-		$this->Cell($txtAncho, 5, utf8_decode($txt), $borde, 0, $align, $relleno);
+		$this->Cell($txtAncho, 5, utf8Decode($txt), $borde, 0, $align, $relleno);
 	}
 	function CuadroNombre($txtAncho, $Paterno, $Materno, $Nombres, $Full = 0, $relleno)
 	{
@@ -170,15 +170,15 @@ class PPDF extends FPDF_Protection
 
 			$Resto = 35;
 			// $DatosReporteGenerado = utf8_decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " " . $DatosUsuario;
-			$DatosReporteGenerado = utf8_decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " ";
+			$DatosReporteGenerado = utf8Decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " ";
 			$this->Cell(60, 3, $DatosReporteGenerado, $BordePie, 0, "L");
 
-			$this->Cell((round(($this->ancho - 50) / 2) + 55 - 0), 3, utf8_decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
+			$this->Cell((round(($this->ancho - 50) / 2) + 55 - 0), 3, utf8Decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
 			$this->ln();
 			$this->Cell((round(($this->ancho - 50) / 2) + 0), 3, $idioma['Por'] . ": " . $DatosUsuario, $BordePie, 0, "L");
 
 			$this->Fuente("I", 8);
-			$this->Cell((round(($this->ancho - 50) / 2) + 30 - $Resto), 3, utf8_decode($lema), $BordePie, 0, "C");
+			$this->Cell((round(($this->ancho - 50) / 2) + 30 - $Resto), 3, utf8Decode($lema), $BordePie, 0, "C");
 			$this->Fuente("I", 7);
 
 			$this->Cell((round(($this->ancho - 50) / 2) + 00), 3, "Desarrollado por Ronald Nina", $BordePie, 0, "R");
@@ -186,27 +186,27 @@ class PPDF extends FPDF_Protection
 
 			if ($this->CurOrientation == "P" || $this->OrientacionObligada == "L") {
 				$Resto = 0;
-				$DatosReporteGenerado = utf8_decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " ";
+				$DatosReporteGenerado = utf8Decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " ";
 				$this->Cell(50, 3, $DatosReporteGenerado, $BordePie, 0, "L");
 			} else {
 				$Resto = 35;
-				$DatosReporteGenerado = utf8_decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " " . $DatosUsuario;
+				$DatosReporteGenerado = utf8Decode($idioma['ReporteGenerado']) . ": " . date('d-m-Y H:i:s') . " " . $DatosUsuario;
 				$this->Cell(90, 3, $DatosReporteGenerado, $BordePie, 0, "L");
 			}
 
 			$this->Fuente("I", 8);
-			$this->Cell((round(($this->ancho - 50) / 2) - $Resto), 3, utf8_decode($lema), $BordePie, 0, "C");
+			$this->Cell((round(($this->ancho - 50) / 2) - $Resto), 3, utf8Decode($lema), $BordePie, 0, "C");
 			$this->Fuente("I", 7);
 
 
 			if ($this->CurOrientation == "P" || $this->OrientacionObligada == "L") {
-				$this->Cell((round(($this->ancho - 50) / 2) + 0), 3, utf8_decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
+				$this->Cell((round(($this->ancho - 50) / 2) + 0), 3, utf8Decode($idioma['TituloSistema'] . ""), $BordePie, 0, "R");
 				$this->ln();
 
 				$this->Cell((round(($this->ancho - 50) / 2) + 50), 3, $idioma['Por'] . ": " . $DatosUsuario, $BordePie, 0, "L");
 				$this->Cell((round(($this->ancho - 50) / 2) + 00), 3, "Desarrollado por Ronald Nina", $BordePie, 0, "R");
 			} else {
-				$this->Cell((round(($this->ancho - 50) / 2) + 1), 3, utf8_decode($idioma['TituloSistema'] . " - Desarrollado por Ronald Nina"), $BordePie, 0, "R");
+				$this->Cell((round(($this->ancho - 50) / 2) + 1), 3, utf8Decode($idioma['TituloSistema'] . " - Desarrollado por Ronald Nina"), $BordePie, 0, "R");
 			}
 
 			//$this->Cell(60,4,utf8_decode($idioma['ReporteGenerado']).": ".date('d-m-Y H:i:s'),0,0,"R");

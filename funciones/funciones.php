@@ -785,4 +785,14 @@ function textoDia($fecha, $incluirDia = 1, $incluirHora = 0)
 
    return $texto;
 }
+
+function utf8Decode($string)
+{
+   return mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
+}
+
+function utf8Encode($string)
+{
+   return mb_convert_encoding($string, 'UTF-8', 'ISO-8859-1');
+}
    ?>
