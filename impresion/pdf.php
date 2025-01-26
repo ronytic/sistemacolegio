@@ -216,4 +216,7 @@ class PPDF extends FPDF_Protection
 			$this->Pie();
 		}
 	}
+
+	function Pie() {}
+	function Cabecera() {}
 }
