@@ -60,6 +60,7 @@ $(document).ready(function (e) {
 	});
 });
 function mostrarAgenda() {
+	cargandoG("#respuesta");
 	Busqueda = $("#Busqueda").attr("checked") ? true : false;
 	if (Busqueda) {
 		var CodMateria = $("select[name=Materia]").val();
