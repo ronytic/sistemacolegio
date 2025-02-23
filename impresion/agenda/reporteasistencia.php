@@ -44,6 +44,12 @@ if (isset($_GET)) {
 	$pdf = new PDF("P", "mm", "letter");
 	$pdf->AddPage();
 	$i = 0;
+
+	$CodigosObservaciones = [];
+	foreach ($observaciones->agruparObservaciones() as $CodOb) {
+		$CodigosObservaciones[$CodOb['NivelObservacion']] = explode(",", $CodOb['CodObservaciones']);
+	}
+
 	$tObservaciones = 0;
 	$tfaltas = 0;
 	$tAtrasos = 0;
@@ -58,40 +64,39 @@ if (isset($_GET)) {
 		/*Inicio Agenda*/
 		$CodAl = $al['CodAlumno'];
 
-		//Cantidad de Faltas
-		$Obser = array();
-		$CodObser = $observaciones->CodObservaciones(2);
-		foreach ($CodObser as $CodO) {
-			$Obser[] = $CodO['CodObservacion'];
-		}
-		$CodigosObservaciones = implode(",", $Obser);
-		$CantFaltas = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-		$CantFaltas = array_shift($CantFaltas);
-		//Cantidad de Atrasos
-		$Obser = array();
-		$CodObser = $observaciones->CodObservaciones(3);
-		foreach ($CodObser as $CodO) {
-			$Obser[] = $CodO['CodObservacion'];
-		}
-		$CodigosObservaciones = implode(",", $Obser);
-		$CantAtrasos = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-		$CantAtrasos = array_shift($CantAtrasos);
-		//Cantidad de Licencias
-		$Obser = array();
-		$CodObser = $observaciones->CodObservaciones(4);
-		foreach ($CodObser as $CodO) {
-			$Obser[] = $CodO['CodObservacion'];
-		}
-		$CodigosObservaciones = implode(",", $Obser);
-		$CantLicencias = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-		$CantLicencias = array_shift($CantLicencias);
+		$CantFaltas = 0;
+		$CantAtrasos = 0;
+		$CantLicencias = 0;
+		$TotalesAgenda = $agenda->CantidadTotalAgrupado($CodAl);
+		foreach ($TotalesAgenda as $TotAgenda) {
+			//Faltas
+			foreach ($CodigosObservaciones[2] as $CodOb) {
+				if ($TotAgenda['CodObservacion'] == $CodOb) {
+					$CantFaltas += $TotAgenda['Cantidad'] ?? 0;
+				}
+			}
+			//Atrasos
+			foreach ($CodigosObservaciones[3] as $CodOb) {
 
-		$Total = $CantFaltas['Cantidad'] + $CantAtrasos['Cantidad'] + $CantLicencias['Cantidad'];
+				if ($TotAgenda['CodObservacion'] == $CodOb) {
+					$CantAtrasos += $TotAgenda['Cantidad'] ?? 0;
+				}
+			}
+			//Licencias
+			foreach ($CodigosObservaciones[4] as $CodOb) {
+				if ($TotAgenda['CodObservacion'] == $CodOb) {
+					$CantLicencias += $TotAgenda['Cantidad'] ?? 0;
+				}
+			}
+		}
+
+
+		$Total = $CantFaltas + $CantAtrasos + $CantLicencias;
 		/*Fin Agenda*/
 
-		$tfaltas += $CantFaltas['Cantidad'];
-		$tAtrasos += $CantAtrasos['Cantidad'];
-		$tLicencias += $CantLicencias['Cantidad'];
+		$tfaltas += $CantFaltas;
+		$tAtrasos += $CantAtrasos;
+		$tLicencias += $CantLicencias;
 
 		$tTotal += $Total;
 
@@ -104,9 +109,9 @@ if (isset($_GET)) {
 		$pdf->CuadroCuerpo(10, $i, $relleno, "R");
 		$pdf->CuadroNombreSeparado(30, $al['Paterno'], 30, $al['Materno'], 45, $al['Nombres'], 1, $relleno);
 
-		$pdf->CuadroCuerpo(15, $CantFaltas['Cantidad'], $relleno, "R", 1);
-		$pdf->CuadroCuerpo(15, $CantAtrasos['Cantidad'], $relleno, "R", 1);
-		$pdf->CuadroCuerpo(15, $CantLicencias['Cantidad'], $relleno, "R", 1);
+		$pdf->CuadroCuerpo(15, $CantFaltas, $relleno, "R", 1);
+		$pdf->CuadroCuerpo(15, $CantAtrasos, $relleno, "R", 1);
+		$pdf->CuadroCuerpo(15, $CantLicencias, $relleno, "R", 1);
 
 		$pdf->CuadroCuerpoResaltar(15, $Total, 1, "R", 1, 1);
 		$pdf->Ln();

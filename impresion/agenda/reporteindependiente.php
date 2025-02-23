@@ -22,69 +22,78 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 	$al = array_shift($al);
 	$cur = $curso->mostrarCurso($al['CodCurso']);
 	$cur = array_shift($cur);
-	//Cantidad de Observaciones
-	$CodObser = $observaciones->CodObservaciones(1);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$TodoObservaciones = [];
+	foreach ($observaciones->mostrarTodoRegistro('', '1') as $TO) {
+		$TodoObservaciones[$TO['CodObservacion']] = $TO['Nombre'];
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantObser = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantObser = array_shift($CantObser);
-	//Cantidad de Faltas
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(2);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+	$TodoMaterias = [];
+	foreach ($materia->mostrarMaterias() as $TM) {
+		$TodoMaterias[$TM['CodMateria']] = $TM['Nombre'];
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantFaltas = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantFaltas = array_shift($CantFaltas);
-	//Cantidad de Atrasos
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(3);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$CodigosObservacionesG = $observaciones->agruparObservaciones();
+	$CodigosObservaciones = [];
+	foreach ($CodigosObservacionesG as $CodOb) {
+		$CodigosObservaciones[$CodOb['NivelObservacion']] = explode(",", $CodOb['CodObservaciones']);
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantAtrasos = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantAtrasos = array_shift($CantAtrasos);
-	//Cantidad de Licencias
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(4);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$TotalesAgenda = $agenda->CantidadTotalAgrupado($CodAlumno);
+
+	$CantObservaciones = 0;
+	$CantFaltas = 0;
+	$CantAtrasos = 0;
+	$CantLicencias = 0;
+	$CantNotificacion = 0;
+	$CantNoContestan = 0;
+	$CantFelicitacion = 0;
+
+	foreach ($TotalesAgenda as $TotAgenda) {
+		//Observaciones
+		foreach ($CodigosObservaciones[1] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantObservaciones += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Faltas
+		foreach ($CodigosObservaciones[2] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantFaltas += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Atrasos
+		foreach ($CodigosObservaciones[3] as $CodOb) {
+
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantAtrasos += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Licencias
+		foreach ($CodigosObservaciones[4] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantLicencias += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Notificacion
+		foreach ($CodigosObservaciones[5] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantNotificacion += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//NoContestan
+		foreach ($CodigosObservaciones[6] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantNoContestan += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Felicitacion
+		foreach ($CodigosObservaciones[7] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantFelicitacion += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantLicencias = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantLicencias = array_shift($CantLicencias);
-	//Cantidad de Felicitaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(5);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantNotificacion = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantNotificacion = array_shift($CantNotificacion);
-	//Cantidad de No contestan
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(6);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantNoContestan = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantNoContestan = array_shift($CantNoContestan);
-	//Cantidad de Felicitaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(7);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantFelicitacion = $agenda->CantidadObservaciones($CodAlumno, $CodigosObservaciones, $CodMateria);
-	$CantFelicitacion = array_shift($CantFelicitacion);
-	$Total = $CantObser['Cantidad'] + $CantFaltas['Cantidad'] + $CantAtrasos['Cantidad'] + $CantLicencias['Cantidad'] + $CantNotificacion['Cantidad'] + $CantNoContestan['Cantidad'] + $CantFelicitacion['Cantidad'];
+	$Total = $CantObservaciones + $CantFaltas + $CantAtrasos + $CantLicencias + $CantNotificacion + $CantNoContestan + $CantFelicitacion;
 
 	/*Sacando Fecha de Trimestre*/
 	if ($cur['Bimestre']) {
@@ -189,10 +198,10 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["Faltas"] . " ", 0, "C", 1, "B");
 	$pdf->CuadroCuerpoPersonalizado(40, $idioma["Atrasos"] . " ", 0, "C", 1, "B");
 	$pdf->ln();
-	$pdf->CuadroCuerpo(40, $CantObser['Cantidad'], 0, "C", $borde);
-	$pdf->CuadroCuerpo(40, $CantFelicitacion['Cantidad'], 0, "C", $borde);
-	$pdf->CuadroCuerpo(40, $CantFaltas['Cantidad'], 0, "C", $borde);
-	$pdf->CuadroCuerpo(40, $CantAtrasos['Cantidad'], 0, "C", $borde);
+	$pdf->CuadroCuerpo(40, $CantObservaciones, 0, "C", $borde);
+	$pdf->CuadroCuerpo(40, $CantFelicitacion, 0, "C", $borde);
+	$pdf->CuadroCuerpo(40, $CantFaltas, 0, "C", $borde);
+	$pdf->CuadroCuerpo(40, $CantAtrasos, 0, "C", $borde);
 
 	$pdf->ln();
 
@@ -202,9 +211,9 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 	$pdf->CuadroCuerpoPersonalizado(35, $idioma["Total"] . " ", 0, "C", 1, "B");
 	$pdf->ln();
 
-	$pdf->CuadroCuerpo(40, $CantLicencias['Cantidad'], 0, "C", $borde);
-	$pdf->CuadroCuerpo(50, $CantNotificacion['Cantidad'], 0, "C", $borde);
-	$pdf->CuadroCuerpo(50, $CantNoContestan['Cantidad'], 0, "C", $borde);
+	$pdf->CuadroCuerpo(40, $CantLicencias, 0, "C", $borde);
+	$pdf->CuadroCuerpo(50, $CantNotificacion, 0, "C", $borde);
+	$pdf->CuadroCuerpo(50, $CantNoContestan, 0, "C", $borde);
 	$pdf->CuadroCuerpo(35, $Total, 0, "C", $borde);
 
 	$pdf->Ln();
@@ -255,13 +264,13 @@ if (!empty($_GET) && $_GET['lock'] == md5('lock')) {
 		if ($a['Resaltar']) {
 			$importante = " - I";
 		}
-		$m = $materia->mostrarMateria($a['CodMateria']);
-		$m = array_shift($m);
-		$o = $observaciones->mostrarObser($a['CodObservacion']);
-		$o = array_shift($o);
+		// $m = $materia->mostrarMateria($a['CodMateria']);
+		// $m = array_shift($m);
+		// $o = $observaciones->mostrarObser($a['CodObservacion']);
+		// $o = array_shift($o);
 		$pdf->CuadroCuerpo(8, $i, 0, "R", 1, 9, "");
-		$pdf->CuadroCuerpo(50, $m["Nombre"], 0, "L", 1, 8, "");
-		$pdf->CuadroCuerpo(40, recortartexto($o["Nombre"], 23), 0, "L", 1, 9, "");
+		$pdf->CuadroCuerpo(50, $TodoMaterias[$a['CodMateria']] ?? '', 0, "L", 1, 8, "");
+		$pdf->CuadroCuerpo(40, recortartexto($TodoObservaciones[$a['CodObservacion']] ?? '', 23), 0, "L", 1, 9, "");
 		$pdf->CuadroCuerpo(50, recortartexto(minuscula($a["Detalle"]), 33), 0, "L", 1, 8, "");
 		$pdf->CuadroCuerpo(20, fecha2Str($a["Fecha"]), 0, "C", 1, 9, "");
 		$pdf->CuadroCuerpo(10, sacariniciales($mensaje) . $importante, 0, "L", 1, 9, "");

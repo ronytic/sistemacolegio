@@ -19,70 +19,78 @@ if (isset($_POST)) {
 	$al = array_shift($al);
 	$cur = $curso->mostrarCurso($al['CodCurso']);
 	$cur = array_shift($cur);
-	//Cantidad de Observaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(1);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$TodoObservaciones = [];
+	foreach ($observaciones->mostrarTodoRegistro('', '1') as $TO) {
+		$TodoObservaciones[$TO['CodObservacion']] = $TO['Nombre'];
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantObser = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantObser = array_shift($CantObser);
-	//Cantidad de Faltas
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(2);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+	$TodoMaterias = [];
+	foreach ($materia->mostrarMaterias() as $TM) {
+		$TodoMaterias[$TM['CodMateria']] = $TM['Nombre'];
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantFaltas = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantFaltas = array_shift($CantFaltas);
-	//Cantidad de Atrasos
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(3);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$CodigosObservaciones = [];
+	foreach ($observaciones->agruparObservaciones() as $CodOb) {
+		$CodigosObservaciones[$CodOb['NivelObservacion']] = explode(",", $CodOb['CodObservaciones']);
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantAtrasos = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantAtrasos = array_shift($CantAtrasos);
-	//Cantidad de Licencias
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(4);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$TotalesAgenda = $agenda->CantidadTotalAgrupado($CodAl);
+
+	$CantObservaciones = 0;
+	$CantFaltas = 0;
+	$CantAtrasos = 0;
+	$CantLicencias = 0;
+	$CantNotificacion = 0;
+	$CantNoContestan = 0;
+	$CantFelicitacion = 0;
+
+	foreach ($TotalesAgenda as $TotAgenda) {
+		//Observaciones
+		foreach ($CodigosObservaciones[1] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantObservaciones += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Faltas
+		foreach ($CodigosObservaciones[2] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantFaltas += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Atrasos
+		foreach ($CodigosObservaciones[3] as $CodOb) {
+
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantAtrasos += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Licencias
+		foreach ($CodigosObservaciones[4] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantLicencias += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Notificacion
+		foreach ($CodigosObservaciones[5] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantNotificacion += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//NoContestan
+		foreach ($CodigosObservaciones[6] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantNoContestan += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Felicitacion
+		foreach ($CodigosObservaciones[7] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantFelicitacion += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantLicencias = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantLicencias = array_shift($CantLicencias);
-	//Cantidad de Felicitaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(5);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantNotificacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantNotificacion = array_shift($CantNotificacion);
-	//Cantidad de No contestan
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(6);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantNoContestan = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantNoContestan = array_shift($CantNoContestan);
-	//Cantidad de Felicitaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(7);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantFelicitacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria);
-	$CantFelicitacion = array_shift($CantFelicitacion);
-	$Total = $CantObser['Cantidad'] + $CantFaltas['Cantidad'] + $CantAtrasos['Cantidad'] + $CantLicencias['Cantidad'] + $CantNotificacion['Cantidad'] + $CantNoContestan['Cantidad'] + $CantFelicitacion['Cantidad'];
+
+	$Total = $CantObservaciones + $CantFaltas + $CantAtrasos + $CantLicencias + $CantNotificacion + $CantNoContestan + $CantFelicitacion;
 
 	/*Sacando Fecha de Trimestre*/
 	if ($cur['Bimestre']) {
@@ -120,9 +128,9 @@ if (isset($_POST)) {
 			</tr>
 		</thead>
 		<tr>
-			<td class="centrar"><?php echo $CantObser['Cantidad']; ?></td>
+			<td class="centrar"><?php echo $CantObservaciones; ?></td>
 
-			<td class="centrar" colspan="2"><?php echo $CantFelicitacion['Cantidad']; ?></td>
+			<td class="centrar" colspan="2"><?php echo $CantFelicitacion; ?></td>
 			<td class="centrar resaltar alineadovertical x2" rowspan="5"><?php echo $Total; ?></td>
 		</tr>
 		<tr>
@@ -131,17 +139,17 @@ if (isset($_POST)) {
 			<td class="resaltar"><?php echo $idioma['Licencias'] ?></td>
 		</tr>
 		<tr>
-			<td class="centrar"><?php echo $CantFaltas['Cantidad']; ?></td>
-			<td class="centrar"><?php echo $CantAtrasos['Cantidad']; ?></td>
-			<td class="centrar"><?php echo $CantLicencias['Cantidad']; ?></td>
+			<td class="centrar"><?php echo $CantFaltas; ?></td>
+			<td class="centrar"><?php echo $CantAtrasos; ?></td>
+			<td class="centrar"><?php echo $CantLicencias; ?></td>
 		</tr>
 		<tr>
 			<td class="resaltar" colspan="1"><?php echo $idioma['NoRespondeTelf'] ?></td>
 			<td class="resaltar" colspan="2"><?php echo $idioma['NotificacionPadres'] ?></td>
 		</tr>
 		<tr>
-			<td class="centrar" colspan="1"><?php echo $CantNoContestan['Cantidad']; ?></td>
-			<td class="centrar" colspan="2"><?php echo $CantNotificacion['Cantidad']; ?></td>
+			<td class="centrar" colspan="1"><?php echo $CantNoContestan; ?></td>
+			<td class="centrar" colspan="2"><?php echo $CantNotificacion; ?></td>
 		</tr>
 	</table>
 	<?php
@@ -165,10 +173,6 @@ if (isset($_POST)) {
 			foreach ($ag as $a) {
 				$tipo = 0;
 				$mensaje = "";
-				$m = $materia->mostrarMateria($a['CodMateria']);
-				$m = array_shift($m);
-				$o = $observaciones->mostrarObser($a['CodObservacion']);
-				$o = array_shift($o);
 				if ($cur['Bimestre']) {
 					if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre1)) {
 						$tipo = 1;
@@ -220,8 +224,8 @@ if (isset($_POST)) {
 						}
 						?>
 						<?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>" style="width:5px;height:18px"></div><?php } ?></td>
-					<td class="<?php echo $resaltar ?>"><?php echo $m['Nombre'] ?></td>
-					<td class="<?php echo $resaltar ?>"><?php echo $o['Nombre'] ?></td>
+					<td class="<?php echo $resaltar ?>"><?php echo $TodoMaterias[$a['CodMateria']] ?? '' ?></td>
+					<td class="<?php echo $resaltar ?>"><?php echo $TodoObservaciones[$a['CodObservacion']] ?? '' ?></td>
 					<td class="<?php echo $resaltar ?>"><?php echo $a['Detalle']; ?></td>
 					<td class="<?php echo $resaltar ?> der">
 						<div title="<?php echo ($idioma['FechaRegistro']) ?>: <?php echo date("d-m-Y", strtotime($a['FechaRegistro'])); ?>

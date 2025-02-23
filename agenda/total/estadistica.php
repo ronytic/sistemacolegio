@@ -12,6 +12,12 @@ if (!empty($_POST)) {
 	$CodCurso = $_POST['CodCurso'];
 	$cur = $curso->mostrarCurso($CodCurso);
 	$cur = array_shift($cur);
+
+	$CodigosObservaciones = [];
+	foreach ($observaciones->agruparObservaciones() as $CodOb) {
+		$CodigosObservaciones[$CodOb['NivelObservacion']] = explode(",", $CodOb['CodObservaciones']);
+	}
+
 ?>
 	<a href="#" class="btn" id="reportegeneral"><?php echo $idioma['ReporteGeneral'] ?></a>
 	<a href="#" class="btn btn-info" id="reporteimprimir"><?php echo $idioma['ReporteImprimir'] ?></a>
@@ -53,78 +59,72 @@ if (!empty($_POST)) {
 			foreach ($alumno->mostrarAlumnosCurso($CodCurso) as $al) {
 				$i++;
 				$CodAl = $al['CodAlumno'];
-				//Cantidad de Observaciones
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(1);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
+
+				$TotalesAgenda = $agenda->CantidadTotalAgrupado($CodAl);
+
+				$CantObservaciones = 0;
+				$CantFaltas = 0;
+				$CantAtrasos = 0;
+				$CantLicencias = 0;
+				$CantNotificacion = 0;
+				$CantNoContestan = 0;
+				$CantFelicitacion = 0;
+
+				foreach ($TotalesAgenda as $TotAgenda) {
+					//Observaciones
+					foreach ($CodigosObservaciones[1] as $CodOb) {
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantObservaciones += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
+					//Faltas
+					foreach ($CodigosObservaciones[2] as $CodOb) {
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantFaltas += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
+					//Atrasos
+					foreach ($CodigosObservaciones[3] as $CodOb) {
+
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantAtrasos += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
+					//Licencias
+					foreach ($CodigosObservaciones[4] as $CodOb) {
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantLicencias += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
+					//Notificacion
+					foreach ($CodigosObservaciones[5] as $CodOb) {
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantNotificacion += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
+					//NoContestan
+					foreach ($CodigosObservaciones[6] as $CodOb) {
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantNoContestan += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
+					//Felicitacion
+					foreach ($CodigosObservaciones[7] as $CodOb) {
+						if ($TotAgenda['CodObservacion'] == $CodOb) {
+							$CantFelicitacion += $TotAgenda['Cantidad'] ?? 0;
+						}
+					}
 				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantObser = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantObser = array_shift($CantObser);
-				//Cantidad de Faltas
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(2);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
-				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantFaltas = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantFaltas = array_shift($CantFaltas);
-				//Cantidad de Atrasos
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(3);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
-				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantAtrasos = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantAtrasos = array_shift($CantAtrasos);
-				//Cantidad de Licencias
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(4);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
-				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantLicencias = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantLicencias = array_shift($CantLicencias);
-				//Cantidad de Felicitaciones
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(5);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
-				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantNotificacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantNotificacion = array_shift($CantNotificacion);
-				//Cantidad de No contestan
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(6);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
-				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantNoContestan = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantNoContestan = array_shift($CantNoContestan);
-				//Cantidad de Felicitaciones
-				$Obser = array();
-				$CodObser = $observaciones->CodObservaciones(7);
-				foreach ($CodObser as $CodO) {
-					$Obser[] = $CodO['CodObservacion'];
-				}
-				$CodigosObservaciones = implode(",", $Obser);
-				$CantFelicitacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones);
-				$CantFelicitacion = array_shift($CantFelicitacion);
-				$Total = $CantObser['Cantidad'] + $CantFaltas['Cantidad'] + $CantAtrasos['Cantidad'] + $CantLicencias['Cantidad'] + $CantNotificacion['Cantidad'] + $CantNoContestan['Cantidad'] + $CantFelicitacion['Cantidad'];
+
+				$Total = $CantObservaciones + $CantFaltas + $CantAtrasos + $CantLicencias + $CantNotificacion + $CantNoContestan + $CantFelicitacion;
 				//Estadisticas Totales
-				$tObser += $CantObser['Cantidad'];
-				$tFaltas += $CantFaltas['Cantidad'];
-				$tAtrasos += $CantAtrasos['Cantidad'];
-				$tLicencias += $CantLicencias['Cantidad'];
-				$tNotificacion += $CantNotificacion['Cantidad'];
-				$tNoContestan += $CantNoContestan['Cantidad'];
-				$tFelicitacion += $CantFelicitacion['Cantidad'];
+				$tObser += $CantObservaciones;
+				$tFaltas += $CantFaltas;
+				$tAtrasos += $CantAtrasos;
+				$tLicencias += $CantLicencias;
+				$tNotificacion += $CantNotificacion;
+				$tNoContestan += $CantNoContestan;
+				$tFelicitacion += $CantFelicitacion;
 				$tTotal += $Total;
 			?>
 				<tr>
@@ -132,13 +132,13 @@ if (!empty($_POST)) {
 					<td><?php echo capitalizar($al['Paterno']) ?></td>
 					<td><?php echo capitalizar($al['Materno']) ?></td>
 					<td><?php echo capitalizar($al['Nombres']) ?></td>
-					<td class="centrar"><?php echo $CantObser['Cantidad']; ?></td>
-					<td class="centrar"><?php echo $CantFaltas['Cantidad']; ?></td>
-					<td class="centrar"><?php echo $CantAtrasos['Cantidad']; ?></td>
-					<td class="centrar"><?php echo $CantLicencias['Cantidad']; ?></td>
-					<td class="centrar"><?php echo $CantNotificacion['Cantidad']; ?></td>
-					<td class="centrar"><?php echo $CantNoContestan['Cantidad']; ?></td>
-					<td class="centrar"><?php echo $CantFelicitacion['Cantidad']; ?></td>
+					<td class="centrar"><?php echo $CantObservaciones; ?></td>
+					<td class="centrar"><?php echo $CantFaltas; ?></td>
+					<td class="centrar"><?php echo $CantAtrasos; ?></td>
+					<td class="centrar"><?php echo $CantLicencias; ?></td>
+					<td class="centrar"><?php echo $CantNotificacion; ?></td>
+					<td class="centrar"><?php echo $CantNoContestan; ?></td>
+					<td class="centrar"><?php echo $CantFelicitacion; ?></td>
 					<td class="centrar der"><?php echo $Total; ?></td>
 				</tr>
 			<?php

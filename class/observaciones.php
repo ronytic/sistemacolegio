@@ -23,4 +23,9 @@ class observaciones extends bd
 		$this->campos = array("*");
 		return $this->getRecords(" CodObservacion=$CodObser and Activo=1");
 	}
+	function agruparObservaciones()
+	{
+		$this->campos = array("GROUP_CONCAT(CodObservacion SEPARATOR ',') as CodObservaciones", "NivelObservacion");
+		return $this->getRecords("Activo=1", "", "NivelObservacion");
+	}
 }

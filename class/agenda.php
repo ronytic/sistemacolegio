@@ -80,7 +80,7 @@ class agenda extends bd
     }
     public function CantidadObservacionesTotal($CodCurso = "", $CodAlumno = "", $CodObservaciones = "", $CodMateria = "", $Fecha = "")
     {
-        $this->campos = array("count(*) as Cantidad");
+        $this->campos = array("count(*) as Cantidad", "CodObservacion");
 
         if ($CodMateria == "") {
             $Materia = "";
@@ -102,8 +102,18 @@ class agenda extends bd
         } else {
             $fech = "and Fecha='$Fecha'";
         }
+        return $this->getRecords("CodObservacion IN($CodObservaciones) and Activo=1 $Curso $CodAl $Materia $fech", '', 'CodObservacion');
+    }
 
-        return $this->getRecords("CodObservacion IN($CodObservaciones) and Activo=1 $Curso $CodAl $Materia $fech");
+    public function CantidadTotalAgrupado($CodAlumno)
+    {
+        /*SELECT count(*) CantidadObservaciones,
+                    CodObservacion
+                FROM `agenda`
+                WHERE CodAlumno = 681 and Activo = 1
+                GROUP BY CodObservacion;*/
+        $this->campos = array("count(*) as Cantidad", "CodObservacion");
+        return $this->getRecords("CodAlumno = $CodAlumno and Activo = 1", "CodObservacion", "CodObservacion");
     }
     public function actualizarAgendaE($values, $where)
     {

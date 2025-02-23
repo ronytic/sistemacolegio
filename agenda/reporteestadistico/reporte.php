@@ -18,71 +18,52 @@ if (!empty($_POST)) {
 	$Materia = $_POST['Materia'];
 	$Alumnos = $_POST['Alumnos'];
 	$Observacion = $_POST['Observacion'];
-	//print_r($Observacion);
+
 	$FechaInicio = fecha2Str($FechaInicio, 0);
 	$FechaFinal = fecha2Str($FechaFinal, 0);
-	$Cod = array_shift($_POST['Observacion']);
+	$Cod = array_shift($Observacion);
 
-	if ($Cod == "") {
-		//echo "Asd";
-		$Observacion = array();
-		foreach ($observaciones->mostrarObservaciones("Nombre") as $obs) {
-			//$obs=array_shift($obs);
-			array_push($Observacion, $obs['CodObservacion']);
-		}
-	} else {
-		$Observacion = (array)$Observacion;
+	$TodoObservaciones = [];
+	$CodTodosObservaciones = [];
+	foreach ($observaciones->mostrarTodoRegistro('', '1', 'Nombre') as $TO) {
+		$TodoObservaciones[$TO['CodObservacion']] = $TO['Nombre'];
+		$CodTodosObservaciones[] = $TO['CodObservacion'];
 	}
 
-	//print_r($Observacion);
-	$ValoresObser = array();
-	$i = 0;
-	foreach ($Observacion as $obs) {
-		$i++;
-		$o = $observaciones->mostrarObser($obs);
-		$o = array_shift($o);
-		$ValoresObser['Observacion' . $i] = "" . $o['Nombre'] . "";
+	if ($Cod == "") {
+		$CodObservaciones = $CodTodosObservaciones;
+	} else {
+		$CodObservaciones = (array)$Observacion;
+	}
+
+
+	$ValoresObser = [];
+
+	foreach ($CodObservaciones as $i => $obs) {
+		$ValoresObser['Observacion' . ($i + 1)]['Nombre'] = "" . $TodoObservaciones[$obs] . "";
 	}
 
 	$CantidadDias = (strtotime($FechaFinal) - strtotime($FechaInicio)) / 86400;
-	$ValoresFechas = array();
-	$Valores = array();
+	$ValoresFechas = [];
 
-	$j = 0;
-	foreach ($Observacion as $obs) {
-		$j++;
-		$Valor = array();
-		for ($i = 1; $i <= $CantidadDias + 1; $i++) {
+	$Valor = [];
+	for ($i = 1; $i <= $CantidadDias + 1; $i++) {
 
-			$Fecha = date("Y-m-d", strtotime($FechaInicio . "+" . ($i - 1) . "days"));
-			$ag = $agenda->CantidadObservacionesTotal($Curso, $Alumnos, $obs, $Materia, $Fecha);
-			$ag = array_shift($ag);
-			$Cantidad = $ag['Cantidad'];
+		$Fecha = date("Y-m-d", strtotime($FechaInicio . "+" . ($i - 1) . "days"));
+		$ag = $agenda->CantidadObservacionesTotal($Curso, $Alumnos, implode(",", $CodObservaciones), $Materia, $Fecha);
 
-			array_push($Valor, $Cantidad);
-			$Valores[$j]['Cantidades'] = $Valor;
-			$ValoresFechas['Fecha' . $i] = "'" . utf8_encode(strftime("%A", strtotime($Fecha))) . "," . fecha2Str($Fecha) . "'";
+		foreach ($CodObservaciones as $j => $obs) {
+			$Cantidad = 0;
+			foreach ($ag as $a) {
+				if ($a['CodObservacion'] == $obs) {
+					$Cantidad = $a['Cantidad'];
+				}
+			}
+			$ValoresObser['Observacion' . ($j + 1)]['Cantidades'][] = $Cantidad;
 		}
+		$ValoresFechas['Fecha' . $i] = "'" . utf8Encode(textoDia($Fecha, 1, 0, 0)) . "'";
 	}
-
-
-	//print_r($Valores);
-	//print_r($ValoresFechas);
 	$ValoresFechas = implode(",", $ValoresFechas);
-	//echo implode(",",$ValoresObser)."<br>";
-	//echo $ValoresFechas."<br>";
-	//echo $ValoresObser."<br>";
-	foreach ($Valores as $Val) {
-		//print_r($Val);
-		$ValoresCantidad = implode(",", $Val['Cantidades']);
-		//echo $ValoresCantidad."<br>";
-	}
-	//print_r($Valores);
-	/*foreach($ValoresFechas as $vf){
-
-	}*/
-	//var_dump($Valores);
-	//	echo $CantidadDias;
 
 	$subtitulo = "";
 
@@ -162,17 +143,15 @@ if (!empty($_POST)) {
 					<?php $i = 0;
 					foreach ($ValoresObser as $Vo) {
 						$i++;
-						$Val = array_shift($Valores);
-						//$Vo=array_shift($ValoresObser);
-						$ValoresCantidad = implode(",", $Val['Cantidades']);
+						$ValoresCantidad = implode(",", $Vo['Cantidades']);
 						echo $i != 1 ? "," : "";
 					?> {
-							name: '<?php echo $Vo //.$i;
-									?>',
+							name: '<?php echo $Vo['Nombre'] ?>',
 							data: [<?php echo $ValoresCantidad ?>]
 						}
 					<?php
-					} ?>
+					}
+					?>
 				],
 				navigation: {
 					buttonOptions: {
