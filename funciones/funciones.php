@@ -761,7 +761,7 @@ function htmlListadoCriteriosContrasena()
    <?php
 }
 
-function textoDia($fecha, $incluirDia = 1, $incluirHora = 0)
+function textoDia($fecha, $incluirDia = 1, $incluirHora = 0, $fechaConvertido = 1)
 {
    global $idioma;
    $fecha = strtotime($fecha);
@@ -778,7 +778,11 @@ function textoDia($fecha, $incluirDia = 1, $incluirHora = 0)
    if ($incluirDia == 1) {
       $texto .= diaSemana($diaSemana) . ", ";
    }
-   $texto .= $dia . " " . $idioma['De'] . " " . mes($mes) . " " . $idioma['De'] . " " . $anio;
+   if ($fechaConvertido == 1) {
+      $texto .= $dia . " " . $idioma['De'] . " " . mes($mes) . " " . $idioma['De'] . " " . $anio;
+   } else {
+      $texto .= $dia . "-" . $mes . "-" . $anio;
+   }
    if ($hora != "") {
       $texto .= ", " . $hora;
    }
