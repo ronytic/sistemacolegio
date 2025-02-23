@@ -45,10 +45,30 @@ body {
 .login h4 {
   background-color: blue;
 } */
-.login h2,
-.login h4,
-.login img.logo {
+.login a.tituloprincipal {
+  width: 100%;
+  /* background-color: #bababa; */
+  margin: 0px !important;
+}
+
+.login .logo {
+  /* background-color: red; */
+  width: 15%;
   float: left;
+}
+
+.login .titulo {
+  /* background-color: yellow; */
+  width: 85%;
+  float: left;
+}
+.login .titulo h2,
+.login .titulo h4 {
+  text-align: left;
+}
+
+.login .logo img {
+  width: 100%;
 }
 
 .login h2,
@@ -151,7 +171,8 @@ hr.plomo {
   }
 
   .login h2 {
-    font-size: 8vw;
+    font-size: 7vw;
+    line-height: 0.9em;
   }
 
   .login h2,
@@ -170,5 +191,18 @@ hr.plomo {
 
   .mensajes {
     margin-top: 10px;
+  }
+}
+@media (max-width: 767px) {
+  .login {
+    margin-top: 10px !important;
+  }
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+  .login .logo {
+    width: 20%;
+  }
+  .login .titulo {
+    width: 80%;
   }
 }

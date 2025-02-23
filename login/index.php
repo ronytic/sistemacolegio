@@ -3,12 +3,14 @@ include_once "../class/config.php";
 include_once "../class/anuncioslogin.php";
 $idiomano = 0;
 if (!isset($_COOKIE['Idioma'])) {
+    $_COOKIE['Idioma'] = "es";
     include_once "../idioma/es.php";
 } else {
     if (file_exists("../idioma/" . $_COOKIE['Idioma'] . ".php")) {
         include_once "../idioma/" . $_COOKIE['Idioma'] . ".php";
     } else {
         $idiomano = 1;
+        $_COOKIE['Idioma'] = "es";
         include_once "../idioma/es.php";
     }
 }
@@ -54,9 +56,14 @@ $anunciosLogin = $anuncioslogin->mostrarAnuncios();
         <div class="row-fluid">
             <div class="offset1 span4">
                 <div class="login">
-                    <a href="../"><img src="../imagenes/logos/<?php echo $LogoInicio ?>" width="50" height="50" class="logo" />
-                        <h4><?php echo $TipoUnidadLogin; ?></h4>
-                        <h2><?php echo $NombreUnidadLogin; ?></h2>
+                    <a href="../" class="tituloprincipal">
+                        <div class="logo">
+                            <img src="../imagenes/logos/<?php echo $LogoInicio ?>" width="50" height="50" />
+                        </div>
+                        <div class="titulo">
+                            <h4><?php echo $TipoUnidadLogin; ?></h4>
+                            <h2><?php echo $NombreUnidadLogin; ?></h2>
+                        </div>
                     </a>
                     <hr />
                     <?php
@@ -164,7 +171,7 @@ $anunciosLogin = $anuncioslogin->mostrarAnuncios();
             <div class="span12">
                 <div class="pie">
                     <hr />
-                    <?php echo $idioma['Pie'] ?> <?php echo $sigla; ?> &copy; 2011 - <?php echo date("Y"); ?> <p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="http://fb.com/ronaldnina" class="" target="_blank" title="">Ronald Nina Layme</a> </p>
+                    <?php echo $idioma['Pie'] ?> <?php echo $sigla; ?> &copy; 2011 - <?php echo date("Y"); ?> <p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="https://ninatic.net" class="" target="_blank" title="">Ronald Nina Layme</a> </p>
                 </div>
             </div>
         </div>
