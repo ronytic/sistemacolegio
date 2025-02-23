@@ -90,7 +90,7 @@ if (!empty($_POST)) {
 	}
 }
 ?>
-<div id="reporte"></div>
+<div id="reporte" style="height: 600px !important;"></div>
 <a href="#" class="imprimir btn btn-info"><?php echo $idioma['Imprimir'] ?></a>
 <script type="text/javascript">
 	$(function() {
