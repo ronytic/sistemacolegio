@@ -29,7 +29,7 @@ $titulo = "NPaginaPrincipal";
 <?php endif; ?>
 </div>
 <div class="row-fluid">
-    <?php if ($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2) : ?>
+    <?php if (($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2) && $ManejarCuotas) : ?>
         <div class="span6 box">
             <div class="box-header">
                 <h2><?php echo $idioma['EstadisticasInstantaneaPagoCuotas'] ?></h2>
