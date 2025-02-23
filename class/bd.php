@@ -80,6 +80,7 @@ class bd
 		$query1 = "SELECT COLUMN_NAME
 		FROM information_schema.KEY_COLUMN_USAGE
 		WHERE TABLE_NAME = '$nombretabla'
+			and CONSTRAINT_SCHEMA = '" . $this->get_db() . "'
 		  AND CONSTRAINT_NAME = 'PRIMARY'";
 		$res = mysqli_query($this->l, $query1);
 		$res = mysqli_fetch_array($res);
