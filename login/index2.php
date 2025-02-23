@@ -144,7 +144,7 @@ $idiomaCookie = isset($_COOKIE['Idioma']) ? $_COOKIE['Idioma'] : "";
             <div class="span12">
                 <div class="pie">
                     <hr />
-                    <?php echo $idioma['Pie'] ?> <?php echo $sigla; ?> &copy; 2011 - <?php echo date("Y"); ?> <p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="http://fb.com/ronaldnina" class="" target="_blank" title="">Ronald Nina Layme</a> </p>
+                    <?php echo $idioma['Pie'] ?> <?php echo $sigla; ?> &copy; 2011 - <?php echo date("Y"); ?> <p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="https://ninatic.net" class="" target="_blank" title="">Ronald Nina Layme</a> </p>
                 </div>
             </div>
         </div>

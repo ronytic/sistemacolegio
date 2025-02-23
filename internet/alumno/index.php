@@ -402,7 +402,7 @@ $folder = "../../";
         <div class="span12">
             <div class="cuerpo pie">
                 <?php echo $idioma['TituloSistema'] ?> &copy; <?php echo $idioma['DerechosReservados'] ?> 2011 - <?php echo date("Y") ?>
-                <p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="http://fb.com/ronaldnina" title="http://fb.com/ronaldnina - 73230568" target="_blank" class="link">Ronald Nina Layme</a></p>
+                <p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="https://ninatic.net" title="https://ninatic.net - 73230568" target="_blank" class="link">Ronald Nina Layme</a></p>
             </div>
         </div>
     </div>

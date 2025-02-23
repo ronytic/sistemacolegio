@@ -515,7 +515,7 @@ foreach ($a as $al) {
 $creditosy = ($cantidadalumnos + 10 + 1);
 $doc->getActiveSheet()->mergeCells('A' . $creditosy . ":J" . $creditosy);
 $doc->getActiveSheet()->setCellValue('A' . $creditosy, "Sistema Académico Administrativo para Colegios - Desarrollado por Ronald Nina Layme")->getStyle('A' . $creditosy)->applyFromArray(estilo(9, "000000", "", 'FFFFFF', "left", "center", 'none', '000000'));
-//$doc->getActiveSheet()->getCell('A'.$creditosy)->getHyperlink()->setUrl('http://www.fb.com/ronaldnina');
+//$doc->getActiveSheet()->getCell('A'.$creditosy)->getHyperlink()->setUrl('https://ninatic.net');
 $dodv = $doc->getActiveSheet()->getCell('A' . $creditosy)->getDataValidation();
 $dodv->setShowInputMessage(true);
 $dodv->setPromptTitle('Creditos');

@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
     <hr>
 
-    <footer>
+    <footer style="background-color: red; margin: 0px 10px">
     	<p class="pull-left"><?php echo $idioma['TituloSistema'] ?> - <?php echo $Sigla; ?> &copy; <?php echo $idioma['DerechosReservados'] ?> 2011 - <?php echo date("Y"); ?></p>
     	<p class="pull-right"><?php echo $idioma['DesarrolladoPor']; ?>: <a href="https://ninatic.net" class="enlacepie" target="_blank" title="">Ronald Nina Layme</a> </p>
     </footer>
