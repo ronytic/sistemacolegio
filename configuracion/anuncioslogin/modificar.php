@@ -26,6 +26,12 @@ if (!empty($_POST['CodAnunciosLogin'])) {
 				</td>
 			</tr>
 			<tr>
+				<td><?php echo $idioma['Visible'] ?><br>
+					<?php campo("Visible", "select", array("1" => $idioma["Si"], "0" => $idioma["No"]), "span12", 1, "", 0, "", $men['Visible'])
+					?>
+				</td>
+			</tr>
+			<tr>
 				<td><?php echo $idioma['Imagen'] ?><br>
 					<?php if ($men['Imagen'] != "") { ?>
 						<img src="../../<?php echo $men['Imagen'] ?>" class="img-polaroid" />

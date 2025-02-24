@@ -11,6 +11,8 @@ if (count($men)) {
 				<th>N</th>
 				<th><?php echo $idioma['Mensaje'] ?></th>
 				<th><?php echo $idioma['Resaltar'] ?></th>
+				<th><?php echo $idioma['Visible'] ?></th>
+				<th><?php echo $idioma['FechaRegistro'] ?></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -29,7 +31,13 @@ if (count($men)) {
 						</a>
 				</td>
 			<?php } ?>
-			<td class="der"><?php echo $m['Resaltar'] ? $idioma['Si'] : $idioma['No'] ?></td>
+			<td class="centrar"><?php echo $m['Resaltar'] ? $idioma['Si'] : $idioma['No'] ?></td>
+			<td class="centrar">
+				<span class="badge badge-<?php echo $m['Visible'] ? 'success' : 'important' ?>">
+					<?php echo $m['Visible'] ? $idioma['Si'] : $idioma['No'] ?>
+				</span>
+			</td>
+			<td><?php echo date("d/m/Y", strtotime($m['FechaRegistro'])) ?></td>
 			<td><a href="#" class="btn btn-mini modificar" title="<?php echo $idioma['Modificar'] ?>" rel="<?php echo $m['CodAnunciosLogin'] ?>"><i class="icon-pencil"></i></a><a href="#" class="btn btn-mini eliminar" title="<?php echo $idioma['Eliminar'] ?>" rel="<?php echo $m['CodAnunciosLogin'] ?>"><i class="icon-remove"></i></a></td>
 			</tr>
 		<?php

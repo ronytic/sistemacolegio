@@ -604,3 +604,6 @@ VALUES ('AlertaGestionAnterior', '1');
 UPDATE `submenu`
 SET `CodMenu` = '1', Nombre = 'RegistroEnEspera', Orden = 15, Url = 'espera/'
 WHERE (`CodSubmenu` = '4');
+
+-- 2025-02-23
+ALTER TABLE `anuncioslogin` ADD `Visible` TINYINT(1) NOT NULL AFTER `Resaltar`;

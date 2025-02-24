@@ -98,7 +98,11 @@ class bd
 			$this->campos = array('*');
 		}
 		$where = $where_str ? "WHERE $where_str" : "";
-		$order = $order_str ? "ORDER BY $order_str ASC" : "";
+		if (strpos($order_str, 'ASC') !== false || strpos($order_str, 'DESC') !== false) {
+			$order = $order_str ? "ORDER BY $order_str" : "";
+		} else {
+			$order = $order_str ? "ORDER BY $order_str ASC" : "";
+		}
 		$order = $order_strDesc ? "ORDER BY $order_str DESC" : $order;
 		$group = $group_str ? "GROUP BY $group_str" : "";
 		$count = $count ? "LIMIT $start, $count" : "";

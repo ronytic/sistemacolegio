@@ -19,6 +19,11 @@ if (isset($_POST)) {
                 </td>
             </tr>
             <tr>
+                <td><?php echo $idioma['Visible'] ?><br>
+                    <?php campo("Visible", "select", array("1" => $idioma["Si"], "0" => $idioma["No"]), "span12", 1, "", 0, "", 1) ?>
+                </td>
+            </tr>
+            <tr>
                 <td><?php echo $idioma['Imagen'] ?><br>
                     <input type="file" name="Imagen" accept="image/*" class="span12">
                 </td>

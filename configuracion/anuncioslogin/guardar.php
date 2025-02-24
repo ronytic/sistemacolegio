@@ -7,6 +7,7 @@ if (!empty($_POST)) {
 	$valores = array(
 		"Mensaje" => "'$Mensaje'",
 		"Resaltar" => "'$Resaltar'",
+		"Visible" => "'$Visible'",
 	);
 	if (isset($_FILES['Imagen']) && $_FILES['Imagen']['name'] != "") {
 		@copy($_FILES['Imagen']['tmp_name'], "../../imagenes/anuncioslogin/" . $_FILES['Imagen']['name']);
