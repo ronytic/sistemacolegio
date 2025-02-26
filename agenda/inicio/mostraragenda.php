@@ -8,7 +8,7 @@ include_once("../../class/config.php");
 include_once("../../class/observaciones.php");
 if (isset($_POST)) {
 	$Fecha = fecha2Str($_POST['Fecha'], 0);
-	$CodAl = isset($_SESSION['CodAl']) ?  $_SESSION['CodAl'] : "";
+	$CodAl = isset($_POST['CodAl']) ?  $_POST['CodAl'] : "";
 	$CodMateria = isset($_POST['CodMateria']) ? $_POST['CodMateria'] : "";
 	$alumno = new alumno;
 	$curso = new curso;
@@ -17,80 +17,83 @@ if (isset($_POST)) {
 	$observaciones = new observaciones;
 	$config = new config;
 
-	//Cantidad de Observaciones
-	$CodObser = $observaciones->CodObservaciones(1);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+	$TodoObservaciones = [];
+	foreach ($observaciones->mostrarTodoRegistro('', '1') as $TO) {
+		$TodoObservaciones[$TO['CodObservacion']] = $TO['Nombre'];
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantObser = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantObser = array_shift($CantObser);
-	//Cantidad de Faltas
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(2);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$CodigosObservaciones = [];
+	foreach ($observaciones->agruparObservaciones() as $CodOb) {
+		$CodigosObservaciones[$CodOb['NivelObservacion']] = explode(",", $CodOb['CodObservaciones']);
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantFaltas = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantFaltas = array_shift($CantFaltas);
-	//Cantidad de Atrasos
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(3);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
+
+	$TotalesAgenda = $agenda->CantidadTotalAgrupado('', $Fecha);
+
+	$CantObservaciones = 0;
+	$CantFaltas = 0;
+	$CantAtrasos = 0;
+	$CantLicencias = 0;
+	$CantNotificacion = 0;
+	$CantNoContestan = 0;
+	$CantFelicitacion = 0;
+
+	foreach ($TotalesAgenda as $TotAgenda) {
+		//Observaciones
+		foreach ($CodigosObservaciones[1] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantObservaciones += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Faltas
+		foreach ($CodigosObservaciones[2] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantFaltas += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Atrasos
+		foreach ($CodigosObservaciones[3] as $CodOb) {
+
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantAtrasos += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Licencias
+		foreach ($CodigosObservaciones[4] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantLicencias += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Notificacion
+		foreach ($CodigosObservaciones[5] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantNotificacion += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//NoContestan
+		foreach ($CodigosObservaciones[6] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantNoContestan += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
+		//Felicitacion
+		foreach ($CodigosObservaciones[7] as $CodOb) {
+			if ($TotAgenda['CodObservacion'] == $CodOb) {
+				$CantFelicitacion += $TotAgenda['Cantidad'] ?? 0;
+			}
+		}
 	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantAtrasos = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantAtrasos = array_shift($CantAtrasos);
-	//Cantidad de Licencias
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(4);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantLicencias = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantLicencias = array_shift($CantLicencias);
-	//Cantidad de Felicitaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(5);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantNotificacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantNotificacion = array_shift($CantNotificacion);
-	//Cantidad de No contestan
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(6);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantNoContestan = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantNoContestan = array_shift($CantNoContestan);
-	//Cantidad de Felicitaciones
-	$Obser = array();
-	$CodObser = $observaciones->CodObservaciones(7);
-	foreach ($CodObser as $CodO) {
-		$Obser[] = $CodO['CodObservacion'];
-	}
-	$CodigosObservaciones = implode(",", $Obser);
-	$CantFelicitacion = $agenda->CantidadObservaciones($CodAl, $CodigosObservaciones, $CodMateria, $Fecha);
-	$CantFelicitacion = array_shift($CantFelicitacion);
-	$Total = $CantObser['Cantidad'] + $CantFaltas['Cantidad'] + $CantAtrasos['Cantidad'] + $CantLicencias['Cantidad'] + $CantNotificacion['Cantidad'] + $CantNoContestan['Cantidad'] + $CantFelicitacion['Cantidad'];
+
+	$Total = $CantObservaciones + $CantFaltas + $CantAtrasos + $CantLicencias + $CantNotificacion + $CantNoContestan + $CantFelicitacion;
 
 
-	$ag = $agenda->mostrarRegistroFecha($Fecha);
+	$ag = $agenda->mostrarRegistroSinRetiradosFecha($Fecha);
 ?>
 	<table class="table table-condensed table-bordered inicio">
 		<tr>
 			<td width="75" colspan="1" class=""><?php echo $idioma['TotalObservaciones'] ?>: <span class="resaltar"><?php echo $Total; ?></span> <a href="#" class="imprimir btn btn-info btn-mini"><?php echo $idioma['Imprimir'] ?></a></td>
 		</tr>
 		<tr>
-			<td class="centrar" id="grafica" width="100%" height="270"><?php echo $CantObser['Cantidad']; ?></td>
-
+			<td class="centrar" id="grafica" width="100%" height="270"><?php echo $CantObservaciones; ?></td>
 
 		</tr>
 	</table>
@@ -140,19 +143,19 @@ if (isset($_POST)) {
 				$fechaFinTrimestre3 = $config->mostrarConfig("FinTrimestre3", 1);
 				/*Fin de Sacando Información de Trimestre*/
 				foreach ($ag as $a) {
-					$al = $alumno->mostrarTodoDatos($a['CodAlumno']);
-					$al = array_shift($al);
+					// $al = $alumno->mostrarTodoDatos($a['CodAlumno']);
+					// $al = array_shift($al);
 
-					$cur = $curso->mostrarCurso($al['CodCurso']);
-					$cur = array_shift($cur);
+					// $cur = $curso->mostrarCurso($al['CodCurso']);
+					// $cur = array_shift($cur);
 
 					$tipo = 0;
 					$mensaje = "";
-					$m = $materia->mostrarMateria($a['CodMateria']);
-					$m = array_shift($m);
-					$o = $observaciones->mostrarObser($a['CodObservacion']);
-					$o = array_shift($o);
-					if ($cur['Bimestre']) {
+					// $m = $materia->mostrarMateria($a['CodMateria']);
+					// $m = array_shift($m);
+					// $o = $observaciones->mostrarObser($a['CodObservacion']);
+					// $o = array_shift($o);
+					if ($a['Bimestre']) {
 						if (strtotime($a['Fecha']) >= strtotime($fechaInicioBimestre1) and strtotime($a['Fecha']) <= strtotime($fechaFinBimestre1)) {
 							$tipo = 1;
 						}
@@ -208,12 +211,12 @@ if (isset($_POST)) {
 							?>
 							<?php if ($a['Resaltar']) { ?><div class="crojo" title="<?php echo $idioma['Importante'] ?>" style="width:5px;height:18px"></div><?php } ?>
 						</td>
-						<td class="<?php echo $resaltar ?>"><?php echo capitalizar($al['Paterno']) ?> <?php echo capitalizar(acortarPalabra($al['Nombres'])) ?></td>
-						<td class="<?php echo $resaltar ?>"><small><?php echo $cur['Abreviado'] ?></small></td>
+						<td class="<?php echo $resaltar ?>"><?php echo capitalizar($a['Paterno']) ?> <?php echo capitalizar(acortarPalabra($a['Nombres'])) ?></td>
+						<td class="<?php echo $resaltar ?>"><small><?php echo $a['AbreviadoCurso'] ?></small></td>
 						<td class="<?php echo $resaltar ?> pequeno">
-							<div title="<?php echo $m['Nombre'] ?>"><?php echo $m['Abreviado'] ?></div>
+							<div title="<?php echo $a['NombreMateria'] ?>"><?php echo $a['AbreviadoMateria'] ?></div>
 						</td>
-						<td class="<?php echo $resaltar ?>"><?php echo $o['Nombre'] ?></td>
+						<td class="<?php echo $resaltar ?>"><?php echo $a['Nombre'] ?></td>
 						<td class="<?php echo $resaltar ?>"><?php echo $a['Detalle']; ?></td>
 						<td class="centrar">
 							<a href="agenda/total/agenda.php?CodAl=<?php echo $a['CodAlumno'] ?>" class="btn btn-mini" title="<?php echo $idioma['VerAgenda'] ?>"><i class="icon-book"></i></a>
@@ -265,7 +268,7 @@ if (isset($_POST)) {
 		legend: false,
 		series: [{
 			name: '<?php echo $idioma['Observaciones'] ?>',
-			data: [<?php echo $CantObser['Cantidad']; ?>, <?php echo $CantFaltas['Cantidad']; ?>, <?php echo $CantAtrasos['Cantidad']; ?>, <?php echo $CantLicencias['Cantidad']; ?>, <?php echo $CantNoContestan['Cantidad']; ?>, <?php echo $CantNotificacion['Cantidad']; ?>, <?php echo $CantFelicitacion['Cantidad']; ?>],
+			data: [<?php echo $CantObservaciones; ?>, <?php echo $CantFaltas; ?>, <?php echo $CantAtrasos; ?>, <?php echo $CantLicencias; ?>, <?php echo $CantNoContestan; ?>, <?php echo $CantNotificacion; ?>, <?php echo $CantFelicitacion; ?>],
 		}],
 		exporting: {
 			enabled: false

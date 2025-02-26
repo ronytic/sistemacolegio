@@ -48,25 +48,37 @@ if (!empty($_GET['CodAl'])) {
     <div class="span9 box">
         <div class="box-header"><?php echo $idioma['DatosPersonales'] ?></div>
         <div class="box-content">
-            <table class="tabla">
-                <tr>
-                    <td rowspan="4"><img src="<?php echo $ima ?>" class="img-polaroid" width="100" /></td>
-                    <td><?php echo $idioma['Nombre'] ?>:</td>
-                    <td colspan="3" class="text-info x2"><?php echo capitalizar($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']) ?></span></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['Curso'] ?>:</td>
-                    <td class="text-info"><?php echo $cur['Nombre'] ?></span></td>
-                    <td><?php echo $idioma['Telefono'] ?>:</td>
-                    <td class="text-info"><?php echo $al['TelefonoCasa'] ?> <?php echo $al['Celular'] ?></span></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['CelularMadre'] ?>:</td>
-                    <td class="text-info"><?php echo $al['CelularM'] ?></td>
-                    <td><?php echo $idioma['CelularPadre'] ?>:</td>
-                    <td class="text-info"><?php echo $al['CelularP'] ?></td>
-                </tr>
-            </table>
+            <div class="pull-left">
+                <img src="<?php echo $ima ?>" class="img-polaroid" width="100" />
+            </div>
+            <div class="pull-left">
+                <table class="tabla ">
+                    <tr>
+                        <td rowspan="4"></td>
+                        <td class="der"><?php echo $idioma['Nombre'] ?>:</td>
+                        <td colspan="3" class="text-info x2"><?php echo capitalizar($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']) ?></span></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['Curso'] ?>:</td>
+                        <td class="text-info"><?php echo $cur['Nombre'] ?></span></td>
+                        <td class="der"><?php echo $idioma['Telefono'] ?>:</td>
+                        <td class="text-info"><?php echo $al['TelefonoCasa'] ?> <?php echo $al['Celular'] ?></span></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['CelularMadre'] ?>:</td>
+                        <td class="text-info"><?php echo $al['CelularM'] ?></td>
+                        <td class="der"><?php echo $idioma['CelularPadre'] ?>:</td>
+                        <td class="text-info"><?php echo $al['CelularP'] ?></td>
+                    </tr>
+                    <tr>
+                        <td class="der"><?php echo $idioma['NombreMadre'] ?>:</td>
+                        <td class="text-info"><?php echo Capitalizar($al['ApellidosMadre'] . ' ' . $al['NombreMadre']) ?></td>
+                        <td class="der"><?php echo $idioma['NombrePadre'] ?>:</td>
+                        <td class="text-info"><?php echo Capitalizar($al['ApellidosPadre'] . ' ' . $al['NombrePadre']) ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear: both;"></div>
         </div>
     </div>
 
@@ -84,6 +96,7 @@ if (!empty($_GET['CodAl'])) {
             </div>
         </div>
     </div>
+    <div style="clear: both;"></div>
     </div>
     <div class="sortable row-fluid">
         <div class="span3">

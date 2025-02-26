@@ -61,7 +61,7 @@ if (!empty($_POST)) {
 			}
 			$ValoresObser['Observacion' . ($j + 1)]['Cantidades'][] = $Cantidad;
 		}
-		$ValoresFechas['Fecha' . $i] = "'" . utf8Encode(textoDia($Fecha, 1, 0, 0)) . "'";
+		$ValoresFechas['Fecha' . $i] = "'" . (textoDia($Fecha, 1, 0, 0)) . "'";
 	}
 	$ValoresFechas = implode(",", $ValoresFechas);
 
