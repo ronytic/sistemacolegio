@@ -10,7 +10,7 @@ if (isset($_POST)) {
 	//$contra = mb_strtolower(generarPalabra(), "utf8");
 	$valores = array("Password" => "'$contra'");
 
-	if ($docente->actualizarRegistro($valores, $CodDocente)) {
+	if ($docente->actualizarRegistro($valores, "CodDocente=$CodDocente")) {
 		echo $contra;
 	} else {
 		echo $idioma['NoseGuardo'];
