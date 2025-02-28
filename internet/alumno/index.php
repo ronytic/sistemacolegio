@@ -69,6 +69,43 @@ $folder = "../../";
     <!-- Favicon para tabley ios -->
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo $folder ?>imagenes/logos/<?php echo $LogoIcono ?>">
 
+    <style>
+        /* Estilos generales para la tabla */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        /* Estilo para los encabezados */
+        .table thead {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .table th {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Estilo para las celdas del cuerpo de la tabla */
+        .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Estilo para la tabla con bordes */
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -96,6 +133,75 @@ $folder = "../../";
             </div>
         </div>
     </div>
+
+    <!--Estadísticas-->
+
+    <?php
+    $CodigosObservaciones = [];
+    foreach ($observaciones->agruparObservaciones() as $CodOb) {
+        $CodigosObservaciones[$CodOb['NivelObservacion']] = explode(",", $CodOb['CodObservaciones']);
+    }
+
+    $TotalesAgenda = $agenda->CantidadTotalAgrupado($CodAlumno);
+
+    $CantObservaciones = 0;
+    $CantFaltas = 0;
+    $CantAtrasos = 0;
+    $CantLicencias = 0;
+    $CantNotificacion = 0;
+    $CantNoContestan = 0;
+    $CantFelicitacion = 0;
+
+    foreach ($TotalesAgenda as $TotAgenda) {
+        //Observaciones
+        foreach ($CodigosObservaciones[1] as $CodOb) {
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantObservaciones += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+        //Faltas
+        foreach ($CodigosObservaciones[2] as $CodOb) {
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantFaltas += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+        //Atrasos
+        foreach ($CodigosObservaciones[3] as $CodOb) {
+
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantAtrasos += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+        //Licencias
+        foreach ($CodigosObservaciones[4] as $CodOb) {
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantLicencias += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+        //Notificacion
+        foreach ($CodigosObservaciones[5] as $CodOb) {
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantNotificacion += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+        //NoContestan
+        foreach ($CodigosObservaciones[6] as $CodOb) {
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantNoContestan += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+        //Felicitacion
+        foreach ($CodigosObservaciones[7] as $CodOb) {
+            if ($TotAgenda['CodObservacion'] == $CodOb) {
+                $CantFelicitacion += $TotAgenda['Cantidad'] ?? 0;
+            }
+        }
+    }
+
+    $Total = $CantObservaciones + $CantFaltas + $CantAtrasos + $CantLicencias + $CantNotificacion + $CantNoContestan + $CantFelicitacion;
+    ?>
+
+    <!--Agenda-->
     <div class="row-fluid wrapper">
         <?php if ($ManejarCuotas == '1') { ?>
             <div class="span3">
@@ -132,6 +238,33 @@ $folder = "../../";
         <div class="<?php echo ($ManejarCuotas == '1') ? 'span9' : 'span12'; ?>">
             <div class="cuerpo">
                 <h2><a name="agenda"></a><?php echo $idioma['Agenda'] ?></h2>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <table class="table  table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><?php echo $idioma['Observaciones'] ?></th>
+                                    <th><?php echo $idioma['Felicitaciones'] ?></th>
+                                    <th><?php echo $idioma['Faltas'] ?></th>
+                                    <th><?php echo $idioma['Atrasos'] ?></th>
+                                    <th><?php echo $idioma['Licencias'] ?></th>
+                                    <th><?php echo $idioma['Total'] ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $CantObservaciones; ?></td>
+                                    <td><?php echo $CantFelicitacion; ?></td>
+                                    <td><?php echo $CantFaltas; ?></td>
+                                    <td><?php echo $CantAtrasos; ?></td>
+                                    <td><?php echo $CantLicencias; ?></td>
+                                    <td><?php echo $Total; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--Lista de observaciones-->
                 <?php echo $idioma['OrdenObservaciones'] ?>
                 <table class="tabla">
                     <tr class="cabecera">
