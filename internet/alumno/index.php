@@ -68,51 +68,13 @@ $folder = "../../";
     <link rel="shortcut icon" href="<?php echo $folder ?>imagenes/logos/<?php echo $LogoIcono ?>" />
     <!-- Favicon para tabley ios -->
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo $folder ?>imagenes/logos/<?php echo $LogoIcono ?>">
-
-    <style>
-        /* Estilos generales para la tabla */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        /* Estilo para los encabezados */
-        .table thead {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .table th {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        /* Estilo para las celdas del cuerpo de la tabla */
-        .table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        /* Estilo para la tabla con bordes */
-        .table-bordered {
-            border: 1px solid #ddd;
-        }
-    </style>
-
 </head>
 
 <body>
     <div class="row-fluid wrapper">
-        <div class="span12">
+        <div class="span12" >
             <a name="datos"></a>
-            <div class="cuerpo">
+            <div class="cuerpo" style="text-align:center;">
                 <div class=" span2">
                     <img src="../../imagenes/alumnos/<?php echo $Foto ?>" class="img-circle fotoalumno" width="100%" title="" />
                 </div>
@@ -120,7 +82,7 @@ $folder = "../../";
 
                     <h1 class="nombre"><?php echo ucwords($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']) ?></h1>
                     <p class="otrosdatos"><?php echo $cur['Nombre'] ?></p>
-                    <p class="otrosdatos"><?php echo $al['Sexo'] ? $idioma['Hombre'] : $idioma['Mujer']; ?></p>
+                    <!-- <p class="otrosdatos"><?php echo $al['Sexo'] ? $idioma['Hombre'] : $idioma['Mujer']; ?></p> -->
                     <p class="otrosdatos"><?php echo $al['Ci'] ?></p>
                     <p class="otrosdatos"><?php echo ucwords($al['Zona'] . " " . $al['Calle'] . " " . $al['Numero']) ?></p>
                 </div>
@@ -238,32 +200,43 @@ $folder = "../../";
         <div class="<?php echo ($ManejarCuotas == '1') ? 'span9' : 'span12'; ?>">
             <div class="cuerpo">
                 <h2><a name="agenda"></a><?php echo $idioma['Agenda'] ?></h2>
-                <div class="row-fluid">
-                    <div class="span6">
-                        <table class="table  table-bordered">
-                            <thead>
-                                <tr>
-                                    <th><?php echo $idioma['Observaciones'] ?></th>
-                                    <th><?php echo $idioma['Felicitaciones'] ?></th>
-                                    <th><?php echo $idioma['Faltas'] ?></th>
-                                    <th><?php echo $idioma['Atrasos'] ?></th>
-                                    <th><?php echo $idioma['Licencias'] ?></th>
-                                    <th><?php echo $idioma['Total'] ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><?php echo $CantObservaciones; ?></td>
-                                    <td><?php echo $CantFelicitacion; ?></td>
-                                    <td><?php echo $CantFaltas; ?></td>
-                                    <td><?php echo $CantAtrasos; ?></td>
-                                    <td><?php echo $CantLicencias; ?></td>
-                                    <td><?php echo $Total; ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+                <table class="tabla" style="margin-bottom: 20px;">
+                    <tr class="cabecera">
+                        <td width="110"><?php echo $idioma['Observaciones'] ?></td>
+                        <td width="110"><?php echo $idioma['Felicitaciones'] ?></td>
+                        <td width="110"><?php echo $idioma['Faltas'] ?></td>
+                        <td width="110" class="columnaocultarmobile"><?php echo $idioma['Atrasos'] ?></td>
+                        <td width="110" class="columnaocultarmobile"><?php echo $idioma['Licencias'] ?></td>
+                        <td width="110" class="columnaocultarmobile"><?php echo $idioma['Total'] ?></td>
+                    </tr>
+                    <tr>
+                        <td class="div"><?php echo $CantObservaciones; ?></td>
+                        <td class="div"><?php echo $CantFelicitacion; ?></td>
+                        <td class="div"><?php echo $CantFaltas; ?></td>
+                        <td class="div columnaocultarmobile"><?php echo $CantAtrasos; ?></td>
+                        <td class="div columnaocultarmobile"><?php echo $CantLicencias; ?></td>
+                        <td class="div columnaocultarmobile"><?php echo $Total; ?></td>
+                    </tr>
+                    <tr class="divinferior filamobile cabecera">
+                        <td class="div detalle"><?php echo $idioma['Atrasos'] ?></td>
+                        <td class="div detalle"><?php echo $idioma['Licencias'] ?></td>
+                        <td class="div detalle" colspan=3><?php echo $idioma['Total'] ?></td>
+                    </tr>
+                    <tr class="divinferior filamobile">
+                        <td class="div detalle"><?php echo $CantAtrasos; ?></td>
+                        <td class="div detalle"><?php echo $CantLicencias; ?></td>
+                        <td class="div detalle" colspan=3><?php echo $Total; ?></td>
+                    </tr>
+                    <tr class="divinferior filamobile cabecera">
+                        <!-- <td class="div detalle" colspan=3><?php echo $idioma['Total'] ?></td> -->
+                    </tr>
+                    <tr class="divinferior filamobile">
+                        <!-- <td class="div detalle" colspan=3><?php echo $Total; ?></td> -->
+                    </tr>
+
+                </table>
+
                 <!--Lista de observaciones-->
                 <?php echo $idioma['OrdenObservaciones'] ?>
                 <table class="tabla">

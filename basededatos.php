@@ -3,7 +3,7 @@ $host = "localhost";
 $user = "root";
 $pass = "";
 // $database = "sistema_colegio";
-$database = "sanjose20252";
+$database = "sanjose2025";
 
 /*$user="redcampu_csb";
 $pass="83034888";
