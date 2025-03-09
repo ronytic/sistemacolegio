@@ -71,27 +71,27 @@ $folder = "../../";
 </head>
 
 <body>
-    <div class="row-fluid wrapper">
-        <div class="span12" >
-            <a name="datos"></a>
-            <div class="cuerpo" style="text-align:center;">
-                <div class=" span2">
-                    <img src="../../imagenes/alumnos/<?php echo $Foto ?>" class="img-circle fotoalumno" width="100%" title="" />
-                </div>
-                <div class="datos">
+    <div class="contenedoracciones">
+        <div class="contenedorbotones">
+            <!-- <a href="../../" class="inicio"><?php echo $idioma["Inicio"] ?></a> -->
+            <a href="../../login/logout.php" class="salir"><?php echo $idioma["Salir"] ?></a>
+        </div>
+    </div>
 
+    <div class="row-fluid wrapper">
+        <div class="span12">
+            <div class="cabecera">
+
+                <div class="contenedorfoto">
+                    <img src="../../imagenes/alumnos/<?php echo $Foto ?>" class="img-circle fotoalumno" title="" />
+                </div>
+                <div class="contenedordatospersonales">
                     <h1 class="nombre"><?php echo ucwords($al['Paterno'] . " " . $al['Materno'] . " " . $al['Nombres']) ?></h1>
-                    <p class="otrosdatos"><?php echo $cur['Nombre'] ?></p>
-                    <!-- <p class="otrosdatos"><?php echo $al['Sexo'] ? $idioma['Hombre'] : $idioma['Mujer']; ?></p> -->
-                    <p class="otrosdatos"><?php echo $al['Ci'] ?></p>
-                    <p class="otrosdatos"><?php echo ucwords($al['Zona'] . " " . $al['Calle'] . " " . $al['Numero']) ?></p>
+                    <p class="datospersonalessecundarios"><?php echo $cur['Nombre'] ?></p>
+                    <p class="datospersonalessecundarios"><?php echo $al['Ci'] ?></p>
+                    <p class="datospersonalessecundarios"><?php echo ucwords($al['Zona'] . " " . $al['Calle'] . " " . $al['Numero']) ?></p>
                 </div>
-                <div class="acciones">
-                    <div class="botones">
-                        <a href="../../" class="inicio"><?php echo $idioma["Inicio"] ?></a>
-                        <a href="../../login/logout.php" class="salir"><?php echo $idioma["Salir"] ?></a>
-                    </div>
-                </div>
+                <div style="clear:both"></div>
             </div>
         </div>
     </div>
@@ -201,51 +201,50 @@ $folder = "../../";
             <div class="cuerpo">
                 <h2><a name="agenda"></a><?php echo $idioma['Agenda'] ?></h2>
 
-                <table class="tabla" style="margin-bottom: 20px;">
-                    <tr class="cabecera">
-                        <td width="110"><?php echo $idioma['Observaciones'] ?></td>
-                        <td width="110"><?php echo $idioma['Felicitaciones'] ?></td>
-                        <td width="110"><?php echo $idioma['Faltas'] ?></td>
-                        <td width="110" class="columnaocultarmobile"><?php echo $idioma['Atrasos'] ?></td>
-                        <td width="110" class="columnaocultarmobile"><?php echo $idioma['Licencias'] ?></td>
-                        <td width="110" class="columnaocultarmobile"><?php echo $idioma['Total'] ?></td>
+                <table class="tablaresumen" style="margin-bottom: 20px;">
+                    <tr class="cabeceratabla">
+                        <th width="100"><?php echo $idioma['Observaciones'] ?></th>
+                        <th width="100"><?php echo $idioma['Felicitaciones'] ?></th>
+                        <th width="100"><?php echo $idioma['Faltas'] ?></th>
+                        <th width="100"><?php echo $idioma['Atrasos'] ?></th>
+                        <th width="100" class="columnaocultarmobile"><?php echo $idioma['Licencias'] ?></th>
+                        <th width="100" class="columnaocultarmobile"><?php echo $idioma['NoRespondeTelf'] ?></th>
+                        <th width="100" class="columnaocultarmobile"><?php echo $idioma['NotificacionPadres'] ?></th>
+                        <th width="100" class="columnaocultarmobile"><?php echo $idioma['Total'] ?></th>
                     </tr>
                     <tr>
-                        <td class="div"><?php echo $CantObservaciones; ?></td>
-                        <td class="div"><?php echo $CantFelicitacion; ?></td>
-                        <td class="div"><?php echo $CantFaltas; ?></td>
-                        <td class="div columnaocultarmobile"><?php echo $CantAtrasos; ?></td>
-                        <td class="div columnaocultarmobile"><?php echo $CantLicencias; ?></td>
-                        <td class="div columnaocultarmobile"><?php echo $Total; ?></td>
+                        <td style="background: #B3D9FF;"><?php echo $CantObservaciones; ?></td>
+                        <td style="background: #B9F2C3;"><?php echo $CantFelicitacion; ?></td>
+                        <td style="background: #FFB6B9;"><?php echo $CantFaltas; ?></td>
+                        <td style="background: #FFE5A9;"><?php echo $CantAtrasos; ?></td>
+                        <td style="background: #AEEEEE;" class="columnaocultarmobile"><?php echo $CantLicencias; ?></td>
+                        <td style="background: #FFD8A8;" class="columnaocultarmobile"><?php echo $CantNoContestan; ?></td>
+                        <td style="background: #C3E6CB;" class="columnaocultarmobile"><?php echo $CantNotificacion; ?></td>
+                        <td style="background: #f1f1f1;" class="columnaocultarmobile"><?php echo $Total; ?></td>
                     </tr>
-                    <tr class="divinferior filamobile cabecera">
-                        <td class="div detalle"><?php echo $idioma['Atrasos'] ?></td>
-                        <td class="div detalle"><?php echo $idioma['Licencias'] ?></td>
-                        <td class="div detalle" colspan=3><?php echo $idioma['Total'] ?></td>
+                    <tr class="filamobile cabeceratabla">
+                        <th><?php echo $idioma['Licencias'] ?></th>
+                        <th><?php echo $idioma['NoRespondeTelf'] ?></th>
+                        <th><?php echo $idioma['NotificacionPadres'] ?></th>
+                        <th><?php echo $idioma['Total'] ?></th>
                     </tr>
-                    <tr class="divinferior filamobile">
-                        <td class="div detalle"><?php echo $CantAtrasos; ?></td>
-                        <td class="div detalle"><?php echo $CantLicencias; ?></td>
-                        <td class="div detalle" colspan=3><?php echo $Total; ?></td>
-                    </tr>
-                    <tr class="divinferior filamobile cabecera">
-                        <!-- <td class="div detalle" colspan=3><?php echo $idioma['Total'] ?></td> -->
-                    </tr>
-                    <tr class="divinferior filamobile">
-                        <!-- <td class="div detalle" colspan=3><?php echo $Total; ?></td> -->
+                    <tr class="filamobile">
+                        <td style="background: #AEEEEE;"><?php echo $CantLicencias; ?></td>
+                        <td style="background: #FFD8A8;"><?php echo $CantNoContestan; ?></td>
+                        <td style="background: #C3E6CB;"><?php echo $CantNotificacion; ?></td>
+                        <td style="background: #f1f1f1; "><?php echo $Total; ?></td>
                     </tr>
 
                 </table>
-
                 <!--Lista de observaciones-->
-                <?php echo $idioma['OrdenObservaciones'] ?>
+
                 <table class="tabla">
-                    <tr class="cabecera">
-                        <td width="25">Nº</td>
-                        <td width="70"><?php echo $idioma['Fecha'] ?></td>
-                        <td width="120"><?php echo $idioma['Materia'] ?></td>
-                        <td width="150"><?php echo $idioma['Observacion'] ?></td>
-                        <td width="300" class="columnaocultarmobile"><?php echo $idioma['Detalle'] ?></td>
+                    <tr class="cabeceratabla">
+                        <th width="25">Nº</th>
+                        <th width="100"><?php echo $idioma['Fecha'] ?></th>
+                        <th width="233"><?php echo $idioma['Materia'] ?></th>
+                        <th width="150"><?php echo $idioma['Observacion'] ?></th>
+                        <th width="350" class="columnaocultarmobile"><?php echo $idioma['Detalle'] ?></th>
                     </tr>
                     <?php
                     $i = 0;
@@ -257,15 +256,15 @@ $folder = "../../";
                         $obs = array_shift($obs);
                     ?>
                         <tr>
-                            <td class="div"><?php echo $i; ?></td>
-                            <td class="div"><?php echo date("d", strtotime($ag['Fecha'])) . "-" . mesNumeroToLiteralCorto(date("n", strtotime($ag['Fecha']))); ?></td>
-                            <td class="div"><?php echo $ma['Nombre']; ?></td>
-                            <td class="div"><?php echo $obs['Nombre']; ?></td>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo date("d", strtotime($ag['Fecha'])) . "-" . mesNumeroToLiteralCorto(date("n", strtotime($ag['Fecha']))); ?></td>
+                            <td><?php echo $ma['Nombre']; ?></td>
+                            <td><?php echo $obs['Nombre']; ?></td>
                             <td class="columnaocultarmobile"><?php echo $ag['Detalle'] ?></td>
                         </tr>
-                        <tr class="divinferior filamobile">
+                        <tr class="filamobile bordemobilevisible intercalado">
                             <td class="div"></td>
-                            <td class="div detalle" colspan="4"><?php echo $ag['Detalle'] ?></td>
+                            <td class="detalle" colspan="4"><?php echo $ag['Detalle'] ?></td>
                         </tr>
                     <?php
                     }
@@ -278,6 +277,14 @@ $folder = "../../";
                     }
                     ?>
                 </table>
+
+                <div style="margin-top:8px; ">
+                    <strong style="color:red;">*</strong>
+                    <span style="color:rgb(181, 181, 181)">
+                        <?php echo $idioma['OrdenObservaciones'] ?>
+                    </span>
+                </div>
+
             </div>
         </div>
     </div>
