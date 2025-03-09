@@ -408,8 +408,8 @@ $folder = "../../";
                                     <?php } ?>
 
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <!-- <td></td>
+                                    <td></td> -->
                                 </tr>
                             <?php } ?>
                             <?php
@@ -476,14 +476,18 @@ $folder = "../../";
                                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $Dps; ?></td>
                                                 <?php } ?>
                                                 <td class="div der <?php echo $cur['NotaAprobacion'] > $NotaFinal && $NotaFinal != 0 ? 'rojo' : ''; ?>"><?php echo $NotaFinal; ?></td>
-                                            <?php } ?>
+                                        <?php }
+
+                                            /*?>
                                             <!-- <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Resultado']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['Dps']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn2['NotaFinal'] && $rn2['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn2['NotaFinal']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['Resultado']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['Dps']; ?></td>
                                     <td class="div der <?php echo $cur['NotaAprobacion'] > $rn3['NotaFinal'] && $rn3['NotaFinal'] != 0 ? 'rojo' : ''; ?>"><?php echo $rn3['NotaFinal']; ?></td> -->
-                                        <?php } ?>
+                                        <?php
+                                        */
+                                        } ?>
                                         <td class="div der <?php echo $cur['NotaAprobacion'] > $promedio && $promedio != 0 ? 'rojo' : ''; ?>"><?php echo $promedio ?></td>
                                         <?php if ($cur['Bimestre'] == 0) {
                                             if (isset($rn4) && $rn4['Nota2'] != "0") {
@@ -491,10 +495,12 @@ $folder = "../../";
                                             } else {
                                                 $promedioanual = $promedio;
                                             }
+                                            /*
                                         ?>
                                             <!-- <td class="div der"><?php echo isset($rn4) ? $rn4['Nota2'] : '' ?></td>
                                         <td class="der <?php echo $cur['NotaAprobacion'] > $promedioanual && $promedioanual != 0 ? 'rojo' : ''; ?>"><?php echo $promedioanual ?></td> -->
-                                        <?php } ?>
+                                        <?php */
+                                        } ?>
                                     </tr>
                                 <?php } else { ?>
                                     <tr>
