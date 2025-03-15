@@ -2,7 +2,7 @@ function checkPasswordStrength(password) {
     var number = /([0-9])/;
     var upperCase = /([A-Z])/;
     var lowerCase = /([a-z])/;
-    var specialCharacters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+    var specialCharacters = /([~,!,@,#,$,%,^,&,*,\-,.,_,+,=,?,>,<])/;
 
     var characters = (password.length >= 5 && password.length <= 15);
     var capitalletters = password.match(upperCase) ? 1 : 0;
