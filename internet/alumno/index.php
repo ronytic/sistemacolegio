@@ -169,10 +169,11 @@ $folder = "../../";
             <div class="span3">
                 <div class="cuerpo">
                     <h2><a name="cuotas"></a><?php echo $idioma["Cuotas"] ?></h2>
-                    <table class="tabla">
+                    <table class="table table-bordered table-striped table-hover">
                         <?php
                         $total = 0;
                         $totalDeuda = 0;
+                        $totalCancelado = 0;
                         $cantidadCuotas = 0;
                         foreach ($cuota->mostrarCuotas($al['CodAlumno']) as $cuo) {
                             if ($cuo['Cancelado']) {
@@ -182,18 +183,41 @@ $folder = "../../";
                             <tr>
                                 <td class="div"><?php echo $cuo['Numero']; ?></td>
                                 <td class="div"><?php echo $cuo['MontoPagar']; ?> <?php echo $Moneda ?></td>
-                                <td><?php echo $cuo['Cancelado'] ? $idioma['Cancelado'] : $idioma['Pendiente']; ?></td>
-                                <td><i class="icon-ok"></i></td>
+                                <td style="text-align: center;"> <span class="badge badge-<?php echo ($cuo['Cancelado'] ? 'success' : 'secondary') ?>">
+                                        <?php echo $cuo['Cancelado'] ? $idioma['Cancelado'] : $idioma['Pendiente']; ?>
+                                    </span>
+                                </td>
+
+                                <td style="text-align: center;">
+                                    <i class=" <?php echo ($cuo['Cancelado'] ? 'icon-ok' : 'icon-time') ?>" style></i>
+                                </td>
                             </tr>
                         <?php
                             $total += $cuo['MontoPagar'];
                             if ($cuo['Cancelado']) {
+                                $totalCancelado += $cuo['MontoPagar'];
+                            } else {
                                 $totalDeuda += $cuo['MontoPagar'];
                             }
                         }
                         ?>
                     </table>
-                    <div class="msgA"><?php echo $idioma['MontoAdeudado'] ?>: <?php echo $total - $totalDeuda; ?> Bs.</div>
+                    <table class="table table-bordered table-striped table-xs">
+                        <tr>
+                            <th colspan="2">
+                                <?php echo $idioma['Totales'] ?>
+                            </th>
+                        </tr>
+                        <tr class="alert alert-success success">
+                            <td><?php echo $idioma['Cancelado'] ?></td>
+                            <td><strong><?php echo $totalCancelado; ?> Bs.</strong></td>
+                        </tr>
+                        <tr class="alert alert-warning warning">
+                            <td><?php echo $idioma['Pendiente'] ?></td>
+                            <td><strong><?php echo $totalDeuda; ?> Bs.</strong></td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
         <?php } ?>
