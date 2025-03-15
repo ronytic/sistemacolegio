@@ -223,29 +223,29 @@ ALTER TABLE `rude`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.cuota
+ALTER TABLE cuota
 MODIFY COLUMN CodAlumno INT UNSIGNED NULL;
 ALTER TABLE `cuota`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.documentosimpresos
+ALTER TABLE documentosimpresos
 MODIFY COLUMN CodAlumno INT UNSIGNED NULL;
 ALTER TABLE `documentosimpresos`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.materias
+ALTER TABLE materias
 MODIFY COLUMN CodMateria INT UNSIGNED auto_increment NOT NULL;
-ALTER TABLE colegio_der.documento
+ALTER TABLE documento
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `documento`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.cursomateria
+ALTER TABLE cursomateria
 MODIFY COLUMN CodCurso int unsigned NULL;
-ALTER TABLE colegio_der.cursomateria
+ALTER TABLE cursomateria
 MODIFY COLUMN CodMateria int unsigned NULL;
 ALTER TABLE `cursomateria`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
@@ -255,9 +255,9 @@ ALTER TABLE `cursomateria`
 ADD FOREIGN KEY (`CodMateria`) REFERENCES `materias`(`CodMateria`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.cursomateriaexportar
+ALTER TABLE cursomateriaexportar
 MODIFY COLUMN CodCurso int unsigned NULL;
-ALTER TABLE colegio_der.cursomateriaexportar
+ALTER TABLE cursomateriaexportar
 MODIFY COLUMN CodMateria INT UNSIGNED NULL COMMENT '1000 para materia combinada';
 Truncate table cursomateriaexportar;
 ALTER TABLE `cursomateriaexportar`
@@ -268,15 +268,15 @@ ALTER TABLE `cursomateriaexportar`
 ADD FOREIGN KEY (`CodMateria`) REFERENCES `materias`(`CodMateria`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.reserva
+ALTER TABLE reserva
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `reserva`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.materiasboletin
+ALTER TABLE materiasboletin
 MODIFY COLUMN CodCurso int unsigned NULL;
-ALTER TABLE colegio_der.materiasboletin
+ALTER TABLE materiasboletin
 MODIFY COLUMN CodMateria int unsigned NULL;
 ALTER TABLE `materiasboletin`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
@@ -286,9 +286,9 @@ ALTER TABLE `materiasboletin`
 ADD FOREIGN KEY (`CodMateria`) REFERENCES `materias`(`CodMateria`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.asesor
+ALTER TABLE asesor
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.asesor
+ALTER TABLE asesor
 MODIFY COLUMN CodCurso INT UNSIGNED NULL;
 ALTER TABLE `asesor`
 ADD FOREIGN KEY (`CodDocente`) REFERENCES `docente`(`CodDocente`) ON DELETE
@@ -298,21 +298,21 @@ ALTER TABLE `asesor`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.menu
+ALTER TABLE menu
 MODIFY COLUMN CodMenu int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.submenu
+ALTER TABLE submenu
 MODIFY COLUMN CodMenu INT UNSIGNED NULL;
 ALTER TABLE `submenu`
 ADD FOREIGN KEY (`CodMenu`) REFERENCES `menu`(`CodMenu`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.clases
+ALTER TABLE clases
 MODIFY COLUMN CodCurso int unsigned NULL;
-ALTER TABLE colegio_der.clases
+ALTER TABLE clases
 MODIFY COLUMN CodMateria int unsigned NULL;
-ALTER TABLE colegio_der.clases
+ALTER TABLE clases
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.clases
+ALTER TABLE clases
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `clases`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
@@ -330,21 +330,21 @@ ALTER TABLE `clases`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.clasesarchivos
+ALTER TABLE clasesarchivos
 MODIFY COLUMN CodClases int unsigned NULL;
 ALTER TABLE `clasesarchivos`
 ADD FOREIGN KEY (`CodClases`) REFERENCES `clases`(`CodClases`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.evaluaciondocopciones
+ALTER TABLE evaluaciondocopciones
 MODIFY COLUMN CodEvaluacionDocPreguntas int unsigned NULL;
 ALTER TABLE `evaluaciondocopciones`
 ADD FOREIGN KEY (`CodEvaluacionDocPreguntas`) REFERENCES `evaluaciondocpreguntas`(`CodEvaluacionDocPreguntas`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.evaluaciondocrespuestas
+ALTER TABLE evaluaciondocrespuestas
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.evaluaciondocrespuestas
+ALTER TABLE evaluaciondocrespuestas
 MODIFY COLUMN CodCurso int unsigned NULL;
 ALTER TABLE `evaluaciondocrespuestas`
 ADD FOREIGN KEY (`CodDocente`) REFERENCES `docente`(`CodDocente`) ON DELETE
@@ -354,11 +354,11 @@ ALTER TABLE `evaluaciondocrespuestas`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.docentemateriacurso
+ALTER TABLE docentemateriacurso
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.docentemateriacurso
+ALTER TABLE docentemateriacurso
 MODIFY COLUMN CodMateria int unsigned NULL;
-ALTER TABLE colegio_der.docentemateriacurso
+ALTER TABLE docentemateriacurso
 MODIFY COLUMN CodCurso int unsigned NULL;
 ALTER TABLE `docentemateriacurso`
 ADD FOREIGN KEY (`CodDocente`) REFERENCES `docente`(`CodDocente`) ON DELETE
@@ -372,17 +372,17 @@ ALTER TABLE `docentemateriacurso`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.logusuario
+ALTER TABLE logusuario
 MODIFY COLUMN CodUsuario int unsigned NULL;
 -- ALTER TABLE `logusuario` ADD FOREIGN KEY (`CodUsuario`) REFERENCES `usuario`(`CodUsuario`) ON DELETE SET NULL ON UPDATE SET NULL;
--- ALTER TABLE colegio_der.usuario MODIFY COLUMN CodUsuario int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.tarea
+-- ALTER TABLE usuario MODIFY COLUMN CodUsuario int unsigned auto_increment NOT NULL;
+ALTER TABLE tarea
 MODIFY COLUMN CodTarea int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.tarea
+ALTER TABLE tarea
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.tarea
+ALTER TABLE tarea
 MODIFY COLUMN CodCurso int unsigned NULL;
-ALTER TABLE colegio_der.tarea
+ALTER TABLE tarea
 MODIFY COLUMN CodMateria int unsigned NULL;
 ALTER TABLE `tarea`
 ADD FOREIGN KEY (`CodDocente`) REFERENCES `docente`(`CodDocente`) ON DELETE
@@ -396,40 +396,44 @@ ALTER TABLE `tarea`
 ADD FOREIGN KEY (`CodMateria`) REFERENCES `materias`(`CodMateria`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.asistencia
+ALTER TABLE asistencia
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `asistencia`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.anuncioslogin
+ALTER TABLE anuncioslogin
 MODIFY COLUMN CodUsuario int unsigned NULL;
 update anuncioslogin
 set CodUsuario = null
-where anuncioslogin.CodAnunciosLogin = 1
+where anuncioslogin.CodAnunciosLogin = 1;
+
+ALTER TABLE `usuario` CHANGE `CodUsuario` `CodUsuario` INT UNSIGNED NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `anuncioslogin`
 ADD FOREIGN KEY (`CodUsuario`) REFERENCES `usuario`(`CodUsuario`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.notificaciones
+
+ALTER TABLE notificaciones
 MODIFY COLUMN CodUsuario int unsigned NULL;
 update notificaciones
-set CodUsuario = null
+set CodUsuario = null;
 ALTER TABLE `notificaciones`
 ADD FOREIGN KEY (`CodUsuario`) REFERENCES `usuario`(`CodUsuario`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.observaciones
+ALTER TABLE observaciones
 MODIFY COLUMN CodObservacion int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.agenda
+ALTER TABLE agenda
 MODIFY COLUMN CodAgenda int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.agenda
+ALTER TABLE agenda
 MODIFY COLUMN CodCurso int unsigned NULL;
-ALTER TABLE colegio_der.agenda
+ALTER TABLE agenda
 MODIFY COLUMN CodAlumno int unsigned NULL;
-ALTER TABLE colegio_der.agenda
+ALTER TABLE agenda
 MODIFY COLUMN CodMateria int unsigned NULL;
-ALTER TABLE colegio_der.agenda
+ALTER TABLE agenda
 MODIFY COLUMN CodObservacion int unsigned NULL;
 ALTER TABLE `agenda`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
@@ -447,33 +451,33 @@ ALTER TABLE `agenda`
 ADD FOREIGN KEY (`CodObservacion`) REFERENCES `observaciones`(`CodObservacion`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.observacionesfrecuentes
+ALTER TABLE observacionesfrecuentes
 MODIFY COLUMN CodUsuario int unsigned NULL;
 update observacionesfrecuentes
-set CodUsuario = null
+set CodUsuario = null;
 ALTER TABLE `observacionesfrecuentes`
 ADD FOREIGN KEY (`CodUsuario`) REFERENCES `usuario`(`CodUsuario`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.tmpcola
+ALTER TABLE tmpcola
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `tmpcola`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.smsenviado
+ALTER TABLE smsenviado
 MODIFY COLUMN CodUsuario int unsigned NULL;
 ALTER TABLE `smsenviado`
 ADD FOREIGN KEY (`CodUsuario`) REFERENCES `usuario`(`CodUsuario`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.docentemateria
+ALTER TABLE docentemateria
 MODIFY COLUMN CodDocenteMateria int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.docentemateria
+ALTER TABLE docentemateria
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.docentemateria
+ALTER TABLE docentemateria
 MODIFY COLUMN CodMateria int unsigned NULL;
-ALTER TABLE colegio_der.docentemateria
+ALTER TABLE docentemateria
 MODIFY COLUMN CodCurso int unsigned NULL;
 ALTER TABLE `docentemateria`
 ADD FOREIGN KEY (`CodDocente`) REFERENCES `docente`(`CodDocente`) ON DELETE
@@ -487,17 +491,17 @@ ALTER TABLE `docentemateria`
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.factura
+ALTER TABLE factura
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `factura`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.facturadetalle
+ALTER TABLE facturadetalle
 MODIFY COLUMN CodFactura int unsigned NULL;
-ALTER TABLE colegio_der.facturadetalle
+ALTER TABLE facturadetalle
 MODIFY COLUMN CodAlumno int unsigned NULL;
-ALTER TABLE colegio_der.facturadetalle
+ALTER TABLE facturadetalle
 MODIFY COLUMN CodCuota varchar(11) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NULL;
 ALTER TABLE `facturadetalle`
 ADD FOREIGN KEY (`CodFactura`) REFERENCES `factura`(`CodFactura`) ON DELETE
@@ -507,27 +511,27 @@ ALTER TABLE `facturadetalle`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.agendaactividades
+ALTER TABLE agendaactividades
 MODIFY COLUMN CodUsuario int unsigned NULL;
 update agendaactividades
-set CodUsuario = null
+set CodUsuario = null;
 ALTER TABLE `agendaactividades`
 ADD FOREIGN KEY (`CodUsuario`) REFERENCES `usuario`(`CodUsuario`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.casilleros
+ALTER TABLE casilleros
 MODIFY COLUMN CodDocenteMateriaCurso int unsigned NULL;
-ALTER TABLE colegio_der.docentemateriacurso
+ALTER TABLE docentemateriacurso
 MODIFY COLUMN CodDocenteMateriaCurso int unsigned auto_increment NOT NULL;
 ALTER TABLE `casilleros`
 ADD FOREIGN KEY (`CodDocenteMateriaCurso`) REFERENCES `docentemateriacurso`(`CodDocenteMateriaCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.casilleros
+ALTER TABLE casilleros
 MODIFY COLUMN CodCasilleros int unsigned auto_increment NOT NULL;
-ALTER TABLE colegio_der.registronotas
+ALTER TABLE registronotas
 MODIFY COLUMN CodCasilleros int unsigned NULL;
-ALTER TABLE colegio_der.registronotas
+ALTER TABLE registronotas
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `registronotas`
 ADD FOREIGN KEY (`CodCasilleros`) REFERENCES `casilleros`(`CodCasilleros`) ON DELETE
@@ -537,15 +541,15 @@ ALTER TABLE `registronotas`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.registronotasexcel
+ALTER TABLE registronotasexcel
 MODIFY COLUMN CodDocenteMateriaCurso int unsigned NULL;
-ALTER TABLE colegio_der.registronotasexcel
+ALTER TABLE registronotasexcel
 MODIFY COLUMN CodCasilleros int unsigned NULL;
-ALTER TABLE colegio_der.registronotasexcel
+ALTER TABLE registronotasexcel
 MODIFY COLUMN CodDocente int unsigned NULL;
-ALTER TABLE colegio_der.registronotasexcel
+ALTER TABLE registronotasexcel
 MODIFY COLUMN CodMateria int unsigned NULL;
-ALTER TABLE colegio_der.registronotasexcel
+ALTER TABLE registronotasexcel
 MODIFY COLUMN CodCurso int unsigned NULL;
 ALTER TABLE `registronotasexcel`
 ADD FOREIGN KEY (`CodDocenteMateriaCurso`) REFERENCES `docentemateriacurso`(`CodDocenteMateriaCurso`) ON DELETE
@@ -565,25 +569,25 @@ ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
 DROP TABLE config_1;
-ALTER TABLE colegio_der.notascualitativa
+ALTER TABLE notascualitativa
 MODIFY COLUMN CodDocenteMateriaCurso int unsigned NULL;
 ALTER TABLE `notascualitativa`
 ADD FOREIGN KEY (`CodDocenteMateriaCurso`) REFERENCES `docentemateriacurso`(`CodDocenteMateriaCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.notascualitativabimestre
+ALTER TABLE notascualitativabimestre
 MODIFY COLUMN CodCurso int unsigned NULL;
 ALTER TABLE notascualitativabimestre
 ADD FOREIGN KEY (`CodCurso`) REFERENCES `curso`(`CodCurso`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.tmp_documento
+ALTER TABLE tmp_documento
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `tmp_documento`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `tmp_alumno`(`CodAlumno`) ON DELETE
 SET NULL ON UPDATE
 SET NULL;
-ALTER TABLE colegio_der.tmp_rude
+ALTER TABLE tmp_rude
 MODIFY COLUMN CodAlumno int unsigned NULL;
 ALTER TABLE `tmp_rude`
 ADD FOREIGN KEY (`CodAlumno`) REFERENCES `tmp_alumno`(`CodAlumno`) ON DELETE
@@ -597,7 +601,7 @@ CREATE TABLE gestionesanteriores (
 	Label VARCHAR(255),
 	EnlaceExterno TINYINT (1) DEFAULT 0,
 	Activo TINYINT DEFAULT 1
-);
+) ENGINE=INNODB;
 INSERT INTO `sanjose2025`.`config` (`Nombre`, `Valor`)
 VALUES ('AlertaGestionAnterior', '1');
 -- 2025-01-16
@@ -607,3 +611,5 @@ WHERE (`CodSubmenu` = '4');
 
 -- 2025-02-23
 ALTER TABLE `anuncioslogin` ADD `Visible` TINYINT(1) NOT NULL AFTER `Resaltar`;
+
+ALTER TABLE `cuota` ADD `CodUsuario` INT UNSIGNED NOT NULL AFTER `Observaciones`, ADD `Nivel` TINYINT(1) NOT NULL AFTER `CodUsuario`, ADD `FechaRegistro` DATE NOT NULL AFTER `Nivel`, ADD `HoraRegistro` TIME NOT NULL AFTER `FechaRegistro`, ADD `Activo` TINYINT(1) NOT NULL AFTER `HoraRegistro`;
