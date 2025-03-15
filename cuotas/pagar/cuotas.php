@@ -19,8 +19,7 @@ if (!empty($_POST)) {
         <thead>
             <tr>
                 <th><?php echo $idioma['NombreCompleto'] ?></th>
-                <th><?php echo $idioma['MontoPagar'] ?></th>
-                <th><?php echo $idioma['Descuento'] ?></th>
+                <th><?php echo $idioma['MontoBeca'] ?></th>
                 <th><?php echo $idioma['Nit'] ?></th>
                 <th><?php echo $idioma['FacturarA'] ?></th>
             </tr>
@@ -28,8 +27,7 @@ if (!empty($_POST)) {
 
         <tr class="info resaltar">
             <td><?php echo ucwords($alumnos['Paterno']); ?> <?php echo ucwords($alumnos['Materno']); ?> <?php echo ucwords($alumnos['Nombres']); ?></td>
-            <td><?php if ($alumnos['CodCurso'] == 1) echo $confK['Valor'];
-                else echo $confG['Valor']; ?> Bs</td>
+
             <td><?php echo $alumnos['MontoBeca']; ?> Bs</td>
             <td><?php echo $alumnos['Nit']; ?></td>
             <td><?php echo $alumnos['FacturaA']; ?></td>

@@ -56,6 +56,9 @@ class casilleros extends bd
 	}
 	function mostrarHabilitadoTrimestre($CodDocenteMateriaCurso, $Trimestre)
 	{
+		if ($CodDocenteMateriaCurso == '') {
+			return [];
+		}
 		$this->campos = array('*');
 		return $this->getRecords("CodDocenteMateriaCurso IN($CodDocenteMateriaCurso) and Trimestre=$Trimestre");
 	}

@@ -61,32 +61,34 @@ if (isset($_POST)) {
 						</thead>
 						<?php
 						$casi = $casilleros->mostrarHabilitadoTrimestre($codigos, $j);
-						if (!count($casi)) { ?><tr>
+						if (!count($casi)) { ?>
+							<tr>
 								<td colspan="7"><?php echo $idioma['NoTieneAsignadoCasilleros']; ?></td>
-							</tr><?php }
-								foreach ($casi as $cas) {
-									$i++;
-									$docmateriacurso = $docentemateriacurso->mostrarRegistro($cas['CodDocenteMateriaCurso']);
-									$docmateriacurso = array_shift($docmateriacurso);
-									$cur = $curso->mostrarCurso($docmateriacurso['CodCurso']);
-									$cur = array_shift($cur);
-									$mat = $materias->mostrarMateria($docmateriacurso['CodMateria']);
-									$mat = array_shift($mat);
-									switch ($docmateriacurso['SexoAlumno']) {
-										case 0: {
-												$sexo = $idioma['SoloMujeres'];
-											}
-											break;
-										case 1: {
-												$sexo = $idioma['SoloVarones'];
-											}
-											break;
-										case 2: {
-												$sexo = $idioma['AmbosSexos'];
-											}
-											break;
+							</tr>
+						<?php }
+						foreach ($casi as $cas) {
+							$i++;
+							$docmateriacurso = $docentemateriacurso->mostrarRegistro($cas['CodDocenteMateriaCurso']);
+							$docmateriacurso = array_shift($docmateriacurso);
+							$cur = $curso->mostrarCurso($docmateriacurso['CodCurso']);
+							$cur = array_shift($cur);
+							$mat = $materias->mostrarMateria($docmateriacurso['CodMateria']);
+							$mat = array_shift($mat);
+							switch ($docmateriacurso['SexoAlumno']) {
+								case 0: {
+										$sexo = $idioma['SoloMujeres'];
 									}
-									?>
+									break;
+								case 1: {
+										$sexo = $idioma['SoloVarones'];
+									}
+									break;
+								case 2: {
+										$sexo = $idioma['AmbosSexos'];
+									}
+									break;
+							}
+						?>
 							<tr>
 								<td><?php echo $i ?></td>
 								<td><?php echo $mat['Nombre'] ?></td>
@@ -98,7 +100,7 @@ if (isset($_POST)) {
 								</td>
 							</tr>
 						<?php
-								}
+						}
 						?>
 					</table>
 				</div>

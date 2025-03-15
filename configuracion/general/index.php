@@ -331,55 +331,57 @@ include_once($folder . "cabecerahtml.php");
                 </tr>
             </table>
         </div>
-        <div class="box-header">
-            <h2><?php echo $idioma['Sms'] ?><a name="sms"></a></h2>
-        </div>
-        <div class="box-content">
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <td width="60%"><?php echo $idioma['MostrarDatosSMSBoletaAlumnos'] ?></td>
-                    <td><select class="span12" name="MostrarDatosSMSBoletaAlumnos">
-                            <option value="0" <?php echo (dato("MostrarDatosSMSBoletaAlumnos")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
-                            <option value="1" <?php echo (dato("MostrarDatosSMSBoletaAlumnos")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
-                        </select></td>
-                </tr>
-                <tr>
-                    <td width="60%"><?php echo $idioma['EstadoSms'] ?></td>
-                    <td><select class="span12" name="EstadoSms">
-                            <option value="NoEnviar" <?php echo (dato("EstadoSms")) == "NoEnviar" ? 'selected' : '' ?>><?php echo $idioma['NoEnviar'] ?></option>
-                            <option value="PorCadaObservacion" <?php echo (dato("EstadoSms")) == "PorCadaObservacion" ? 'selected' : '' ?>><?php echo $idioma['PorCadaObservacion'] ?></option>
-                            <!--<option value="GeneralCadaDia" <?php echo (dato("EstadoSms")) == "GeneralCadaDia" ? 'selected' : '' ?>><?php echo $idioma['GeneralCadaDia'] ?></option>-->
-                        </select></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['PuertoUsb'] ?><br><small><?php echo $idioma['NadaPuerto'] ?></small>
-                        <script language="javascript">
-                            $(document).on("ready", function() {
-                                cargandoG(".msgusb");
-                                $.post("usb.php", {
-                                    'PuertoUsb': <?php echo dato("PuertoUsb") ?>
-                                }, function(data) {
-                                    $(".msgusb").html(data)
+        <?php if ($_SESSION['Nivel'] == 1) : ?>
+            <div class="box-header">
+                <h2><?php echo $idioma['Sms'] ?><a name="sms"></a></h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td width="60%"><?php echo $idioma['MostrarDatosSMSBoletaAlumnos'] ?></td>
+                        <td><select class="span12" name="MostrarDatosSMSBoletaAlumnos">
+                                <option value="0" <?php echo (dato("MostrarDatosSMSBoletaAlumnos")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                                <option value="1" <?php echo (dato("MostrarDatosSMSBoletaAlumnos")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td width="60%"><?php echo $idioma['EstadoSms'] ?></td>
+                        <td><select class="span12" name="EstadoSms">
+                                <option value="NoEnviar" <?php echo (dato("EstadoSms")) == "NoEnviar" ? 'selected' : '' ?>><?php echo $idioma['NoEnviar'] ?></option>
+                                <option value="PorCadaObservacion" <?php echo (dato("EstadoSms")) == "PorCadaObservacion" ? 'selected' : '' ?>><?php echo $idioma['PorCadaObservacion'] ?></option>
+                                <!--<option value="GeneralCadaDia" <?php echo (dato("EstadoSms")) == "GeneralCadaDia" ? 'selected' : '' ?>><?php echo $idioma['GeneralCadaDia'] ?></option>-->
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $idioma['PuertoUsb'] ?><br><small><?php echo $idioma['NadaPuerto'] ?></small>
+                            <script language="javascript">
+                                $(document).on("ready", function() {
+                                    cargandoG(".msgusb");
+                                    $.post("usb.php", {
+                                        'PuertoUsb': <?php echo dato("PuertoUsb") ?>
+                                    }, function(data) {
+                                        $(".msgusb").html(data)
+                                    });
                                 });
-                            });
-                        </script>
-                        <div class="msgusb"></div>
-                    </td>
-                    <td><input type="text" class="span12" name="PuertoUsb" value="<?php echo (dato("PuertoUsb")) ?>"></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['ComunicadoSMS'] ?></td>
-                    <td><textarea class="span12" name="ComunicadoSMS" rows="6"><?php echo (dato("ComunicadoSMS")) ?></textarea></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['CitacionSMS'] ?></td>
-                    <td><textarea class="span12" name="CitacionSMS" rows="6"><?php echo (dato("CitacionSMS")) ?></textarea></td>
-                </tr>
-                <tr>
-                    <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
-                </tr>
-            </table>
-        </div>
+                            </script>
+                            <div class="msgusb"></div>
+                        </td>
+                        <td><input type="text" class="span12" name="PuertoUsb" value="<?php echo (dato("PuertoUsb")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $idioma['ComunicadoSMS'] ?></td>
+                        <td><textarea class="span12" name="ComunicadoSMS" rows="6"><?php echo (dato("ComunicadoSMS")) ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $idioma['CitacionSMS'] ?></td>
+                        <td><textarea class="span12" name="CitacionSMS" rows="6"><?php echo (dato("CitacionSMS")) ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
+                    </tr>
+                </table>
+            </div>
+        <?php endif; ?>
     </div>
 
 
@@ -605,210 +607,7 @@ include_once($folder . "cabecerahtml.php");
             </table>
         </div>
 
-        <div class="box-header">
-            <h2><?php echo $idioma['Facturacion'] ?><a name="facturacion"></a></h2>
-        </div>
-        <div class="box-content">
-            <table class="table table-bordered table-hover">
-                <tr class="info">
-                    <td><?php echo $idioma['SistemaFacturacion'] ?><div class="pequeno"><?php echo $idioma['SistemaFacturacionT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SistemaFacturacion">
-                            <option value="0" <?php echo (dato("SistemaFacturacion")) == '0' ? 'selected' : '' ?>><?php echo $idioma['NoUsarFacturacion'] ?></option>
-                            <option value="Antiguo" <?php echo (dato("SistemaFacturacion")) == 'Antiguo' ? 'selected' : '' ?>><?php echo $idioma['SistemaFacturacionComputarizada'] ?></option>
-                            <option value="NuevoQR" <?php echo (dato("SistemaFacturacion")) == 'NuevoQR' ? 'selected' : '' ?>><?php echo $idioma['NuevoSistemaFacturacion'] ?></option>
-                            <option value="SistemaFacturacionElectronica" <?php echo (dato("SistemaFacturacion")) == 'SistemaFacturacionElectronica' ? 'selected' : '' ?>><?php echo $idioma['SistemaFacturacionElectronica'] ?></option>
-                        </select></td>
-                </tr>
-            </table>
-            <table class="table table-bordered table-hover cajaConfigFacturacion" id="CajaNuevoQR" style="display: none;">
-                <tr>
-                    <td colspan="2">
-                        <h3><?php echo $idioma['SistemaFacturacionVirtual'] ?></h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['NumeroAutorizacion'] ?>
-                        <div class="pequeno"><?php echo $idioma['NumeroAutorizacionT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="NumeroAutorizacion" value="<?php echo (dato("NumeroAutorizacion")) ?>"></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['FechaLimiteEmision'] ?></td>
-                    <td><input type="text" class="span12 fecha" name="FechaLimiteEmision" value="<?php echo (fecha2Str(dato("FechaLimiteEmision"))) ?>"></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['LlaveDosificacion'] ?><div class="pequeno"><?php echo $idioma['LlaveDosificacionT'] ?></div>
-                    </td>
-                    <td><textarea class="span12" name="LlaveDosificacion" rows="4"><?php echo (dato("LlaveDosificacion")) ?></textarea></td>
-                </tr>
-                <tr>
-                    <td><?php echo $idioma['ImagenFondo'] ?><div class="pequeno"><?php echo $idioma['ImagenFondoT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="ImagenFondoFactura">
-                            <option value="0" <?php echo (dato("ImagenFondoFactura")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
-                            <option value="1" <?php echo (dato("ImagenFondoFactura")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
-                        </select></td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['NitEmisor'] ?>
-                        <div class="pequeno"><?php echo $idioma['NitEmisorT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="NitEmisor" value="<?php echo (dato("NitEmisor")) ?>"></td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['RazonSocialEmisor'] ?>
-                        <div class="pequeno"><?php echo $idioma['RazonSocialEmisorT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="RazonSocialEmisor" value="<?php echo (dato("RazonSocialEmisor")) ?>"></td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['ActividadEconomica'] ?>
-                        <div class="pequeno"><?php echo $idioma['ActividadEconomicaT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="ActividadEconomica" value="<?php echo (dato("ActividadEconomica")) ?>"></td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['LeyendaPiePagina'] ?>
-                        <div class="pequeno"><?php echo $idioma['LeyendaPiePaginaT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="LeyendaPiePagina" value="<?php echo (dato("LeyendaPiePagina")) ?>"></td>
-                </tr>
-            </table>
-            <table class="table table-bordered table-hover cajaConfigFacturacion" id="CajaSFE" style="display: none;">
-                <tr class="success">
-                    <td colspan="2">
-                        <h3><?php echo $idioma['SistemaFacturacionElectronica'] ?></h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFEUrl'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFEUrlT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="SFEUrl" value="<?php echo (dato("SFEUrl")) ?>"></td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFEUsuario'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFEUsuarioT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="SFEUsuario" value="<?php echo (dato("SFEUsuario")) ?>"></td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFEContrasena'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFEContrasenaT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="SFEContrasena" value="<?php echo (dato("SFEContrasena")) ?>"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" id="SFETestConexion" class="btn btn-info" value="Verificar Usuario">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFEValidezToken'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFEValidezTokenT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="SFEValidezToken" value="<?php echo (dato("SFEValidezToken")) ?>" readonly>
-                        <input type="text" class="span12" name="SFEToken" value="<?php echo (dato("SFEToken")) ?>" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" id="SFEObtenerSistemas" class="btn btn-info" value="Obtener Sistemas">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFESistema'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFESistemaT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFEIdSistema"></select>
-                        <input type="hidden" name="SFEIdSistemaAux" value="<?php echo (dato("SFEIdSistema")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" id="SFESincronizar" class="btn btn-info" value="Sincronizar">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['Sucursal'] ?>
-                        <div class="pequeno"><?php echo $idioma['SucursalT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFECodSucursal"></select>
-                        <input type="hidden" name="SFECodSucursalAux" value="<?php echo (dato("SFECodSucursal")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['PuntoDeVenta'] ?>
-                        <div class="pequeno"><?php echo $idioma['PuntoDeVentaT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFECodPos"></select>
-                        <input type="hidden" name="SFECodPosAux" value="<?php echo (dato("SFECodPos")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['MetodoDePago'] ?>
-                        <div class="pequeno"><?php echo $idioma['MetodoDePagoT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFEMetodoDePago"></select>
-                        <input type="hidden" name="SFEMetodoDePagoAux" value="<?php echo (dato("SFEMetodoDePago")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['TipoDeMoneda'] ?>
-                        <div class="pequeno"><?php echo $idioma['TipoDeMonedaT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFETipoDeMoneda"></select>
-                        <input type="hidden" name="SFETipoDeMonedaAux" value="<?php echo (dato("SFETipoDeMoneda")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFEActividades'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFEActividadesT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFEActividades"></select>
-                        <input type="hidden" name="SFEActividadesAux" value="<?php echo (dato("SFEActividades")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <b><?php echo $idioma['SFEDetalleFactura'] ?></b>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFEUnidadMedidaMensualidad'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFEUnidadMedidaMensualidadT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFEUnidadMedidaMensualidad"></select>
-                        <input type="hidden" name="SFEUnidadMedidaMensualidadAux" value="<?php echo (dato("SFEUnidadMedidaMensualidad")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFECodigoProductoSIN'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFECodigoProductoSINT'] ?></div>
-                    </td>
-                    <td><select class="span12" name="SFECodigoProductoSIN"></select>
-                        <input type="hidden" name="SFECodigoProductoSINAux" value="<?php echo (dato("SFECodigoProductoSIN")) ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="50%"><?php echo $idioma['SFECodigoProductoInterno'] ?>
-                        <div class="pequeno"><?php echo $idioma['SFECodigoProductoInternoT'] ?></div>
-                    </td>
-                    <td><input type="text" class="span12" name="SFECodigoProductoInterno" value="<?php echo (dato("SFECodigoProductoInterno")) ?>">
-                    </td>
-                </tr>
-            </table>
 
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
-                </tr>
-            </table>
-        </div>
         <div class="box-header">
             <h2><?php echo $idioma['AccesoSistema'] ?><a name="accesosistema"></a></h2>
         </div>
@@ -832,6 +631,210 @@ include_once($folder . "cabecerahtml.php");
             </table>
         </div>
         <?php if ($_SESSION['Nivel'] == 1) : ?>
+            <div class="box-header">
+                <h2><?php echo $idioma['Facturacion'] ?><a name="facturacion"></a></h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-hover">
+                    <tr class="info">
+                        <td><?php echo $idioma['SistemaFacturacion'] ?><div class="pequeno"><?php echo $idioma['SistemaFacturacionT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SistemaFacturacion">
+                                <option value="0" <?php echo (dato("SistemaFacturacion")) == '0' ? 'selected' : '' ?>><?php echo $idioma['NoUsarFacturacion'] ?></option>
+                                <option value="Antiguo" <?php echo (dato("SistemaFacturacion")) == 'Antiguo' ? 'selected' : '' ?>><?php echo $idioma['SistemaFacturacionComputarizada'] ?></option>
+                                <option value="NuevoQR" <?php echo (dato("SistemaFacturacion")) == 'NuevoQR' ? 'selected' : '' ?>><?php echo $idioma['NuevoSistemaFacturacion'] ?></option>
+                                <option value="SistemaFacturacionElectronica" <?php echo (dato("SistemaFacturacion")) == 'SistemaFacturacionElectronica' ? 'selected' : '' ?>><?php echo $idioma['SistemaFacturacionElectronica'] ?></option>
+                            </select></td>
+                    </tr>
+                </table>
+                <table class="table table-bordered table-hover cajaConfigFacturacion" id="CajaNuevoQR" style="display: none;">
+                    <tr>
+                        <td colspan="2">
+                            <h3><?php echo $idioma['SistemaFacturacionVirtual'] ?></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['NumeroAutorizacion'] ?>
+                            <div class="pequeno"><?php echo $idioma['NumeroAutorizacionT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="NumeroAutorizacion" value="<?php echo (dato("NumeroAutorizacion")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $idioma['FechaLimiteEmision'] ?></td>
+                        <td><input type="text" class="span12 fecha" name="FechaLimiteEmision" value="<?php echo (fecha2Str(dato("FechaLimiteEmision"))) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $idioma['LlaveDosificacion'] ?><div class="pequeno"><?php echo $idioma['LlaveDosificacionT'] ?></div>
+                        </td>
+                        <td><textarea class="span12" name="LlaveDosificacion" rows="4"><?php echo (dato("LlaveDosificacion")) ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $idioma['ImagenFondo'] ?><div class="pequeno"><?php echo $idioma['ImagenFondoT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="ImagenFondoFactura">
+                                <option value="0" <?php echo (dato("ImagenFondoFactura")) == 0 ? 'selected' : '' ?>><?php echo $idioma['No'] ?></option>
+                                <option value="1" <?php echo (dato("ImagenFondoFactura")) == 1 ? 'selected' : '' ?>><?php echo $idioma['Si'] ?></option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['NitEmisor'] ?>
+                            <div class="pequeno"><?php echo $idioma['NitEmisorT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="NitEmisor" value="<?php echo (dato("NitEmisor")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['RazonSocialEmisor'] ?>
+                            <div class="pequeno"><?php echo $idioma['RazonSocialEmisorT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="RazonSocialEmisor" value="<?php echo (dato("RazonSocialEmisor")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['ActividadEconomica'] ?>
+                            <div class="pequeno"><?php echo $idioma['ActividadEconomicaT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="ActividadEconomica" value="<?php echo (dato("ActividadEconomica")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['LeyendaPiePagina'] ?>
+                            <div class="pequeno"><?php echo $idioma['LeyendaPiePaginaT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="LeyendaPiePagina" value="<?php echo (dato("LeyendaPiePagina")) ?>"></td>
+                    </tr>
+                </table>
+                <table class="table table-bordered table-hover cajaConfigFacturacion" id="CajaSFE" style="display: none;">
+                    <tr class="success">
+                        <td colspan="2">
+                            <h3><?php echo $idioma['SistemaFacturacionElectronica'] ?></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFEUrl'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFEUrlT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="SFEUrl" value="<?php echo (dato("SFEUrl")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFEUsuario'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFEUsuarioT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="SFEUsuario" value="<?php echo (dato("SFEUsuario")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFEContrasena'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFEContrasenaT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="SFEContrasena" value="<?php echo (dato("SFEContrasena")) ?>"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" id="SFETestConexion" class="btn btn-info" value="Verificar Usuario">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFEValidezToken'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFEValidezTokenT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="SFEValidezToken" value="<?php echo (dato("SFEValidezToken")) ?>" readonly>
+                            <input type="text" class="span12" name="SFEToken" value="<?php echo (dato("SFEToken")) ?>" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" id="SFEObtenerSistemas" class="btn btn-info" value="Obtener Sistemas">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFESistema'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFESistemaT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFEIdSistema"></select>
+                            <input type="hidden" name="SFEIdSistemaAux" value="<?php echo (dato("SFEIdSistema")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" id="SFESincronizar" class="btn btn-info" value="Sincronizar">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['Sucursal'] ?>
+                            <div class="pequeno"><?php echo $idioma['SucursalT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFECodSucursal"></select>
+                            <input type="hidden" name="SFECodSucursalAux" value="<?php echo (dato("SFECodSucursal")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['PuntoDeVenta'] ?>
+                            <div class="pequeno"><?php echo $idioma['PuntoDeVentaT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFECodPos"></select>
+                            <input type="hidden" name="SFECodPosAux" value="<?php echo (dato("SFECodPos")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['MetodoDePago'] ?>
+                            <div class="pequeno"><?php echo $idioma['MetodoDePagoT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFEMetodoDePago"></select>
+                            <input type="hidden" name="SFEMetodoDePagoAux" value="<?php echo (dato("SFEMetodoDePago")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['TipoDeMoneda'] ?>
+                            <div class="pequeno"><?php echo $idioma['TipoDeMonedaT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFETipoDeMoneda"></select>
+                            <input type="hidden" name="SFETipoDeMonedaAux" value="<?php echo (dato("SFETipoDeMoneda")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFEActividades'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFEActividadesT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFEActividades"></select>
+                            <input type="hidden" name="SFEActividadesAux" value="<?php echo (dato("SFEActividades")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b><?php echo $idioma['SFEDetalleFactura'] ?></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFEUnidadMedidaMensualidad'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFEUnidadMedidaMensualidadT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFEUnidadMedidaMensualidad"></select>
+                            <input type="hidden" name="SFEUnidadMedidaMensualidadAux" value="<?php echo (dato("SFEUnidadMedidaMensualidad")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFECodigoProductoSIN'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFECodigoProductoSINT'] ?></div>
+                        </td>
+                        <td><select class="span12" name="SFECodigoProductoSIN"></select>
+                            <input type="hidden" name="SFECodigoProductoSINAux" value="<?php echo (dato("SFECodigoProductoSIN")) ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><?php echo $idioma['SFECodigoProductoInterno'] ?>
+                            <div class="pequeno"><?php echo $idioma['SFECodigoProductoInternoT'] ?></div>
+                        </td>
+                        <td><input type="text" class="span12" name="SFECodigoProductoInterno" value="<?php echo (dato("SFECodigoProductoInterno")) ?>">
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td class="centrar" colspan="2"><input type="submit" class="btn btn-success" value="<?php echo $idioma['Guardar'] ?>"></td>
+                    </tr>
+                </table>
+            </div>
             <div class="box-header">
                 <h2><?php echo $idioma['Avanzado'] ?><a name="avanzado"></a></h2>
             </div>
