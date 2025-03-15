@@ -41,12 +41,15 @@ $titulo = "NPaginaPrincipal";
                         <td><?php echo $idioma['FechaCuotas'] ?><br><?php campo("FechaCuotas", "text", date("d-m-Y"), "input-medium") ?></td>
                         <td>
                             <?php
-                            $urlRegistroFactura = 'factura/registro/';
-                            if (isset($SistemaFacturacion) && $SistemaFacturacion == 'SistemaFacturacionElectronica') {
-                                $urlRegistroFactura = 'factura/registrosfe/';
-                            }
+                            if ($SistemaFacturacion != '0') {
+
+                                $urlRegistroFactura = 'factura/registro/';
+                                if (isset($SistemaFacturacion) && $SistemaFacturacion == 'SistemaFacturacionElectronica') {
+                                    $urlRegistroFactura = 'factura/registrosfe/';
+                                }
                             ?>
-                            <a href="<?php echo $urlRegistroFactura ?>" class="btn btn-mini"><i class="icon-plus"></i><?php echo $idioma['RegistrarFactura'] ?></a>
+                                <a href="<?php echo $urlRegistroFactura ?>" class="btn btn-mini"><i class="icon-plus"></i><?php echo $idioma['RegistrarFactura'] ?></a>
+                            <?php } ?>
                             <a href="cuotas/pagar/" class="btn btn-mini"><i class="icon-plus"></i><?php echo $idioma['RegistrarNuevosPagos'] ?></a>
                         </td>
                     </tr>
