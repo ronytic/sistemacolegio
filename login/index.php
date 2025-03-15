@@ -115,28 +115,30 @@ $anunciosLogin = $anuncioslogin->mostrarAnuncios(1);
             </div>
             <div class="offset1 span6">
                 <div class="mensajes">
-                    <h2><?php echo $idioma['Comunicados'] ?></h2>
-                    <hr />
-                    <ul>
+                    <h2 class="mensajeTitulo"><?php echo $idioma['Comunicados'] ?></h2>
+                    <div class="mensajesCuerpo">
+
+                        <ul>
+                            <?php
+                            if (count($anunciosLogin) > 0) {
+                                foreach ($anunciosLogin as $anuncios) {
+                            ?>
+                                    <li class="<?php echo $anuncios['Resaltar'] ? 'resaltar' : '' ?><?php echo $anuncios['Imagen'] != "" ? 'imagen' : '' ?>">
+                                        <?php echo $anuncios['Mensaje'] ?>
+                                        <?php if ($anuncios['Imagen'] != "") { ?>
+                                            <img src="../<?php echo $anuncios['Imagen'] ?>" class="" />
+                                    </li>
+                                <?php } ?>
+                                <hr>
+                            <?php
+                                }
+                            } else {
+                            ?>
+                            <li class="resaltarpequeno"><?php echo $idioma['NoComunicados'] ?></li>
                         <?php
-                        if (count($anunciosLogin) > 0) {
-                            foreach ($anunciosLogin as $anuncios) {
-                        ?>
-                                <li class="<?php echo $anuncios['Resaltar'] ? 'resaltar' : '' ?><?php echo $anuncios['Imagen'] != "" ? 'imagen' : '' ?>">
-                                    <?php echo $anuncios['Mensaje'] ?>
-                                    <?php if ($anuncios['Imagen'] != "") { ?>
-                                        <img src="../<?php echo $anuncios['Imagen'] ?>" class="" />
-                                </li>
-                            <?php } ?>
-                            <hr>
-                        <?php
-                            }
-                        } else {
-                        ?>
-                        <li class="resaltarpequeno"><?php echo $idioma['NoComunicados'] ?></li>
-                    <?php
-                        } ?>
-                    </ul>
+                            } ?>
+                        </ul>
+                    </div>
 
                 </div>
 
