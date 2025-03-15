@@ -52,5 +52,5 @@ if (!empty($_POST)) {
 ?>
 
 <script language="javascript">
-	// mostrar();
+	mostrar();
 </script>
